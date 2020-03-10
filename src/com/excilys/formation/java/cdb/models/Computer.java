@@ -1,4 +1,4 @@
-package com.excilys.formation.java.cdb.model;
+package com.excilys.formation.java.cdb.models;
 
 import java.time.LocalDate;
 
@@ -8,18 +8,30 @@ public class Computer {
 	private String name;
 	private LocalDate introducedDate;
 	private LocalDate discontinuedDate;
-	private int idCompany;
+	private Company company;
 	
 	public Computer() {
 	}
 	
-	public Computer(int idComputer, String name, LocalDate introducedDate, LocalDate discontinuedDate, int idCompany) {
+	public Computer(String name) {
+		this.name = name;
+	}
+	
+	public Computer(String name, LocalDate introducedDate, LocalDate discontinuedDate, Company company) {
+		super();
+		this.name = name;
+		this.introducedDate = introducedDate;
+		this.discontinuedDate = discontinuedDate;
+		this.company = company;
+	}
+	
+	public Computer(int idComputer, String name, LocalDate introducedDate, LocalDate discontinuedDate, Company company) {
 		super();
 		this.idComputer = idComputer;
 		this.name = name;
 		this.introducedDate = introducedDate;
 		this.discontinuedDate = discontinuedDate;
-		this.idCompany = idCompany;
+		this.company = company;
 	}
 	
 	public int getIdComputer() {
@@ -46,17 +58,21 @@ public class Computer {
 	public void setDiscontinuedDate(LocalDate discontinuedDate) {
 		this.discontinuedDate = discontinuedDate;
 	}
-	public int getIdCompany() {
-		return idCompany;
+	public Company getCompany() {
+		return company;
 	}
-	public void setIdCompany(int idCompany) {
-		this.idCompany = idCompany;
+	public void setCompany(Company company) {
+		this.company = company;
 	}
 
 	@Override
 	public String toString() {
+		String companyString = "";
+		if (company != null) {
+			companyString = ", companyId=" + company.getIdCompany() + ", companyName=" + company.getName();
+		}
 		return "Computer [idComputer=" + idComputer + ", name=" + name + ", introducedDate=" + introducedDate
-				+ ", discontinuedDate=" + discontinuedDate + ", idCompany=" + idCompany + "]";
+				+ ", discontinuedDate=" + discontinuedDate + companyString + "]";
 	}
 	
 }

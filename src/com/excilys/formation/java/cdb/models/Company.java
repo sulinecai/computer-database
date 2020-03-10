@@ -1,4 +1,4 @@
-package com.excilys.formation.java.cdb.model;
+package com.excilys.formation.java.cdb.models;
 
 public class Company {
 	
@@ -7,10 +7,15 @@ public class Company {
 	
 	public Company() {
 	}
-
+	
 	public Company(int idCompany, String name) {
 		super();
 		this.idCompany = idCompany;
+		this.name = name;
+	}
+	
+	public Company(String name) {
+		super();
 		this.name = name;
 	}
 
