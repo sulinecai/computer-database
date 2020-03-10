@@ -13,6 +13,12 @@ public class UserInterface {
 			ComputerDAO computerDAO = new ComputerDAO();
 			Optional<Computer> cp = computerDAO.findById(5);
 			System.out.println(cp.toString());
+			
+//			List<Computer> allComputer = computerDAO.listAll();
+//			for (Computer c : allComputer) {
+//				System.out.println(c.toString());
+//			}
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
