@@ -69,10 +69,12 @@ public class Computer {
 	public String toString() {
 		String companyString = "";
 		if (company != null) {
-			companyString = ", companyId=" + company.getIdCompany() + ", companyName=" + company.getName();
+			if (company.getIdCompany() != 0) {
+				companyString = ", companyId:" + company.getIdCompany() + ", companyName:" + company.getName();
+			}
 		}
-		return "Computer [idComputer=" + idComputer + ", name=" + name + ", introducedDate=" + introducedDate
-				+ ", discontinuedDate=" + discontinuedDate + companyString + "]";
+		return "Computer " + idComputer + ", name: " + name + ", introducedDate:" + introducedDate
+				+ ", discontinuedDate:" + discontinuedDate + companyString;
 	}
 	
 }

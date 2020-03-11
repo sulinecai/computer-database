@@ -18,6 +18,10 @@ public class Company {
 		super();
 		this.name = name;
 	}
+	
+	public Company(int id) {
+		this.idCompany = id;
+	}
 
 	public int getIdCompany() {
 		return idCompany;
@@ -37,6 +41,6 @@ public class Company {
 
 	@Override
 	public String toString() {
-		return "Company [idCompany=" + idCompany + ", name=" + name + "]";
+		return "Company " + idCompany + ", name: " + name ;
 	}
 }
