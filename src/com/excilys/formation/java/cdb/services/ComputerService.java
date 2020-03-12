@@ -3,12 +3,13 @@ package com.excilys.formation.java.cdb.services;
 import java.util.List;
 
 import com.excilys.formation.java.cdb.models.Computer;
+import com.excilys.formation.java.cdb.persistence.daos.CompanyDAO;
 import com.excilys.formation.java.cdb.persistence.daos.ComputerDAO;
 
 public class ComputerService implements Service<Computer> {
 	
-	private ComputerDAO computerDAO = new ComputerDAO();
-	private CompanyService companyService = new CompanyService();
+	private ComputerDAO computerDAO = ComputerDAO.getInstance();
+	private CompanyDAO companyDAO = CompanyDAO.getInstance();
 	
 	@Override
 	public List<Computer> getAll() {
@@ -35,7 +36,7 @@ public class ComputerService implements Service<Computer> {
 				allowed = false;
 			}
 			if(computer.getCompany() != null) {
-				if (!companyService.exist(computer.getCompany().getIdCompany())) {
+				if (!companyDAO.findById(computer.getIdComputer()).isPresent()) {
 					allowed = false;
 				}
 			}

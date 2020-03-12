@@ -1,5 +1,6 @@
 package com.excilys.formation.java.cdb.persistence.daos;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -10,6 +11,7 @@ import java.util.Optional;
 
 import com.excilys.formation.java.cdb.models.Company;
 import com.excilys.formation.java.cdb.models.Computer;
+import com.excilys.formation.java.cdb.persistence.MysqlConnect;
 
 public class ComputerDAO extends DAO<Computer> {
 	
@@ -21,7 +23,7 @@ public class ComputerDAO extends DAO<Computer> {
 	private static final String ATTRIBUT_COMPANY_NAME = "company_name";
 
 	private static final String SQL_SELECT_ALL = "SELECT computer.id, computer.name, introduced, discontinued, "
-			+ "company_id, company.name AS company_name FROM computer LEFT JOIN company ON company_id = company.id";
+			+ "company_id, company.name AS company_name FROM computer LEFT JOIN company ON company_id = company.id ORDER BY computer.id";
 	
 	private static final String SQL_SELECT_WITH_ID = "SELECT computer.id, computer.name, introduced, discontinued, "
 			+ "company_id, company.name AS company_name FROM computer LEFT JOIN company ON "
@@ -34,12 +36,26 @@ public class ComputerDAO extends DAO<Computer> {
 			+ "WHERE id = ?";
 	
 	private static final String SQL_DELETE = "DELETE FROM computer WHERE id = ?";
+	
+	
+    private static ComputerDAO computerDAO;
+    
+	private Connection connect = MysqlConnect.getInstance();
+        
+    private ComputerDAO() {}
+    
+    public static synchronized ComputerDAO getInstance() {
+        if ( computerDAO == null ) {
+        	computerDAO = new ComputerDAO();
+        }
+        return computerDAO;
+    }
 
 	@Override
 	public List<Computer> getAll() {
 		List<Computer> computerList = new ArrayList<Computer>();
 
-		try(PreparedStatement statement = this.connect.prepareStatement(SQL_SELECT_ALL)){
+		try(PreparedStatement statement = connect.prepareStatement(SQL_SELECT_ALL)){
 			ResultSet resultSet = statement.executeQuery();
 			while (resultSet.next()) {
 				Computer computer = convert(resultSet);
@@ -55,7 +71,7 @@ public class ComputerDAO extends DAO<Computer> {
 	public Optional<Computer> findById(int id) {
 		Optional<Computer> result = Optional.empty();
 		
-		try(PreparedStatement statement = this.connect.prepareStatement(SQL_SELECT_WITH_ID)){
+		try(PreparedStatement statement = connect.prepareStatement(SQL_SELECT_WITH_ID)){
 			statement.setInt(1, id);
 			ResultSet resultSet = statement.executeQuery();	
 			
@@ -70,7 +86,7 @@ public class ComputerDAO extends DAO<Computer> {
 	}
 
 	public void create(Computer computer) {
-		try(PreparedStatement statement = this.connect.prepareStatement(SQL_INSERT)){
+		try(PreparedStatement statement = connect.prepareStatement(SQL_INSERT)){
 			statement.setString(1, computer.getName());
 			Timestamp introDate = computer.getIntroducedDate() == null ? null : Timestamp.valueOf(computer.getIntroducedDate().atStartOfDay());
 			statement.setTimestamp(2, introDate);
@@ -88,7 +104,7 @@ public class ComputerDAO extends DAO<Computer> {
 	}
 	
 	public void update(Computer computer) {
-		try(PreparedStatement statement = this.connect.prepareStatement(SQL_UPDATE)){
+		try(PreparedStatement statement = connect.prepareStatement(SQL_UPDATE)){
 			statement.setString(1, computer.getName());
 			Timestamp introDate = computer.getIntroducedDate() == null ? null : Timestamp.valueOf(computer.getIntroducedDate().atStartOfDay());
 			statement.setTimestamp(2, introDate);
@@ -107,7 +123,7 @@ public class ComputerDAO extends DAO<Computer> {
 	}
 
 	public void delete(int id) {
-		try(PreparedStatement statement = this.connect.prepareStatement(SQL_DELETE)){
+		try(PreparedStatement statement = connect.prepareStatement(SQL_DELETE)){
 			statement.setInt(1, id);
 			statement.execute();
 		} catch (SQLException e) {
