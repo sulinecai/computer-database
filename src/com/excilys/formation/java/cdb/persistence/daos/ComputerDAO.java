@@ -91,11 +91,11 @@ public class ComputerDAO extends DAO<Computer> {
 	}
 
 	@Override
-	public Optional<Computer> findById(int id) {
+	public Optional<Computer> findById(Long id) {
 		Optional<Computer> result = Optional.empty();
 		
 		try(PreparedStatement statement = connect.prepareStatement(SQL_SELECT_WITH_ID)){
-			statement.setInt(1, id);
+			statement.setLong(1, id);
 			ResultSet resultSet = statement.executeQuery();	
 			
 			while(resultSet.next()) {
@@ -118,7 +118,7 @@ public class ComputerDAO extends DAO<Computer> {
 			if (computer.getCompany() == null) {
 				statement.setNull(4, java.sql.Types.INTEGER);
 			} else {
-				statement.setInt(4, computer.getCompany().getIdCompany());
+				statement.setLong(4, computer.getCompany().getIdCompany());
 			}
 			statement.execute();
 		} catch (SQLException e) {
@@ -136,18 +136,18 @@ public class ComputerDAO extends DAO<Computer> {
 			if (computer.getCompany() == null) {
 				statement.setNull(4, java.sql.Types.INTEGER);
 			} else {
-				statement.setInt(4, computer.getCompany().getIdCompany());
+				statement.setLong(4, computer.getCompany().getIdCompany());
 			}
-			statement.setInt(5, computer.getIdComputer());
+			statement.setLong(5, computer.getIdComputer());
 			statement.execute();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
 
-	public void delete(int id) {
+	public void delete(Long id) {
 		try(PreparedStatement statement = connect.prepareStatement(SQL_DELETE)){
-			statement.setInt(1, id);
+			statement.setLong(1, id);
 			statement.execute();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -158,7 +158,7 @@ public class ComputerDAO extends DAO<Computer> {
 	protected Computer convert(ResultSet resultSet) {
 		Computer computer = new Computer();
 		try {
-			computer.setIdComputer(resultSet.getInt(ATTRIBUT_ID_COMPUTER));
+			computer.setIdComputer(resultSet.getLong(ATTRIBUT_ID_COMPUTER));
 			computer.setName(resultSet.getString(ATTRIBUT_NAME));
 			if (resultSet.getTimestamp(ATTRIBUT_INTRODUCED) != null) { 
 				computer.setIntroducedDate(resultSet.getTimestamp(ATTRIBUT_INTRODUCED).toLocalDateTime().toLocalDate());
@@ -167,7 +167,7 @@ public class ComputerDAO extends DAO<Computer> {
 				computer.setDiscontinuedDate(resultSet.getTimestamp(ATTRIBUT_DISCONTINUED).toLocalDateTime().toLocalDate());
 			}
 			computer.setCompany(new Company());
-			computer.getCompany().setIdCompany(resultSet.getInt(ATTRIBUT_COMPANY_ID));
+			computer.getCompany().setIdCompany(resultSet.getLong(ATTRIBUT_COMPANY_ID));
 			computer.getCompany().setName(resultSet.getString(ATTRIBUT_COMPANY_NAME));
 		} catch (SQLException e) {
 			e.printStackTrace();

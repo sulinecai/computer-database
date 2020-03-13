@@ -22,7 +22,7 @@ public class ComputerService implements Service<Computer> {
 	}
 	
 	@Override
-	public Computer findById(int id) {
+	public Computer findById(Long id) {
 		return computerDAO.findById(id).get();
 	}
 	
@@ -53,12 +53,12 @@ public class ComputerService implements Service<Computer> {
 		computerDAO.update(computer);
 	}
 	
-	public void delete(int id) {
+	public void delete(Long id) {
 		computerDAO.delete(id);
 	}
 
 	@Override
-	public boolean exist(int id) {
+	public boolean exist(Long id) {
 		return computerDAO.findById(id).isPresent();
 	}
 }

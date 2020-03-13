@@ -50,7 +50,7 @@ public class UserInterface {
 					
 				case 3:
 					System.out.println("Enter the id of a computer: ");
-					int computerId = scanner.nextInt();
+					Long computerId = scanner.nextLong();
 					
 					if (computerService.exist(computerId)) {
 						Computer computer = computerService.findById(computerId);
@@ -58,6 +58,9 @@ public class UserInterface {
 					} else {
 						System.out.println("The computer with the id " + computerId + " doesn't exit.");
 					}
+					
+					backToMenu(); 
+					
 					break;
 					
 				case 4:
@@ -86,13 +89,13 @@ public class UserInterface {
 					
 				case 6:
 					System.out.println("Enter the id of the computer to delete: ");
-					int id = scanner.nextInt();
+					Long id = scanner.nextLong();
 					boolean exist = computerService.exist(id);
 					
 					while(!exist) {
 						System.out.println("The id doesn't exist.");
 						System.out.println("Enter the id of an existing  computer : ");
-						id = scanner.nextInt();
+						id = scanner.nextLong();
 					}
 					scanner.nextLine();
 					computerService.delete(id);
@@ -121,7 +124,7 @@ public class UserInterface {
 				System.out.println("Enter the id of the computer : ");
 				id = scanner.nextLine();
 			}
-			computer.setIdComputer(Integer.valueOf(id));
+			computer.setIdComputer(Long.valueOf(id));
 		}
 
 		System.out.println("Enter the name of the computer: ");
@@ -147,7 +150,7 @@ public class UserInterface {
 		System.out.println("Enter the manufacturer company id:(press <Enter> to skip)");
 		String companyId = scanner.nextLine();
 		if (!companyId.equals("")) {
-			computer.setCompany(new Company(Integer.valueOf(companyId)));
+			computer.setCompany(new Company(Long.valueOf(companyId)));
 		}
 		
 		return computer;
@@ -213,6 +216,17 @@ public class UserInterface {
 			case "q":
 				quit = true;
 				break;
+			}
+		} while (!quit);
+	}
+	
+	public void backToMenu() {
+		System.out.println("(Enter 'q' to quit this page and go to main page.)");
+		boolean quit = false;
+		do {
+			String input = scanner.nextLine();
+			if (input.toLowerCase().equals("q")) {
+				quit = true;
 			}
 		} while (!quit);
 	}

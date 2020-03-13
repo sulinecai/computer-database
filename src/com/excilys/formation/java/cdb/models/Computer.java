@@ -4,7 +4,7 @@ import java.time.LocalDate;
 
 public class Computer {
 	
-	private int idComputer;
+	private Long idComputer;
 	private String name;
 	private LocalDate introducedDate;
 	private LocalDate discontinuedDate;
@@ -25,7 +25,7 @@ public class Computer {
 		this.company = company;
 	}
 	
-	public Computer(int idComputer, String name, LocalDate introducedDate, LocalDate discontinuedDate, Company company) {
+	public Computer(Long idComputer, String name, LocalDate introducedDate, LocalDate discontinuedDate, Company company) {
 		super();
 		this.idComputer = idComputer;
 		this.name = name;
@@ -34,10 +34,10 @@ public class Computer {
 		this.company = company;
 	}
 	
-	public int getIdComputer() {
+	public Long getIdComputer() {
 		return idComputer;
 	}
-	public void setIdComputer(int idComputer) {
+	public void setIdComputer(Long idComputer) {
 		this.idComputer = idComputer;
 	}
 	public String getName() {

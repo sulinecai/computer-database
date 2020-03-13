@@ -20,12 +20,12 @@ public class CompanyService implements Service<Company> {
 	}
 
 	@Override
-	public Company findById(int id) {
+	public Company findById(Long id) {
 		return companyDAO.findById(id).get();
 	}
 
 	@Override
-	public boolean exist(int id) {
+	public boolean exist(Long id) {
 		return companyDAO.findById(id).isPresent();
 	}
 

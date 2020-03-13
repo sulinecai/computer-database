@@ -2,13 +2,13 @@ package com.excilys.formation.java.cdb.models;
 
 public class Company {
 	
-	private int idCompany;
+	private Long idCompany;
 	private String name;
 	
 	public Company() {
 	}
 	
-	public Company(int idCompany, String name) {
+	public Company(Long idCompany, String name) {
 		super();
 		this.idCompany = idCompany;
 		this.name = name;
@@ -19,15 +19,15 @@ public class Company {
 		this.name = name;
 	}
 	
-	public Company(int id) {
+	public Company(Long id) {
 		this.idCompany = id;
 	}
 
-	public int getIdCompany() {
+	public Long getIdCompany() {
 		return idCompany;
 	}
 
-	public void setIdCompany(int idCompany) {
+	public void setIdCompany(Long idCompany) {
 		this.idCompany = idCompany;
 	}
 

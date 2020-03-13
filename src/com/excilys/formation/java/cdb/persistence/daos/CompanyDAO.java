@@ -71,11 +71,11 @@ public class CompanyDAO extends DAO<Company>{
 	}
 
 	@Override
-	public Optional<Company> findById(int id) {
+	public Optional<Company> findById(Long id) {
 		Optional<Company> result = Optional.empty();
 		
 		try(PreparedStatement statement = this.connect.prepareStatement(SQL_SELECT_WITH_ID)){
-			statement.setInt(1, id);
+			statement.setLong(1, id);
 			ResultSet resultSet = statement.executeQuery();	
 			
 			while(resultSet.next()) {
@@ -92,7 +92,7 @@ public class CompanyDAO extends DAO<Company>{
 	protected Company convert(ResultSet resultSet) {
 		Company company = new Company();
 		try {
-			company = new Company(resultSet.getInt(ATTRIBUT_ID_COMPANY),resultSet.getString(ATTRIBUT_NAME));
+			company = new Company(resultSet.getLong(ATTRIBUT_ID_COMPANY),resultSet.getString(ATTRIBUT_NAME));
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

@@ -8,7 +8,7 @@ public abstract class DAO<T> {
 		
 	public abstract List<T> getAll();
 	
-	public abstract Optional<T> findById(int id);
+	public abstract Optional<T> findById(Long id);
 	
 	protected abstract T convert(ResultSet resultSet);
 

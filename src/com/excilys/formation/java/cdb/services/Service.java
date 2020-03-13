@@ -6,8 +6,8 @@ public interface Service<T> {
 	
 	public List<T> getAll();
 	
-	public T findById(int id);
+	public T findById(Long id);
 	
-	public boolean exist(int id);
+	public boolean exist(Long id);
 
 }
