@@ -41,8 +41,7 @@ public class UserInterface {
 					           	
 			switch (featureChoice) {
 				case 1:
-					List<Computer> allComputers = computerService.getAll();
-					allComputers.forEach(cp -> System.out.println(cp.toString()));
+					showAllComputers();
 					break;
 					
 				case 2:
@@ -80,7 +79,7 @@ public class UserInterface {
 					if (computerService.exist(computerUpd.getIdComputer())) {
 						computerService.update(computerUpd);
 						System.out.println("Update OK.");
-					} else {
+					} else {;
 						System.out.println("Update impossible.");
 					}
 					break;
@@ -176,6 +175,38 @@ public class UserInterface {
 				break;
 			case "n":
 				if (currentPage.hasNextPage(numberOfCompanies)) {
+					currentPage.nextPage();
+				}
+				break;
+			case "q":
+				quit = true;
+				break;
+			}
+		} while (!quit);
+	}
+	
+	public void showAllComputers() {
+		Page currentPage = new Page();
+		boolean quit = false;
+		List<Computer> allComputers = computerService.getAll();
+		int numberOfComputers = allComputers.size();
+
+		do {
+			List<Computer> allComputersbyPage = computerService.getAllByPage(currentPage);
+			allComputersbyPage.forEach(cp -> System.out.println(cp.toString()));
+			System.out.println("Page " + currentPage.getCurrentPage() + "/" + currentPage.getTotalPages(numberOfComputers));
+			System.out.println("(Enter 'q' to quit, 'p' to go to the previous page, 'n' to go to the next page.)");
+
+			String input = scanner.nextLine();
+
+			switch (input.toLowerCase()) {
+			case "p":
+				if (currentPage.hasPreviousPage()) {
+					currentPage.previousPage();
+				}
+				break;
+			case "n":
+				if (currentPage.hasNextPage(numberOfComputers)) {
 					currentPage.nextPage();
 				}
 				break;

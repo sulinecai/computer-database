@@ -11,6 +11,7 @@ import java.util.Optional;
 
 import com.excilys.formation.java.cdb.models.Company;
 import com.excilys.formation.java.cdb.models.Computer;
+import com.excilys.formation.java.cdb.models.Page;
 import com.excilys.formation.java.cdb.persistence.MysqlConnect;
 
 public class ComputerDAO extends DAO<Computer> {
@@ -24,6 +25,10 @@ public class ComputerDAO extends DAO<Computer> {
 
 	private static final String SQL_SELECT_ALL = "SELECT computer.id, computer.name, introduced, discontinued, "
 			+ "company_id, company.name AS company_name FROM computer LEFT JOIN company ON company_id = company.id ORDER BY computer.id";
+	
+	private static final String SQL_SELECT_ALL_BY_PAGE = "SELECT computer.id, computer.name, introduced, discontinued, "
+			+ "company_id, company.name AS company_name FROM computer LEFT JOIN company ON company_id = company.id "
+			+ "ORDER BY computer.id LIMIT ? OFFSET ?";
 	
 	private static final String SQL_SELECT_WITH_ID = "SELECT computer.id, computer.name, introduced, discontinued, "
 			+ "company_id, company.name AS company_name FROM computer LEFT JOIN company ON "
@@ -56,6 +61,24 @@ public class ComputerDAO extends DAO<Computer> {
 		List<Computer> computerList = new ArrayList<Computer>();
 
 		try(PreparedStatement statement = connect.prepareStatement(SQL_SELECT_ALL)){
+			ResultSet resultSet = statement.executeQuery();
+			while (resultSet.next()) {
+				Computer computer = convert(resultSet);
+				computerList.add(computer);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return computerList;
+	}
+	
+	public List<Computer> getAllByPage(Page page) {
+		List<Computer> computerList = new ArrayList<Computer>();
+
+		try(PreparedStatement statement = connect.prepareStatement(SQL_SELECT_ALL_BY_PAGE)){
+			statement.setInt(1, page.getMaxLine());
+			statement.setInt(2, page.getPageFirstLine());
+			
 			ResultSet resultSet = statement.executeQuery();
 			while (resultSet.next()) {
 				Computer computer = convert(resultSet);

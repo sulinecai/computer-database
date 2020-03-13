@@ -3,6 +3,7 @@ package com.excilys.formation.java.cdb.services;
 import java.util.List;
 
 import com.excilys.formation.java.cdb.models.Computer;
+import com.excilys.formation.java.cdb.models.Page;
 import com.excilys.formation.java.cdb.persistence.daos.CompanyDAO;
 import com.excilys.formation.java.cdb.persistence.daos.ComputerDAO;
 
@@ -14,6 +15,10 @@ public class ComputerService implements Service<Computer> {
 	@Override
 	public List<Computer> getAll() {
 		return computerDAO.getAll();
+	}
+	
+	public List<Computer> getAllByPage(Page page) {
+		return computerDAO.getAllByPage(page);
 	}
 	
 	@Override
