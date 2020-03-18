@@ -8,14 +8,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.excilys.formation.java.cdb.mappers.CompanyMapper;
 import com.excilys.formation.java.cdb.models.Company;
 import com.excilys.formation.java.cdb.models.Page;
 import com.excilys.formation.java.cdb.persistence.MysqlConnect;
 
 public class CompanyDAO extends DAO<Company>{
-	
-	private static final String ATTRIBUT_ID_COMPANY = "id";
-	private static final String ATTRIBUT_NAME = "name";
 	
 	private static final String SQL_SELECT_ALL = "SELECT id, name FROM company ORDER BY id";
 	
@@ -25,6 +26,8 @@ public class CompanyDAO extends DAO<Company>{
 	
     private static CompanyDAO companyDAO;
     
+	private static Logger logger = LoggerFactory.getLogger(CompanyDAO.class);
+
 	private Connection connect = MysqlConnect.getInstance();
         
     private CompanyDAO() {}
@@ -43,11 +46,11 @@ public class CompanyDAO extends DAO<Company>{
 		try(PreparedStatement statement = connect.prepareStatement(SQL_SELECT_ALL)){
 			ResultSet resultSet = statement.executeQuery();
 			while (resultSet.next()) {
-				Company company = convert(resultSet);
+				Company company = CompanyMapper.convert(resultSet);
 				companyList.add(company);
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			logger.error("sql error when listing all companies");
 		}
 		return companyList;
 	}
@@ -61,11 +64,11 @@ public class CompanyDAO extends DAO<Company>{
 			
 			ResultSet resultSet = statement.executeQuery();
 			while (resultSet.next()) {
-				Company company = convert(resultSet);
+				Company company = CompanyMapper.convert(resultSet);
 				companyList.add(company);
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			logger.error("sql error when listing companies by page");
 		}
 		return companyList;
 	}
@@ -79,24 +82,13 @@ public class CompanyDAO extends DAO<Company>{
 			ResultSet resultSet = statement.executeQuery();	
 			
 			while(resultSet.next()) {
-				result = Optional.ofNullable(convert(resultSet));
+				result = Optional.ofNullable(CompanyMapper.convert(resultSet));
 			}
 
 		} catch (SQLException e) {
-			e.printStackTrace();
+			logger.error("sql error when finding company with id");
 		}
 		return result;
-	}
-
-	@Override
-	protected Company convert(ResultSet resultSet) {
-		Company company = new Company();
-		try {
-			company = new Company(resultSet.getLong(ATTRIBUT_ID_COMPANY),resultSet.getString(ATTRIBUT_NAME));
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return company;
 	}
 		
 }

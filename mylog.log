@@ -1,0 +1,90 @@
+2020-03-18 11:58:24 DEBUG UserInterface:25 - start the UI
+2020-03-18 14:51:52 DEBUG UserInterface:25 - start the UI
+2020-03-18 15:04:28 DEBUG UserInterface:25 - start the UI
+2020-03-18 15:06:07 DEBUG UserInterface:25 - start the UI
+2020-03-18 15:10:25 DEBUG UserInterface:25 - start the UI
+2020-03-18 15:11:49 DEBUG UserInterface:25 - start the UI
+2020-03-18 15:12:04 DEBUG UserInterface:25 - start the UI
+2020-03-18 15:16:28 DEBUG UserInterface:25 - start the UI
+2020-03-18 15:17:31 DEBUG UserInterface:25 - start the UI
+2020-03-18 15:18:15 DEBUG UserInterface:25 - start the UI
+2020-03-18 15:19:20 DEBUG UserInterface:25 - start the UI
+2020-03-18 15:19:29 DEBUG UserInterface:25 - start the UI
+2020-03-18 15:52:46 ERROR MysqlConnect:46 - error when connecting to db
+java.io.FileNotFoundException: db.properties (Aucun fichier ou dossier de ce type)
+	at java.io.FileInputStream.open0(Native Method)
+	at java.io.FileInputStream.open(FileInputStream.java:195)
+	at java.io.FileInputStream.<init>(FileInputStream.java:138)
+	at java.io.FileInputStream.<init>(FileInputStream.java:93)
+	at com.excilys.formation.java.cdb.persistence.MysqlConnect.<init>(MysqlConnect.java:34)
+	at com.excilys.formation.java.cdb.persistence.MysqlConnect.getInstance(MysqlConnect.java:52)
+	at com.excilys.formation.java.cdb.persistence.daos.ComputerDAO.<init>(ComputerDAO.java:41)
+	at com.excilys.formation.java.cdb.persistence.daos.ComputerDAO.getInstance(ComputerDAO.java:47)
+	at com.excilys.formation.java.cdb.services.ComputerService.<init>(ComputerService.java:12)
+	at com.excilys.formation.java.cdb.ui.UserInterface.<clinit>(UserInterface.java:18)
+	at com.excilys.formation.java.cdb.ui.Main.main(Main.java:6)
+2020-03-18 15:52:46 ERROR MysqlConnect:46 - error when connecting to db
+java.io.FileNotFoundException: db.properties (Aucun fichier ou dossier de ce type)
+	at java.io.FileInputStream.open0(Native Method)
+	at java.io.FileInputStream.open(FileInputStream.java:195)
+	at java.io.FileInputStream.<init>(FileInputStream.java:138)
+	at java.io.FileInputStream.<init>(FileInputStream.java:93)
+	at com.excilys.formation.java.cdb.persistence.MysqlConnect.<init>(MysqlConnect.java:34)
+	at com.excilys.formation.java.cdb.persistence.MysqlConnect.getInstance(MysqlConnect.java:52)
+	at com.excilys.formation.java.cdb.persistence.daos.CompanyDAO.<init>(CompanyDAO.java:31)
+	at com.excilys.formation.java.cdb.persistence.daos.CompanyDAO.getInstance(CompanyDAO.java:37)
+	at com.excilys.formation.java.cdb.services.ComputerService.<init>(ComputerService.java:13)
+	at com.excilys.formation.java.cdb.ui.UserInterface.<clinit>(UserInterface.java:18)
+	at com.excilys.formation.java.cdb.ui.Main.main(Main.java:6)
+2020-03-18 15:52:46 DEBUG UserInterface:25 - start the UI
+2020-03-18 15:55:26 DEBUG UserInterface:25 - start the UI
+2020-03-18 16:00:11 ERROR MysqlConnect:36 - error when connecting to db
+org.h2.jdbc.JdbcSQLInvalidAuthorizationSpecException: Mauvais nom d'utilisateur ou mot de passe
+Wrong user name or password [28000-199]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:459)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:427)
+	at org.h2.message.DbException.get(DbException.java:205)
+	at org.h2.message.DbException.get(DbException.java:181)
+	at org.h2.message.DbException.get(DbException.java:170)
+	at org.h2.engine.Engine.validateUserAndPassword(Engine.java:366)
+	at org.h2.engine.Engine.createSessionAndValidate(Engine.java:186)
+	at org.h2.engine.Engine.createSession(Engine.java:161)
+	at org.h2.server.TcpServerThread.run(TcpServerThread.java:160)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:461)
+	at org.h2.engine.SessionRemote.done(SessionRemote.java:611)
+	at org.h2.engine.SessionRemote.initTransfer(SessionRemote.java:147)
+	at org.h2.engine.SessionRemote.connectServer(SessionRemote.java:435)
+	at org.h2.engine.SessionRemote.connectEmbeddedOrServer(SessionRemote.java:321)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:173)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:152)
+	at org.h2.Driver.connect(Driver.java:69)
+	at java.sql.DriverManager.getConnection(DriverManager.java:664)
+	at java.sql.DriverManager.getConnection(DriverManager.java:247)
+	at com.excilys.formation.java.cdb.persistence.MysqlConnect.<init>(MysqlConnect.java:33)
+	at com.excilys.formation.java.cdb.persistence.MysqlConnect.getInstance(MysqlConnect.java:42)
+	at com.excilys.formation.java.cdb.persistence.MysqlConnectTest.testGetInstance(MysqlConnectTest.java:14)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:47)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:44)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:271)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:70)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:50)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:238)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:63)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:236)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:53)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:229)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:309)
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:89)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:41)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:542)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:770)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:464)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:210)

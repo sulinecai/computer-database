@@ -4,6 +4,9 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Scanner;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.excilys.formation.java.cdb.models.Company;
 import com.excilys.formation.java.cdb.models.Computer;
 import com.excilys.formation.java.cdb.models.Page;
@@ -16,7 +19,10 @@ public class UserInterface {
 	private static CompanyService companyService = new CompanyService();
 	private static Scanner scanner = new Scanner(System.in);
 	
+	private static Logger logger = LoggerFactory.getLogger(UserInterface.class);
+	
 	public void start() {
+		logger.debug("start the UI");
 		
 		boolean quit = false;
 

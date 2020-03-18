@@ -1,7 +1,6 @@
 package com.excilys.formation.java.cdb.services;
 
 import java.util.List;
-
 import com.excilys.formation.java.cdb.models.Company;
 import com.excilys.formation.java.cdb.models.Page;
 import com.excilys.formation.java.cdb.persistence.daos.CompanyDAO;

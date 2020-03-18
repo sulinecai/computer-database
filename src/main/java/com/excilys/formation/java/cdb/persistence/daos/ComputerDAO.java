@@ -9,20 +9,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import com.excilys.formation.java.cdb.models.Company;
+import com.excilys.formation.java.cdb.mappers.ComputerMapper;
 import com.excilys.formation.java.cdb.models.Computer;
 import com.excilys.formation.java.cdb.models.Page;
 import com.excilys.formation.java.cdb.persistence.MysqlConnect;
 
 public class ComputerDAO extends DAO<Computer> {
 	
-	private static final String ATTRIBUT_ID_COMPUTER = "id";
-	private static final String ATTRIBUT_NAME = "name";
-	private static final String ATTRIBUT_INTRODUCED = "introduced";
-	private static final String ATTRIBUT_DISCONTINUED = "discontinued";
-	private static final String ATTRIBUT_COMPANY_ID = "company_id";
-	private static final String ATTRIBUT_COMPANY_NAME = "company_name";
-
 	private static final String SQL_SELECT_ALL = "SELECT computer.id, computer.name, introduced, discontinued, "
 			+ "company_id, company.name AS company_name FROM computer LEFT JOIN company ON company_id = company.id ORDER BY computer.id";
 	
@@ -63,7 +56,7 @@ public class ComputerDAO extends DAO<Computer> {
 		try(PreparedStatement statement = connect.prepareStatement(SQL_SELECT_ALL)){
 			ResultSet resultSet = statement.executeQuery();
 			while (resultSet.next()) {
-				Computer computer = convert(resultSet);
+				Computer computer = ComputerMapper.convert(resultSet);
 				computerList.add(computer);
 			}
 		} catch (SQLException e) {
@@ -81,7 +74,7 @@ public class ComputerDAO extends DAO<Computer> {
 			
 			ResultSet resultSet = statement.executeQuery();
 			while (resultSet.next()) {
-				Computer computer = convert(resultSet);
+				Computer computer = ComputerMapper.convert(resultSet);
 				computerList.add(computer);
 			}
 		} catch (SQLException e) {
@@ -99,7 +92,7 @@ public class ComputerDAO extends DAO<Computer> {
 			ResultSet resultSet = statement.executeQuery();	
 			
 			while(resultSet.next()) {
-				result = Optional.ofNullable(convert(resultSet));
+				result = Optional.ofNullable(ComputerMapper.convert(resultSet));
 			}
 
 		} catch (SQLException e) {
@@ -152,27 +145,6 @@ public class ComputerDAO extends DAO<Computer> {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-	}
-	
-	@Override
-	protected Computer convert(ResultSet resultSet) {
-		Computer computer = new Computer();
-		try {
-			computer.setIdComputer(resultSet.getLong(ATTRIBUT_ID_COMPUTER));
-			computer.setName(resultSet.getString(ATTRIBUT_NAME));
-			if (resultSet.getTimestamp(ATTRIBUT_INTRODUCED) != null) { 
-				computer.setIntroducedDate(resultSet.getTimestamp(ATTRIBUT_INTRODUCED).toLocalDateTime().toLocalDate());
-			}
-			if (resultSet.getTimestamp(ATTRIBUT_DISCONTINUED) != null) {
-				computer.setDiscontinuedDate(resultSet.getTimestamp(ATTRIBUT_DISCONTINUED).toLocalDateTime().toLocalDate());
-			}
-			computer.setCompany(new Company());
-			computer.getCompany().setIdCompany(resultSet.getLong(ATTRIBUT_COMPANY_ID));
-			computer.getCompany().setName(resultSet.getString(ATTRIBUT_COMPANY_NAME));
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return computer;
 	}
 
 }

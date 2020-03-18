@@ -10,6 +10,4 @@ public abstract class DAO<T> {
 	
 	public abstract Optional<T> findById(Long id);
 	
-	protected abstract T convert(ResultSet resultSet);
-
 }
