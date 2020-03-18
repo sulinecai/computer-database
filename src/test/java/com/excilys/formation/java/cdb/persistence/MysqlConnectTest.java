@@ -13,6 +13,6 @@ public class MysqlConnectTest {
 	public void testGetInstance() {
 		Connection connection = MysqlConnect.getInstance();
 		assertNotNull(connection);
-		assertEquals(MysqlConnect.getInstance(), connection);
+		assertEquals("the two instance are not equals (singleton)",MysqlConnect.getInstance(), connection);
 	}
 }

@@ -69,7 +69,7 @@ public class Computer {
 	public String toString() {
 		String companyString = "";
 		if (company != null) {
-			if (company.getIdCompany() != 0) {
+			if (company.getIdCompany() != null && company.getIdCompany() != 0) {
 				companyString = ", companyId:" + company.getIdCompany() + ", companyName:" + company.getName();
 			}
 		}
