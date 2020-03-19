@@ -7,25 +7,25 @@ import com.excilys.formation.java.cdb.persistence.daos.CompanyDAO;
 
 public class CompanyService implements Service<Company> {
 
-	private CompanyDAO companyDAO = CompanyDAO.getInstance();
+    private CompanyDAO companyDAO = CompanyDAO.getInstance();
 
-	@Override
-	public List<Company> getAll() {
-		return companyDAO.getAll();
-	}
-	
-	public List<Company> getAllByPage(Page page) {
-		return companyDAO.getAllByPage(page);
-	}
+    @Override
+    public List<Company> getAll() {
+        return companyDAO.getAll();
+    }
 
-	@Override
-	public Company findById(Long id) {
-		return companyDAO.findById(id).get();
-	}
+    public List<Company> getAllByPage(Page page) {
+        return companyDAO.getAllByPage(page);
+    }
 
-	@Override
-	public boolean exist(Long id) {
-		return companyDAO.findById(id).isPresent();
-	}
+    @Override
+    public Company findById(Long id) {
+        return companyDAO.findById(id).get();
+    }
+
+    @Override
+    public boolean exist(Long id) {
+        return companyDAO.findById(id).isPresent();
+    }
 
 }

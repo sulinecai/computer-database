@@ -10,10 +10,9 @@ import com.excilys.formation.java.cdb.persistence.MysqlConnectTest;
 
 @RunWith(Suite.class)
 @SuiteClasses({
-	CompanyMapperTest.class,
-	ComputerMapperTest.class,
-	MysqlConnectTest.class
-})
+    CompanyMapperTest.class,
+    ComputerMapperTest.class,
+    MysqlConnectTest.class })
 public class AllTests {
 
 }
