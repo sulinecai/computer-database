@@ -30,9 +30,16 @@ public class CompanyDAO extends DAO<Company> {
 
     private Connection connect = MysqlConnect.getInstance();
 
+    /**
+     * Private constructor of CompanyDAO.
+     */
     private CompanyDAO() {
     }
 
+    /**
+     * Instance of the singleton CompanyDAO.
+     * @return the instance of CompanyDAO
+     */
     public static synchronized CompanyDAO getInstance() {
         if (companyDAO == null) {
             companyDAO = new CompanyDAO();
@@ -77,17 +84,16 @@ public class CompanyDAO extends DAO<Company> {
     @Override
     public Optional<Company> findById(Long id) {
         Optional<Company> result = Optional.empty();
-
-        try (PreparedStatement statement = this.connect.prepareStatement(SQL_SELECT_WITH_ID)) {
-            statement.setLong(1, id);
-            ResultSet resultSet = statement.executeQuery();
-
-            while (resultSet.next()) {
-                result = Optional.ofNullable(CompanyMapper.convert(resultSet));
+        if (id != null) {
+            try (PreparedStatement statement = this.connect.prepareStatement(SQL_SELECT_WITH_ID)) {
+                statement.setLong(1, id);
+                ResultSet resultSet = statement.executeQuery();
+                while (resultSet.next()) {
+                    result = Optional.ofNullable(CompanyMapper.convert(resultSet));
+                }
+            } catch (SQLException e) {
+                logger.error("sql error when finding company with id");
             }
-
-        } catch (SQLException e) {
-            logger.error("sql error when finding company with id");
         }
         return result;
     }

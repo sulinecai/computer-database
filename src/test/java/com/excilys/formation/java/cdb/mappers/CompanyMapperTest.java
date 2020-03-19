@@ -2,12 +2,13 @@ package com.excilys.formation.java.cdb.mappers;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
+import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.mock;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import org.junit.Test;
-import org.mockito.Mockito;
 
 import com.excilys.formation.java.cdb.models.Company;
 
@@ -19,13 +20,16 @@ public class CompanyMapperTest {
     private final Long id = 10L;
     private final String name = "test name";
 
-    private ResultSet resultSet = Mockito.mock(ResultSet.class);
+    private ResultSet resultSet = mock(ResultSet.class);
 
+    /**
+     * Test that the resultSet is correctly converted in Company object.
+     */
     @Test
     public void testConvert() {
         try {
-            Mockito.when(resultSet.getLong(ATTRIBUT_ID_COMPANY)).thenReturn(id);
-            Mockito.when(resultSet.getString(ATTRIBUT_NAME)).thenReturn(name);
+            when(resultSet.getLong(ATTRIBUT_ID_COMPANY)).thenReturn(id);
+            when(resultSet.getString(ATTRIBUT_NAME)).thenReturn(name);
         } catch (SQLException e) {
             fail("sql exception :" + e.getMessage());
         }
@@ -36,10 +40,13 @@ public class CompanyMapperTest {
         assertEquals(expCompany.getName(), company.getName());
     }
 
+    /**
+     * Test that the resultSet with id null is correctly converted in Company object.
+     */
     @Test
     public void testConvertIdNull() {
         try {
-            Mockito.when(resultSet.getString(ATTRIBUT_NAME)).thenReturn(name);
+            when(resultSet.getString(ATTRIBUT_NAME)).thenReturn(name);
         } catch (SQLException e) {
             fail("sql exception :" + e.getMessage());
         }
@@ -50,10 +57,13 @@ public class CompanyMapperTest {
         assertEquals(expCompany.getName(), company.getName());
     }
 
+    /**
+     * Test that the resultSet with name null is correctly converted in Company object.
+     */
     @Test
     public void testConvertNameNull() {
         try {
-            Mockito.when(resultSet.getLong(ATTRIBUT_ID_COMPANY)).thenReturn(id);
+            when(resultSet.getLong(ATTRIBUT_ID_COMPANY)).thenReturn(id);
         } catch (SQLException e) {
             fail("sql exception :" + e.getMessage());
         }
