@@ -15,6 +15,13 @@ public class CompanyMapper {
 
     private static Logger logger = LoggerFactory.getLogger(CompanyMapper.class);
 
+    /**
+     * Convert a result set to the associated Company object.
+     *
+     * @param resultSet
+     * @return converted Company object
+     */
+
     public static Company convert(ResultSet resultSet) {
         Company company = new Company();
         try {
@@ -24,5 +31,4 @@ public class CompanyMapper {
         }
         return company;
     }
-
 }

@@ -20,6 +20,13 @@ public class ComputerMapper {
 
     private static Logger logger = LoggerFactory.getLogger(ComputerMapper.class);
 
+    /**
+     * Convert a result set to the associated Computer object.
+     *
+     * @param resultSet
+     * @return converted Computer object
+     */
+
     public static Computer convert(ResultSet resultSet) {
         Computer computer = new Computer();
         try {

@@ -63,21 +63,29 @@ public class CompanyDAO extends DAO<Company> {
         return companyList;
     }
 
+    /**
+     * Get all the companies on a given page.
+     * @param page
+     * @return list of the companies
+     */
     public List<Company> getAllByPage(Page page) {
         List<Company> companyList = new ArrayList<Company>();
 
-        try (PreparedStatement statement = connect.prepareStatement(SQL_SELECT_ALL_BY_PAGE)) {
-            statement.setInt(1, page.getMaxLine());
-            statement.setInt(2, page.getPageFirstLine());
+        if (page.getCurrentPage() >= 0) {
+            try (PreparedStatement statement = connect.prepareStatement(SQL_SELECT_ALL_BY_PAGE)) {
+                statement.setInt(1, page.getMaxLine());
+                statement.setInt(2, page.getPageFirstLine());
 
-            ResultSet resultSet = statement.executeQuery();
-            while (resultSet.next()) {
-                Company company = CompanyMapper.convert(resultSet);
-                companyList.add(company);
+                ResultSet resultSet = statement.executeQuery();
+                while (resultSet.next()) {
+                    Company company = CompanyMapper.convert(resultSet);
+                    companyList.add(company);
+                }
+            } catch (SQLException e) {
+                logger.error("sql error when listing companies by page");
             }
-        } catch (SQLException e) {
-            logger.error("sql error when listing companies by page");
         }
+
         return companyList;
     }
 
