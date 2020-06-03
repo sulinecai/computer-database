@@ -19,7 +19,7 @@ public class CompanyDAOTest {
 
     /**
      * Reset the singleton of companyDAO.
-     * 
+     *
      * @throws SecurityException
      * @throws NoSuchFieldException
      * @throws IllegalArgumentException
@@ -79,7 +79,7 @@ public class CompanyDAOTest {
     }
 
     /**
-     * Test that the first page is returned when the page number is negative.
+     * Test that the page is empty when the page number is negative.
      */
     @Test
     public void testGetAllByPageNegative() {
@@ -89,7 +89,7 @@ public class CompanyDAOTest {
     }
 
     /**
-     * Test that the first page is returned when the page number is negative.
+     * Test that the page is empty when  when the page number is 0.
      */
     @Test
     public void testGetAllByPageZero() {
@@ -103,7 +103,7 @@ public class CompanyDAOTest {
      * pages.
      */
     @Test
-    public void testGetAllByPageExceed() {
+    public void testGetAllByPageExceeded() {
         CompanyDAO companyDAO = CompanyDAO.getInstance();
         List<Company> companies = companyDAO.getAllByPage(new Page(8, 3));
         assertTrue(companies.isEmpty());

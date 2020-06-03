@@ -71,7 +71,7 @@ public class CompanyDAO extends DAO<Company> {
     public List<Company> getAllByPage(Page page) {
         List<Company> companyList = new ArrayList<Company>();
 
-        if (page.getCurrentPage() >= 0) {
+        if (page.getCurrentPage() > 0) {
             try (PreparedStatement statement = connect.prepareStatement(SQL_SELECT_ALL_BY_PAGE)) {
                 statement.setInt(1, page.getMaxLine());
                 statement.setInt(2, page.getPageFirstLine());
@@ -105,5 +105,4 @@ public class CompanyDAO extends DAO<Company> {
         }
         return result;
     }
-
 }
