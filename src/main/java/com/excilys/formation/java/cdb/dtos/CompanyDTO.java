@@ -5,6 +5,9 @@ public class CompanyDTO {
     private String idCompany;
     private String name;
 
+    public CompanyDTO() {
+    }
+
     public CompanyDTO(String idCompany, String name) {
         super();
         this.idCompany = idCompany;
@@ -36,4 +39,18 @@ public class CompanyDTO {
         return "CompanyDTO " + idCompany + ", name: " + name;
     }
 
+    @Override
+    public int hashCode() {
+        return Integer.valueOf(this.idCompany);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        boolean result = false;
+        if (o instanceof CompanyDTO){
+            CompanyDTO dto = (CompanyDTO) o;
+            result = (this.idCompany.equals(dto.getIdCompany()) && this.getName().equals(dto.getName()));
+        }
+        return result;
+    }
 }

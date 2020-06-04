@@ -2,10 +2,12 @@ package com.excilys.formation.java.cdb.mappers;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.excilys.formation.java.cdb.dtos.ComputerDTO;
 import com.excilys.formation.java.cdb.models.Company;
 import com.excilys.formation.java.cdb.models.Computer;
 
@@ -47,4 +49,43 @@ public class ComputerMapper {
         return computer;
     }
 
+    /**
+     * Convert a Computer to a ComputerDTO.
+     *
+     * @param computer
+     * @return computerDTO
+     */
+    public static ComputerDTO toComputerDTO(Computer computer) {
+        ComputerDTO dto = new ComputerDTO();
+        try {
+            dto.setIdComputer(computer.getIdComputer().toString());
+            dto.setName(computer.getName());
+            dto.setIntroducedDate(computer.getIntroducedDate().toString());
+            dto.setDiscontinuedDate(computer.getDiscontinuedDate().toString());
+            dto.setCompanyDTO(CompanyMapper.toCompanyDTO(computer.getCompany()));
+        } catch (RuntimeException e) {
+            logger.error("error when converting a companyDTO to a company");
+        }
+        return dto;
+    }
+
+    /**
+     * Convert a ComputerDTO to a Computer.
+     *
+     * @param dto
+     * @return computer
+     */
+    public static Computer toComputer(ComputerDTO dto) {
+        Computer computer = new Computer();
+        try {
+            computer.setIdComputer(Long.valueOf(dto.getIdComputer()));
+            computer.setName(dto.getName());
+            computer.setIntroducedDate(LocalDate.parse(dto.getIntroducedDate()));
+            computer.setDiscontinuedDate(LocalDate.parse(dto.getDiscontinuedDate()));
+            computer.setCompany(CompanyMapper.toCompany(dto.getCompanyDTO()));
+        } catch (RuntimeException e) {
+            logger.error("error when converting a company to a companyDTO");
+        }
+        return computer;
+    }
 }

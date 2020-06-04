@@ -10,6 +10,7 @@ import java.sql.SQLException;
 
 import org.junit.Test;
 
+import com.excilys.formation.java.cdb.dtos.CompanyDTO;
 import com.excilys.formation.java.cdb.models.Company;
 
 public class CompanyMapperTest {
@@ -72,6 +73,26 @@ public class CompanyMapperTest {
 
         assertEquals(expCompany.getIdCompany(), company.getIdCompany());
         assertEquals(expCompany.getName(), company.getName());
+    }
+
+    /**
+     * Test that the Company is correctly converted to a CompanyDTO.
+     */
+    @Test
+    public void testToCompanyDTO() {
+        Company company = new Company(1L, "test");
+        CompanyDTO dto = CompanyMapper.toCompanyDTO(company);
+        assertEquals(new CompanyDTO("1",  "test"), dto);
+    }
+
+    /**
+     * Test that the CompanyDTO is correctly converted to a Company.
+     */
+    @Test
+    public void testToCompany() {
+        CompanyDTO dto = new CompanyDTO("1", "test");
+        Company company = CompanyMapper.toCompany(dto);
+        assertEquals(new Company(1L,  "test"), company);
     }
 
 }

@@ -1,9 +1,5 @@
 package com.excilys.formation.java.cdb.dtos;
 
-import java.time.LocalDate;
-
-import com.excilys.formation.java.cdb.models.Company;
-
 public class ComputerDTO {
     private String idComputer;
     private String name;
@@ -68,11 +64,42 @@ public class ComputerDTO {
         this.discontinuedDate = discontinuedDate;
     }
 
-    public CompanyDTO getCompany() {
+    public CompanyDTO getCompanyDTO() {
         return companyDTO;
     }
 
-    public void setCompany(CompanyDTO companyDTO) {
+    public void setCompanyDTO(CompanyDTO companyDTO) {
         this.companyDTO = companyDTO;
+    }
+
+    @Override
+    public String toString() {
+        String companyString = "";
+        if (companyDTO != null) {
+            if (companyDTO.getIdCompany() != null && companyDTO.getIdCompany() != "0") {
+                companyString = ", companyId:" + companyDTO.getIdCompany() + ", companyName:" + companyDTO.getName();
+            }
+        }
+        return "Computer " + idComputer + ", name: " + name + ", introducedDate:" + introducedDate
+                + ", discontinuedDate:" + discontinuedDate + companyString;
+    }
+
+    @Override
+    public int hashCode() {
+        return Integer.valueOf(this.idComputer);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        boolean result = false;
+        if (o instanceof ComputerDTO) {
+            ComputerDTO dto = (ComputerDTO) o;
+            result = this.getIdComputer().equals(dto.getIdComputer());
+            result = result && this.getName().equals(dto.getName());
+            result = result && this.introducedDate.equals(dto.getIntroducedDate());
+            result = result && this.discontinuedDate.equals(dto.getDiscontinuedDate());
+            result = result && this.companyDTO.equals(dto.getCompanyDTO());
+        }
+        return result;
     }
 }

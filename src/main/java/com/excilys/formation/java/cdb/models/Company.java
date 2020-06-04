@@ -43,4 +43,19 @@ public class Company {
     public String toString() {
         return "Company " + idCompany + ", name: " + name;
     }
+
+    @Override
+    public int hashCode() {
+        return this.idCompany.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        boolean result = false;
+        if (o instanceof Company){
+            Company company = (Company) o;
+            result = (this.idCompany.equals(company.getIdCompany()) && this.getName().equals(company.getName()));
+        }
+        return result;
+    }
 }

@@ -10,8 +10,6 @@ import java.util.Properties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.excilys.formation.java.cdb.persistence.daos.ComputerDAO;
-
 public final class MysqlConnect {
 
     private static Connection connection;

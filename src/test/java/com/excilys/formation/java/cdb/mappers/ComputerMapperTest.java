@@ -6,10 +6,13 @@ import static org.junit.Assert.fail;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.time.LocalDate;
 
 import org.junit.Test;
 import org.mockito.Mockito;
 
+import com.excilys.formation.java.cdb.dtos.CompanyDTO;
+import com.excilys.formation.java.cdb.dtos.ComputerDTO;
 import com.excilys.formation.java.cdb.models.Company;
 import com.excilys.formation.java.cdb.models.Computer;
 
@@ -101,6 +104,26 @@ public class ComputerMapperTest {
                 discontinued.toLocalDateTime().toLocalDate(), new Company());
 
         assertEquals(expComputer.toString(), computer.toString());
+    }
+
+    /**
+     * Test that the Computer is correctly converted to a ComputerDTO.
+     */
+    @Test
+    public void testToComputerDTO() {
+        Computer computer = new Computer(1L, "id", LocalDate.of(2010, 3, 5), LocalDate.of(2016, 4, 7), new Company(2L, "company"));
+        ComputerDTO dto = ComputerMapper.toComputerDTO(computer);
+        assertEquals(new ComputerDTO("1", "id", "2010-03-05", "2016-04-07", new CompanyDTO("2", "company")), dto);
+    }
+
+    /**
+     * Test that the ComputerDTO is correctly converted to a Computer.
+     */
+    @Test
+    public void testToComputer() {
+        ComputerDTO dto = new ComputerDTO("1", "id", "2010-03-05", "2016-04-07", new CompanyDTO("2", "company"));
+        Computer computer = ComputerMapper.toComputer(dto);
+        assertEquals(new Computer(1L, "id", LocalDate.of(2010, 3, 5), LocalDate.of(2016, 4, 7), new Company(2L, "company")), computer);
     }
 
 }

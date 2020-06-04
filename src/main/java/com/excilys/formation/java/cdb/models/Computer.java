@@ -2,6 +2,8 @@ package com.excilys.formation.java.cdb.models;
 
 import java.time.LocalDate;
 
+import com.excilys.formation.java.cdb.dtos.ComputerDTO;
+
 public class Computer {
 
     private Long idComputer;
@@ -85,5 +87,24 @@ public class Computer {
         }
         return "Computer " + idComputer + ", name: " + name + ", introducedDate:" + introducedDate
                 + ", discontinuedDate:" + discontinuedDate + companyString;
+    }
+
+    @Override
+    public int hashCode() {
+        return this.idComputer.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        boolean result = false;
+        if (o instanceof Computer) {
+            Computer dto = (Computer) o;
+            result = this.getIdComputer().equals(dto.getIdComputer());
+            result = result && this.getName().equals(dto.getName());
+            result = result && this.introducedDate.equals(dto.getIntroducedDate());
+            result = result && this.discontinuedDate.equals(dto.getDiscontinuedDate());
+            result = result && this.company.equals(dto.getCompany());
+        }
+        return result;
     }
 }
