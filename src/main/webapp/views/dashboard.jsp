@@ -21,7 +21,7 @@
     <section id="main">
         <div class="container">
             <h1 id="homeTitle">
-                <c:out value="${computers.size()}"/> Computers found
+                <c:out value="${computer.size()}"/> Computers found
             </h1>
             <div id="actions" class="form-horizontal">
                 <div class="pull-left">
@@ -84,7 +84,7 @@
                             <input type="checkbox" name="cb" class="cb" value="0">
                         </td>
                         <td>
-                            <a href="editComputer.html" onclick=""><c:out value="${computer.name}"/></a>
+                            <a href="editComputer.html" onclick="">${computer.name}"</a>
                         </td>
                         <td><c:out value="${computer.introducedDate}"/></td>
                         <td><c:out value="${computer.discontinuedDate}"/></td>
@@ -114,14 +114,16 @@
                 <a href="#" aria-label="Next">
                     <span aria-hidden="true">&raquo;</span>
                 </a>
-            </li>
-        </ul>
+	            </li>
+	        </ul>
 
         <div class="btn-group btn-group-sm pull-right" role="group" >
             <button type="button" class="btn btn-default">10</button>
             <button type="button" class="btn btn-default">50</button>
             <button type="button" class="btn btn-default">100</button>
         </div>
+        </div>
+        
 
     </footer>
 <script src="js/jquery.min.js"></script>
