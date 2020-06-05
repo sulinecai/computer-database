@@ -44,6 +44,7 @@ public class Company {
         return "Company " + idCompany + ", name: " + name;
     }
 
+
     @Override
     public int hashCode() {
         return this.idCompany.hashCode();

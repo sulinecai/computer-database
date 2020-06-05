@@ -29,6 +29,7 @@ public final class MysqlConnect {
             Class.forName(driver);
             connection = DriverManager.getConnection(url, userName, password);
         } catch (IOException | SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
             logger.error("error when connecting to db", e);
         }
     }
