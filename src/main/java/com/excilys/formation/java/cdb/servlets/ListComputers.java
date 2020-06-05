@@ -28,10 +28,9 @@ public class ListComputers extends HttpServlet {
 	    ComputerService computerService = new ComputerService();
         List<Computer> allComputers = computerService.getAll();
         List<ComputerDTO> allComputerDTOs = new ArrayList<ComputerDTO>();
-//        for (Computer c : allComputers) {
-//            allComputerDTOs.add(ComputerMapper.toComputerDTO(c));
-//        }
-        System.out.println(allComputers.get(0));
+        for (Computer c : allComputers) {
+            allComputerDTOs.add(ComputerMapper.toComputerDTO(c));
+        }
         request.setAttribute("computers", allComputerDTOs);
 
         this.getServletContext().getRequestDispatcher("/views/dashboard.jsp").forward(request, response);

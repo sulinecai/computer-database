@@ -60,8 +60,16 @@ public class ComputerMapper {
         try {
             dto.setIdComputer(computer.getIdComputer().toString());
             dto.setName(computer.getName());
-            dto.setIntroducedDate(computer.getIntroducedDate().toString());
-            dto.setDiscontinuedDate(computer.getDiscontinuedDate().toString());
+            if (computer.getIntroducedDate() == null) {
+                dto.setIntroducedDate("");
+            } else {
+                dto.setIntroducedDate(computer.getIntroducedDate().toString());
+            }
+            if (computer.getDiscontinuedDate() == null) {
+                dto.setDiscontinuedDate("");
+            } else {
+                dto.setDiscontinuedDate(computer.getDiscontinuedDate().toString());
+            }
             dto.setCompanyDTO(CompanyMapper.toCompanyDTO(computer.getCompany()));
         } catch (RuntimeException e) {
             logger.error("error when converting a companyDTO to a company");
