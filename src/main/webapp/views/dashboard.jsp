@@ -21,7 +21,7 @@
     <section id="main">
         <div class="container">
             <h1 id="homeTitle">
-                <c:out value="${computer.size()}"/> Computers found
+                <c:out value="${nbComputers}"/> Computers found
             </h1>
             <div id="actions" class="form-horizontal">
                 <div class="pull-left">
@@ -84,7 +84,7 @@
                             <input type="checkbox" name="cb" class="cb" value="0">
                         </td>
                         <td>
-                            <a href="editComputer.html" onclick="">${computer.name}"</a>
+                            <a href="editComputer.html" onclick=""><c:out value="${computer.name}"/></a>
                         </td>
                         <td><c:out value="${computer.introducedDate}"/></td>
                         <td><c:out value="${computer.discontinuedDate}"/></td>
@@ -100,17 +100,17 @@
     <footer class="navbar-fixed-bottom">
         <div class="container text-center">
             <ul class="pagination">
-                <li>
+                <li class="page-item">
                     <a href="#" aria-label="Previous">
                       <span aria-hidden="true">&laquo;</span>
                   </a>
               </li>
-              <li><a href="#">1</a></li>
-              <li><a href="#">2</a></li>
-              <li><a href="#">3</a></li>
-              <li><a href="#">4</a></li>
-              <li><a href="#">5</a></li>
-              <li>
+              <li class="page-item active"><a href="ListComputers?page=1">1</a></li>
+              <li class="page-item"><a href="#">2</a></li>
+              <li class="page-item"><a href="#">3</a></li>
+              <li class="page-item"><a href="#">4</a></li>
+              <li class="page-item"><a href="#">5</a></li>
+              <li class="page-item">
                 <a href="#" aria-label="Next">
                     <span aria-hidden="true">&raquo;</span>
                 </a>

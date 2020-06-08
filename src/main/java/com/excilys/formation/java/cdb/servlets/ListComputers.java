@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.excilys.formation.java.cdb.dtos.ComputerDTO;
 import com.excilys.formation.java.cdb.mappers.ComputerMapper;
 import com.excilys.formation.java.cdb.models.Computer;
+import com.excilys.formation.java.cdb.models.Page;
 import com.excilys.formation.java.cdb.services.ComputerService;
 
 
@@ -26,14 +27,25 @@ public class ListComputers extends HttpServlet {
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	    ComputerService computerService = new ComputerService();
-        List<Computer> allComputers = computerService.getAll();
+	    int nbComputers = computerService.getAll().size();
+	    int computerPerPage = 10;
+	    int currentPage = 1;
+        if(request.getParameter("page") != null) {
+        	currentPage = Integer.parseInt(request.getParameter("page"));
+        }
+
+        Page page = new Page(computerPerPage,currentPage);
+        List<Computer> allComputers = computerService.getAllByPage(page);
         List<ComputerDTO> allComputerDTOs = new ArrayList<ComputerDTO>();
         for (Computer c : allComputers) {
             allComputerDTOs.add(ComputerMapper.toComputerDTO(c));
         }
         request.setAttribute("computers", allComputerDTOs);
+        request.setAttribute("nbComputers", nbComputers);
+        
 
-        this.getServletContext().getRequestDispatcher("/views/dashboard.jsp").forward(request, response);
+
+        request.getRequestDispatcher("/views/dashboard.jsp").forward(request, response);
 	}
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
