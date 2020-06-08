@@ -18,10 +18,10 @@ import com.excilys.formation.java.cdb.services.ComputerService;
 
 
 /**
- * Servlet implementation class ListComputers.
+ * Servlet implementation class ListComputersServlet.
  */
 @WebServlet("/ListComputers")
-public class ListComputers extends HttpServlet {
+public class ListComputersServlet extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
 

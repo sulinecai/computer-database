@@ -33,16 +33,20 @@ public class ComputerService implements Service<Computer> {
     public boolean allowedToCreate(Computer computer) {
         boolean allowed = true;
         if (computer.getName() == null) {
+            System.out.println("computer name is null");
             allowed = false;
         } else if (computer.getDiscontinuedDate() != null) {
             if (computer.getIntroducedDate() == null) {
                 allowed = false;
+                System.out.println("introduced date is null");
             } else if (computer.getDiscontinuedDate().isBefore(computer.getIntroducedDate())) {
                 allowed = false;
+                System.out.println("discontinued is before intro");
             }
             if (computer.getCompany() != null) {
-                if (!companyDAO.findById(computer.getIdComputer()).isPresent()) {
+                if (!companyDAO.findById(computer.getCompany().getIdCompany()).isPresent()) {
                     allowed = false;
+                    System.out.println("company does not exist");
                 }
             }
         }

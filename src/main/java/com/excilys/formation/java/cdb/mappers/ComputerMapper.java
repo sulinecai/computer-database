@@ -72,7 +72,7 @@ public class ComputerMapper {
             }
             dto.setCompanyDTO(CompanyMapper.toCompanyDTO(computer.getCompany()));
         } catch (RuntimeException e) {
-            logger.error("error when converting a companyDTO to a company");
+            logger.error("error when converting a computerDTO to a computer");
         }
         return dto;
     }
@@ -86,13 +86,21 @@ public class ComputerMapper {
     public static Computer toComputer(ComputerDTO dto) {
         Computer computer = new Computer();
         try {
-            computer.setIdComputer(Long.valueOf(dto.getIdComputer()));
+            if (dto.getIdComputer() != null) {
+                computer.setIdComputer(Long.valueOf(dto.getIdComputer()));
+            }
             computer.setName(dto.getName());
-            computer.setIntroducedDate(LocalDate.parse(dto.getIntroducedDate()));
-            computer.setDiscontinuedDate(LocalDate.parse(dto.getDiscontinuedDate()));
-            computer.setCompany(CompanyMapper.toCompany(dto.getCompanyDTO()));
+            if (dto.getIntroducedDate() != null) {
+                computer.setIntroducedDate(LocalDate.parse(dto.getIntroducedDate()));
+            }
+            if (dto.getDiscontinuedDate() != null) {
+                computer.setDiscontinuedDate(LocalDate.parse(dto.getDiscontinuedDate()));
+            }
+            if (dto.getCompanyDTO() != null) {
+                computer.setCompany(CompanyMapper.toCompany(dto.getCompanyDTO()));
+            }
         } catch (RuntimeException e) {
-            logger.error("error when converting a company to a companyDTO");
+            logger.error("error when converting a computerDTO to a computer : " + e.toString());
         }
         return computer;
     }

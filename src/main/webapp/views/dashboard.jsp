@@ -33,11 +33,11 @@
                     </form>
                 </div>
                 <div class="pull-right">
-                    <a class="btn btn-success" id="addComputer" href="addComputer.html">Add Computer</a> 
+                    <a class="btn btn-success" id="addComputer" href="AddComputer">Add Computer</a> 
                     <a class="btn btn-default" id="editComputer" href="#" onclick="$.fn.toggleEditMode();">Edit</a>
                 </div>
             </div>
-        </div>
+        </div>    
 
         <form id="deleteForm" action="#" method="POST">
             <input type="hidden" name="selection" value="">
@@ -113,7 +113,7 @@
  					    </c:if>          
 						<li class="page-item ${activePage}"><a href="ListComputers?page=${i}"><c:out value="${i}" /></a></li>
 					</c:forEach>
-					<c:if test="${nbPages > lastPageIndex}">
+					<c:if test="${currentPage < nbPages}">
 					   <li class="page-item"><a href="ListComputers?page=${currentPage+1}" aria-label="Next">
 					       <span aria-hidden="true">&raquo;</span></a>
 					   </li>
