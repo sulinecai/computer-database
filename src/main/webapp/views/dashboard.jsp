@@ -1,5 +1,5 @@
 <%@ page pageEncoding= "UTF-8" %>
-<%@ taglib  uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -99,25 +99,30 @@
 
     <footer class="navbar-fixed-bottom">
         <div class="container text-center">
-            <ul class="pagination">
-                <li class="page-item">
-                    <a href="#" aria-label="Previous">
-                      <span aria-hidden="true">&laquo;</span>
-                  </a>
-              </li>
-              <li class="page-item active"><a href="ListComputers?page=1">1</a></li>
-              <li class="page-item"><a href="#">2</a></li>
-              <li class="page-item"><a href="#">3</a></li>
-              <li class="page-item"><a href="#">4</a></li>
-              <li class="page-item"><a href="#">5</a></li>
-              <li class="page-item">
-                <a href="#" aria-label="Next">
-                    <span aria-hidden="true">&raquo;</span>
-                </a>
-	            </li>
-	        </ul>
+			<c:if test="${lastPageIndex > 0}">
+				<ul class="pagination">
+				    <c:if test="${currentPage > 1}">			
+					    <li class="page-item"> <a href="ListComputers?page=${currentPage-1}" aria-label="Previous">
+						       <span aria-hidden="true">&laquo;</span></a>
+				        </li>
+                    </c:if>
+					<c:forEach var="i" begin="${currentPage}" end="${lastPageIndex}" step="1">
+					   <c:set var="activePage" value=""/>                             
+					    <c:if test="${i == currentPage}"> 
+					       <c:set var="activePage" value="active"/>                             
+ 					    </c:if>          
+						<li class="page-item ${activePage}"><a href="ListComputers?page=${i}"><c:out value="${i}" /></a></li>
+					</c:forEach>
+					<c:if test="${nbPages > lastPageIndex}">
+					   <li class="page-item"><a href="ListComputers?page=${currentPage+1}" aria-label="Next">
+					       <span aria-hidden="true">&raquo;</span></a>
+					   </li>
+					</c:if>
+				</ul>
+			</c:if>
 
-        <div class="btn-group btn-group-sm pull-right" role="group" >
+
+			<div class="btn-group btn-group-sm pull-right" role="group" >
             <button type="button" class="btn btn-default">10</button>
             <button type="button" class="btn btn-default">50</button>
             <button type="button" class="btn btn-default">100</button>

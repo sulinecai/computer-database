@@ -40,10 +40,18 @@ public class ListComputers extends HttpServlet {
         for (Computer c : allComputers) {
             allComputerDTOs.add(ComputerMapper.toComputerDTO(c));
         }
+
+        int nbPages = page.getTotalPages(nbComputers);
+        int lastPageIndex = nbPages;
+        if ((currentPage + 9 )< nbPages) {
+            lastPageIndex = currentPage + 9;
+        }
+
         request.setAttribute("computers", allComputerDTOs);
         request.setAttribute("nbComputers", nbComputers);
-        
-
+        request.setAttribute("currentPage", currentPage);
+        request.setAttribute("nbPages", nbPages);
+        request.setAttribute("lastPageIndex", lastPageIndex);
 
         request.getRequestDispatcher("/views/dashboard.jsp").forward(request, response);
 	}
