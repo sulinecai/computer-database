@@ -10,13 +10,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.excilys.formation.java.cdb.dtos.CompanyDTO;
 import com.excilys.formation.java.cdb.dtos.ComputerDTO;
 import com.excilys.formation.java.cdb.mappers.CompanyMapper;
 import com.excilys.formation.java.cdb.mappers.ComputerMapper;
 import com.excilys.formation.java.cdb.models.Company;
 import com.excilys.formation.java.cdb.models.Computer;
-import com.excilys.formation.java.cdb.models.Page;
 import com.excilys.formation.java.cdb.services.CompanyService;
 import com.excilys.formation.java.cdb.services.ComputerService;
 
@@ -26,6 +28,7 @@ import com.excilys.formation.java.cdb.services.ComputerService;
  */
 @WebServlet("/AddComputer")
 public class AddComputerServlet extends HttpServlet {
+    private static Logger logger = LoggerFactory.getLogger(AddComputerServlet.class);
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         CompanyService companyService = new CompanyService();
@@ -46,11 +49,10 @@ public class AddComputerServlet extends HttpServlet {
 	    if (!request.getParameter("introduced").isEmpty()) {
 	        computerDTO.setIntroducedDate(request.getParameter("introduced"));
 	    }
-        if (!request.getParameter("introduced").isEmpty()) {
+        if (!request.getParameter("discontinued").isEmpty()) {
             computerDTO.setDiscontinuedDate(request.getParameter("discontinued"));
         }
         if (!request.getParameter("companyId").isEmpty() && !request.getParameter("companyId").equals("0")) {
-            System.out.println("test "+request.getParameter("companyId"));
             CompanyDTO companyDTO = new CompanyDTO(request.getParameter("companyId"));
             computerDTO.setCompanyDTO(companyDTO);
         }
@@ -58,12 +60,10 @@ public class AddComputerServlet extends HttpServlet {
         Computer computer = ComputerMapper.toComputer(computerDTO);
         if (computerService.allowedToCreate(computer)) {
             computerService.create(computer);
-            System.out.println("creation ok");
-
+            logger.info("computer creation ok");
         } else {
-            System.out.println("creation impossible");
+            logger.info("computer creation not allowed");
         }
-
 		doGet(request, response);
 	}
 }

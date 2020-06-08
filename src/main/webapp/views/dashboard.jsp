@@ -113,7 +113,7 @@
  					    </c:if>          
 						<li class="page-item ${activePage}"><a href="ListComputers?page=${i}"><c:out value="${i}" /></a></li>
 					</c:forEach>
-					<c:if test="${currentPage < nbPages}">
+					<c:if test="${currentPage < lastpageindex}">
 					   <li class="page-item"><a href="ListComputers?page=${currentPage+1}" aria-label="Next">
 					       <span aria-hidden="true">&raquo;</span></a>
 					   </li>
