@@ -58,7 +58,7 @@ public class AddComputerServlet extends HttpServlet {
         }
         ComputerService computerService = ComputerService.getInstance();
         Computer computer = ComputerMapper.toComputer(computerDTO);
-        if (computerService.allowedToCreate(computer)) {
+        if (computerService.allowedToCreateOrEdit(computer)) {
             computerService.create(computer);
             logger.info("computer creation ok");
         } else {

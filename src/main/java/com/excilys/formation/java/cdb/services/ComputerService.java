@@ -46,10 +46,10 @@ public class ComputerService {
         computerDAO.create(computer);
     }
 
-    public boolean allowedToCreate(Computer computer) {
+    public boolean allowedToCreateOrEdit(Computer computer) {
         boolean allowed = true;
-        if (computer.getName() == null) {
-            logger.info("computer name is null");
+        if (computer.getName() == null || computer.getName().isEmpty()) {
+            logger.info("computer name is required");
             allowed = false;
         } else if (computer.getDiscontinuedDate() != null) {
             if (computer.getIntroducedDate() == null) {

@@ -125,5 +125,4 @@ public class ComputerMapperTest {
         Computer computer = ComputerMapper.toComputer(dto);
         assertEquals(new Computer(1L, "id", LocalDate.of(2010, 3, 5), LocalDate.of(2016, 4, 7), new Company(2L, "company")), computer);
     }
-
 }

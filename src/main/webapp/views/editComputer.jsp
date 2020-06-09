@@ -16,39 +16,51 @@
             <a class="navbar-brand" href="ListComputers"> Application - Computer Database </a>
         </div>
     </header>
-
     <section id="main">
         <div class="container">
             <div class="row">
                 <div class="col-xs-8 col-xs-offset-2 box">
-                    <h1>Add Computer</h1>
-                    <form action="AddComputer" method="POST" onsubmit="return validateForm()">
+                    <div class="label label-default pull-right">
+                        id: <c:out value="${computer.idComputer}" />
+                    </div>
+                    <h1>Edit Computer</h1>
+
+                    <form action="EditComputer" method="POST" onsubmit="return validateForm()">
+                        <input type="hidden" value="${computer.idComputer}" id="idComputer" name="idComputer"/> <!-- TODO: Change this value with the computer id -->
                         <fieldset>
                             <div class="form-group">
                                 <label for="computerName">Computer name *</label>
-                                <input type="text" class="form-control" required id="computerName" name="computerName" placeholder="Computer name">
+                                <input type="text" class="form-control" required id="computerName" name="computerName" value="${computer.name}">
                             </div>
                             <div class="form-group">
                                 <label for="introduced">Introduced date</label>
-                                <input type="date" class="form-control" id="introduced" name="introduced" placeholder="Introduced date">
+                                <input type="date" class="form-control" id="introduced" name="introduced" value="${computer.introducedDate}">
                             </div>
                             <div class="form-group">
                                 <label for="discontinued">Discontinued date</label>
-                                <input type="date" class="form-control" id="discontinued" name="discontinued" placeholder="Discontinued date">
+                                <input type="date" class="form-control" id="discontinued" name="discontinued" value="${computer.discontinuedDate}">
                             </div>
                             <div class="form-group">
                                 <label for="companyId">Company</label>
                                 <select class="form-control" id="companyId" name="companyId">
-                                    <option value="0" selected="selected">--</option>
-	                                <c:forEach items="${companies}" var="company">
-	                                   <option value="${company.idCompany}" ><c:out value="${company.idCompany} - ${company.name}"/></option>
-	                                </c:forEach>
+                                    <option value="0">--</option>
+                                    <c:forEach items="${companies}" var="company">
+										<c:set var="currentCompany" value="" />
+										<c:if test="${company.idCompany == computer.companyDTO.idCompany}">
+											<c:set var="currentCompany" value="selected" />
+										</c:if>
+										<c:out value="${currentCompany}"></c:out>
+										<option value="${company.idCompany}"
+											<c:out value="${currentCompany}"/>>
+											<c:out value="${company.idCompany} - ${company.name}" />
+										</option>
+									</c:forEach>
                                 </select>
-                            </div>   
-                            <i>* required</i>               
-                        </fieldset>                        
+                            </div>  
+                            <i>* required</i>       
+                        </fieldset>
                         <div class="actions pull-right">
-                            <input type="submit" value="Add" class="btn btn-primary">
+                            <input type="submit" value="Edit" class="btn btn-primary">
                             or
                             <a href="ListComputers" class="btn btn-default">Cancel</a>
                         </div>
@@ -57,8 +69,6 @@
             </div>
         </div>
     </section>
-<script src="js/jquery.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/validateDates.js"></script>
+<script src="js/validateDates.js"></script>    
 </body>
 </html>

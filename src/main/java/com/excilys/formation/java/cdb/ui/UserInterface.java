@@ -73,7 +73,7 @@ public class UserInterface {
                 boolean askId = false;
                 Computer computer = inputComputer(askId);
 
-                if (computerService.allowedToCreate(computer)) {
+                if (computerService.allowedToCreateOrEdit(computer)) {
                     computerService.create(computer);
                     System.out.println("Creation OK.");
                 } else {

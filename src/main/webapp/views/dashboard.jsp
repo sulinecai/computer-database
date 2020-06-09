@@ -84,7 +84,7 @@
                             <input type="checkbox" name="cb" class="cb" value="0">
                         </td>
                         <td>
-                            <a href="editComputer.html" onclick=""><c:out value="${computer.name}"/></a>
+                            <a href="EditComputer?idComputer=${computer.idComputer}" onclick=""><c:out value="${computer.name}"/></a>
                         </td>
                         <td><c:out value="${computer.introducedDate}"/></td>
                         <td><c:out value="${computer.discontinuedDate}"/></td>
@@ -113,7 +113,7 @@
  					    </c:if>          
 						<li class="page-item ${activePage}"><a href="ListComputers?page=${i}"><c:out value="${i}" /></a></li>
 					</c:forEach>
-					<c:if test="${currentPage < lastpageindex}">
+					<c:if test="${currentPage < nbPages}">
 					   <li class="page-item"><a href="ListComputers?page=${currentPage+1}" aria-label="Next">
 					       <span aria-hidden="true">&raquo;</span></a>
 					   </li>

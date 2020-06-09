@@ -2,8 +2,6 @@ package com.excilys.formation.java.cdb.models;
 
 import java.time.LocalDate;
 
-import com.excilys.formation.java.cdb.dtos.ComputerDTO;
-
 public class Computer {
 
     private Long idComputer;
