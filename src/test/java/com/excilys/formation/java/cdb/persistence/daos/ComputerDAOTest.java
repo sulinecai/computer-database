@@ -34,6 +34,9 @@ public class ComputerDAOTest {
         Field instance = MysqlConnect.class.getDeclaredField("connection");
         instance.setAccessible(true);
         instance.set(null, null);
+        Field daoInstance = ComputerDAO.class.getDeclaredField("computerDAO");
+        daoInstance.setAccessible(true);
+        daoInstance.set(null, null);
     }
 
     /**
@@ -166,37 +169,37 @@ public class ComputerDAOTest {
         assertFalse(optComputer.isPresent());
     }
 
-//    /**
-//     * Test that the method findById with an id equals to 0 returns an empty
-//     * optional.
-//     */
-//    @Test
-//    public void testCreate() {
-//        ComputerDAO computerDAO = ComputerDAO.getInstance();
-//        Computer computer = new Computer("computer Test", LocalDate.of(2010, 10, 5), LocalDate.of(2011, 3, 15),
-//                new Company(1L));
-//        List<Computer> computers = computerDAO.getAll();
-//        assertEquals(50, computers.size());
-//        computerDAO.create(computer);
-//        computers = computerDAO.getAll();
-//        assertEquals(51, computers.size());
-//    }
-//
-//
-//    @Test
-//    public void testUpdate() {
-//        ComputerDAO computerDAO = ComputerDAO.getInstance();
-//        Computer computer = new Computer(1L, "computer Test 1", LocalDate.of(2010, 10, 5), LocalDate.of(2011, 3, 15),
-//                new Company(1L));
-//        computerDAO.update(computer);
-//        assertEquals("computer Test 1", computerDAO.findById(1L).get().getName());
-//    }
-//
-//    @Test
-//    public void testDelete() {
-//        ComputerDAO computerDAO = ComputerDAO.getInstance();
-//        assertTrue(computerDAO.findById(2L).isPresent());
-//        computerDAO.delete(2L);
-//        assertFalse(computerDAO.findById(2L).isPresent());
-//    }
+    /**
+     * Test that the method findById with an id equals to 0 returns an empty
+     * optional.
+     */
+    @Test
+    public void testCreate() {
+        ComputerDAO computerDAO = ComputerDAO.getInstance();
+        Computer computer = new Computer("computer Test", LocalDate.of(2010, 10, 5), LocalDate.of(2011, 3, 15),
+                new Company(1L));
+        List<Computer> computers = computerDAO.getAll();
+        assertEquals(50, computers.size());
+        computerDAO.create(computer);
+        computers = computerDAO.getAll();
+        assertEquals(51, computers.size());
+    }
+
+
+    @Test
+    public void testUpdate() {
+        ComputerDAO computerDAO = ComputerDAO.getInstance();
+        Computer computer = new Computer(1L, "computer Test 1", LocalDate.of(2010, 10, 5), LocalDate.of(2011, 3, 15),
+                new Company(1L));
+        computerDAO.update(computer);
+        assertEquals("computer Test 1", computerDAO.findById(1L).get().getName());
+    }
+
+    @Test
+    public void testDelete() {
+        ComputerDAO computerDAO = ComputerDAO.getInstance();
+        assertTrue(computerDAO.findById(1L).isPresent());
+        computerDAO.delete(1L);
+        assertFalse(computerDAO.findById(1L).isPresent());
+    }
 }
