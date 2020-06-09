@@ -5,11 +5,22 @@ import com.excilys.formation.java.cdb.models.Company;
 import com.excilys.formation.java.cdb.models.Page;
 import com.excilys.formation.java.cdb.persistence.daos.CompanyDAO;
 
-public class CompanyService implements Service<Company> {
+public class CompanyService {
+
+    private static CompanyService companyService;
+
+    private CompanyService() {
+    }
+
+    public static synchronized CompanyService getInstance() {
+        if (companyService == null) {
+            companyService = new CompanyService();
+        }
+        return companyService;
+    }
 
     private CompanyDAO companyDAO = CompanyDAO.getInstance();
 
-    @Override
     public List<Company> getAll() {
         return companyDAO.getAll();
     }
@@ -18,12 +29,11 @@ public class CompanyService implements Service<Company> {
         return companyDAO.getAllByPage(page);
     }
 
-    @Override
     public Company findById(Long id) {
         return companyDAO.findById(id).get();
     }
 
-    @Override
+
     public boolean exist(Long id) {
         return companyDAO.findById(id).isPresent();
     }

@@ -26,7 +26,7 @@ public class ListComputersServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	    ComputerService computerService = new ComputerService();
+	    ComputerService computerService = ComputerService.getInstance();
 	    int nbComputers = computerService.getAll().size();
 	    int computerPerPage = 10;
 	    int currentPage = 1;

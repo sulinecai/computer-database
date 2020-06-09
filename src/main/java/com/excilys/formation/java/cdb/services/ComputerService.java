@@ -10,14 +10,26 @@ import com.excilys.formation.java.cdb.models.Page;
 import com.excilys.formation.java.cdb.persistence.daos.CompanyDAO;
 import com.excilys.formation.java.cdb.persistence.daos.ComputerDAO;
 
-public class ComputerService implements Service<Computer> {
+public class ComputerService {
+
+    private static ComputerService computerService;
+
+    private ComputerService() {
+    }
+
+    public static synchronized ComputerService getInstance() {
+        if (computerService == null) {
+            computerService = new ComputerService();
+        }
+        return computerService;
+    }
 
     private ComputerDAO computerDAO = ComputerDAO.getInstance();
     private CompanyDAO companyDAO = CompanyDAO.getInstance();
 
     private static Logger logger = LoggerFactory.getLogger(ComputerService.class);
 
-    @Override
+
     public List<Computer> getAll() {
         return computerDAO.getAll();
     }
@@ -26,8 +38,7 @@ public class ComputerService implements Service<Computer> {
         return computerDAO.getAllByPage(page);
     }
 
-    @Override
-    public Computer findById(Long id) {
+      public Computer findById(Long id) {
         return computerDAO.findById(id).get();
     }
 
@@ -66,7 +77,6 @@ public class ComputerService implements Service<Computer> {
         computerDAO.delete(id);
     }
 
-    @Override
     public boolean exist(Long id) {
         return computerDAO.findById(id).isPresent();
     }

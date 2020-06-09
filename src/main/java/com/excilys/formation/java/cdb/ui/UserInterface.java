@@ -15,8 +15,8 @@ import com.excilys.formation.java.cdb.services.ComputerService;
 
 public class UserInterface {
 
-    private static ComputerService computerService = new ComputerService();
-    private static CompanyService companyService = new CompanyService();
+    private static ComputerService computerService = ComputerService.getInstance();
+    private static CompanyService companyService = CompanyService.getInstance();
     private static Scanner scanner = new Scanner(System.in);
 
     private static Logger logger = LoggerFactory.getLogger(UserInterface.class);

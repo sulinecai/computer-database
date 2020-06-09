@@ -43,8 +43,8 @@ public class CompanyMapper {
         try {
             dto.setIdCompany(company.getIdCompany().toString());
             dto.setName(company.getName());
-        } catch (RuntimeException e) {
-            logger.error("error when converting a company to a companyDTO");
+        } catch (NullPointerException e) {
+            logger.error("error when converting a company to a companyDTO : " + e.getMessage());
         }
         return dto;
     }
@@ -59,8 +59,8 @@ public class CompanyMapper {
         try {
             company.setIdCompany(Long.valueOf(dto.getIdCompany()));
             company.setName(dto.getName());
-        } catch (RuntimeException e) {
-            logger.error("error when converting a companyDTO to a company");
+        } catch (NullPointerException e) {
+            logger.error("error when converting a companyDTO to a company : " + e.getMessage());
         }
         return company;
     }

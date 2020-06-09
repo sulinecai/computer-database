@@ -31,7 +31,7 @@ public class AddComputerServlet extends HttpServlet {
     private static Logger logger = LoggerFactory.getLogger(AddComputerServlet.class);
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        CompanyService companyService = new CompanyService();
+        CompanyService companyService = CompanyService.getInstance();
         List<Company> allCompanies = companyService.getAll();
         List<CompanyDTO> allCompanyDTOs = new ArrayList<CompanyDTO>();
         for (Company c : allCompanies) {
@@ -56,7 +56,7 @@ public class AddComputerServlet extends HttpServlet {
             CompanyDTO companyDTO = new CompanyDTO(request.getParameter("companyId"));
             computerDTO.setCompanyDTO(companyDTO);
         }
-        ComputerService computerService = new ComputerService();
+        ComputerService computerService = ComputerService.getInstance();
         Computer computer = ComputerMapper.toComputer(computerDTO);
         if (computerService.allowedToCreate(computer)) {
             computerService.create(computer);
