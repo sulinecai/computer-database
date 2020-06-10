@@ -47,7 +47,7 @@ public class CompanyDTO {
     @Override
     public boolean equals(Object o) {
         boolean result = false;
-        if (o instanceof CompanyDTO){
+        if (o instanceof CompanyDTO) {
             CompanyDTO dto = (CompanyDTO) o;
             result = (this.idCompany.equals(dto.getIdCompany()) && this.getName().equals(dto.getName()));
         }

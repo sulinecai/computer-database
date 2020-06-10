@@ -19,10 +19,8 @@ import com.excilys.formation.java.cdb.mappers.CompanyMapper;
 import com.excilys.formation.java.cdb.mappers.ComputerMapper;
 import com.excilys.formation.java.cdb.models.Company;
 import com.excilys.formation.java.cdb.models.Computer;
-import com.excilys.formation.java.cdb.models.Page;
 import com.excilys.formation.java.cdb.services.CompanyService;
 import com.excilys.formation.java.cdb.services.ComputerService;
-
 
 /**
  * Servlet implementation class EditComputersServlet.
@@ -43,7 +41,7 @@ public class EditComputerServlet extends HttpServlet {
 
         request.setAttribute("companies", allCompanyDTOs);
 
-        if(!request.getParameter("idComputer").isEmpty() && !request.getParameter("idComputer").equals("0")) {
+        if (!request.getParameter("idComputer").isEmpty() && !request.getParameter("idComputer").equals("0")) {
             Long idComputer = Long.valueOf(request.getParameter("idComputer"));
             if (computerService.exist(idComputer)) {
                 Computer computer = computerService.findById(idComputer);
@@ -53,12 +51,12 @@ public class EditComputerServlet extends HttpServlet {
         }
 
         request.getRequestDispatcher("/views/editComputer.jsp").forward(request, response);
-	}
+    }
 
-	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	    ComputerDTO computerDTO = new ComputerDTO();
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        ComputerDTO computerDTO = new ComputerDTO();
 
-	    if (!request.getParameter("idComputer").isEmpty()) {
+        if (!request.getParameter("idComputer").isEmpty()) {
             computerDTO.setIdComputer(request.getParameter("idComputer"));
             if (!request.getParameter("computerName").isEmpty()) {
                 computerDTO.setName(request.getParameter("computerName"));
@@ -84,5 +82,5 @@ public class EditComputerServlet extends HttpServlet {
         }
 
         doGet(request, response);
-	}
+    }
 }

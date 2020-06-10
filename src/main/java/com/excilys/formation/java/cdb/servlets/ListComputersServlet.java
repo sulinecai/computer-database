@@ -16,7 +16,6 @@ import com.excilys.formation.java.cdb.models.Computer;
 import com.excilys.formation.java.cdb.models.Page;
 import com.excilys.formation.java.cdb.services.ComputerService;
 
-
 /**
  * Servlet implementation class ListComputersServlet.
  */
@@ -26,15 +25,15 @@ public class ListComputersServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	    ComputerService computerService = ComputerService.getInstance();
-	    int nbComputers = computerService.getAll().size();
-	    int computerPerPage = 10;
-	    int currentPage = 1;
-        if(request.getParameter("page") != null) {
-        	currentPage = Integer.parseInt(request.getParameter("page"));
+        ComputerService computerService = ComputerService.getInstance();
+        int nbComputers = computerService.getAll().size();
+        int computerPerPage = 10;
+        int currentPage = 1;
+        if (request.getParameter("page") != null) {
+            currentPage = Integer.parseInt(request.getParameter("page"));
         }
 
-        Page page = new Page(computerPerPage,currentPage);
+        Page page = new Page(computerPerPage, currentPage);
         List<Computer> allComputers = computerService.getAllByPage(page);
         List<ComputerDTO> allComputerDTOs = new ArrayList<ComputerDTO>();
         for (Computer c : allComputers) {
@@ -43,7 +42,7 @@ public class ListComputersServlet extends HttpServlet {
 
         int nbPages = page.getTotalPages(nbComputers);
         int lastPageIndex = nbPages;
-        if ((currentPage + 9 )< nbPages) {
+        if ((currentPage + 9) < nbPages) {
             lastPageIndex = currentPage + 9;
         }
 
@@ -54,9 +53,9 @@ public class ListComputersServlet extends HttpServlet {
         request.setAttribute("lastPageIndex", lastPageIndex);
 
         request.getRequestDispatcher("/views/dashboard.jsp").forward(request, response);
-	}
+    }
 
-	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
-	}
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        doGet(request, response);
+    }
 }

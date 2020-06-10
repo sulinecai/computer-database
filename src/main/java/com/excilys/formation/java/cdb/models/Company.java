@@ -44,7 +44,6 @@ public class Company {
         return "Company " + idCompany + ", name: " + name;
     }
 
-
     @Override
     public int hashCode() {
         return this.idCompany.hashCode();
@@ -53,7 +52,7 @@ public class Company {
     @Override
     public boolean equals(Object o) {
         boolean result = false;
-        if (o instanceof Company){
+        if (o instanceof Company) {
             Company company = (Company) o;
             result = (this.idCompany.equals(company.getIdCompany()) && this.getName().equals(company.getName()));
         }

@@ -18,9 +18,9 @@ public final class Datasource {
 
     private Datasource() {
         try {
-        	HikariConfig config = new HikariConfig("/datasource.properties");
-        	dataSource = new HikariDataSource(config);
-        	
+            HikariConfig config = new HikariConfig("/datasource.properties");
+            dataSource = new HikariDataSource(config);
+
             connection = dataSource.getConnection();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -33,5 +33,5 @@ public final class Datasource {
             new Datasource();
         }
         return connection;
-    }  
+    }
 }

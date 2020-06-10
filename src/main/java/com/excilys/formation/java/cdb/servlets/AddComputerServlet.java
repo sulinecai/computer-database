@@ -22,7 +22,6 @@ import com.excilys.formation.java.cdb.models.Computer;
 import com.excilys.formation.java.cdb.services.CompanyService;
 import com.excilys.formation.java.cdb.services.ComputerService;
 
-
 /**
  * Servlet implementation class AddComputerServlet.
  */
@@ -42,13 +41,13 @@ public class AddComputerServlet extends HttpServlet {
 
         request.getRequestDispatcher("/views/addComputer.jsp").forward(request, response);
 
-	}
+    }
 
-	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	    ComputerDTO computerDTO = new ComputerDTO(request.getParameter("computerName"));
-	    if (!request.getParameter("introduced").isEmpty()) {
-	        computerDTO.setIntroducedDate(request.getParameter("introduced"));
-	    }
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        ComputerDTO computerDTO = new ComputerDTO(request.getParameter("computerName"));
+        if (!request.getParameter("introduced").isEmpty()) {
+            computerDTO.setIntroducedDate(request.getParameter("introduced"));
+        }
         if (!request.getParameter("discontinued").isEmpty()) {
             computerDTO.setDiscontinuedDate(request.getParameter("discontinued"));
         }
@@ -64,6 +63,6 @@ public class AddComputerServlet extends HttpServlet {
         } else {
             logger.info("computer creation not allowed");
         }
-		doGet(request, response);
-	}
+        doGet(request, response);
+    }
 }
