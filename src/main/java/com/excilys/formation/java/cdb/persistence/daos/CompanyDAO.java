@@ -14,7 +14,7 @@ import org.slf4j.LoggerFactory;
 import com.excilys.formation.java.cdb.mappers.CompanyMapper;
 import com.excilys.formation.java.cdb.models.Company;
 import com.excilys.formation.java.cdb.models.Page;
-import com.excilys.formation.java.cdb.persistence.MysqlConnect;
+import com.excilys.formation.java.cdb.persistence.Datasource;
 
 public class CompanyDAO extends DAO<Company> {
 
@@ -28,7 +28,7 @@ public class CompanyDAO extends DAO<Company> {
 
     private static Logger logger = LoggerFactory.getLogger(CompanyDAO.class);
 
-    private Connection connect = MysqlConnect.getInstance();
+    private Connection connect = Datasource.getInstance();
 
     /**
      * Private constructor of CompanyDAO.

@@ -12,7 +12,7 @@ import java.util.Optional;
 import com.excilys.formation.java.cdb.mappers.ComputerMapper;
 import com.excilys.formation.java.cdb.models.Computer;
 import com.excilys.formation.java.cdb.models.Page;
-import com.excilys.formation.java.cdb.persistence.MysqlConnect;
+import com.excilys.formation.java.cdb.persistence.Datasource;
 
 public class ComputerDAO extends DAO<Computer> {
 
@@ -37,7 +37,7 @@ public class ComputerDAO extends DAO<Computer> {
 
     private static ComputerDAO computerDAO;
 
-    private Connection connect = MysqlConnect.getInstance();
+    private Connection connect = Datasource.getInstance();
 
     /**
      * Private constructor of ComputerDAO.
