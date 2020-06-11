@@ -108,6 +108,7 @@
 					    <li class="page-item"> <a href="ListComputers?page=${currentPage-1}" aria-label="Previous">
 						       <span aria-hidden="true">&laquo;</span></a>
 				        </li>
+				        
                     </c:if>
 					<c:forEach var="i" begin="${currentPage}" end="${lastPageIndex}" step="1">
 					   <c:set var="activePage" value=""/>                             
