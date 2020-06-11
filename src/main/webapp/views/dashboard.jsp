@@ -101,10 +101,14 @@
         <div class="container text-center">
 			<c:if test="${lastPageIndex > 0}">
 				<ul class="pagination">
-				    <c:if test="${currentPage > 1}">			
+				    <c:if test="${currentPage > 1}">	
+				    	<li class="page-item"> <a href="ListComputers?page=1" aria-label="First">
+						       <span aria-hidden="true">&laquo;&laquo;</span></a>
+				        </li>		
 					    <li class="page-item"> <a href="ListComputers?page=${currentPage-1}" aria-label="Previous">
 						       <span aria-hidden="true">&laquo;</span></a>
 				        </li>
+				        
                     </c:if>
 					<c:forEach var="i" begin="${currentPage}" end="${lastPageIndex}" step="1">
 					   <c:set var="activePage" value=""/>                             
@@ -116,6 +120,9 @@
 					<c:if test="${currentPage < nbPages}">
 					   <li class="page-item"><a href="ListComputers?page=${currentPage+1}" aria-label="Next">
 					       <span aria-hidden="true">&raquo;</span></a>
+					   </li>
+					   <li class="page-item"><a href="ListComputers?page=${nbPages}" aria-label="Next">
+					       <span aria-hidden="true">&raquo;&raquo;</span></a>
 					   </li>
 					</c:if>
 				</ul>
