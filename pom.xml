@@ -18,6 +18,8 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
+		
+		<HikariCP.version>3.4.5</HikariCP.version>
 	</properties>
 
 	<reporting>
@@ -103,7 +105,7 @@
 		<dependency>
 		    <groupId>com.zaxxer</groupId>
 		    <artifactId>HikariCP</artifactId>
-		    <version>3.4.5</version>
+		    <version>${HikariCP.version}</version>
 		</dependency>
 
 	</dependencies>
