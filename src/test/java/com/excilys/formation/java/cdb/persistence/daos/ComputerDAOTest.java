@@ -16,7 +16,7 @@ import org.junit.Test;
 import com.excilys.formation.java.cdb.models.Company;
 import com.excilys.formation.java.cdb.models.Computer;
 import com.excilys.formation.java.cdb.models.Page;
-import com.excilys.formation.java.cdb.persistence.MysqlConnect;
+import com.excilys.formation.java.cdb.persistence.Datasource;
 
 public class ComputerDAOTest {
 
@@ -31,7 +31,7 @@ public class ComputerDAOTest {
     @Before
     public void setUp()
             throws NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException {
-        Field instance = MysqlConnect.class.getDeclaredField("connection");
+        Field instance = Datasource.class.getDeclaredField("connection");
         instance.setAccessible(true);
         instance.set(null, null);
         Field daoInstance = ComputerDAO.class.getDeclaredField("computerDAO");
