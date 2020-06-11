@@ -56,6 +56,13 @@ public class ListComputersServlet extends HttpServlet {
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    	String[] computerIdsToDelete = request.getParameter("selection").split(",");
+		ComputerService computerService = ComputerService.getInstance();
+
+    	for (String computerId : computerIdsToDelete) {
+    		computerService.delete(Long.valueOf(computerId));
+    	}
+    	
         doGet(request, response);
     }
 }
