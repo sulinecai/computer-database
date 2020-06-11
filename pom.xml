@@ -27,7 +27,8 @@
     <slf4j-log4j12.version>1.7.25</slf4j-log4j12.version>
     <slf4j-api.version>1.6.1</slf4j-api.version>
     <h2.version>1.4.200</h2.version>
-    <jstl.version>1.2</jstl.version>    
+    <jstl.version>1.2</jstl.version>  
+    <HikariCP.version>3.4.5</HikariCP.version>
   </properties>
 
 <dependencies>
@@ -94,6 +95,12 @@
 			<groupId>javax.servlet</groupId>
 			<artifactId>jstl</artifactId>
 			<version>${jstl.version}</version>
+		</dependency>
+		
+		<dependency>
+		    <groupId>com.zaxxer</groupId>
+		    <artifactId>HikariCP</artifactId>
+		    <version>${HikariCP.version}</version>
 		</dependency>
 
 	</dependencies>

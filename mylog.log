@@ -88,3 +88,420 @@ Wrong user name or password [28000-199]
 	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:770)
 	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:464)
 	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:210)
+2020-06-10 15:55:45 DEBUG HikariConfig:946 - Driver class com.mysql.cj.jdbc.Driver found in Thread context class loader ParallelWebappClassLoader
+  context: computer-database
+  delegate: false
+----------> Parent Classloader:
+java.net.URLClassLoader@7ef20235
+
+2020-06-10 15:55:45 DEBUG HikariConfig:1066 - HikariPool-1 - configuration:
+2020-06-10 15:55:45 DEBUG HikariConfig:1098 - allowPoolSuspension.............false
+2020-06-10 15:55:45 DEBUG HikariConfig:1098 - autoCommit......................true
+2020-06-10 15:55:45 DEBUG HikariConfig:1098 - catalog.........................none
+2020-06-10 15:55:45 DEBUG HikariConfig:1098 - connectionInitSql...............none
+2020-06-10 15:55:45 DEBUG HikariConfig:1098 - connectionTestQuery.............none
+2020-06-10 15:55:45 DEBUG HikariConfig:1098 - connectionTimeout...............30000
+2020-06-10 15:55:45 DEBUG HikariConfig:1098 - dataSource......................none
+2020-06-10 15:55:45 DEBUG HikariConfig:1098 - dataSourceClassName.............none
+2020-06-10 15:55:45 DEBUG HikariConfig:1098 - dataSourceJNDI..................none
+2020-06-10 15:55:45 DEBUG HikariConfig:1098 - dataSourceProperties............{password=<masked>, user=admincdb}
+2020-06-10 15:55:45 DEBUG HikariConfig:1098 - driverClassName................."com.mysql.cj.jdbc.Driver"
+2020-06-10 15:55:45 DEBUG HikariConfig:1098 - exceptionOverrideClassName......none
+2020-06-10 15:55:45 DEBUG HikariConfig:1098 - healthCheckProperties...........{}
+2020-06-10 15:55:45 DEBUG HikariConfig:1098 - healthCheckRegistry.............none
+2020-06-10 15:55:45 DEBUG HikariConfig:1098 - idleTimeout.....................600000
+2020-06-10 15:55:45 DEBUG HikariConfig:1098 - initializationFailTimeout.......1
+2020-06-10 15:55:45 DEBUG HikariConfig:1098 - isolateInternalQueries..........false
+2020-06-10 15:55:45 DEBUG HikariConfig:1098 - jdbcUrl.........................jdbc:mysql://localhost:3306/computer-database-db?serverTimezone=UTC
+2020-06-10 15:55:45 DEBUG HikariConfig:1098 - leakDetectionThreshold..........0
+2020-06-10 15:55:45 DEBUG HikariConfig:1098 - maxLifetime.....................1800000
+2020-06-10 15:55:45 DEBUG HikariConfig:1098 - maximumPoolSize.................10
+2020-06-10 15:55:45 DEBUG HikariConfig:1098 - metricRegistry..................none
+2020-06-10 15:55:45 DEBUG HikariConfig:1098 - metricsTrackerFactory...........none
+2020-06-10 15:55:45 DEBUG HikariConfig:1098 - minimumIdle.....................10
+2020-06-10 15:55:45 DEBUG HikariConfig:1098 - password........................<masked>
+2020-06-10 15:55:45 DEBUG HikariConfig:1098 - poolName........................"HikariPool-1"
+2020-06-10 15:55:45 DEBUG HikariConfig:1098 - readOnly........................false
+2020-06-10 15:55:45 DEBUG HikariConfig:1098 - registerMbeans..................false
+2020-06-10 15:55:45 DEBUG HikariConfig:1098 - scheduledExecutor...............none
+2020-06-10 15:55:45 DEBUG HikariConfig:1098 - schema..........................none
+2020-06-10 15:55:45 DEBUG HikariConfig:1098 - threadFactory...................internal
+2020-06-10 15:55:45 DEBUG HikariConfig:1098 - transactionIsolation............default
+2020-06-10 15:55:45 DEBUG HikariConfig:1098 - username........................none
+2020-06-10 15:55:45 DEBUG HikariConfig:1098 - validationTimeout...............5000
+2020-06-10 15:55:45 INFO  HikariDataSource:80 - HikariPool-1 - Starting...
+2020-06-10 15:55:46 DEBUG HikariPool:564 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@1b50c03b
+2020-06-10 15:55:46 INFO  HikariDataSource:82 - HikariPool-1 - Start completed.
+2020-06-10 15:55:46 DEBUG HikariPool:421 - HikariPool-1 - Pool stats (total=1, active=1, idle=0, waiting=0)
+2020-06-10 15:55:46 DEBUG HikariPool:728 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@44f82871
+2020-06-10 15:55:46 DEBUG HikariPool:728 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@70097733
+2020-06-10 15:55:46 DEBUG HikariPool:728 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@5215a9f4
+2020-06-10 15:55:46 DEBUG HikariPool:728 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@447e2ee5
+2020-06-10 15:55:46 DEBUG HikariPool:728 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@250b2166
+2020-06-10 15:55:46 DEBUG HikariPool:728 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@705fd809
+2020-06-10 15:55:46 DEBUG HikariPool:728 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@1a17580c
+2020-06-10 15:55:47 DEBUG HikariPool:728 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@755b6150
+2020-06-10 15:55:47 DEBUG HikariPool:728 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@fde414c
+2020-06-10 15:55:47 DEBUG HikariPool:421 - HikariPool-1 - After adding stats (total=10, active=1, idle=9, waiting=0)
+2020-06-10 15:56:16 DEBUG HikariPool:421 - HikariPool-1 - Pool stats (total=10, active=1, idle=9, waiting=0)
+2020-06-10 15:56:16 DEBUG HikariPool:517 - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2020-06-10 15:56:46 DEBUG HikariPool:421 - HikariPool-1 - Pool stats (total=10, active=1, idle=9, waiting=0)
+2020-06-10 15:56:46 DEBUG HikariPool:517 - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2020-06-10 15:57:16 DEBUG HikariPool:421 - HikariPool-1 - Pool stats (total=10, active=1, idle=9, waiting=0)
+2020-06-10 15:57:16 DEBUG HikariPool:517 - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2020-06-10 15:57:46 DEBUG HikariPool:421 - HikariPool-1 - Pool stats (total=10, active=1, idle=9, waiting=0)
+2020-06-10 15:57:46 DEBUG HikariPool:517 - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2020-06-10 15:58:16 DEBUG HikariPool:421 - HikariPool-1 - Pool stats (total=10, active=1, idle=9, waiting=0)
+2020-06-10 15:58:16 DEBUG HikariPool:517 - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2020-06-10 15:58:46 DEBUG HikariPool:421 - HikariPool-1 - Pool stats (total=10, active=1, idle=9, waiting=0)
+2020-06-10 15:58:46 DEBUG HikariPool:517 - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2020-06-10 15:59:16 DEBUG HikariPool:421 - HikariPool-1 - Pool stats (total=10, active=1, idle=9, waiting=0)
+2020-06-10 15:59:16 DEBUG HikariPool:517 - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2020-06-10 15:59:46 DEBUG HikariPool:421 - HikariPool-1 - Pool stats (total=10, active=1, idle=9, waiting=0)
+2020-06-10 15:59:46 DEBUG HikariPool:517 - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2020-06-10 16:00:16 DEBUG HikariPool:421 - HikariPool-1 - Pool stats (total=10, active=1, idle=9, waiting=0)
+2020-06-10 16:00:16 DEBUG HikariPool:517 - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2020-06-10 16:00:46 DEBUG HikariPool:421 - HikariPool-1 - Pool stats (total=10, active=1, idle=9, waiting=0)
+2020-06-10 16:00:46 DEBUG HikariPool:517 - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2020-06-10 16:01:16 DEBUG HikariPool:421 - HikariPool-1 - Pool stats (total=10, active=1, idle=9, waiting=0)
+2020-06-10 16:01:16 DEBUG HikariPool:517 - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2020-06-10 16:01:46 DEBUG HikariPool:421 - HikariPool-1 - Pool stats (total=10, active=1, idle=9, waiting=0)
+2020-06-10 16:01:46 DEBUG HikariPool:517 - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2020-06-10 16:02:16 DEBUG HikariPool:421 - HikariPool-1 - Pool stats (total=10, active=1, idle=9, waiting=0)
+2020-06-10 16:02:16 DEBUG HikariPool:517 - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2020-06-10 16:02:46 DEBUG HikariPool:421 - HikariPool-1 - Pool stats (total=10, active=1, idle=9, waiting=0)
+2020-06-10 16:02:46 DEBUG HikariPool:517 - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2020-06-10 16:03:16 DEBUG HikariPool:421 - HikariPool-1 - Pool stats (total=10, active=1, idle=9, waiting=0)
+2020-06-10 16:03:16 DEBUG HikariPool:517 - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2020-06-10 16:03:46 DEBUG HikariPool:421 - HikariPool-1 - Pool stats (total=10, active=1, idle=9, waiting=0)
+2020-06-10 16:03:46 DEBUG HikariPool:517 - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2020-06-10 16:04:16 DEBUG HikariPool:421 - HikariPool-1 - Pool stats (total=10, active=1, idle=9, waiting=0)
+2020-06-10 16:04:16 DEBUG HikariPool:517 - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2020-06-10 16:04:46 DEBUG HikariPool:421 - HikariPool-1 - Pool stats (total=10, active=1, idle=9, waiting=0)
+2020-06-10 16:04:46 DEBUG HikariPool:517 - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2020-06-10 16:05:16 DEBUG HikariPool:421 - HikariPool-1 - Pool stats (total=10, active=1, idle=9, waiting=0)
+2020-06-10 16:05:16 DEBUG HikariPool:517 - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2020-06-10 16:05:46 DEBUG HikariPool:421 - HikariPool-1 - Pool stats (total=10, active=1, idle=9, waiting=0)
+2020-06-10 16:05:46 DEBUG HikariPool:517 - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2020-06-10 16:06:16 DEBUG HikariPool:421 - HikariPool-1 - Pool stats (total=10, active=1, idle=9, waiting=0)
+2020-06-10 16:06:16 DEBUG HikariPool:517 - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2020-06-10 16:06:46 DEBUG HikariPool:421 - HikariPool-1 - Pool stats (total=10, active=1, idle=9, waiting=0)
+2020-06-10 16:06:46 DEBUG HikariPool:517 - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2020-06-10 16:07:16 DEBUG HikariPool:421 - HikariPool-1 - Pool stats (total=10, active=1, idle=9, waiting=0)
+2020-06-10 16:07:16 DEBUG HikariPool:517 - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2020-06-10 16:07:46 DEBUG HikariPool:421 - HikariPool-1 - Pool stats (total=10, active=1, idle=9, waiting=0)
+2020-06-10 16:07:46 DEBUG HikariPool:517 - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2020-06-10 16:08:16 DEBUG HikariPool:421 - HikariPool-1 - Pool stats (total=10, active=1, idle=9, waiting=0)
+2020-06-10 16:08:16 DEBUG HikariPool:517 - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2020-06-10 16:08:46 DEBUG HikariPool:421 - HikariPool-1 - Pool stats (total=10, active=1, idle=9, waiting=0)
+2020-06-10 16:08:46 DEBUG HikariPool:517 - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2020-06-10 16:09:16 DEBUG HikariPool:421 - HikariPool-1 - Pool stats (total=10, active=1, idle=9, waiting=0)
+2020-06-10 16:09:16 DEBUG HikariPool:517 - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2020-06-10 16:09:46 DEBUG HikariPool:421 - HikariPool-1 - Pool stats (total=10, active=1, idle=9, waiting=0)
+2020-06-10 16:09:46 DEBUG HikariPool:517 - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2020-06-10 16:10:16 DEBUG HikariPool:421 - HikariPool-1 - Pool stats (total=10, active=1, idle=9, waiting=0)
+2020-06-10 16:10:16 DEBUG HikariPool:517 - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2020-06-10 16:10:46 DEBUG HikariPool:421 - HikariPool-1 - Pool stats (total=10, active=1, idle=9, waiting=0)
+2020-06-10 16:10:46 DEBUG HikariPool:517 - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2020-06-10 16:11:17 DEBUG HikariPool:421 - HikariPool-1 - Pool stats (total=10, active=1, idle=9, waiting=0)
+2020-06-10 16:11:17 DEBUG HikariPool:517 - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2020-06-10 16:11:47 DEBUG HikariPool:421 - HikariPool-1 - Pool stats (total=10, active=1, idle=9, waiting=0)
+2020-06-10 16:11:47 DEBUG HikariPool:517 - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2020-06-10 16:12:17 DEBUG HikariPool:421 - HikariPool-1 - Pool stats (total=10, active=1, idle=9, waiting=0)
+2020-06-10 16:12:17 DEBUG HikariPool:517 - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2020-06-10 16:12:47 DEBUG HikariPool:421 - HikariPool-1 - Pool stats (total=10, active=1, idle=9, waiting=0)
+2020-06-10 16:12:47 DEBUG HikariPool:517 - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2020-06-10 16:13:17 DEBUG HikariPool:421 - HikariPool-1 - Pool stats (total=10, active=1, idle=9, waiting=0)
+2020-06-10 16:13:17 DEBUG HikariPool:517 - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2020-06-10 16:13:47 DEBUG HikariPool:421 - HikariPool-1 - Pool stats (total=10, active=1, idle=9, waiting=0)
+2020-06-10 16:13:47 DEBUG HikariPool:517 - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2020-06-10 16:14:17 DEBUG HikariPool:421 - HikariPool-1 - Pool stats (total=10, active=1, idle=9, waiting=0)
+2020-06-10 16:14:17 DEBUG HikariPool:517 - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2020-06-10 16:14:47 DEBUG HikariPool:421 - HikariPool-1 - Pool stats (total=10, active=1, idle=9, waiting=0)
+2020-06-10 16:14:47 DEBUG HikariPool:517 - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2020-06-10 16:15:17 DEBUG HikariPool:421 - HikariPool-1 - Pool stats (total=10, active=1, idle=9, waiting=0)
+2020-06-10 16:15:17 DEBUG HikariPool:517 - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2020-06-10 16:15:47 DEBUG HikariPool:421 - HikariPool-1 - Pool stats (total=10, active=1, idle=9, waiting=0)
+2020-06-10 16:15:47 DEBUG HikariPool:517 - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2020-06-10 16:16:17 DEBUG HikariPool:421 - HikariPool-1 - Pool stats (total=10, active=1, idle=9, waiting=0)
+2020-06-10 16:16:17 DEBUG HikariPool:517 - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2020-06-10 16:16:47 DEBUG HikariPool:421 - HikariPool-1 - Pool stats (total=10, active=1, idle=9, waiting=0)
+2020-06-10 16:16:47 DEBUG HikariPool:517 - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2020-06-10 16:17:17 DEBUG HikariPool:421 - HikariPool-1 - Pool stats (total=10, active=1, idle=9, waiting=0)
+2020-06-10 16:17:17 DEBUG HikariPool:517 - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2020-06-10 16:17:47 DEBUG HikariPool:421 - HikariPool-1 - Pool stats (total=10, active=1, idle=9, waiting=0)
+2020-06-10 16:17:47 DEBUG HikariPool:517 - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2020-06-10 16:18:17 DEBUG HikariPool:421 - HikariPool-1 - Pool stats (total=10, active=1, idle=9, waiting=0)
+2020-06-10 16:18:17 DEBUG HikariPool:517 - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2020-06-10 16:18:47 DEBUG HikariPool:421 - HikariPool-1 - Pool stats (total=10, active=1, idle=9, waiting=0)
+2020-06-10 16:18:47 DEBUG HikariPool:517 - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2020-06-10 16:19:17 DEBUG HikariPool:421 - HikariPool-1 - Pool stats (total=10, active=1, idle=9, waiting=0)
+2020-06-10 16:19:17 DEBUG HikariPool:517 - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2020-06-10 16:19:47 DEBUG HikariPool:421 - HikariPool-1 - Pool stats (total=10, active=1, idle=9, waiting=0)
+2020-06-10 16:19:47 DEBUG HikariPool:517 - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2020-06-10 16:20:17 DEBUG HikariPool:421 - HikariPool-1 - Pool stats (total=10, active=1, idle=9, waiting=0)
+2020-06-10 16:20:17 DEBUG HikariPool:517 - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2020-06-10 16:20:47 DEBUG HikariPool:421 - HikariPool-1 - Pool stats (total=10, active=1, idle=9, waiting=0)
+2020-06-10 16:20:47 DEBUG HikariPool:517 - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2020-06-10 16:21:17 DEBUG HikariPool:421 - HikariPool-1 - Pool stats (total=10, active=1, idle=9, waiting=0)
+2020-06-10 16:21:17 DEBUG HikariPool:517 - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2020-06-10 16:21:47 DEBUG HikariPool:421 - HikariPool-1 - Pool stats (total=10, active=1, idle=9, waiting=0)
+2020-06-10 16:21:47 DEBUG HikariPool:517 - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2020-06-10 16:22:17 DEBUG HikariPool:421 - HikariPool-1 - Pool stats (total=10, active=1, idle=9, waiting=0)
+2020-06-10 16:22:17 DEBUG HikariPool:517 - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2020-06-10 16:22:47 DEBUG HikariPool:421 - HikariPool-1 - Pool stats (total=10, active=1, idle=9, waiting=0)
+2020-06-10 16:22:47 DEBUG HikariPool:517 - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2020-06-10 16:23:17 DEBUG HikariPool:421 - HikariPool-1 - Pool stats (total=10, active=1, idle=9, waiting=0)
+2020-06-10 16:23:17 DEBUG HikariPool:517 - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2020-06-10 16:23:47 DEBUG HikariPool:421 - HikariPool-1 - Pool stats (total=10, active=1, idle=9, waiting=0)
+2020-06-10 16:23:47 DEBUG HikariPool:517 - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2020-06-10 16:24:17 DEBUG HikariPool:421 - HikariPool-1 - Pool stats (total=10, active=1, idle=9, waiting=0)
+2020-06-10 16:24:17 DEBUG HikariPool:517 - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2020-06-10 16:24:47 DEBUG HikariPool:421 - HikariPool-1 - Pool stats (total=10, active=1, idle=9, waiting=0)
+2020-06-10 16:24:47 DEBUG HikariPool:517 - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2020-06-10 16:25:13 DEBUG PoolBase:134 - HikariPool-1 - Closing connection com.mysql.cj.jdbc.ConnectionImpl@705fd809: (connection has passed maxLifetime)
+2020-06-10 16:25:13 DEBUG HikariPool:728 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@31668e5b
+2020-06-10 16:25:17 DEBUG HikariPool:421 - HikariPool-1 - Pool stats (total=10, active=1, idle=9, waiting=0)
+2020-06-10 16:25:17 DEBUG HikariPool:517 - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2020-06-10 16:25:17 DEBUG PoolBase:134 - HikariPool-1 - Closing connection com.mysql.cj.jdbc.ConnectionImpl@755b6150: (connection has passed maxLifetime)
+2020-06-10 16:25:17 DEBUG HikariPool:728 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@54d82982
+2020-06-10 16:25:23 DEBUG PoolBase:134 - HikariPool-1 - Closing connection com.mysql.cj.jdbc.ConnectionImpl@44f82871: (connection has passed maxLifetime)
+2020-06-10 16:25:23 DEBUG HikariPool:728 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@16ad8067
+2020-06-10 16:25:24 DEBUG PoolBase:134 - HikariPool-1 - Closing connection com.mysql.cj.jdbc.ConnectionImpl@fde414c: (connection has passed maxLifetime)
+2020-06-10 16:25:24 DEBUG HikariPool:728 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@86bacbd
+2020-06-10 16:25:30 DEBUG PoolBase:134 - HikariPool-1 - Closing connection com.mysql.cj.jdbc.ConnectionImpl@447e2ee5: (connection has passed maxLifetime)
+2020-06-10 16:25:30 DEBUG HikariPool:728 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@44937709
+2020-06-10 16:25:39 DEBUG PoolBase:134 - HikariPool-1 - Closing connection com.mysql.cj.jdbc.ConnectionImpl@1a17580c: (connection has passed maxLifetime)
+2020-06-10 16:25:39 DEBUG HikariPool:728 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@64c047f3
+2020-06-10 16:25:39 DEBUG PoolBase:134 - HikariPool-1 - Closing connection com.mysql.cj.jdbc.ConnectionImpl@5215a9f4: (connection has passed maxLifetime)
+2020-06-10 16:25:39 DEBUG HikariPool:728 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@64abd278
+2020-06-10 16:25:40 DEBUG PoolBase:134 - HikariPool-1 - Closing connection com.mysql.cj.jdbc.ConnectionImpl@70097733: (connection has passed maxLifetime)
+2020-06-10 16:25:40 DEBUG HikariPool:728 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@2bce890e
+2020-06-10 16:25:45 DEBUG PoolBase:134 - HikariPool-1 - Closing connection com.mysql.cj.jdbc.ConnectionImpl@250b2166: (connection has passed maxLifetime)
+2020-06-10 16:25:46 DEBUG HikariPool:728 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@55183dd4
+2020-06-10 16:25:47 DEBUG HikariPool:421 - HikariPool-1 - Pool stats (total=10, active=1, idle=9, waiting=0)
+2020-06-10 16:25:47 DEBUG HikariPool:517 - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2020-06-10 16:26:17 DEBUG HikariPool:421 - HikariPool-1 - Pool stats (total=10, active=1, idle=9, waiting=0)
+2020-06-10 16:26:17 DEBUG HikariPool:517 - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2020-06-10 16:26:47 DEBUG HikariPool:421 - HikariPool-1 - Pool stats (total=10, active=1, idle=9, waiting=0)
+2020-06-10 16:26:47 DEBUG HikariPool:517 - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2020-06-10 16:27:17 DEBUG HikariPool:421 - HikariPool-1 - Pool stats (total=10, active=1, idle=9, waiting=0)
+2020-06-10 16:27:17 DEBUG HikariPool:517 - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2020-06-10 16:27:47 DEBUG HikariPool:421 - HikariPool-1 - Pool stats (total=10, active=1, idle=9, waiting=0)
+2020-06-10 16:27:47 DEBUG HikariPool:517 - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2020-06-10 16:28:17 DEBUG HikariPool:421 - HikariPool-1 - Pool stats (total=10, active=1, idle=9, waiting=0)
+2020-06-10 16:28:17 DEBUG HikariPool:517 - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2020-06-10 16:28:47 DEBUG HikariPool:421 - HikariPool-1 - Pool stats (total=10, active=1, idle=9, waiting=0)
+2020-06-10 16:28:47 DEBUG HikariPool:517 - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2020-06-10 16:29:17 DEBUG HikariPool:421 - HikariPool-1 - Pool stats (total=10, active=1, idle=9, waiting=0)
+2020-06-10 16:29:17 DEBUG HikariPool:517 - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2020-06-10 16:29:47 DEBUG HikariPool:421 - HikariPool-1 - Pool stats (total=10, active=1, idle=9, waiting=0)
+2020-06-10 16:29:47 DEBUG HikariPool:517 - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2020-06-10 16:30:17 DEBUG HikariPool:421 - HikariPool-1 - Pool stats (total=10, active=1, idle=9, waiting=0)
+2020-06-10 16:30:17 DEBUG HikariPool:517 - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2020-06-10 16:30:47 DEBUG HikariPool:421 - HikariPool-1 - Pool stats (total=10, active=1, idle=9, waiting=0)
+2020-06-10 16:30:47 DEBUG HikariPool:517 - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2020-06-10 16:31:17 DEBUG HikariPool:421 - HikariPool-1 - Pool stats (total=10, active=1, idle=9, waiting=0)
+2020-06-10 16:31:17 DEBUG HikariPool:517 - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2020-06-10 16:31:47 DEBUG HikariPool:421 - HikariPool-1 - Pool stats (total=10, active=1, idle=9, waiting=0)
+2020-06-10 16:31:47 DEBUG HikariPool:517 - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2020-06-10 16:32:17 DEBUG HikariPool:421 - HikariPool-1 - Pool stats (total=10, active=1, idle=9, waiting=0)
+2020-06-10 16:32:17 DEBUG HikariPool:517 - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2020-06-10 16:32:47 DEBUG HikariPool:421 - HikariPool-1 - Pool stats (total=10, active=1, idle=9, waiting=0)
+2020-06-10 16:32:47 DEBUG HikariPool:517 - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2020-06-10 16:33:17 DEBUG HikariPool:421 - HikariPool-1 - Pool stats (total=10, active=1, idle=9, waiting=0)
+2020-06-10 16:33:17 DEBUG HikariPool:517 - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2020-06-10 16:33:47 DEBUG HikariPool:421 - HikariPool-1 - Pool stats (total=10, active=1, idle=9, waiting=0)
+2020-06-10 16:33:47 DEBUG HikariPool:517 - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2020-06-10 16:34:17 DEBUG HikariPool:421 - HikariPool-1 - Pool stats (total=10, active=1, idle=9, waiting=0)
+2020-06-10 16:34:17 DEBUG HikariPool:517 - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2020-06-10 16:34:47 DEBUG HikariPool:421 - HikariPool-1 - Pool stats (total=10, active=1, idle=9, waiting=0)
+2020-06-10 16:34:47 DEBUG HikariPool:517 - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2020-06-10 16:35:17 DEBUG HikariPool:421 - HikariPool-1 - Pool stats (total=10, active=1, idle=9, waiting=0)
+2020-06-10 16:35:17 DEBUG HikariPool:517 - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2020-06-10 16:35:47 DEBUG HikariPool:421 - HikariPool-1 - Pool stats (total=10, active=1, idle=9, waiting=0)
+2020-06-10 16:35:47 DEBUG HikariPool:517 - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2020-06-10 16:36:17 DEBUG HikariPool:421 - HikariPool-1 - Pool stats (total=10, active=1, idle=9, waiting=0)
+2020-06-10 16:36:17 DEBUG HikariPool:517 - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2020-06-10 16:36:47 DEBUG HikariPool:421 - HikariPool-1 - Pool stats (total=10, active=1, idle=9, waiting=0)
+2020-06-10 16:36:47 DEBUG HikariPool:517 - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2020-06-10 16:37:17 DEBUG HikariPool:421 - HikariPool-1 - Pool stats (total=10, active=1, idle=9, waiting=0)
+2020-06-10 16:37:17 DEBUG HikariPool:517 - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2020-06-10 16:37:47 DEBUG HikariPool:421 - HikariPool-1 - Pool stats (total=10, active=1, idle=9, waiting=0)
+2020-06-10 16:37:47 DEBUG HikariPool:517 - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2020-06-10 16:38:17 DEBUG HikariPool:421 - HikariPool-1 - Pool stats (total=10, active=1, idle=9, waiting=0)
+2020-06-10 16:38:17 DEBUG HikariPool:517 - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2020-06-10 16:38:47 DEBUG HikariPool:421 - HikariPool-1 - Pool stats (total=10, active=1, idle=9, waiting=0)
+2020-06-10 16:38:47 DEBUG HikariPool:517 - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2020-06-10 16:39:17 DEBUG HikariPool:421 - HikariPool-1 - Pool stats (total=10, active=1, idle=9, waiting=0)
+2020-06-10 16:39:17 DEBUG HikariPool:517 - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2020-06-10 16:39:47 DEBUG HikariPool:421 - HikariPool-1 - Pool stats (total=10, active=1, idle=9, waiting=0)
+2020-06-10 16:39:47 DEBUG HikariPool:517 - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2020-06-10 16:40:17 DEBUG HikariPool:421 - HikariPool-1 - Pool stats (total=10, active=1, idle=9, waiting=0)
+2020-06-10 16:40:17 DEBUG HikariPool:517 - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2020-06-10 16:40:47 DEBUG HikariPool:421 - HikariPool-1 - Pool stats (total=10, active=1, idle=9, waiting=0)
+2020-06-10 16:40:47 DEBUG HikariPool:517 - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2020-06-10 16:41:17 DEBUG HikariPool:421 - HikariPool-1 - Pool stats (total=10, active=1, idle=9, waiting=0)
+2020-06-10 16:41:17 DEBUG HikariPool:517 - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2020-06-10 16:41:47 DEBUG HikariPool:421 - HikariPool-1 - Pool stats (total=10, active=1, idle=9, waiting=0)
+2020-06-10 16:41:47 DEBUG HikariPool:517 - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2020-06-10 16:42:17 DEBUG HikariPool:421 - HikariPool-1 - Pool stats (total=10, active=1, idle=9, waiting=0)
+2020-06-10 16:42:17 DEBUG HikariPool:517 - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2020-06-10 16:42:47 DEBUG HikariPool:421 - HikariPool-1 - Pool stats (total=10, active=1, idle=9, waiting=0)
+2020-06-10 16:42:47 DEBUG HikariPool:517 - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2020-06-10 16:43:17 DEBUG HikariPool:421 - HikariPool-1 - Pool stats (total=10, active=1, idle=9, waiting=0)
+2020-06-10 16:43:17 DEBUG HikariPool:517 - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2020-06-10 16:43:47 DEBUG HikariPool:421 - HikariPool-1 - Pool stats (total=10, active=1, idle=9, waiting=0)
+2020-06-10 16:43:47 DEBUG HikariPool:517 - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2020-06-10 16:44:17 DEBUG HikariPool:421 - HikariPool-1 - Pool stats (total=10, active=1, idle=9, waiting=0)
+2020-06-10 16:44:17 DEBUG HikariPool:517 - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2020-06-10 16:44:47 DEBUG HikariPool:421 - HikariPool-1 - Pool stats (total=10, active=1, idle=9, waiting=0)
+2020-06-10 16:44:47 DEBUG HikariPool:517 - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2020-06-10 16:45:17 DEBUG HikariPool:421 - HikariPool-1 - Pool stats (total=10, active=1, idle=9, waiting=0)
+2020-06-10 16:45:17 DEBUG HikariPool:517 - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2020-06-10 16:45:47 DEBUG HikariPool:421 - HikariPool-1 - Pool stats (total=10, active=1, idle=9, waiting=0)
+2020-06-10 16:45:47 DEBUG HikariPool:517 - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2020-06-10 16:46:17 DEBUG HikariPool:421 - HikariPool-1 - Pool stats (total=10, active=1, idle=9, waiting=0)
+2020-06-10 16:46:17 DEBUG HikariPool:517 - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2020-06-10 16:46:47 DEBUG HikariPool:421 - HikariPool-1 - Pool stats (total=10, active=1, idle=9, waiting=0)
+2020-06-10 16:46:47 DEBUG HikariPool:517 - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2020-06-10 16:47:17 DEBUG HikariPool:421 - HikariPool-1 - Pool stats (total=10, active=1, idle=9, waiting=0)
+2020-06-10 16:47:17 DEBUG HikariPool:517 - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2020-06-10 16:47:47 DEBUG HikariPool:421 - HikariPool-1 - Pool stats (total=10, active=1, idle=9, waiting=0)
+2020-06-10 16:47:47 DEBUG HikariPool:517 - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2020-06-10 16:48:17 DEBUG HikariPool:421 - HikariPool-1 - Pool stats (total=10, active=1, idle=9, waiting=0)
+2020-06-10 16:48:17 DEBUG HikariPool:517 - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2020-06-10 16:48:47 DEBUG HikariPool:421 - HikariPool-1 - Pool stats (total=10, active=1, idle=9, waiting=0)
+2020-06-10 16:48:47 DEBUG HikariPool:517 - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2020-06-10 16:49:17 DEBUG HikariPool:421 - HikariPool-1 - Pool stats (total=10, active=1, idle=9, waiting=0)
+2020-06-10 16:49:17 DEBUG HikariPool:517 - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2020-06-10 16:49:47 DEBUG HikariPool:421 - HikariPool-1 - Pool stats (total=10, active=1, idle=9, waiting=0)
+2020-06-10 16:49:47 DEBUG HikariPool:517 - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2020-06-10 16:50:17 DEBUG HikariPool:421 - HikariPool-1 - Pool stats (total=10, active=1, idle=9, waiting=0)
+2020-06-10 16:50:17 DEBUG HikariPool:517 - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2020-06-10 16:50:47 DEBUG HikariPool:421 - HikariPool-1 - Pool stats (total=10, active=1, idle=9, waiting=0)
+2020-06-10 16:50:47 DEBUG HikariPool:517 - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2020-06-10 16:51:17 DEBUG HikariPool:421 - HikariPool-1 - Pool stats (total=10, active=1, idle=9, waiting=0)
+2020-06-10 16:51:17 DEBUG HikariPool:517 - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2020-06-10 16:51:47 DEBUG HikariPool:421 - HikariPool-1 - Pool stats (total=10, active=1, idle=9, waiting=0)
+2020-06-10 16:51:47 DEBUG HikariPool:517 - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2020-06-10 16:52:17 DEBUG HikariPool:421 - HikariPool-1 - Pool stats (total=10, active=1, idle=9, waiting=0)
+2020-06-10 16:52:17 DEBUG HikariPool:517 - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2020-06-10 16:52:47 DEBUG HikariPool:421 - HikariPool-1 - Pool stats (total=10, active=1, idle=9, waiting=0)
+2020-06-10 16:52:47 DEBUG HikariPool:517 - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2020-06-10 16:53:17 DEBUG HikariPool:421 - HikariPool-1 - Pool stats (total=10, active=1, idle=9, waiting=0)
+2020-06-10 16:53:17 DEBUG HikariPool:517 - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2020-06-10 16:53:47 DEBUG HikariPool:421 - HikariPool-1 - Pool stats (total=10, active=1, idle=9, waiting=0)
+2020-06-10 16:53:47 DEBUG HikariPool:517 - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2020-06-10 16:54:17 DEBUG HikariPool:421 - HikariPool-1 - Pool stats (total=10, active=1, idle=9, waiting=0)
+2020-06-10 16:54:17 DEBUG HikariPool:517 - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2020-06-10 16:54:39 DEBUG PoolBase:134 - HikariPool-1 - Closing connection com.mysql.cj.jdbc.ConnectionImpl@16ad8067: (connection has passed maxLifetime)
+2020-06-10 16:54:39 DEBUG HikariPool:728 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@52b3007b
+2020-06-10 16:54:44 DEBUG PoolBase:134 - HikariPool-1 - Closing connection com.mysql.cj.jdbc.ConnectionImpl@86bacbd: (connection has passed maxLifetime)
+2020-06-10 16:54:44 DEBUG HikariPool:728 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@281143a0
+2020-06-10 16:54:47 DEBUG HikariPool:421 - HikariPool-1 - Pool stats (total=10, active=1, idle=9, waiting=0)
+2020-06-10 16:54:47 DEBUG HikariPool:517 - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2020-06-10 16:55:02 DEBUG PoolBase:134 - HikariPool-1 - Closing connection com.mysql.cj.jdbc.ConnectionImpl@31668e5b: (connection has passed maxLifetime)
+2020-06-10 16:55:02 DEBUG HikariPool:728 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@6ab25929
+2020-06-10 16:55:05 DEBUG PoolBase:134 - HikariPool-1 - Closing connection com.mysql.cj.jdbc.ConnectionImpl@54d82982: (connection has passed maxLifetime)
+2020-06-10 16:55:05 DEBUG HikariPool:728 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@626dfeb7
+2020-06-10 16:55:05 DEBUG PoolBase:134 - HikariPool-1 - Closing connection com.mysql.cj.jdbc.ConnectionImpl@64abd278: (connection has passed maxLifetime)
+2020-06-10 16:55:05 DEBUG HikariPool:728 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@1ae66bd0
+2020-06-10 16:55:12 DEBUG PoolBase:134 - HikariPool-1 - Closing connection com.mysql.cj.jdbc.ConnectionImpl@2bce890e: (connection has passed maxLifetime)
+2020-06-10 16:55:12 DEBUG HikariPool:728 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@60b961c3
+2020-06-10 16:55:17 DEBUG HikariPool:421 - HikariPool-1 - Pool stats (total=10, active=1, idle=9, waiting=0)
+2020-06-10 16:55:17 DEBUG HikariPool:517 - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2020-06-10 16:55:18 DEBUG PoolBase:134 - HikariPool-1 - Closing connection com.mysql.cj.jdbc.ConnectionImpl@64c047f3: (connection has passed maxLifetime)
+2020-06-10 16:55:19 DEBUG HikariPool:728 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@8320933
+2020-06-10 16:55:19 DEBUG PoolBase:134 - HikariPool-1 - Closing connection com.mysql.cj.jdbc.ConnectionImpl@44937709: (connection has passed maxLifetime)
+2020-06-10 16:55:19 DEBUG HikariPool:728 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@60ef4cab
+2020-06-10 16:55:34 DEBUG PoolBase:134 - HikariPool-1 - Closing connection com.mysql.cj.jdbc.ConnectionImpl@55183dd4: (connection has passed maxLifetime)
+2020-06-10 16:55:34 DEBUG HikariPool:728 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@21f1969
+2020-06-10 16:55:47 DEBUG HikariPool:421 - HikariPool-1 - Pool stats (total=10, active=1, idle=9, waiting=0)
+2020-06-10 16:55:47 DEBUG HikariPool:517 - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2020-06-10 16:56:17 DEBUG HikariPool:421 - HikariPool-1 - Pool stats (total=10, active=1, idle=9, waiting=0)
+2020-06-10 16:56:17 DEBUG HikariPool:517 - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2020-06-10 16:56:47 DEBUG HikariPool:421 - HikariPool-1 - Pool stats (total=10, active=1, idle=9, waiting=0)
+2020-06-10 16:56:47 DEBUG HikariPool:517 - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2020-06-10 16:57:17 DEBUG HikariPool:421 - HikariPool-1 - Pool stats (total=10, active=1, idle=9, waiting=0)
+2020-06-10 16:57:17 DEBUG HikariPool:517 - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2020-06-10 16:57:47 DEBUG HikariPool:421 - HikariPool-1 - Pool stats (total=10, active=1, idle=9, waiting=0)
+2020-06-10 16:57:47 DEBUG HikariPool:517 - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2020-06-10 16:58:17 DEBUG HikariPool:421 - HikariPool-1 - Pool stats (total=10, active=1, idle=9, waiting=0)
+2020-06-10 16:58:17 DEBUG HikariPool:517 - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2020-06-10 16:58:47 DEBUG HikariPool:421 - HikariPool-1 - Pool stats (total=10, active=1, idle=9, waiting=0)
+2020-06-10 16:58:47 DEBUG HikariPool:517 - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2020-06-10 16:59:17 DEBUG HikariPool:421 - HikariPool-1 - Pool stats (total=10, active=1, idle=9, waiting=0)
+2020-06-10 16:59:17 DEBUG HikariPool:517 - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2020-06-10 16:59:47 DEBUG HikariPool:421 - HikariPool-1 - Pool stats (total=10, active=1, idle=9, waiting=0)
+2020-06-10 16:59:47 DEBUG HikariPool:517 - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2020-06-10 17:00:17 DEBUG HikariPool:421 - HikariPool-1 - Pool stats (total=10, active=1, idle=9, waiting=0)
+2020-06-10 17:00:17 DEBUG HikariPool:517 - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2020-06-10 17:00:47 DEBUG HikariPool:421 - HikariPool-1 - Pool stats (total=10, active=1, idle=9, waiting=0)
+2020-06-10 17:00:47 DEBUG HikariPool:517 - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2020-06-10 17:01:17 DEBUG HikariPool:421 - HikariPool-1 - Pool stats (total=10, active=1, idle=9, waiting=0)
+2020-06-10 17:01:17 DEBUG HikariPool:517 - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2020-06-10 17:01:47 DEBUG HikariPool:421 - HikariPool-1 - Pool stats (total=10, active=1, idle=9, waiting=0)
+2020-06-10 17:01:47 DEBUG HikariPool:517 - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2020-06-10 17:02:17 DEBUG HikariPool:421 - HikariPool-1 - Pool stats (total=10, active=1, idle=9, waiting=0)
+2020-06-10 17:02:17 DEBUG HikariPool:517 - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2020-06-10 17:02:47 DEBUG HikariPool:421 - HikariPool-1 - Pool stats (total=10, active=1, idle=9, waiting=0)
+2020-06-10 17:02:47 DEBUG HikariPool:517 - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2020-06-10 17:03:17 DEBUG HikariPool:421 - HikariPool-1 - Pool stats (total=10, active=1, idle=9, waiting=0)
+2020-06-10 17:03:17 DEBUG HikariPool:517 - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2020-06-10 17:03:47 DEBUG HikariPool:421 - HikariPool-1 - Pool stats (total=10, active=1, idle=9, waiting=0)
+2020-06-10 17:03:47 DEBUG HikariPool:517 - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2020-06-10 17:04:17 DEBUG HikariPool:421 - HikariPool-1 - Pool stats (total=10, active=1, idle=9, waiting=0)
+2020-06-10 17:04:17 DEBUG HikariPool:517 - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2020-06-10 17:04:47 DEBUG HikariPool:421 - HikariPool-1 - Pool stats (total=10, active=1, idle=9, waiting=0)
+2020-06-10 17:04:47 DEBUG HikariPool:517 - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2020-06-10 17:05:17 DEBUG HikariPool:421 - HikariPool-1 - Pool stats (total=10, active=1, idle=9, waiting=0)
+2020-06-10 17:05:17 DEBUG HikariPool:517 - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2020-06-10 17:05:47 DEBUG HikariPool:421 - HikariPool-1 - Pool stats (total=10, active=1, idle=9, waiting=0)
+2020-06-10 17:05:47 DEBUG HikariPool:517 - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2020-06-10 17:06:17 DEBUG HikariPool:421 - HikariPool-1 - Pool stats (total=10, active=1, idle=9, waiting=0)
+2020-06-10 17:06:17 DEBUG HikariPool:517 - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2020-06-10 17:06:47 DEBUG HikariPool:421 - HikariPool-1 - Pool stats (total=10, active=1, idle=9, waiting=0)
+2020-06-10 17:06:47 DEBUG HikariPool:517 - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2020-06-10 17:07:17 DEBUG HikariPool:421 - HikariPool-1 - Pool stats (total=10, active=1, idle=9, waiting=0)
+2020-06-10 17:07:17 DEBUG HikariPool:517 - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2020-06-10 17:07:47 DEBUG HikariPool:421 - HikariPool-1 - Pool stats (total=10, active=1, idle=9, waiting=0)
+2020-06-10 17:07:47 DEBUG HikariPool:517 - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2020-06-10 17:08:17 DEBUG HikariPool:421 - HikariPool-1 - Pool stats (total=10, active=1, idle=9, waiting=0)
+2020-06-10 17:08:17 DEBUG HikariPool:517 - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2020-06-10 17:08:47 DEBUG HikariPool:421 - HikariPool-1 - Pool stats (total=10, active=1, idle=9, waiting=0)
+2020-06-10 17:08:47 DEBUG HikariPool:517 - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2020-06-10 17:09:17 DEBUG HikariPool:421 - HikariPool-1 - Pool stats (total=10, active=1, idle=9, waiting=0)
+2020-06-10 17:09:17 DEBUG HikariPool:517 - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2020-06-10 17:09:47 DEBUG HikariPool:421 - HikariPool-1 - Pool stats (total=10, active=1, idle=9, waiting=0)
+2020-06-10 17:09:47 DEBUG HikariPool:517 - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2020-06-10 17:10:17 DEBUG HikariPool:421 - HikariPool-1 - Pool stats (total=10, active=1, idle=9, waiting=0)
+2020-06-10 17:10:17 DEBUG HikariPool:517 - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2020-06-10 17:10:47 DEBUG HikariPool:421 - HikariPool-1 - Pool stats (total=10, active=1, idle=9, waiting=0)
+2020-06-10 17:10:47 DEBUG HikariPool:517 - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2020-06-10 17:11:17 DEBUG HikariPool:421 - HikariPool-1 - Pool stats (total=10, active=1, idle=9, waiting=0)
+2020-06-10 17:11:17 DEBUG HikariPool:517 - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2020-06-10 17:11:47 DEBUG HikariPool:421 - HikariPool-1 - Pool stats (total=10, active=1, idle=9, waiting=0)
+2020-06-10 17:11:47 DEBUG HikariPool:517 - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2020-06-10 17:12:17 DEBUG HikariPool:421 - HikariPool-1 - Pool stats (total=10, active=1, idle=9, waiting=0)
+2020-06-10 17:12:17 DEBUG HikariPool:517 - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2020-06-10 17:12:47 DEBUG HikariPool:421 - HikariPool-1 - Pool stats (total=10, active=1, idle=9, waiting=0)
+2020-06-10 17:12:47 DEBUG HikariPool:517 - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2020-06-10 17:13:17 DEBUG HikariPool:421 - HikariPool-1 - Pool stats (total=10, active=1, idle=9, waiting=0)
+2020-06-10 17:13:17 DEBUG HikariPool:517 - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2020-06-10 17:13:47 DEBUG HikariPool:421 - HikariPool-1 - Pool stats (total=10, active=1, idle=9, waiting=0)
+2020-06-10 17:13:47 DEBUG HikariPool:517 - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2020-06-10 17:14:17 DEBUG HikariPool:421 - HikariPool-1 - Pool stats (total=10, active=1, idle=9, waiting=0)
+2020-06-10 17:14:17 DEBUG HikariPool:517 - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2020-06-10 17:14:47 DEBUG HikariPool:421 - HikariPool-1 - Pool stats (total=10, active=1, idle=9, waiting=0)
+2020-06-10 17:14:48 DEBUG HikariPool:517 - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2020-06-10 17:15:18 DEBUG HikariPool:421 - HikariPool-1 - Pool stats (total=10, active=1, idle=9, waiting=0)
+2020-06-10 17:15:18 DEBUG HikariPool:517 - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2020-06-10 17:15:48 DEBUG HikariPool:421 - HikariPool-1 - Pool stats (total=10, active=1, idle=9, waiting=0)
+2020-06-10 17:15:48 DEBUG HikariPool:517 - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2020-06-10 17:16:18 DEBUG HikariPool:421 - HikariPool-1 - Pool stats (total=10, active=1, idle=9, waiting=0)
+2020-06-10 17:16:18 DEBUG HikariPool:517 - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2020-06-10 17:16:48 DEBUG HikariPool:421 - HikariPool-1 - Pool stats (total=10, active=1, idle=9, waiting=0)
+2020-06-10 17:16:48 DEBUG HikariPool:517 - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2020-06-10 17:17:18 DEBUG HikariPool:421 - HikariPool-1 - Pool stats (total=10, active=1, idle=9, waiting=0)
+2020-06-10 17:17:18 DEBUG HikariPool:517 - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
