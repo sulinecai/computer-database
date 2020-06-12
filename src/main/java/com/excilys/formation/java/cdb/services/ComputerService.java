@@ -49,20 +49,20 @@ public class ComputerService {
     public boolean allowedToCreateOrEdit(Computer computer) {
         boolean allowed = true;
         if (computer.getName() == null || computer.getName().isEmpty()) {
-            logger.info("computer name is required");
+            logger.error("computer name is required");
             allowed = false;
         } else if (computer.getDiscontinuedDate() != null) {
             if (computer.getIntroducedDate() == null) {
                 allowed = false;
-                logger.info("introduced date is null");
+                logger.error("introduced date is null");
             } else if (computer.getDiscontinuedDate().isBefore(computer.getIntroducedDate())) {
                 allowed = false;
-                logger.info("discontinued is before intro");
+                logger.error("discontinued is before intro");
             }
             if (computer.getCompany() != null) {
                 if (!companyDAO.findById(computer.getCompany().getIdCompany()).isPresent()) {
                     allowed = false;
-                    logger.info("company does not exist");
+                    logger.error("company does not exist");
                 }
             }
         }

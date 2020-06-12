@@ -28,7 +28,7 @@ public class CompanyMapper {
         try {
             company = new Company(resultSet.getLong(ATTRIBUT_ID_COMPANY), resultSet.getString(ATTRIBUT_NAME));
         } catch (SQLException e) {
-            logger.error("sql error when converting resultset to company");
+            logger.error("sql error when converting resultset to company", e);
         }
         return company;
     }
@@ -44,7 +44,7 @@ public class CompanyMapper {
             dto.setIdCompany(company.getIdCompany().toString());
             dto.setName(company.getName());
         } catch (NullPointerException e) {
-            logger.error("error when converting a company to a companyDTO : " + e.getMessage());
+            logger.error("idCompany or name null when converting a company to a companyDTO", e);
         }
         return dto;
     }
@@ -60,7 +60,7 @@ public class CompanyMapper {
             company.setIdCompany(Long.valueOf(dto.getIdCompany()));
             company.setName(dto.getName());
         } catch (NullPointerException e) {
-            logger.error("error when converting a companyDTO to a company : " + e.getMessage());
+            logger.error("id company or name null when converting a companyDTO to a company", e);
         }
         return company;
     }

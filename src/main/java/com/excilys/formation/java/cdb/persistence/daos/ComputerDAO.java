@@ -9,12 +9,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.excilys.formation.java.cdb.mappers.CompanyMapper;
 import com.excilys.formation.java.cdb.mappers.ComputerMapper;
 import com.excilys.formation.java.cdb.models.Computer;
 import com.excilys.formation.java.cdb.models.Page;
 import com.excilys.formation.java.cdb.persistence.Datasource;
 
-public class ComputerDAO extends DAO<Computer> {
+public class ComputerDAO {
 
     private static final String SQL_SELECT_ALL = "SELECT computer.id, computer.name, introduced, discontinued, "
             + "company_id, company.name AS company_name FROM computer LEFT JOIN company ON company_id = company.id ORDER BY computer.id";
@@ -38,6 +42,8 @@ public class ComputerDAO extends DAO<Computer> {
     private static ComputerDAO computerDAO;
 
     private Connection connect = Datasource.getInstance();
+    
+    private static Logger logger = LoggerFactory.getLogger(CompanyMapper.class);
 
     /**
      * Private constructor of ComputerDAO.
@@ -56,7 +62,6 @@ public class ComputerDAO extends DAO<Computer> {
         return computerDAO;
     }
 
-    @Override
     public List<Computer> getAll() {
         List<Computer> computerList = new ArrayList<Computer>();
 
@@ -67,7 +72,7 @@ public class ComputerDAO extends DAO<Computer> {
                 computerList.add(computer);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.error("sql error when listing all computers", e);
         }
         return computerList;
     }
@@ -80,8 +85,9 @@ public class ComputerDAO extends DAO<Computer> {
     public List<Computer> getAllByPage(Page page) {
         List<Computer> computerList = new ArrayList<Computer>();
 
-        if (page.getCurrentPage() > 0) {
-
+    	if (page == null) {
+            logger.error("the page is null");
+    	} else if (page.getCurrentPage() > 0) {
             try (PreparedStatement statement = connect.prepareStatement(SQL_SELECT_ALL_BY_PAGE)) {
                 statement.setInt(1, page.getMaxLine());
                 statement.setInt(2, page.getPageFirstLine());
@@ -92,27 +98,26 @@ public class ComputerDAO extends DAO<Computer> {
                     computerList.add(computer);
                 }
             } catch (SQLException e) {
-                e.printStackTrace();
+                logger.error("sql error when listing all companies by page", e);
             }
         }
         return computerList;
     }
 
-    @Override
     public Optional<Computer> findById(Long id) {
         Optional<Computer> result = Optional.empty();
         if (id != null) {
             try (PreparedStatement statement = connect.prepareStatement(SQL_SELECT_WITH_ID)) {
                 statement.setLong(1, id);
                 ResultSet resultSet = statement.executeQuery();
-
                 while (resultSet.next()) {
                     result = Optional.ofNullable(ComputerMapper.convert(resultSet));
                 }
-
             } catch (SQLException e) {
-                e.printStackTrace();
+                logger.error("sql error when finding computer with id", e);
             }
+        } else {
+            logger.error("company id to find is null");
         }
         return result;
     }
@@ -138,8 +143,10 @@ public class ComputerDAO extends DAO<Computer> {
                 }
                 statement.execute();
             } catch (SQLException e) {
-                e.printStackTrace();
+                logger.error("sql error when creating a computer", e);
             }
+        } else {
+            logger.error("the computer is null");
         }
     }
 
@@ -148,24 +155,28 @@ public class ComputerDAO extends DAO<Computer> {
      * @param computer
      */
     public void update(Computer computer) {
-        try (PreparedStatement statement = connect.prepareStatement(SQL_UPDATE)) {
-            statement.setString(1, computer.getName());
-            Timestamp introDate = computer.getIntroducedDate() == null ? null
-                    : Timestamp.valueOf(computer.getIntroducedDate().atStartOfDay());
-            statement.setTimestamp(2, introDate);
-            Timestamp discontDate = computer.getDiscontinuedDate() == null ? null
-                    : Timestamp.valueOf(computer.getDiscontinuedDate().atStartOfDay());
-            statement.setTimestamp(3, discontDate);
-            if (computer.getCompany() == null) {
-                statement.setNull(4, java.sql.Types.INTEGER);
-            } else {
-                statement.setLong(4, computer.getCompany().getIdCompany());
-            }
-            statement.setLong(5, computer.getIdComputer());
-            statement.execute();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        if (computer != null) {
+	        try (PreparedStatement statement = connect.prepareStatement(SQL_UPDATE)) {
+	            statement.setString(1, computer.getName());
+	            Timestamp introDate = computer.getIntroducedDate() == null ? null
+	                    : Timestamp.valueOf(computer.getIntroducedDate().atStartOfDay());
+	            statement.setTimestamp(2, introDate);
+	            Timestamp discontDate = computer.getDiscontinuedDate() == null ? null
+	                    : Timestamp.valueOf(computer.getDiscontinuedDate().atStartOfDay());
+	            statement.setTimestamp(3, discontDate);
+	            if (computer.getCompany() == null) {
+	                statement.setNull(4, java.sql.Types.INTEGER);
+	            } else {
+	                statement.setLong(4, computer.getCompany().getIdCompany());
+	            }
+	            statement.setLong(5, computer.getIdComputer());
+	            statement.execute();
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        }
+	    } else {
+	        logger.error("the computer is null");
+	    }
     }
 
     /**
@@ -173,12 +184,16 @@ public class ComputerDAO extends DAO<Computer> {
      * @param id
      */
     public void delete(Long id) {
-        try (PreparedStatement statement = connect.prepareStatement(SQL_DELETE)) {
-            statement.setLong(1, id);
-            statement.execute();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+    	if (id != null) {
+    		try (PreparedStatement statement = connect.prepareStatement(SQL_DELETE)) {
+                statement.setLong(1, id);
+                statement.execute();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+    	} else {
+	        logger.error("the computer id to delete is null");
+    	}
     }
 
 }

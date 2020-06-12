@@ -21,6 +21,7 @@ import com.excilys.formation.java.cdb.models.Company;
 import com.excilys.formation.java.cdb.models.Computer;
 import com.excilys.formation.java.cdb.services.CompanyService;
 import com.excilys.formation.java.cdb.services.ComputerService;
+import com.excilys.formation.java.cdb.validators.ComputerValidator;
 
 /**
  * Servlet implementation class AddComputerServlet.
@@ -56,13 +57,16 @@ public class AddComputerServlet extends HttpServlet {
             computerDTO.setCompanyDTO(companyDTO);
         }
         ComputerService computerService = ComputerService.getInstance();
-        Computer computer = ComputerMapper.toComputer(computerDTO);
-        if (computerService.allowedToCreateOrEdit(computer)) {
-            computerService.create(computer);
-            logger.info("computer creation ok");
-        } else {
-            logger.info("computer creation not allowed");
+        if (ComputerValidator.dateFormatValidator(computerDTO.getIntroducedDate()) && ComputerValidator.dateFormatValidator(computerDTO.getDiscontinuedDate())){
+        	Computer computer = ComputerMapper.toComputer(computerDTO);
+            if (computerService.allowedToCreateOrEdit(computer)) {
+                computerService.create(computer);
+                logger.info("computer creation ok");
+            } else {
+                logger.error("computer creation not allowed");
+            }
         }
+        
         doGet(request, response);
     }
 }

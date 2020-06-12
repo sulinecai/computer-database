@@ -16,7 +16,7 @@ import com.excilys.formation.java.cdb.models.Company;
 import com.excilys.formation.java.cdb.models.Page;
 import com.excilys.formation.java.cdb.persistence.Datasource;
 
-public class CompanyDAO extends DAO<Company> {
+public class CompanyDAO {
 
     private static final String SQL_SELECT_ALL = "SELECT id, name FROM company ORDER BY id";
 
@@ -47,7 +47,6 @@ public class CompanyDAO extends DAO<Company> {
         return companyDAO;
     }
 
-    @Override
     public List<Company> getAll() {
         List<Company> companyList = new ArrayList<Company>();
 
@@ -58,7 +57,7 @@ public class CompanyDAO extends DAO<Company> {
                 companyList.add(company);
             }
         } catch (SQLException e) {
-            logger.error("sql error when listing all companies");
+            logger.error("sql error when listing all companies", e);
         }
         return companyList;
     }
@@ -82,14 +81,13 @@ public class CompanyDAO extends DAO<Company> {
                     companyList.add(company);
                 }
             } catch (SQLException e) {
-                logger.error("sql error when listing companies by page");
+                logger.error("sql error when listing companies by page", e);
             }
         }
 
         return companyList;
     }
 
-    @Override
     public Optional<Company> findById(Long id) {
         Optional<Company> result = Optional.empty();
         if (id != null) {
@@ -100,7 +98,7 @@ public class CompanyDAO extends DAO<Company> {
                     result = Optional.ofNullable(CompanyMapper.convert(resultSet));
                 }
             } catch (SQLException e) {
-                logger.error("sql error when finding company with id");
+                logger.error("sql error when finding company with id", e);
             }
         }
         return result;
