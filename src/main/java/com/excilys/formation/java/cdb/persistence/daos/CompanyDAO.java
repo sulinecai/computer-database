@@ -16,7 +16,7 @@ import com.excilys.formation.java.cdb.models.Company;
 import com.excilys.formation.java.cdb.models.Page;
 import com.excilys.formation.java.cdb.persistence.Datasource;
 
-public class CompanyDAO extends DAO<Company> {
+public class CompanyDAO {
 
     private static final String SQL_SELECT_ALL = "SELECT id, name FROM company ORDER BY id";
 
@@ -47,7 +47,6 @@ public class CompanyDAO extends DAO<Company> {
         return companyDAO;
     }
 
-    @Override
     public List<Company> getAll() {
         List<Company> companyList = new ArrayList<Company>();
 
@@ -89,7 +88,6 @@ public class CompanyDAO extends DAO<Company> {
         return companyList;
     }
 
-    @Override
     public Optional<Company> findById(Long id) {
         Optional<Company> result = Optional.empty();
         if (id != null) {

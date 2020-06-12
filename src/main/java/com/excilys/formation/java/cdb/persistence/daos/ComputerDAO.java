@@ -14,7 +14,7 @@ import com.excilys.formation.java.cdb.models.Computer;
 import com.excilys.formation.java.cdb.models.Page;
 import com.excilys.formation.java.cdb.persistence.Datasource;
 
-public class ComputerDAO extends DAO<Computer> {
+public class ComputerDAO {
 
     private static final String SQL_SELECT_ALL = "SELECT computer.id, computer.name, introduced, discontinued, "
             + "company_id, company.name AS company_name FROM computer LEFT JOIN company ON company_id = company.id ORDER BY computer.id";
@@ -34,6 +34,10 @@ public class ComputerDAO extends DAO<Computer> {
             + "WHERE id = ?";
 
     private static final String SQL_DELETE = "DELETE FROM computer WHERE id = ?";
+    
+    private static final String SQL_SELECT_WITH_NAME_BY_PAGE = "SELECT computer.id, computer.name, introduced, discontinued, "
+    		+ "company_id, company.name AS company_name FROM computer LEFT JOIN company ON company_id = company.id "
+    		+ "WHERE computer.name LIKE '?%' OR company.name LIKE '?%' LIMIT ? OFFSET ?";
 
     private static ComputerDAO computerDAO;
 
@@ -56,7 +60,6 @@ public class ComputerDAO extends DAO<Computer> {
         return computerDAO;
     }
 
-    @Override
     public List<Computer> getAll() {
         List<Computer> computerList = new ArrayList<Computer>();
 
@@ -98,7 +101,6 @@ public class ComputerDAO extends DAO<Computer> {
         return computerList;
     }
 
-    @Override
     public Optional<Computer> findById(Long id) {
         Optional<Computer> result = Optional.empty();
         if (id != null) {
@@ -115,6 +117,27 @@ public class ComputerDAO extends DAO<Computer> {
             }
         }
         return result;
+    }
+    
+    public List<Computer> findByNameByPage(String name, Page page) {
+        List<Computer> computerList = new ArrayList<Computer>();
+        if (page.getCurrentPage() > 0 && name != null && !name.isEmpty() && !name.contains("%")) {
+
+            try (PreparedStatement statement = connect.prepareStatement(SQL_SELECT_WITH_NAME_BY_PAGE)) {
+                statement.setString(1, name);
+                statement.setInt(1, page.getMaxLine());
+                statement.setInt(2, page.getPageFirstLine());
+
+                ResultSet resultSet = statement.executeQuery();
+                while (resultSet.next()) {
+                    Computer computer = ComputerMapper.convert(resultSet);
+                    computerList.add(computer);
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return computerList;
     }
 
     /**

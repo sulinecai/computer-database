@@ -33,8 +33,16 @@ public class ListComputersServlet extends HttpServlet {
             currentPage = Integer.parseInt(request.getParameter("page"));
         }
 
+
         Page page = new Page(computerPerPage, currentPage);
-        List<Computer> allComputers = computerService.getAllByPage(page);
+        List<Computer> allComputers = new ArrayList<Computer>();
+    	if (request.getParameter("search") == null ) {
+            allComputers = computerService.getAllByPage(page);
+    	} else {
+    		String search = request.getParameter("search");
+            allComputers = computerService.findByNameByPage(search, page);
+    	}
+
         List<ComputerDTO> allComputerDTOs = new ArrayList<ComputerDTO>();
         for (Computer c : allComputers) {
             allComputerDTOs.add(ComputerMapper.toComputerDTO(c));
@@ -51,16 +59,18 @@ public class ListComputersServlet extends HttpServlet {
         request.setAttribute("currentPage", currentPage);
         request.setAttribute("nbPages", nbPages);
         request.setAttribute("lastPageIndex", lastPageIndex);
-
+       
         request.getRequestDispatcher("/views/dashboard.jsp").forward(request, response);
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    	String[] computerIdsToDelete = request.getParameter("selection").split(",");
-		ComputerService computerService = ComputerService.getInstance();
+    	if (request.getParameter("selection") != null) {
+    		String[] computerIdsToDelete = request.getParameter("selection").split(",");
+    		ComputerService computerService = ComputerService.getInstance();
 
-    	for (String computerId : computerIdsToDelete) {
-    		computerService.delete(Long.valueOf(computerId));
+        	for (String computerId : computerIdsToDelete) {
+        		computerService.delete(Long.valueOf(computerId));
+        	}
     	}
     	
         doGet(request, response);
