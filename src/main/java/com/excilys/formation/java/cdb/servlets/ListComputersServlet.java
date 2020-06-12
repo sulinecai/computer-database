@@ -23,24 +23,37 @@ import com.excilys.formation.java.cdb.services.ComputerService;
 public class ListComputersServlet extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
+    static int computerPerPage = 10;
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         ComputerService computerService = ComputerService.getInstance();
         int nbComputers = computerService.getAll().size();
-        int computerPerPage = 10;
         int currentPage = 1;
         if (request.getParameter("page") != null) {
             currentPage = Integer.parseInt(request.getParameter("page"));
         }
+        if (request.getParameter("pageSize") != null) {
+        	computerPerPage = Integer.parseInt(request.getParameter("pageSize"));
+        }
+        if (currentPage<1) {
+        	currentPage = 1;
+        }
 
         Page page = new Page(computerPerPage, currentPage);
+        int nbPages = page.getTotalPages(nbComputers);
+
+        if (currentPage>nbPages) {
+        	currentPage = nbPages;
+        	page.setCurrentPage(currentPage);
+        }
+        
         List<Computer> allComputers = computerService.getAllByPage(page);
         List<ComputerDTO> allComputerDTOs = new ArrayList<ComputerDTO>();
         for (Computer c : allComputers) {
             allComputerDTOs.add(ComputerMapper.toComputerDTO(c));
         }
 
-        int nbPages = page.getTotalPages(nbComputers);
+              
         int lastPageIndex = nbPages;
         if ((currentPage + 9) < nbPages) {
             lastPageIndex = currentPage + 9;
