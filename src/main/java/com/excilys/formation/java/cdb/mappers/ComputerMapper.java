@@ -92,6 +92,7 @@ public class ComputerMapper {
             computer.setName(dto.getName());
             if (dto.getIntroducedDate() != null && !dto.getIntroducedDate().equals("")) {
                 computer.setIntroducedDate(LocalDate.parse(dto.getIntroducedDate()));
+                System.out.println(dto.getIntroducedDate());
             }
             if (dto.getDiscontinuedDate() != null && !dto.getDiscontinuedDate().equals("")) {
                 computer.setDiscontinuedDate(LocalDate.parse(dto.getDiscontinuedDate()));
