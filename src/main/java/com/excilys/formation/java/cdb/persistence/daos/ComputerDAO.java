@@ -38,19 +38,27 @@ public class ComputerDAO {
             + "WHERE id = ?";
 
     private static final String SQL_DELETE = "DELETE FROM computer WHERE id = ?";
-    
+
     private static final String SQL_SELECT_WITH_NAME_BY_PAGE = "SELECT computer.id, computer.name, introduced, discontinued, "
-    		+ "company_id, company.name AS company_name FROM computer LEFT JOIN company ON company_id = company.id "
-    		+ "WHERE computer.name LIKE ? OR company.name LIKE ? LIMIT ? OFFSET ?";
-    
+            + "company_id, company.name AS company_name FROM computer LEFT JOIN company ON company_id = company.id "
+            + "WHERE computer.name LIKE ? OR company.name LIKE ? LIMIT ? OFFSET ?";
+
     private static final String SQL_SELECT_ALL_WITH_NAME = "SELECT computer.id, computer.name, introduced, discontinued, "
-    		+ "company_id, company.name AS company_name FROM computer LEFT JOIN company ON company_id = company.id "
-    		+ "WHERE computer.name LIKE ? OR company.name LIKE ?";
+            + "company_id, company.name AS company_name FROM computer LEFT JOIN company ON company_id = company.id "
+            + "WHERE computer.name LIKE ? OR company.name LIKE ?";
+
+    private static final String SQL_ORDER_BY_NAME_ASC = "SELECT computer.id, computer.name, introduced, discontinued, "
+            + "company_id, company.name AS company_name FROM computer LEFT JOIN company ON company_id = company.id "
+            + "ORDER BY computer.name LIMIT ? OFFSET ?";
+
+    private static final String SQL_ORDER_BY_NAME_DESC = "SELECT computer.id, computer.name, introduced, discontinued, "
+            + "company_id, company.name AS company_name FROM computer LEFT JOIN company ON company_id = company.id "
+            + "ORDER BY computer.name DESC LIMIT ? OFFSET ?";
 
     private static ComputerDAO computerDAO;
 
     private Connection connect = Datasource.getInstance();
-    
+
     private static Logger logger = LoggerFactory.getLogger(CompanyMapper.class);
 
     /**
@@ -61,6 +69,7 @@ public class ComputerDAO {
 
     /**
      * Instance of the singleton ComputerDAO.
+     *
      * @return the instance of ComputerDAO
      */
     public static synchronized ComputerDAO getInstance() {
@@ -87,15 +96,16 @@ public class ComputerDAO {
 
     /**
      * Get all the computers on a given page.
+     *
      * @param page
      * @return list of the computers
      */
     public List<Computer> getAllByPage(Page page) {
         List<Computer> computerList = new ArrayList<Computer>();
 
-    	if (page == null) {
+        if (page == null) {
             logger.error("the page is null");
-    	} else if (page.getCurrentPage() > 0) {
+        } else if (page.getCurrentPage() > 0) {
             try (PreparedStatement statement = connect.prepareStatement(SQL_SELECT_ALL_BY_PAGE)) {
                 statement.setInt(1, page.getMaxLine());
                 statement.setInt(2, page.getPageFirstLine());
@@ -129,7 +139,7 @@ public class ComputerDAO {
         }
         return result;
     }
-    
+
     public List<Computer> findByNameByPage(String name, Page page) {
         List<Computer> computerList = new ArrayList<Computer>();
         if (page.getCurrentPage() > 0 && name != null && !name.isEmpty() && !name.contains("%")) {
@@ -151,7 +161,7 @@ public class ComputerDAO {
         }
         return computerList;
     }
-    
+
     public List<Computer> findAllByName(String name) {
         List<Computer> computerList = new ArrayList<Computer>();
         if (name != null && !name.isEmpty() && !name.contains("%")) {
@@ -171,9 +181,10 @@ public class ComputerDAO {
         }
         return computerList;
     }
-    
+
     /**
      * Add a computer in the database.
+     *
      * @param computer
      */
     public void create(Computer computer) {
@@ -202,48 +213,86 @@ public class ComputerDAO {
 
     /**
      * Update an existing Computer.
+     *
      * @param computer
      */
     public void update(Computer computer) {
         if (computer != null) {
-	        try (PreparedStatement statement = connect.prepareStatement(SQL_UPDATE)) {
-	            statement.setString(1, computer.getName());
-	            Timestamp introDate = computer.getIntroducedDate() == null ? null
-	                    : Timestamp.valueOf(computer.getIntroducedDate().atStartOfDay());
-	            statement.setTimestamp(2, introDate);
-	            Timestamp discontDate = computer.getDiscontinuedDate() == null ? null
-	                    : Timestamp.valueOf(computer.getDiscontinuedDate().atStartOfDay());
-	            statement.setTimestamp(3, discontDate);
-	            if (computer.getCompany() == null) {
-	                statement.setNull(4, java.sql.Types.INTEGER);
-	            } else {
-	                statement.setLong(4, computer.getCompany().getIdCompany());
-	            }
-	            statement.setLong(5, computer.getIdComputer());
-	            statement.execute();
-	        } catch (SQLException e) {
-	            e.printStackTrace();
-	        }
-	    } else {
-	        logger.error("the computer is null");
-	    }
+            try (PreparedStatement statement = connect.prepareStatement(SQL_UPDATE)) {
+                statement.setString(1, computer.getName());
+                Timestamp introDate = computer.getIntroducedDate() == null ? null
+                        : Timestamp.valueOf(computer.getIntroducedDate().atStartOfDay());
+                statement.setTimestamp(2, introDate);
+                Timestamp discontDate = computer.getDiscontinuedDate() == null ? null
+                        : Timestamp.valueOf(computer.getDiscontinuedDate().atStartOfDay());
+                statement.setTimestamp(3, discontDate);
+                if (computer.getCompany() == null) {
+                    statement.setNull(4, java.sql.Types.INTEGER);
+                } else {
+                    statement.setLong(4, computer.getCompany().getIdCompany());
+                }
+                statement.setLong(5, computer.getIdComputer());
+                statement.execute();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        } else {
+            logger.error("the computer is null");
+        }
     }
 
     /**
      * Delete an existing Computer.
+     *
      * @param id
      */
     public void delete(Long id) {
-    	if (id != null) {
-    		try (PreparedStatement statement = connect.prepareStatement(SQL_DELETE)) {
+        if (id != null) {
+            try (PreparedStatement statement = connect.prepareStatement(SQL_DELETE)) {
                 statement.setLong(1, id);
                 statement.execute();
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-    	} else {
-	        logger.error("the computer id to delete is null");
-    	}
+        } else {
+            logger.error("the computer id to delete is null");
+        }
+    }
+
+    public List<Computer> orderByComputerNameAsc(Page page) {
+        List<Computer> computerList = new ArrayList<Computer>();
+
+        try (PreparedStatement statement = connect.prepareStatement(SQL_ORDER_BY_NAME_ASC)) {
+            statement.setInt(1, page.getMaxLine());
+            statement.setInt(2, page.getPageFirstLine());
+
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                Computer computer = ComputerMapper.convert(resultSet);
+                computerList.add(computer);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return computerList;
+    }
+
+    public List<Computer> orderByComputerNameDesc(Page page) {
+        List<Computer> computerList = new ArrayList<Computer>();
+
+        try (PreparedStatement statement = connect.prepareStatement(SQL_ORDER_BY_NAME_DESC)) {
+            statement.setInt(1, page.getMaxLine());
+            statement.setInt(2, page.getPageFirstLine());
+
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                Computer computer = ComputerMapper.convert(resultSet);
+                computerList.add(computer);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return computerList;
     }
 
 }

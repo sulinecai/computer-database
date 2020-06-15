@@ -87,4 +87,13 @@ public class ComputerService {
     public boolean exist(Long id) {
         return computerDAO.findById(id).isPresent();
     }
+
+    public List<Computer> orderByComputerNameAsc(Page page) {
+        return computerDAO.orderByComputerNameAsc(page);
+    }
+
+    public List<Computer> orderByComputerNameDesc(Page page) {
+        return computerDAO.orderByComputerNameDesc(page);
+    }
+
 }

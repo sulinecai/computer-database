@@ -42,10 +42,18 @@ public class ListComputersServlet extends HttpServlet {
 
         Page page = new Page(computerPerPage, currentPage);
 
-        // List<Computer> allComputers = computerService.getAllByPage(page);
         List<Computer> allComputers = new ArrayList<Computer>();
-        if (request.getParameter("search") == null) {
+        if (request.getParameter("search") == null && request.getParameter("orderByComputerName") == null) {
             allComputers = computerService.getAllByPage(page);
+        } else if (request.getParameter("search") == null && request.getParameter("orderByComputerName") != null) {
+            if (request.getParameter("orderByComputerName").equals("asc")) {
+                allComputers = computerService.orderByComputerNameAsc(page);
+                request.setAttribute("orderByComputerName", "asc");
+            }
+            if (request.getParameter("orderByComputerName").equals("desc")) {
+                allComputers = computerService.orderByComputerNameDesc(page);
+                request.setAttribute("orderByComputerName", "desc");
+            }
         } else {
             String search = request.getParameter("search");
             allComputers = computerService.findByNameByPage(search, page);
