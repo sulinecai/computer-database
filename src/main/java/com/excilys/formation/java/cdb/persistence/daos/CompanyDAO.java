@@ -103,4 +103,9 @@ public class CompanyDAO {
         }
         return result;
     }
+
+    public void deleteCompany() {
+        //this.connect.setAutoCommit(false);
+        //https://docs.oracle.com/javase/tutorial/jdbc/basics/transactions.html
+    }
 }
