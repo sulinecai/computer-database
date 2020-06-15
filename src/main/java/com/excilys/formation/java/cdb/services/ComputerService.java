@@ -38,8 +38,16 @@ public class ComputerService {
         return computerDAO.getAllByPage(page);
     }
 
-      public Computer findById(Long id) {
+    public Computer findById(Long id) {
         return computerDAO.findById(id).get();
+    }
+    
+    public List<Computer> findByNameByPage(String name, Page page) {
+        return computerDAO.findByNameByPage(name, page);
+    }
+    
+    public List<Computer> findAllByName(String name) {
+        return computerDAO.findAllByName(name);
     }
 
     public void create(Computer computer) {

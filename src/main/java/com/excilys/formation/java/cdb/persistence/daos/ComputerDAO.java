@@ -38,6 +38,14 @@ public class ComputerDAO {
             + "WHERE id = ?";
 
     private static final String SQL_DELETE = "DELETE FROM computer WHERE id = ?";
+    
+    private static final String SQL_SELECT_WITH_NAME_BY_PAGE = "SELECT computer.id, computer.name, introduced, discontinued, "
+    		+ "company_id, company.name AS company_name FROM computer LEFT JOIN company ON company_id = company.id "
+    		+ "WHERE computer.name LIKE ? OR company.name LIKE ? LIMIT ? OFFSET ?";
+    
+    private static final String SQL_SELECT_ALL_WITH_NAME = "SELECT computer.id, computer.name, introduced, discontinued, "
+    		+ "company_id, company.name AS company_name FROM computer LEFT JOIN company ON company_id = company.id "
+    		+ "WHERE computer.name LIKE ? OR company.name LIKE ?";
 
     private static ComputerDAO computerDAO;
 
@@ -121,7 +129,49 @@ public class ComputerDAO {
         }
         return result;
     }
+    
+    public List<Computer> findByNameByPage(String name, Page page) {
+        List<Computer> computerList = new ArrayList<Computer>();
+        if (page.getCurrentPage() > 0 && name != null && !name.isEmpty() && !name.contains("%")) {
 
+            try (PreparedStatement statement = connect.prepareStatement(SQL_SELECT_WITH_NAME_BY_PAGE)) {
+                statement.setString(1, name.concat("%"));
+                statement.setString(2, name.concat("%"));
+                statement.setInt(3, page.getMaxLine());
+                statement.setInt(4, page.getPageFirstLine());
+
+                ResultSet resultSet = statement.executeQuery();
+                while (resultSet.next()) {
+                    Computer computer = ComputerMapper.convert(resultSet);
+                    computerList.add(computer);
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return computerList;
+    }
+    
+    public List<Computer> findAllByName(String name) {
+        List<Computer> computerList = new ArrayList<Computer>();
+        if (name != null && !name.isEmpty() && !name.contains("%")) {
+
+            try (PreparedStatement statement = connect.prepareStatement(SQL_SELECT_ALL_WITH_NAME)) {
+                statement.setString(1, name.concat("%"));
+                statement.setString(2, name.concat("%"));
+
+                ResultSet resultSet = statement.executeQuery();
+                while (resultSet.next()) {
+                    Computer computer = ComputerMapper.convert(resultSet);
+                    computerList.add(computer);
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return computerList;
+    }
+    
     /**
      * Add a computer in the database.
      * @param computer

@@ -98,30 +98,38 @@
     </section>
 
     <footer class="navbar-fixed-bottom">
+    
         <div class="container text-center">
+			<c:set var="searchValue" value=""/>                             
+			<c:if test="${search != null}"> 
+				<c:set var="searchValue" value="&search=${search}"/>                             
+			</c:if> 
+			<c:set var="pgSize" value=""/>                             
+			<c:if test="${pageSize != null}"> 
+				<c:set var="pgSize" value="&pageSize=${pageSize}"/>                             
+			</c:if> 
 			 <c:if test="${lastPageIndex > 0}">
 				<ul class="pagination">
 				    <c:if test="${currentPage > 1}">	
-				    	<li class="page-item"> <a href="ListComputers?page=1" aria-label="First">
+				    	<li class="page-item"> <a href="ListComputers?page=1${searchValue}${pageSize}" aria-label="First">
 						       <span aria-hidden="true">&laquo;&laquo;</span></a>
 				        </li>		
-					    <li class="page-item"> <a href="ListComputers?page=${currentPage-1}" aria-label="Previous">
+					    <li class="page-item"> <a href="ListComputers?page=${currentPage-1}${searchValue}${pageSize}" aria-label="Previous">
 						       <span aria-hidden="true">&laquo;</span></a>
 				        </li>
-				        
                     </c:if>
 					<c:forEach var="i" begin="${currentPage}" end="${lastPageIndex}" step="1">
 					   <c:set var="activePage" value=""/>                             
 					    <c:if test="${i == currentPage}"> 
 					       <c:set var="activePage" value="active"/>                             
- 					    </c:if>          
-						<li class="page-item ${activePage}"><a href="ListComputers?page=${i}"><c:out value="${i}" /></a></li>
+ 					    </c:if>   
+						<li class="page-item ${activePage}"><a href="ListComputers?page=${i}${searchValue}${pageSize}"><c:out value="${i}" /></a></li>
 					</c:forEach>
 					<c:if test="${currentPage < nbPages}">
-					   <li class="page-item"><a href="ListComputers?page=${currentPage+1}" aria-label="Next">
+					   <li class="page-item"><a href="ListComputers?page=${currentPage+1}${searchValue}${pageSize}" aria-label="Next">
 					       <span aria-hidden="true">&raquo;</span></a>
 					   </li>
-					   <li class="page-item"><a href="ListComputers?page=${nbPages}" aria-label="Last">
+					   <li class="page-item"><a href="ListComputers?page=${nbPages}${searchValue}${pageSize}" aria-label="Last">
 					       <span aria-hidden="true">&raquo;&raquo;</span></a>
 					   </li>
 					</c:if>
@@ -130,9 +138,9 @@
 
 
 			<div class="btn-group btn-group-sm pull-right" role="group" >
-            <button type="button" class="btn btn-default" onclick="window.location.href='?pageSize=10'">10</button>
-            <button type="button" class="btn btn-default" onclick="window.location.href='?pageSize=50'">50</button>
-            <button type="button" class="btn btn-default" onclick="window.location.href='?pageSize=100'">100</button>
+            <button type="button" class="btn btn-default" onclick="window.location.href='?pageSize=10${searchValue}'">10</button>
+            <button type="button" class="btn btn-default" onclick="window.location.href='?pageSize=50${searchValue}'">50</button>
+            <button type="button" class="btn btn-default" onclick="window.location.href='?pageSize=100${searchValue}'">100</button>
         </div>
         </div>
         
