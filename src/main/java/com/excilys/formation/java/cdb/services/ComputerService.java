@@ -45,6 +45,10 @@ public class ComputerService {
     public List<Computer> findByNameByPage(String name, Page page) {
         return computerDAO.findByNameByPage(name, page);
     }
+    
+    public List<Computer> findAllByName(String name) {
+        return computerDAO.findAllByName(name);
+    }
 
     public void create(Computer computer) {
         computerDAO.create(computer);

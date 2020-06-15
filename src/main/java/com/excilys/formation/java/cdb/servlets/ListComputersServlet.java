@@ -41,6 +41,8 @@ public class ListComputersServlet extends HttpServlet {
     	} else {
     		String search = request.getParameter("search");
             allComputers = computerService.findByNameByPage(search, page);
+            request.setAttribute("search", search);
+            nbComputers = computerService.findAllByName(search).size();
     	}
 
         List<ComputerDTO> allComputerDTOs = new ArrayList<ComputerDTO>();
@@ -59,7 +61,6 @@ public class ListComputersServlet extends HttpServlet {
         request.setAttribute("currentPage", currentPage);
         request.setAttribute("nbPages", nbPages);
         request.setAttribute("lastPageIndex", lastPageIndex);
-       
         request.getRequestDispatcher("/views/dashboard.jsp").forward(request, response);
     }
 
