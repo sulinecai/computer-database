@@ -29,7 +29,6 @@ public class ComputerService {
 
     private static Logger logger = LoggerFactory.getLogger(ComputerService.class);
 
-
     public List<Computer> getAll() {
         return computerDAO.getAll();
     }
@@ -41,11 +40,11 @@ public class ComputerService {
     public Computer findById(Long id) {
         return computerDAO.findById(id).get();
     }
-    
+
     public List<Computer> findByNameByPage(String name, Page page) {
         return computerDAO.findByNameByPage(name, page);
     }
-    
+
     public List<Computer> findAllByName(String name) {
         return computerDAO.findAllByName(name);
     }

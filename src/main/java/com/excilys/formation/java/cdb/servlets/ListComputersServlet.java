@@ -33,39 +33,38 @@ public class ListComputersServlet extends HttpServlet {
             currentPage = Integer.parseInt(request.getParameter("page"));
         }
         if (request.getParameter("pageSize") != null) {
-        	computerPerPage = Integer.parseInt(request.getParameter("pageSize"));
+            computerPerPage = Integer.parseInt(request.getParameter("pageSize"));
             request.setAttribute("pageSize", computerPerPage);
         }
-        if (currentPage<1) {
-        	currentPage = 1;
+        if (currentPage < 1) {
+            currentPage = 1;
         }
 
         Page page = new Page(computerPerPage, currentPage);
-        
-        //List<Computer> allComputers = computerService.getAllByPage(page);
+
+        // List<Computer> allComputers = computerService.getAllByPage(page);
         List<Computer> allComputers = new ArrayList<Computer>();
-    	if (request.getParameter("search") == null ) {
+        if (request.getParameter("search") == null) {
             allComputers = computerService.getAllByPage(page);
-    	} else {
-    		String search = request.getParameter("search");
+        } else {
+            String search = request.getParameter("search");
             allComputers = computerService.findByNameByPage(search, page);
             request.setAttribute("search", search);
             nbComputers = computerService.findAllByName(search).size();
-    	}
-    	
-        int nbPages = page.getTotalPages(nbComputers);
-
-        if (currentPage>nbPages) {
-        	currentPage = nbPages;
-        	page.setCurrentPage(currentPage);
         }
 
-    	List<ComputerDTO> allComputerDTOs = new ArrayList<ComputerDTO>();
+        int nbPages = page.getTotalPages(nbComputers);
+
+        if (currentPage > nbPages) {
+            currentPage = nbPages;
+            page.setCurrentPage(currentPage);
+        }
+
+        List<ComputerDTO> allComputerDTOs = new ArrayList<ComputerDTO>();
         for (Computer c : allComputers) {
             allComputerDTOs.add(ComputerMapper.toComputerDTO(c));
         }
 
-              
         int lastPageIndex = nbPages;
         if ((currentPage + 9) < nbPages) {
             lastPageIndex = currentPage + 9;
@@ -80,15 +79,15 @@ public class ListComputersServlet extends HttpServlet {
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    	if (request.getParameter("selection") != null) {
-    		String[] computerIdsToDelete = request.getParameter("selection").split(",");
-    		ComputerService computerService = ComputerService.getInstance();
+        if (request.getParameter("selection") != null) {
+            String[] computerIdsToDelete = request.getParameter("selection").split(",");
+            ComputerService computerService = ComputerService.getInstance();
 
-        	for (String computerId : computerIdsToDelete) {
-        		computerService.delete(Long.valueOf(computerId));
-        	}
-    	}
-    	
+            for (String computerId : computerIdsToDelete) {
+                computerService.delete(Long.valueOf(computerId));
+            }
+        }
+
         doGet(request, response);
     }
 }

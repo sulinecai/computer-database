@@ -58,8 +58,9 @@ public class AddComputerServlet extends HttpServlet {
             computerDTO.setCompanyDTO(companyDTO);
         }
         ComputerService computerService = ComputerService.getInstance();
-        if (ComputerValidator.dateFormatValidator(computerDTO.getIntroducedDate()) && ComputerValidator.dateFormatValidator(computerDTO.getDiscontinuedDate())){
-        	Computer computer = ComputerMapper.toComputer(computerDTO);
+        if (ComputerValidator.dateFormatValidator(computerDTO.getIntroducedDate())
+                && ComputerValidator.dateFormatValidator(computerDTO.getDiscontinuedDate())) {
+            Computer computer = ComputerMapper.toComputer(computerDTO);
             if (computerService.allowedToCreateOrEdit(computer)) {
                 computerService.create(computer);
                 logger.info("computer creation ok");
@@ -67,7 +68,7 @@ public class AddComputerServlet extends HttpServlet {
                 logger.error("computer creation not allowed");
             }
         }
-        
+
         doGet(request, response);
     }
 }
