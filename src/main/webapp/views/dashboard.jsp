@@ -58,19 +58,19 @@
                                     </a>
                             </span>
                         </th>
-						<c:set var="orderByComputer" value=""/>  
+						<c:set var="orderByComputerLink" value=""/>  
 						<c:if test="${orderByComputerName == null}"> 
-							<c:set var="orderByComputer" value="&orderByComputerName=asc"/>                             
+							<c:set var="orderByComputerLink" value="&orderByComputerName=asc"/>                             
 						</c:if>                           
 						<c:if test="${orderByComputerName.equals('asc')}"> 
-							<c:set var="orderByComputer" value="&orderByComputerName=desc"/>                             
+							<c:set var="orderByComputerLink" value="&orderByComputerName=desc"/>                             
 						</c:if> 
 						<c:if test="${orderByComputerName.equals('desc')}"> 
-							<c:set var="orderByComputer" value=""/>                             
+							<c:set var="orderByComputerLink" value=""/>                             
 						</c:if> 
 						
                         <th>
-                        	<a href="ListComputers?${orderByComputer}" onclick="">Computer name &#9650; &#9660;</a>
+                        	<a href="ListComputers?${orderByComputerLink}" onclick="">Computer name &#9650; &#9660;</a>
                         </th>
                         <th>
                             Introduced date
@@ -119,6 +119,7 @@
 			<c:if test="${pageSize != null}"> 
 				<c:set var="pgSize" value="&pageSize=${pageSize}"/>                             
 			</c:if> 
+			<c:set var="orderByComputer" value=""/>  
 			<c:if test="${orderByComputerName != null}"> 
 				<c:set var="orderByComputer" value="&orderByComputerName=${orderByComputerName}"/>                             
 			</c:if> 
