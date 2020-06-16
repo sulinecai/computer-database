@@ -15,7 +15,9 @@ import org.junit.Test;
 import com.excilys.formation.java.cdb.models.Company;
 import com.excilys.formation.java.cdb.models.Page;
 
+
 public class CompanyDAOTest {
+
 
     /**
      * Reset the singleton of companyDAO.
@@ -26,7 +28,7 @@ public class CompanyDAOTest {
      * @throws IllegalAccessException
      */
     @Before
-    public void setUp()
+    public void setup()
             throws NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException {
         Field instance = CompanyDAO.class.getDeclaredField("companyDAO");
         instance.setAccessible(true);
@@ -161,6 +163,11 @@ public class CompanyDAOTest {
         CompanyDAO companyDAO = CompanyDAO.getInstance();
         Optional<Company> optCompany = companyDAO.findById(0L);
         assertFalse(optCompany.isPresent());
+    }
+
+    @Test
+    public void testDelete() {
+        //TODO: complete test
     }
 
 }
