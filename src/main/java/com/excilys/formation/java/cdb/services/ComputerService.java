@@ -88,12 +88,9 @@ public class ComputerService {
         return computerDAO.findById(id).isPresent();
     }
 
-    public List<Computer> orderByComputerNameAsc(Page page) {
-        return computerDAO.orderByComputerNameAsc(page);
+    public List<Computer> orderBy(Page page, String parameter) {
+        return computerDAO.orderBy(page, parameter);
     }
 
-    public List<Computer> orderByComputerNameDesc(Page page) {
-        return computerDAO.orderByComputerNameDesc(page);
-    }
 
 }

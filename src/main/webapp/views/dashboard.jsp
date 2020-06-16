@@ -58,19 +58,19 @@
                                     </a>
                             </span>
                         </th>
-						<c:set var="orderByComputerLink" value=""/>  
-						<c:if test="${orderByComputerName == null}"> 
-							<c:set var="orderByComputerLink" value="&orderByComputerName=asc"/>                             
+						<c:set var="orderByValueLink" value=""/>  
+						<c:if test="${orderBy == null}"> 
+							<c:set var="orderByValueLink" value="&orderBy=computerAsc"/>                             
 						</c:if>                           
-						<c:if test="${orderByComputerName.equals('asc')}"> 
-							<c:set var="orderByComputerLink" value="&orderByComputerName=desc"/>                             
+						<c:if test="${orderBy.equals('computerAsc')}"> 
+							<c:set var="orderByValueLink" value="&orderBy=computerDesc"/>                             
 						</c:if> 
-						<c:if test="${orderByComputerName.equals('desc')}"> 
-							<c:set var="orderByComputerLink" value=""/>                             
+						<c:if test="${orderBy.equals('computerDesc')}"> 
+							<c:set var="orderByValueLink" value=""/>                             
 						</c:if> 
 						
                         <th>
-                        	<a href="ListComputers?${orderByComputerLink}" onclick="">Computer name &#9650; &#9660;</a>
+                        	<a href="ListComputers?${orderByValueLink}" onclick="">Computer name &#9650; &#9660;</a>
                         </th>
                         <th>
                             Introduced date
@@ -79,9 +79,19 @@
                         <th>
                             Discontinued date
                         </th>
+                        <c:set var="orderByValueLink" value=""/>  
+						<c:if test="${orderBy == null}"> 
+							<c:set var="orderByValueLink" value="&orderBy=companyAsc"/>                             
+						</c:if>                           
+						<c:if test="${orderBy.equals('companyAsc')}"> 
+							<c:set var="orderByValueLink" value="&orderBy=companyDesc"/>                             
+						</c:if> 
+						<c:if test="${orderBy.equals('companyDesc')}"> 
+							<c:set var="orderByValueLink" value=""/>                             
+						</c:if> 
                         <!-- Table header for Company -->
                         <th>
-                            Company
+                            <a href="ListComputers?${orderByValueLink}" onclick="">Company &#9650; &#9660;</a>
                         </th>
 
                     </tr>
@@ -119,17 +129,17 @@
 			<c:if test="${pageSize != null}"> 
 				<c:set var="pgSize" value="&pageSize=${pageSize}"/>                             
 			</c:if> 
-			<c:set var="orderByComputer" value=""/>  
-			<c:if test="${orderByComputerName != null}"> 
-				<c:set var="orderByComputer" value="&orderByComputerName=${orderByComputerName}"/>                             
+			<c:set var="orderByValue" value=""/>  
+			<c:if test="${orderBy != null}"> 
+				<c:set var="orderByValue" value="&orderBy=${orderBy}"/>                             
 			</c:if> 
 			 <c:if test="${lastPageIndex > 0}">
 				<ul class="pagination">
 				    <c:if test="${currentPage > 1}">	
-				    	<li class="page-item"> <a href="ListComputers?page=1${searchValue}${pgSize}${orderByComputer}" aria-label="First">
+				    	<li class="page-item"> <a href="ListComputers?page=1${searchValue}${pgSize}${orderByValue}" aria-label="First">
 						       <span aria-hidden="true">&laquo;&laquo;</span></a>
 				        </li>		
-					    <li class="page-item"> <a href="ListComputers?page=${currentPage-1}${searchValue}${pgSize}${orderByComputer}" aria-label="Previous">
+					    <li class="page-item"> <a href="ListComputers?page=${currentPage-1}${searchValue}${pgSize}${orderByValue}" aria-label="Previous">
 						       <span aria-hidden="true">&laquo;</span></a>
 				        </li>
                     </c:if>
@@ -138,13 +148,13 @@
 					    <c:if test="${i == currentPage}"> 
 					       <c:set var="activePage" value="active"/>                             
  					    </c:if>   
-						<li class="page-item ${activePage}"><a href="ListComputers?page=${i}${searchValue}${pgSize}${orderByComputer}"><c:out value="${i}" /></a></li>
+						<li class="page-item ${activePage}"><a href="ListComputers?page=${i}${searchValue}${pgSize}${orderByValue}"><c:out value="${i}" /></a></li>
 					</c:forEach>
 					<c:if test="${currentPage < nbPages}">
-					   <li class="page-item"><a href="ListComputers?page=${currentPage+1}${searchValue}${pgSize}${orderByComputer}" aria-label="Next">
+					   <li class="page-item"><a href="ListComputers?page=${currentPage+1}${searchValue}${pgSize}${orderByValue}" aria-label="Next">
 					       <span aria-hidden="true">&raquo;</span></a>
 					   </li>
-					   <li class="page-item"><a href="ListComputers?page=${nbPages}${searchValue}${pgSize}${orderByComputer}" aria-label="Last">
+					   <li class="page-item"><a href="ListComputers?page=${nbPages}${searchValue}${pgSize}${orderByValue}" aria-label="Last">
 					       <span aria-hidden="true">&raquo;&raquo;</span></a>
 					   </li>
 					</c:if>
@@ -152,9 +162,9 @@
 			</c:if>
 
 			<div class="btn-group btn-group-sm pull-right" role="group" >
-            <button type="button" class="btn btn-default" onclick="window.location.href='?pageSize=10${searchValue}${orderByComputer}'">10</button>
-            <button type="button" class="btn btn-default" onclick="window.location.href='?pageSize=50${searchValue}${orderByComputer}'">50</button>
-            <button type="button" class="btn btn-default" onclick="window.location.href='?pageSize=100${searchValue}${orderByComputer}'">100</button>
+            <button type="button" class="btn btn-default" onclick="window.location.href='?pageSize=10${searchValue}${orderByValue}'">10</button>
+            <button type="button" class="btn btn-default" onclick="window.location.href='?pageSize=50${searchValue}${orderByValue}'">50</button>
+            <button type="button" class="btn btn-default" onclick="window.location.href='?pageSize=100${searchValue}${orderByValue}'">100</button>
         </div>
         </div>
 

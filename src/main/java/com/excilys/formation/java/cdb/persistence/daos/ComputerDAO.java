@@ -21,7 +21,7 @@ import com.excilys.formation.java.cdb.persistence.Datasource;
 public class ComputerDAO {
 
     private static final String SQL_SELECT_ALL = "SELECT computer.id, computer.name, introduced, discontinued, "
-            + "company_id, company.name AS company_name FROM computer LEFT JOIN company ON company_id = company.id ORDER BY computer.id";
+            + "company_id, company.name AS company_name FROM computer LEFT JOIN company ON company_id = company.id";
 
     private static final String SQL_SELECT_ALL_BY_PAGE = "SELECT computer.id, computer.name, introduced, discontinued, "
             + "company_id, company.name AS company_name FROM computer LEFT JOIN company ON company_id = company.id "
@@ -47,13 +47,16 @@ public class ComputerDAO {
             + "company_id, company.name AS company_name FROM computer LEFT JOIN company ON company_id = company.id "
             + "WHERE computer.name LIKE ? OR company.name LIKE ?";
 
-    private static final String SQL_ORDER_BY_NAME_ASC = "SELECT computer.id, computer.name, introduced, discontinued, "
-            + "company_id, company.name AS company_name FROM computer LEFT JOIN company ON company_id = company.id "
-            + "ORDER BY computer.name LIMIT ? OFFSET ?";
+    private static final String SQL_ORDER_BY_COMPUTER  = " ORDER BY computer.name";
 
-    private static final String SQL_ORDER_BY_NAME_DESC = "SELECT computer.id, computer.name, introduced, discontinued, "
-            + "company_id, company.name AS company_name FROM computer LEFT JOIN company ON company_id = company.id "
-            + "ORDER BY computer.name DESC LIMIT ? OFFSET ?";
+    private static final String SQL_ORDER_BY_COMPANY  = " ORDER BY company_name";
+
+    private static final String SQL_DESC  = " DESC";
+
+    private static final String SQL_ASC  = " ASC";
+
+    private static final String SQL_OFFSET  = " LIMIT ? OFFSET ?";
+
 
     private static ComputerDAO computerDAO;
 
@@ -259,28 +262,30 @@ public class ComputerDAO {
         }
     }
 
-    public List<Computer> orderByComputerNameAsc(Page page) {
+    public List<Computer> orderBy(Page page, String parameter) {
         List<Computer> computerList = new ArrayList<Computer>();
 
-        try (PreparedStatement statement = connect.prepareStatement(SQL_ORDER_BY_NAME_ASC)) {
-            statement.setInt(1, page.getMaxLine());
-            statement.setInt(2, page.getPageFirstLine());
+        String requete = SQL_SELECT_ALL;
 
-            ResultSet resultSet = statement.executeQuery();
-            while (resultSet.next()) {
-                Computer computer = ComputerMapper.convert(resultSet);
-                computerList.add(computer);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
+        switch (parameter) {
+        case "computerAsc":
+            requete = requete.concat(SQL_ORDER_BY_COMPUTER).concat(SQL_ASC).concat(SQL_OFFSET);
+            break;
+        case "computerDesc":
+            requete = requete.concat(SQL_ORDER_BY_COMPUTER).concat(SQL_DESC).concat(SQL_OFFSET);
+            break;
+        case "companyAsc":
+            requete = requete.concat(SQL_ORDER_BY_COMPANY).concat(SQL_ASC).concat(SQL_OFFSET);
+            break;
+        case "companyDesc":
+            requete = requete.concat(SQL_ORDER_BY_COMPANY).concat(SQL_DESC).concat(SQL_OFFSET);
+            break;
+        default:
+            requete = requete.concat(SQL_OFFSET);
+            break;
         }
-        return computerList;
-    }
 
-    public List<Computer> orderByComputerNameDesc(Page page) {
-        List<Computer> computerList = new ArrayList<Computer>();
-
-        try (PreparedStatement statement = connect.prepareStatement(SQL_ORDER_BY_NAME_DESC)) {
+        try (PreparedStatement statement = connect.prepareStatement(requete)) {
             statement.setInt(1, page.getMaxLine());
             statement.setInt(2, page.getPageFirstLine());
 
