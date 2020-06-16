@@ -1,6 +1,7 @@
 package com.excilys.formation.java.cdb.ui;
 
 import java.time.LocalDate;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -37,7 +38,8 @@ public class UserInterface {
             System.out.println("4 - Create a computer");
             System.out.println("5 - Update a computer");
             System.out.println("6 - Delete a computer");
-            System.out.println("7 - Quit");
+            System.out.println("7 - Delete a company");
+            System.out.println("8 - Quit");
 
             System.out.println("");
 
@@ -95,19 +97,39 @@ public class UserInterface {
 
             case 6:
                 System.out.println("Enter the id of the computer to delete: ");
-                Long id = scanner.nextLong();
-                boolean exist = computerService.exist(id);
+                Long idComputerToDelete = scanner.nextLong();
+                boolean computerExist = computerService.exist(idComputerToDelete);
 
-                while (!exist) {
+                while (!computerExist) {
                     System.out.println("The id doesn't exist.");
-                    System.out.println("Enter the id of an existing  computer : ");
-                    id = scanner.nextLong();
+                    System.out.println("Enter the id of an existing computer : ");
+                    idComputerToDelete = scanner.nextLong();
                 }
                 scanner.nextLine();
-                computerService.delete(id);
+                computerService.delete(idComputerToDelete);
                 System.out.println("Delete OK.");
                 break;
             case 7:
+                Long idCompanyToDelete = (long) -1;
+                boolean companyExist = false;
+                while (!companyExist || idCompanyToDelete == -1) {
+                    System.out.println("Enter the id of the company to delete: ");
+                    try {
+                        idCompanyToDelete = scanner.nextLong();
+                        companyExist = companyService.exist(idCompanyToDelete);
+                        if (!companyExist) {
+                            System.out.println("The id doesn't exist.");
+                        }
+                    } catch (InputMismatchException e) {
+                        scanner.nextLine();
+                        System.out.println("invalid id");
+                    }
+                }
+                scanner.nextLine();
+                companyService.delete(idCompanyToDelete);
+                System.out.println("Delete OK.");
+                break;
+            case 8:
                 quit = true;
                 break;
 

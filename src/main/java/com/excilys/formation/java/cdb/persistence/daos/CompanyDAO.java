@@ -24,6 +24,10 @@ public class CompanyDAO {
 
     private static final String SQL_SELECT_WITH_ID = "SELECT id, name FROM company WHERE id = ?";
 
+    private static final String SQL_DELETE_COMPANY_WITH_ID = "DELETE FROM company WHERE id = ?";
+
+    private static final String SQL_DELETE_COMPUTER_WITH_COMPANY_ID = "DELETE FROM computer WHERE company_id = ?";
+
     private static CompanyDAO companyDAO;
 
     private static Logger logger = LoggerFactory.getLogger(CompanyDAO.class);
@@ -104,8 +108,37 @@ public class CompanyDAO {
         return result;
     }
 
-    public void deleteCompany() {
-        //this.connect.setAutoCommit(false);
-        //https://docs.oracle.com/javase/tutorial/jdbc/basics/transactions.html
+    public void delete(Long id) {
+        if (id != null) {
+            try {
+                this.connect.setAutoCommit(false);
+                PreparedStatement computerStatement = connect.prepareStatement(SQL_DELETE_COMPUTER_WITH_COMPANY_ID);
+                computerStatement.setLong(1, id);
+                computerStatement.execute();
+                PreparedStatement companyStatement = connect.prepareStatement(SQL_DELETE_COMPANY_WITH_ID);
+                companyStatement.setLong(1, id);
+                companyStatement.execute();
+                this.connect.commit();
+                computerStatement.close();
+                companyStatement.close();
+            } catch (SQLException e) {
+                try {
+                    logger.error("Transaction is being rolled back", e);
+                    this.connect.rollback();
+                } catch (SQLException e1) {
+                    logger.error("error during roll back", e1);
+                }
+            } finally {
+                try {
+                    this.connect.setAutoCommit(true);
+                } catch (SQLException e) {
+                    logger.error("error when setting auto commit", e);
+                }
+            }
+        } else {
+            logger.error("the computer id to delete is null");
+        }
+
+
     }
 }

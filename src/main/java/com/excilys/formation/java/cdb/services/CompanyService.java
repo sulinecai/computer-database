@@ -33,9 +33,12 @@ public class CompanyService {
         return companyDAO.findById(id).get();
     }
 
-
     public boolean exist(Long id) {
         return companyDAO.findById(id).isPresent();
+    }
+
+    public void delete(Long id) {
+        companyDAO.delete(id);
     }
 
 }
