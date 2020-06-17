@@ -115,9 +115,11 @@ public class CompanyDAO {
                 PreparedStatement computerStatement = connect.prepareStatement(SQL_DELETE_COMPUTER_WITH_COMPANY_ID);
                 computerStatement.setLong(1, id);
                 computerStatement.execute();
+                System.out.println(computerStatement);
                 PreparedStatement companyStatement = connect.prepareStatement(SQL_DELETE_COMPANY_WITH_ID);
                 companyStatement.setLong(1, id);
                 companyStatement.execute();
+                System.out.println(companyStatement);
                 this.connect.commit();
                 computerStatement.close();
                 companyStatement.close();

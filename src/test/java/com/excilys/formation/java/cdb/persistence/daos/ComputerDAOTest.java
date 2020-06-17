@@ -7,6 +7,8 @@ import static org.junit.Assert.assertTrue;
 
 import java.lang.reflect.Field;
 import java.time.LocalDate;
+import java.util.Collection;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
@@ -201,5 +203,16 @@ public class ComputerDAOTest {
         assertTrue(computerDAO.findById(1L).isPresent());
         computerDAO.delete(1L);
         assertFalse(computerDAO.findById(1L).isPresent());
+    }
+
+    @Test
+    public void testOrderByComputerNameAsc() {
+        ComputerDAO computerDAO = ComputerDAO.getInstance();
+        Page page = new Page(60, 1);
+        List<Computer> allComputers = computerDAO.getAllByPage(page);
+        List<Computer> orderedComputers = computerDAO.orderBy(page, "computerAsc");
+        Comparator<Computer> byComputerNameAsc = Comparator.comparing(Computer::getName);
+        allComputers.sort(byComputerNameAsc);
+        assertEquals(allComputers, orderedComputers);
     }
 }

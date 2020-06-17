@@ -37,6 +37,9 @@ public class CompanyDAOTest {
         Field instanceCompanyDAO = CompanyDAO.class.getDeclaredField("companyDAO");
         instanceCompanyDAO.setAccessible(true);
         instanceCompanyDAO.set(null, null);
+        Field daoInstance = ComputerDAO.class.getDeclaredField("computerDAO");
+        daoInstance.setAccessible(true);
+        daoInstance.set(null, null);
     }
 
     /**
@@ -174,10 +177,12 @@ public class CompanyDAOTest {
         CompanyDAO companyDAO = CompanyDAO.getInstance();
         ComputerDAO computerDAO = ComputerDAO.getInstance();
         assertTrue(companyDAO.findById(1L).isPresent());
-        assertEquals(50, computerDAO.getAll().size());
+        Page page = new Page(60, 1);
+        assertEquals(50, computerDAO.getAllByPage(page).size());
+        System.out.println(computerDAO.getAllByPage(page).size());
         companyDAO.delete(1L);
         assertFalse(companyDAO.findById(1L).isPresent());
-        assertEquals(32, computerDAO.getAll().size());
+        assertEquals(32, computerDAO.getAllByPage(page).size());
     }
 
 }

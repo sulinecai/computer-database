@@ -89,20 +89,55 @@ public class Computer {
 
     @Override
     public int hashCode() {
-        return this.idComputer.hashCode();
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((company == null) ? 0 : company.hashCode());
+        result = prime * result + ((discontinuedDate == null) ? 0 : discontinuedDate.hashCode());
+        result = prime * result + ((introducedDate == null) ? 0 : introducedDate.hashCode());
+        result = prime * result + ((name == null) ? 0 : name.hashCode());
+        return result;
     }
 
     @Override
-    public boolean equals(Object o) {
-        boolean result = false;
-        if (o instanceof Computer) {
-            Computer dto = (Computer) o;
-            result = this.getIdComputer().equals(dto.getIdComputer());
-            result = result && this.getName().equals(dto.getName());
-            result = result && this.introducedDate.equals(dto.getIntroducedDate());
-            result = result && this.discontinuedDate.equals(dto.getDiscontinuedDate());
-            result = result && this.company.equals(dto.getCompany());
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
         }
-        return result;
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        Computer other = (Computer) obj;
+        if (company == null) {
+            if (other.company != null) {
+                return false;
+            }
+        } else if (!company.equals(other.company)) {
+            return false;
+        }
+        if (discontinuedDate == null) {
+            if (other.discontinuedDate != null) {
+                return false;
+            }
+        } else if (!discontinuedDate.equals(other.discontinuedDate)) {
+            return false;
+        }
+        if (introducedDate == null) {
+            if (other.introducedDate != null) {
+                return false;
+            }
+        } else if (!introducedDate.equals(other.introducedDate)) {
+            return false;
+        }
+        if (name == null) {
+            if (other.name != null) {
+                return false;
+            }
+        } else if (!name.equals(other.name)) {
+            return false;
+        }
+        return true;
     }
 }
