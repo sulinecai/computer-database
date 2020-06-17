@@ -14,6 +14,7 @@ import org.junit.Test;
 
 import com.excilys.formation.java.cdb.models.Company;
 import com.excilys.formation.java.cdb.models.Page;
+import com.excilys.formation.java.cdb.persistence.Datasource;
 
 
 public class CompanyDAOTest {
@@ -30,9 +31,12 @@ public class CompanyDAOTest {
     @Before
     public void setup()
             throws NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException {
-        Field instance = CompanyDAO.class.getDeclaredField("companyDAO");
-        instance.setAccessible(true);
-        instance.set(null, null);
+        Field instanceDatasource = Datasource.class.getDeclaredField("connection");
+        instanceDatasource.setAccessible(true);
+        instanceDatasource.set(null, null);
+        Field instanceCompanyDAO = CompanyDAO.class.getDeclaredField("companyDAO");
+        instanceCompanyDAO.setAccessible(true);
+        instanceCompanyDAO.set(null, null);
     }
 
     /**
@@ -167,7 +171,13 @@ public class CompanyDAOTest {
 
     @Test
     public void testDelete() {
-        //TODO: complete test
+        CompanyDAO companyDAO = CompanyDAO.getInstance();
+        ComputerDAO computerDAO = ComputerDAO.getInstance();
+        assertTrue(companyDAO.findById(1L).isPresent());
+        assertEquals(50, computerDAO.getAll().size());
+        companyDAO.delete(1L);
+        assertFalse(companyDAO.findById(1L).isPresent());
+        assertEquals(32, computerDAO.getAll().size());
     }
 
 }
