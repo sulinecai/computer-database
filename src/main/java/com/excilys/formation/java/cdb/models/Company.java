@@ -5,20 +5,37 @@ public class Company {
     private Long idCompany;
     private String name;
 
+    /**
+     * Default constructor.
+     */
     public Company() {
     }
 
+    /**
+     * Create a company with name and id.
+     *
+     * @param idCompany
+     * @param name
+     */
     public Company(Long idCompany, String name) {
-        super();
         this.idCompany = idCompany;
         this.name = name;
     }
 
+    /**
+     * Create a company with name.
+     *
+     * @param name
+     */
     public Company(String name) {
-        super();
         this.name = name;
     }
 
+    /**
+     * Create a company with id.
+     *
+     * @param id
+     */
     public Company(Long id) {
         this.idCompany = id;
     }

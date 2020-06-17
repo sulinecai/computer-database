@@ -14,9 +14,17 @@ public class ComputerService {
 
     private static ComputerService computerService;
 
+    /**
+     * Private constructor.
+     */
     private ComputerService() {
     }
 
+    /**
+     * Singleton instance.
+     *
+     * @return ComputerService
+     */
     public static synchronized ComputerService getInstance() {
         if (computerService == null) {
             computerService = new ComputerService();
@@ -33,14 +41,33 @@ public class ComputerService {
         return computerDAO.getAll();
     }
 
+    /**
+     * Return the list of computers on a given page.
+     *
+     * @param page
+     * @return list of computers
+     */
     public List<Computer> getAllByPage(Page page) {
         return computerDAO.getAllByPage(page);
     }
 
+    /**
+     * Return the computer with the given id.
+     *
+     * @param id
+     * @return computer
+     */
     public Computer findById(Long id) {
         return computerDAO.findById(id).get();
     }
 
+    /**
+     * Return the list of computer containing the given name on the given page.
+     *
+     * @param name
+     * @param page
+     * @return list of computers
+     */
     public List<Computer> findByNameByPage(String name, Page page) {
         return computerDAO.findByNameByPage(name, page);
     }
@@ -53,6 +80,12 @@ public class ComputerService {
         computerDAO.create(computer);
     }
 
+    /**
+     * Check if a computer is allowed to be created.
+     *
+     * @param computer
+     * @return true if allowed false if not
+     */
     public boolean allowedToCreateOrEdit(Computer computer) {
         boolean allowed = true;
         if (computer.getName() == null || computer.getName().isEmpty()) {

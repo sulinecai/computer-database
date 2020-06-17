@@ -10,13 +10,29 @@ public class Computer {
     private LocalDate discontinuedDate;
     private Company company;
 
+    /**
+     * Default constructor.
+     */
     public Computer() {
     }
 
+    /**
+     * Create a Computer with name.
+     *
+     * @param name
+     */
     public Computer(String name) {
         this.name = name;
     }
 
+    /**
+     * Create a Computer with name.
+     *
+     * @param name
+     * @param introducedDate
+     * @param discontinuedDate
+     * @param company
+     */
     public Computer(String name, LocalDate introducedDate, LocalDate discontinuedDate, Company company) {
         super();
         this.name = name;

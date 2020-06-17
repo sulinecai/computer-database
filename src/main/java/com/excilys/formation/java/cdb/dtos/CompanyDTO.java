@@ -5,17 +5,28 @@ public class CompanyDTO {
     private String idCompany;
     private String name;
 
+    /**
+     * Default constructor of CompanyDTO.
+     */
     public CompanyDTO() {
     }
 
+    /**
+     * Constructor with idCompany and name.
+     * @param idCompany
+     * @param name
+     */
     public CompanyDTO(String idCompany, String name) {
-        super();
         this.idCompany = idCompany;
         this.name = name;
     }
 
-    public CompanyDTO(String id) {
-        this.idCompany = id;
+    /**
+     * Constructor with idCompany and name.
+     * @param idCompany
+     */
+    public CompanyDTO(String idCompany) {
+        this.idCompany = idCompany;
     }
 
     public String getIdCompany() {
