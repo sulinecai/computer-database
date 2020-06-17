@@ -145,11 +145,11 @@ public class ComputerDAO {
 
     public List<Computer> findByNameByPage(String name, Page page) {
         List<Computer> computerList = new ArrayList<Computer>();
-        if (page.getCurrentPage() > 0 && name != null && !name.isEmpty() && !name.contains("%")) {
+        if (page.getCurrentPage() > 0 && name != null && !name.isEmpty() && !name.contains("%") && !name.contains("_")) {
 
             try (PreparedStatement statement = connect.prepareStatement(SQL_SELECT_WITH_NAME_BY_PAGE)) {
-                statement.setString(1, name.concat("%"));
-                statement.setString(2, name.concat("%"));
+                statement.setString(1, "%".concat(name).concat("%"));
+                statement.setString(2, "%".concat(name).concat("%"));
                 statement.setInt(3, page.getMaxLine());
                 statement.setInt(4, page.getPageFirstLine());
 
@@ -167,11 +167,12 @@ public class ComputerDAO {
 
     public List<Computer> findAllByName(String name) {
         List<Computer> computerList = new ArrayList<Computer>();
-        if (name != null && !name.isEmpty() && !name.contains("%")) {
+        if (name != null && !name.isEmpty() && !name.contains("%") && !name.contains("_")) {
 
             try (PreparedStatement statement = connect.prepareStatement(SQL_SELECT_ALL_WITH_NAME)) {
-                statement.setString(1, name.concat("%"));
-                statement.setString(2, name.concat("%"));
+                statement.setString(1, "%".concat(name).concat("%"));
+                statement.setString(2, "%".concat(name).concat("%"));
+                System.out.println(statement);
 
                 ResultSet resultSet = statement.executeQuery();
                 while (resultSet.next()) {
