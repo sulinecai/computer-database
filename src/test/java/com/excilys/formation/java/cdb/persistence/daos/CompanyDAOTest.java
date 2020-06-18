@@ -172,6 +172,9 @@ public class CompanyDAOTest {
         assertFalse(optCompany.isPresent());
     }
 
+    /**
+     * Test that the company and all its computers are deleted.
+     */
     @Test
     public void testDelete() {
         CompanyDAO companyDAO = CompanyDAO.getInstance();

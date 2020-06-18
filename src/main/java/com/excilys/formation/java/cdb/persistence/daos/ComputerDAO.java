@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -159,7 +160,7 @@ public class ComputerDAO {
                     computerList.add(computer);
                 }
             } catch (SQLException e) {
-                e.printStackTrace();
+                logger.error("sql error when finding computer with name", e);
             }
         }
         return computerList;
@@ -180,7 +181,7 @@ public class ComputerDAO {
                     computerList.add(computer);
                 }
             } catch (SQLException e) {
-                e.printStackTrace();
+                logger.error("sql error when finding all computer with name", e);
             }
         }
         return computerList;
@@ -195,17 +196,14 @@ public class ComputerDAO {
         if (computer != null) {
             try (PreparedStatement statement = connect.prepareStatement(SQL_INSERT)) {
                 statement.setString(1, computer.getName());
-                Timestamp introDate = computer.getIntroducedDate() == null ? null
-                        : Timestamp.valueOf(computer.getIntroducedDate().atStartOfDay());
-                statement.setTimestamp(2, introDate);
-                Timestamp discontDate = computer.getDiscontinuedDate() == null ? null
-                        : Timestamp.valueOf(computer.getDiscontinuedDate().atStartOfDay());
-                statement.setTimestamp(3, discontDate);
+                statement.setTimestamp(2, localDateToTimestamp(computer.getIntroducedDate()));
+                statement.setTimestamp(3, localDateToTimestamp(computer.getDiscontinuedDate()));
                 if (computer.getCompany() == null) {
                     statement.setNull(4, java.sql.Types.INTEGER);
                 } else {
                     statement.setLong(4, computer.getCompany().getIdCompany());
                 }
+                System.out.println();
                 statement.execute();
             } catch (SQLException e) {
                 logger.error("sql error when creating a computer", e);
@@ -224,12 +222,8 @@ public class ComputerDAO {
         if (computer != null) {
             try (PreparedStatement statement = connect.prepareStatement(SQL_UPDATE)) {
                 statement.setString(1, computer.getName());
-                Timestamp introDate = computer.getIntroducedDate() == null ? null
-                        : Timestamp.valueOf(computer.getIntroducedDate().atStartOfDay());
-                statement.setTimestamp(2, introDate);
-                Timestamp discontDate = computer.getDiscontinuedDate() == null ? null
-                        : Timestamp.valueOf(computer.getDiscontinuedDate().atStartOfDay());
-                statement.setTimestamp(3, discontDate);
+                statement.setTimestamp(2, localDateToTimestamp(computer.getIntroducedDate()));
+                statement.setTimestamp(3, localDateToTimestamp(computer.getDiscontinuedDate()));
                 if (computer.getCompany() == null) {
                     statement.setNull(4, java.sql.Types.INTEGER);
                 } else {
@@ -296,9 +290,21 @@ public class ComputerDAO {
                 computerList.add(computer);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.error("sql error when sorting computers", e);
         }
         return computerList;
+    }
+
+    private Timestamp localDateToTimestamp (LocalDate localDate) {
+        Timestamp result = null;
+        if (localDate != null) {
+            if (localDate.isEqual(LocalDate.of(1970, 1, 1))) {
+                result = Timestamp.valueOf(localDate.atStartOfDay().plusSeconds(1));
+            } else {
+                result = Timestamp.valueOf(localDate.atStartOfDay());
+            }
+        }
+        return result;
     }
 
 }
