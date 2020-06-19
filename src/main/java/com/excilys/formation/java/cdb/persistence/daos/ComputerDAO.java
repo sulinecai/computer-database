@@ -24,9 +24,9 @@ public class ComputerDAO {
     private static final String SQL_SELECT_ALL = "SELECT computer.id, computer.name, introduced, discontinued, "
             + "company_id, company.name AS company_name FROM computer LEFT JOIN company ON company_id = company.id";
 
-    private static final String SQL_SELECT_ALL_BY_PAGE = "SELECT computer.id, computer.name, introduced, discontinued, "
-            + "company_id, company.name AS company_name FROM computer LEFT JOIN company ON company_id = company.id "
-            + "ORDER BY computer.id LIMIT ? OFFSET ?";
+//    private static final String SQL_SELECT_ALL_BY_PAGE = "SELECT computer.id, computer.name, introduced, discontinued, "
+//            + "company_id, company.name AS company_name FROM computer LEFT JOIN company ON company_id = company.id "
+//            + "ORDER BY computer.id LIMIT ? OFFSET ?";
 
     private static final String SQL_SELECT_WITH_ID = "SELECT computer.id, computer.name, introduced, discontinued, "
             + "company_id, company.name AS company_name FROM computer LEFT JOIN company ON "
@@ -40,11 +40,11 @@ public class ComputerDAO {
 
     private static final String SQL_DELETE = "DELETE FROM computer WHERE id = ?";
 
-    private static final String SQL_SELECT_WITH_NAME_BY_PAGE = "SELECT computer.id, computer.name, introduced, discontinued, "
-            + "company_id, company.name AS company_name FROM computer LEFT JOIN company ON company_id = company.id "
-            + "WHERE computer.name LIKE ? OR company.name LIKE ? LIMIT ? OFFSET ?";
+//    private static final String SQL_SELECT_WITH_NAME_BY_PAGE = "SELECT computer.id, computer.name, introduced, discontinued, "
+//            + "company_id, company.name AS company_name FROM computer LEFT JOIN company ON company_id = company.id "
+//            + "WHERE computer.name LIKE ? OR company.name LIKE ? LIMIT ? OFFSET ?";
 
-    private static final String SQL_SELECT_ALL_WITH_NAME = "SELECT computer.id, computer.name, introduced, discontinued, "
+    private static final String SQL_SELECT_WITH_NAME = "SELECT computer.id, computer.name, introduced, discontinued, "
             + "company_id, company.name AS company_name FROM computer LEFT JOIN company ON company_id = company.id "
             + "WHERE computer.name LIKE ? OR company.name LIKE ?";
 
@@ -86,7 +86,7 @@ public class ComputerDAO {
     public List<Computer> getAll() {
         List<Computer> computerList = new ArrayList<Computer>();
 
-        try (PreparedStatement statement = connect.prepareStatement(SQL_SELECT_ALL)) {
+        try (PreparedStatement statement = Datasource.getInstance().prepareStatement(SQL_SELECT_ALL)) {
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
                 Computer computer = ComputerMapper.convert(resultSet);
@@ -110,7 +110,7 @@ public class ComputerDAO {
         if (page == null) {
             logger.error("the page is null");
         } else if (page.getCurrentPage() > 0) {
-            try (PreparedStatement statement = connect.prepareStatement(SQL_SELECT_ALL_BY_PAGE)) {
+            try (PreparedStatement statement = connect.prepareStatement(SQL_SELECT_ALL.concat(SQL_OFFSET))) {
                 statement.setInt(1, page.getMaxLine());
                 statement.setInt(2, page.getPageFirstLine());
 
@@ -148,7 +148,7 @@ public class ComputerDAO {
         List<Computer> computerList = new ArrayList<Computer>();
         if (page.getCurrentPage() > 0 && name != null && !name.isEmpty() && !name.contains("%") && !name.contains("_")) {
 
-            try (PreparedStatement statement = connect.prepareStatement(SQL_SELECT_WITH_NAME_BY_PAGE)) {
+            try (PreparedStatement statement = connect.prepareStatement(SQL_SELECT_WITH_NAME.concat(SQL_OFFSET))) {
                 statement.setString(1, "%".concat(name).concat("%"));
                 statement.setString(2, "%".concat(name).concat("%"));
                 statement.setInt(3, page.getMaxLine());
@@ -170,7 +170,7 @@ public class ComputerDAO {
         List<Computer> computerList = new ArrayList<Computer>();
         if (name != null && !name.isEmpty() && !name.contains("%") && !name.contains("_")) {
 
-            try (PreparedStatement statement = connect.prepareStatement(SQL_SELECT_ALL_WITH_NAME)) {
+            try (PreparedStatement statement = connect.prepareStatement(SQL_SELECT_WITH_NAME)) {
                 statement.setString(1, "%".concat(name).concat("%"));
                 statement.setString(2, "%".concat(name).concat("%"));
                 System.out.println(statement);

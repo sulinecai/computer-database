@@ -81,7 +81,7 @@ public class ListComputersServlet extends HttpServlet {
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        if (request.getParameter("selection") != null) {
+        if (request.getParameter("selection") != null && !request.getParameter("selection").isEmpty()) {
             String[] computerIdsToDelete = request.getParameter("selection").split(",");
             ComputerService computerService = ComputerService.getInstance();
 
