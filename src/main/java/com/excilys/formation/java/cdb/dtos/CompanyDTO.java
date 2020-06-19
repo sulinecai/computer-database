@@ -1,8 +1,5 @@
 package com.excilys.formation.java.cdb.dtos;
 
-import com.excilys.formation.java.cdb.models.Company;
-import com.excilys.formation.java.cdb.models.Company.Builder;
-
 public class CompanyDTO {
 
     private String idCompany;

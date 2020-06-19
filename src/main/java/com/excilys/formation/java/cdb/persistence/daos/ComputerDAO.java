@@ -295,7 +295,7 @@ public class ComputerDAO {
         return computerList;
     }
 
-    private Timestamp localDateToTimestamp (LocalDate localDate) {
+    private Timestamp localDateToTimestamp(LocalDate localDate) {
         Timestamp result = null;
         if (localDate != null) {
             if (localDate.isEqual(LocalDate.of(1970, 1, 1))) {
