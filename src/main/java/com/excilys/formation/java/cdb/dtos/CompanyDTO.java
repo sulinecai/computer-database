@@ -1,5 +1,8 @@
 package com.excilys.formation.java.cdb.dtos;
 
+import com.excilys.formation.java.cdb.models.Company;
+import com.excilys.formation.java.cdb.models.Company.Builder;
+
 public class CompanyDTO {
 
     private String idCompany;
@@ -9,24 +12,6 @@ public class CompanyDTO {
      * Default constructor of CompanyDTO.
      */
     public CompanyDTO() {
-    }
-
-    /**
-     * Constructor with idCompany and name.
-     * @param idCompany
-     * @param name
-     */
-    public CompanyDTO(String idCompany, String name) {
-        this.idCompany = idCompany;
-        this.name = name;
-    }
-
-    /**
-     * Constructor with idCompany and name.
-     * @param idCompany
-     */
-    public CompanyDTO(String idCompany) {
-        this.idCompany = idCompany;
     }
 
     public String getIdCompany() {
@@ -52,16 +37,64 @@ public class CompanyDTO {
 
     @Override
     public int hashCode() {
-        return Integer.valueOf(this.idCompany);
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((idCompany == null) ? 0 : idCompany.hashCode());
+        result = prime * result + ((name == null) ? 0 : name.hashCode());
+        return result;
     }
 
     @Override
-    public boolean equals(Object o) {
-        boolean result = false;
-        if (o instanceof CompanyDTO) {
-            CompanyDTO dto = (CompanyDTO) o;
-            result = (this.idCompany.equals(dto.getIdCompany()) && this.getName().equals(dto.getName()));
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
         }
-        return result;
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        CompanyDTO other = (CompanyDTO) obj;
+        if (idCompany == null) {
+            if (other.idCompany != null) {
+                return false;
+            }
+        } else if (!idCompany.equals(other.idCompany)) {
+            return false;
+        }
+        if (name == null) {
+            if (other.name != null) {
+                return false;
+            }
+        } else if (!name.equals(other.name)) {
+            return false;
+        }
+        return true;
     }
+
+    public static class Builder {
+
+        private String idCompany;
+        private String name;
+
+        public Builder setIdCompany(String idCompany) {
+            this.idCompany = idCompany;
+            return this;
+        }
+
+        public Builder setName(String name) {
+            this.name = name;
+            return this;
+        }
+
+        public CompanyDTO build() {
+            CompanyDTO companyDTO = new CompanyDTO();
+            companyDTO.idCompany = this.idCompany;
+            companyDTO.name = this.name;
+            return companyDTO;
+
+        }
+    }
+
 }

@@ -54,7 +54,7 @@ public class AddComputerServlet extends HttpServlet {
             computerDTO.setDiscontinuedDate(request.getParameter("discontinued"));
         }
         if (!request.getParameter("companyId").isEmpty() && !request.getParameter("companyId").equals("0")) {
-            CompanyDTO companyDTO = new CompanyDTO(request.getParameter("companyId"));
+            CompanyDTO companyDTO = new CompanyDTO.Builder().setIdCompany(request.getParameter("companyId")).build();
             computerDTO.setCompanyDTO(companyDTO);
         }
         ComputerService computerService = ComputerService.getInstance();

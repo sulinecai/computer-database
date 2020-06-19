@@ -127,7 +127,9 @@ public class ComputerMapperTest {
                     .setName("company")
                     .build());
         ComputerDTO dto = ComputerMapper.toComputerDTO(computer);
-        assertEquals(new ComputerDTO("1", "id", "2010-03-05", "2016-04-07", new CompanyDTO("2", "company")), dto);
+        assertEquals(new ComputerDTO("1", "id", "2010-03-05", "2016-04-07", new CompanyDTO.Builder()
+                .setIdCompany("2")
+                .setName("company").build()), dto);
     }
 
     /**
@@ -135,7 +137,9 @@ public class ComputerMapperTest {
      */
     @Test
     public void testToComputer() {
-        ComputerDTO dto = new ComputerDTO("1", "id", "2010-03-05", "2016-04-07", new CompanyDTO("2", "company"));
+        ComputerDTO dto = new ComputerDTO("1", "id", "2010-03-05", "2016-04-07", new CompanyDTO.Builder()
+                .setIdCompany("2")
+                .setName("company").build());
         Computer computer = ComputerMapper.toComputer(dto);
         assertEquals(new Computer(1L, "id", LocalDate.of(2010, 3, 5), LocalDate.of(2016, 4, 7),
                 new Company.Builder()

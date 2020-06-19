@@ -93,7 +93,9 @@ public class CompanyMapperTest {
                 .setName("test")
                 .build();
         CompanyDTO dto = CompanyMapper.toCompanyDTO(company);
-        assertEquals(new CompanyDTO("1",  "test"), dto);
+        assertEquals(new CompanyDTO.Builder()
+                .setIdCompany("1")
+                .setName("test").build(), dto);
     }
 
     /**
@@ -101,9 +103,10 @@ public class CompanyMapperTest {
      */
     @Test
     public void testToCompany() {
-        CompanyDTO dto = new CompanyDTO("1", "test");
+        CompanyDTO dto = new CompanyDTO.Builder()
+            .setIdCompany("1")
+            .setName("test").build();
         Company company = CompanyMapper.toCompany(dto);
         assertEquals(new Company.Builder().setIdCompany(1L).setName("test").build(), company);
     }
-
 }
