@@ -47,14 +47,17 @@ public class ComputerMapperTest {
             fail("sql exception :" + e.getMessage());
         }
         Computer computer = ComputerMapper.convert(resultSet);
-        Computer expComputer = new Computer(idComputer, computerName, introduced.toLocalDateTime().toLocalDate(),
-                discontinued.toLocalDateTime().toLocalDate(),
-                new Company.Builder()
-                    .setIdCompany(idCompany)
-                    .setName(companyName)
-                    .build());
+        Computer expComputer = new Computer.Builder()
+                .setIdComputer(idComputer)
+                .setName(computerName)
+                .setIntroducedDate(introduced.toLocalDateTime().toLocalDate())
+                .setDiscontinuedDate(discontinued.toLocalDateTime().toLocalDate())
+                .setCompany(new Company.Builder()
+                        .setIdCompany(idCompany)
+                        .setName(companyName)
+                        .build()).build();
 
-        assertEquals(expComputer.toString(), computer.toString());
+        assertEquals(expComputer, computer);
     }
 
     @Test
@@ -69,14 +72,16 @@ public class ComputerMapperTest {
             fail("sql exception :" + e.getMessage());
         }
         Computer computer = ComputerMapper.convert(resultSet);
-        Computer expComputer = new Computer(idComputer, computerName, null,
-                discontinued.toLocalDateTime().toLocalDate(),
-                new Company.Builder()
-                .setIdCompany(idCompany)
-                .setName(companyName)
-                .build());
+        Computer expComputer = new Computer.Builder()
+                .setIdComputer(idComputer)
+                .setName(computerName)
+                .setDiscontinuedDate(discontinued.toLocalDateTime().toLocalDate())
+                .setCompany(new Company.Builder()
+                        .setIdCompany(idCompany)
+                        .setName(companyName)
+                        .build()).build();
 
-        assertEquals(expComputer.toString(), computer.toString());
+        assertEquals(expComputer, computer);
     }
 
     @Test
@@ -91,12 +96,15 @@ public class ComputerMapperTest {
             fail("sql exception :" + e.getMessage());
         }
         Computer computer = ComputerMapper.convert(resultSet);
-        Computer expComputer = new Computer(idComputer, computerName, introduced.toLocalDateTime().toLocalDate(), null,
-                new Company.Builder()
-                    .setIdCompany(idCompany)
-                    .setName(companyName)
-                    .build());
-        assertEquals(expComputer.toString(), computer.toString());
+        Computer expComputer = new Computer.Builder()
+                .setIdComputer(idComputer)
+                .setName(computerName)
+                .setIntroducedDate(introduced.toLocalDateTime().toLocalDate())
+                .setCompany(new Company.Builder()
+                        .setIdCompany(idCompany)
+                        .setName(companyName)
+                        .build()).build();
+        assertEquals(expComputer, computer);
     }
 
     @Test
@@ -110,8 +118,13 @@ public class ComputerMapperTest {
             fail("sql exception :" + e.getMessage());
         }
         Computer computer = ComputerMapper.convert(resultSet);
-        Computer expComputer = new Computer(idComputer, computerName, introduced.toLocalDateTime().toLocalDate(),
-                discontinued.toLocalDateTime().toLocalDate(), new Company());
+
+        Computer expComputer = new Computer.Builder()
+                .setIdComputer(idComputer)
+                .setName(computerName)
+                .setIntroducedDate(introduced.toLocalDateTime().toLocalDate())
+                .setDiscontinuedDate(discontinued.toLocalDateTime().toLocalDate())
+                .build();
 
         assertEquals(expComputer.toString(), computer.toString());
     }
@@ -121,11 +134,15 @@ public class ComputerMapperTest {
      */
     @Test
     public void testToComputerDTO() {
-        Computer computer = new Computer(1L, "id", LocalDate.of(2010, 3, 5), LocalDate.of(2016, 4, 7),
-                new Company.Builder()
-                    .setIdCompany(2L)
-                    .setName("company")
-                    .build());
+        Computer computer = new Computer.Builder()
+                .setIdComputer(1L)
+                .setName("id")
+                .setIntroducedDate(LocalDate.of(2010, 3, 5))
+                .setDiscontinuedDate(LocalDate.of(2016, 4, 7))
+                .setCompany(new Company.Builder()
+                        .setIdCompany(2L)
+                        .setName("company")
+                        .build()).build();
         ComputerDTO dto = ComputerMapper.toComputerDTO(computer);
         assertEquals(new ComputerDTO("1", "id", "2010-03-05", "2016-04-07", new CompanyDTO.Builder()
                 .setIdCompany("2")
@@ -140,11 +157,17 @@ public class ComputerMapperTest {
         ComputerDTO dto = new ComputerDTO("1", "id", "2010-03-05", "2016-04-07", new CompanyDTO.Builder()
                 .setIdCompany("2")
                 .setName("company").build());
+
         Computer computer = ComputerMapper.toComputer(dto);
-        assertEquals(new Computer(1L, "id", LocalDate.of(2010, 3, 5), LocalDate.of(2016, 4, 7),
-                new Company.Builder()
+        Computer expComputer = new Computer.Builder()
+                .setIdComputer(1L)
+                .setName("id")
+                .setIntroducedDate(LocalDate.of(2010, 3, 5))
+                .setDiscontinuedDate(LocalDate.of(2016, 4, 7))
+                .setCompany(new Company.Builder()
                     .setIdCompany(2L)
                     .setName("company")
-                    .build()), computer);
+                    .build()).build();
+        assertEquals(expComputer, computer);
     }
 }

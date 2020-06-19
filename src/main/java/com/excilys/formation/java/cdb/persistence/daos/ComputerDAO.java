@@ -299,7 +299,7 @@ public class ComputerDAO {
         Timestamp result = null;
         if (localDate != null) {
             if (localDate.isEqual(LocalDate.of(1970, 1, 1))) {
-                result = Timestamp.valueOf(localDate.atStartOfDay().plusSeconds(1));
+                result = Timestamp.valueOf(localDate.atStartOfDay().plusHours(1).plusSeconds(1));
             } else {
                 result = Timestamp.valueOf(localDate.atStartOfDay());
             }

@@ -177,8 +177,12 @@ public class ComputerDAOTest {
     @Test
     public void testCreate() {
         ComputerDAO computerDAO = ComputerDAO.getInstance();
-        Computer computer = new Computer("computer Test", LocalDate.of(2010, 10, 5), LocalDate.of(2011, 3, 15),
-                new Company.Builder().setIdCompany(1L).build());
+        Computer computer = new Computer.Builder()
+                .setName("computer Test")
+                .setIntroducedDate(LocalDate.of(2010, 10, 5))
+                .setDiscontinuedDate(LocalDate.of(2011, 3, 15))
+                .setCompany(new Company.Builder()
+                        .setIdCompany(1L).build()).build();
 
         List<Computer> computers = computerDAO.getAll();
         assertEquals(50, computers.size());
@@ -191,8 +195,13 @@ public class ComputerDAOTest {
     @Test
     public void testUpdate() {
         ComputerDAO computerDAO = ComputerDAO.getInstance();
-        Computer computer = new Computer(1L, "computer Test 1", LocalDate.of(2010, 10, 5), LocalDate.of(2011, 3, 15),
-                new Company.Builder().setIdCompany(1L).build());
+        Computer computer = new Computer.Builder()
+                .setIdComputer(1L)
+                .setName("computer Test 1")
+                .setIntroducedDate(LocalDate.of(2010, 10, 5))
+                .setDiscontinuedDate(LocalDate.of(2011, 3, 15))
+                .setCompany(new Company.Builder()
+                        .setIdCompany(1L).build()).build();
         computerDAO.update(computer);
         assertEquals("computer Test 1", computerDAO.findById(1L).get().getName());
     }

@@ -2,6 +2,8 @@ package com.excilys.formation.java.cdb.models;
 
 import java.time.LocalDate;
 
+import com.excilys.formation.java.cdb.models.Company.Builder;
+
 public class Computer {
 
     private Long idComputer;
@@ -14,41 +16,6 @@ public class Computer {
      * Default constructor.
      */
     public Computer() {
-    }
-
-    /**
-     * Create a Computer with name.
-     *
-     * @param name
-     */
-    public Computer(String name) {
-        this.name = name;
-    }
-
-    /**
-     * Create a Computer with name.
-     *
-     * @param name
-     * @param introducedDate
-     * @param discontinuedDate
-     * @param company
-     */
-    public Computer(String name, LocalDate introducedDate, LocalDate discontinuedDate, Company company) {
-        super();
-        this.name = name;
-        this.introducedDate = introducedDate;
-        this.discontinuedDate = discontinuedDate;
-        this.company = company;
-    }
-
-    public Computer(Long idComputer, String name, LocalDate introducedDate, LocalDate discontinuedDate,
-            Company company) {
-        super();
-        this.idComputer = idComputer;
-        this.name = name;
-        this.introducedDate = introducedDate;
-        this.discontinuedDate = discontinuedDate;
-        this.company = company;
     }
 
     public Long getIdComputer() {
@@ -155,5 +122,49 @@ public class Computer {
             return false;
         }
         return true;
+    }
+
+    public static class Builder {
+
+        private Long idComputer;
+        private String name;
+        private LocalDate introducedDate;
+        private LocalDate discontinuedDate;
+        private Company company;
+
+        public Builder setIdComputer(Long idComputer) {
+            this.idComputer = idComputer;
+            return this;
+        }
+
+        public Builder setName(String name) {
+            this.name = name;
+            return this;
+        }
+
+        public Builder setIntroducedDate(LocalDate introducedDate) {
+            this.introducedDate = introducedDate;
+            return this;
+        }
+
+        public Builder setDiscontinuedDate(LocalDate discontinuedDate) {
+            this.discontinuedDate = discontinuedDate;
+            return this;
+        }
+
+        public Builder setCompany(Company company) {
+            this.company = company;
+            return this;
+        }
+
+        public Computer build() {
+            Computer computer = new Computer();
+            computer.idComputer = this.idComputer;
+            computer.name = this.name;
+            computer.introducedDate = this.introducedDate;
+            computer.discontinuedDate = this.discontinuedDate;
+            computer.company = this.company;
+            return computer;
+        }
     }
 }
