@@ -35,7 +35,10 @@ public class CompanyMapperTest {
             fail("sql exception :" + e.getMessage());
         }
         Company company = CompanyMapper.convert(resultSet);
-        Company expCompany = new Company(id, name);
+        Company expCompany = new Company.Builder()
+                .setIdCompany(id)
+                .setName(name)
+                .build();
 
         assertEquals(expCompany.getIdCompany(), company.getIdCompany());
         assertEquals(expCompany.getName(), company.getName());
@@ -52,7 +55,10 @@ public class CompanyMapperTest {
             fail("sql exception :" + e.getMessage());
         }
         Company company = CompanyMapper.convert(resultSet);
-        Company expCompany = new Company(0L, name);
+        Company expCompany = new Company.Builder()
+                .setIdCompany(0L)
+                .setName(name)
+                .build();
 
         assertEquals(expCompany.getIdCompany(), company.getIdCompany());
         assertEquals(expCompany.getName(), company.getName());
@@ -69,7 +75,9 @@ public class CompanyMapperTest {
             fail("sql exception :" + e.getMessage());
         }
         Company company = CompanyMapper.convert(resultSet);
-        Company expCompany = new Company(id, null);
+        Company expCompany = new Company.Builder()
+                .setIdCompany(id)
+                .build();
 
         assertEquals(expCompany.getIdCompany(), company.getIdCompany());
         assertEquals(expCompany.getName(), company.getName());
@@ -80,7 +88,10 @@ public class CompanyMapperTest {
      */
     @Test
     public void testToCompanyDTO() {
-        Company company = new Company(1L, "test");
+        Company company = new Company.Builder()
+                .setIdCompany(1L)
+                .setName("test")
+                .build();
         CompanyDTO dto = CompanyMapper.toCompanyDTO(company);
         assertEquals(new CompanyDTO("1",  "test"), dto);
     }
@@ -92,7 +103,7 @@ public class CompanyMapperTest {
     public void testToCompany() {
         CompanyDTO dto = new CompanyDTO("1", "test");
         Company company = CompanyMapper.toCompany(dto);
-        assertEquals(new Company(1L,  "test"), company);
+        assertEquals(new Company.Builder().setIdCompany(1L).setName("test").build(), company);
     }
 
 }

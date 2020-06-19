@@ -8,8 +8,6 @@ function validateForm() {
 
 	if (introduced != "") {
 		introduced = new Date(introduced);
-		console.log(introduced);
-		alert(introduced);
 		if (isADate(introduced)){
 			if (introduced < dateMin || introduced > dateMax){
 				result = false;

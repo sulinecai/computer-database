@@ -41,8 +41,10 @@ public class ComputerMapper {
                 computer.setDiscontinuedDate(
                         resultSet.getTimestamp(ATTRIBUT_DISCONTINUED).toLocalDateTime().toLocalDate());
             }
-            computer.setCompany(
-                    new Company(resultSet.getLong(ATTRIBUT_COMPANY_ID), resultSet.getString(ATTRIBUT_COMPANY_NAME)));
+            computer.setCompany(new Company.Builder()
+                    .setIdCompany(resultSet.getLong(ATTRIBUT_COMPANY_ID))
+                    .setName(resultSet.getString(ATTRIBUT_COMPANY_NAME))
+                    .build());
         } catch (SQLException e) {
             logger.error("sql error when converting resultset to computer");
         }

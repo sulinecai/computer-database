@@ -26,7 +26,10 @@ public class CompanyMapper {
     public static Company convert(ResultSet resultSet) {
         Company company = new Company();
         try {
-            company = new Company(resultSet.getLong(ATTRIBUT_ID_COMPANY), resultSet.getString(ATTRIBUT_NAME));
+            company = new Company.Builder()
+                    .setIdCompany(resultSet.getLong(ATTRIBUT_ID_COMPANY))
+                    .setName(resultSet.getString(ATTRIBUT_NAME))
+                    .build();
         } catch (SQLException e) {
             logger.error("sql error when converting resultset to company", e);
         }

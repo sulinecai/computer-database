@@ -11,35 +11,6 @@ public class Company {
     public Company() {
     }
 
-    /**
-     * Create a company with name and id.
-     *
-     * @param idCompany
-     * @param name
-     */
-    public Company(Long idCompany, String name) {
-        this.idCompany = idCompany;
-        this.name = name;
-    }
-
-    /**
-     * Create a company with name.
-     *
-     * @param name
-     */
-    public Company(String name) {
-        this.name = name;
-    }
-
-    /**
-     * Create a company with id.
-     *
-     * @param id
-     */
-    public Company(Long id) {
-        this.idCompany = id;
-    }
-
     public Long getIdCompany() {
         return idCompany;
     }
@@ -97,6 +68,30 @@ public class Company {
             return false;
         }
         return true;
+    }
+
+    public static class Builder {
+
+        private Long idCompany;
+        private String name;
+
+        public Builder setIdCompany(Long idCompany) {
+            this.idCompany = idCompany;
+            return this;
+        }
+
+        public Builder setName(String name) {
+            this.name = name;
+            return this;
+        }
+
+        public Company build() {
+            Company company = new Company();
+            company.idCompany = this.idCompany;
+            company.name = this.name;
+            return company;
+
+        }
     }
 
 }

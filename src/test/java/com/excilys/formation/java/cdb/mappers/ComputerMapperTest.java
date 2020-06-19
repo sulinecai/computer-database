@@ -48,7 +48,11 @@ public class ComputerMapperTest {
         }
         Computer computer = ComputerMapper.convert(resultSet);
         Computer expComputer = new Computer(idComputer, computerName, introduced.toLocalDateTime().toLocalDate(),
-                discontinued.toLocalDateTime().toLocalDate(), new Company(idCompany, companyName));
+                discontinued.toLocalDateTime().toLocalDate(),
+                new Company.Builder()
+                    .setIdCompany(idCompany)
+                    .setName(companyName)
+                    .build());
 
         assertEquals(expComputer.toString(), computer.toString());
     }
@@ -66,7 +70,11 @@ public class ComputerMapperTest {
         }
         Computer computer = ComputerMapper.convert(resultSet);
         Computer expComputer = new Computer(idComputer, computerName, null,
-                discontinued.toLocalDateTime().toLocalDate(), new Company(idCompany, companyName));
+                discontinued.toLocalDateTime().toLocalDate(),
+                new Company.Builder()
+                .setIdCompany(idCompany)
+                .setName(companyName)
+                .build());
 
         assertEquals(expComputer.toString(), computer.toString());
     }
@@ -84,8 +92,10 @@ public class ComputerMapperTest {
         }
         Computer computer = ComputerMapper.convert(resultSet);
         Computer expComputer = new Computer(idComputer, computerName, introduced.toLocalDateTime().toLocalDate(), null,
-                new Company(idCompany, companyName));
-
+                new Company.Builder()
+                    .setIdCompany(idCompany)
+                    .setName(companyName)
+                    .build());
         assertEquals(expComputer.toString(), computer.toString());
     }
 
@@ -111,7 +121,11 @@ public class ComputerMapperTest {
      */
     @Test
     public void testToComputerDTO() {
-        Computer computer = new Computer(1L, "id", LocalDate.of(2010, 3, 5), LocalDate.of(2016, 4, 7), new Company(2L, "company"));
+        Computer computer = new Computer(1L, "id", LocalDate.of(2010, 3, 5), LocalDate.of(2016, 4, 7),
+                new Company.Builder()
+                    .setIdCompany(2L)
+                    .setName("company")
+                    .build());
         ComputerDTO dto = ComputerMapper.toComputerDTO(computer);
         assertEquals(new ComputerDTO("1", "id", "2010-03-05", "2016-04-07", new CompanyDTO("2", "company")), dto);
     }
@@ -123,6 +137,10 @@ public class ComputerMapperTest {
     public void testToComputer() {
         ComputerDTO dto = new ComputerDTO("1", "id", "2010-03-05", "2016-04-07", new CompanyDTO("2", "company"));
         Computer computer = ComputerMapper.toComputer(dto);
-        assertEquals(new Computer(1L, "id", LocalDate.of(2010, 3, 5), LocalDate.of(2016, 4, 7), new Company(2L, "company")), computer);
+        assertEquals(new Computer(1L, "id", LocalDate.of(2010, 3, 5), LocalDate.of(2016, 4, 7),
+                new Company.Builder()
+                    .setIdCompany(2L)
+                    .setName("company")
+                    .build()), computer);
     }
 }

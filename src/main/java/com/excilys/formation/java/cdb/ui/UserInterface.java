@@ -180,7 +180,7 @@ public class UserInterface {
         System.out.println("Enter the manufacturer company id:(press <Enter> to skip)");
         String companyId = scanner.nextLine();
         if (!companyId.equals("")) {
-            computer.setCompany(new Company(Long.valueOf(companyId)));
+            computer.setCompany(new Company.Builder().setIdCompany(Long.valueOf(companyId)).build());
         }
 
         return computer;
