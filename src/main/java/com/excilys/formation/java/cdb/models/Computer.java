@@ -12,12 +12,6 @@ public class Computer {
     private LocalDate discontinuedDate;
     private Company company;
 
-    /**
-     * Default constructor.
-     */
-    public Computer() {
-    }
-
     public Long getIdComputer() {
         return idComputer;
     }

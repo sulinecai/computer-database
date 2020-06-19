@@ -5,12 +5,6 @@ public class Company {
     private Long idCompany;
     private String name;
 
-    /**
-     * Default constructor.
-     */
-    public Company() {
-    }
-
     public Long getIdCompany() {
         return idCompany;
     }

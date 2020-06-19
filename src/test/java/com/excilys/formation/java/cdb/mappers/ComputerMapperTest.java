@@ -144,9 +144,15 @@ public class ComputerMapperTest {
                         .setName("company")
                         .build()).build();
         ComputerDTO dto = ComputerMapper.toComputerDTO(computer);
-        assertEquals(new ComputerDTO("1", "id", "2010-03-05", "2016-04-07", new CompanyDTO.Builder()
-                .setIdCompany("2")
-                .setName("company").build()), dto);
+        ComputerDTO expectedDTO = new ComputerDTO.Builder()
+                .setIdComputer("1")
+                .setName("id")
+                .setIntroducedDate("2010-03-05")
+                .setDiscontinuedDate("2016-04-07")
+                .setCompanyDTO(new CompanyDTO.Builder()
+                        .setIdCompany("2")
+                        .setName("company").build()).build();
+        assertEquals(expectedDTO, dto);
     }
 
     /**
@@ -154,9 +160,14 @@ public class ComputerMapperTest {
      */
     @Test
     public void testToComputer() {
-        ComputerDTO dto = new ComputerDTO("1", "id", "2010-03-05", "2016-04-07", new CompanyDTO.Builder()
-                .setIdCompany("2")
-                .setName("company").build());
+        ComputerDTO dto = new ComputerDTO.Builder()
+            .setIdComputer("1")
+            .setName("id")
+            .setIntroducedDate("2010-03-05")
+            .setDiscontinuedDate("2016-04-07")
+            .setCompanyDTO(new CompanyDTO.Builder()
+                    .setIdCompany("2")
+                    .setName("company").build()).build();
 
         Computer computer = ComputerMapper.toComputer(dto);
         Computer expComputer = new Computer.Builder()

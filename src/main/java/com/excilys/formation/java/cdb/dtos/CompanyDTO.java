@@ -5,12 +5,6 @@ public class CompanyDTO {
     private String idCompany;
     private String name;
 
-    /**
-     * Default constructor of CompanyDTO.
-     */
-    public CompanyDTO() {
-    }
-
     public String getIdCompany() {
         return idCompany;
     }

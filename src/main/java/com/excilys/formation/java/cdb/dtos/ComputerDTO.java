@@ -7,51 +7,6 @@ public class ComputerDTO {
     private String discontinuedDate;
     private CompanyDTO companyDTO;
 
-    /**
-     * Default constructor of ComputerDTO.
-     */
-    public ComputerDTO() {
-    }
-
-    /**
-     * Constructor with name attribute.
-     * @param name
-     */
-    public ComputerDTO(String name) {
-        this.name = name;
-    }
-
-    /**
-     * Constructor.
-     * @param name
-     * @param introducedDate
-     * @param discontinuedDate
-     * @param companyDTO
-     */
-    public ComputerDTO(String name, String introducedDate, String discontinuedDate, CompanyDTO companyDTO) {
-        this.name = name;
-        this.introducedDate = introducedDate;
-        this.discontinuedDate = discontinuedDate;
-        this.companyDTO = companyDTO;
-    }
-
-    /**
-     * Constructor.
-     * @param idComputer
-     * @param name
-     * @param introducedDate
-     * @param discontinuedDate
-     * @param companyDTO
-     */
-    public ComputerDTO(String idComputer, String name, String introducedDate, String discontinuedDate,
-            CompanyDTO companyDTO) {
-        this.idComputer = idComputer;
-        this.name = name;
-        this.introducedDate = introducedDate;
-        this.discontinuedDate = discontinuedDate;
-        this.companyDTO = companyDTO;
-    }
-
     public String getIdComputer() {
         return idComputer;
     }
@@ -164,6 +119,50 @@ public class ComputerDTO {
             return false;
         }
         return true;
+    }
+
+    public static class Builder {
+
+        private String idComputer;
+        private String name;
+        private String introducedDate;
+        private String discontinuedDate;
+        private CompanyDTO companyDTO;
+
+        public Builder setIdComputer(String idComputer) {
+            this.idComputer = idComputer;
+            return this;
+        }
+
+        public Builder setName(String name) {
+            this.name = name;
+            return this;
+        }
+
+        public Builder setIntroducedDate(String introducedDate) {
+            this.introducedDate = introducedDate;
+            return this;
+        }
+
+        public Builder setDiscontinuedDate(String discontinuedDate) {
+            this.discontinuedDate = discontinuedDate;
+            return this;
+        }
+
+        public Builder setCompanyDTO(CompanyDTO companyDTO) {
+            this.companyDTO = companyDTO;
+            return this;
+        }
+
+        public ComputerDTO build() {
+            ComputerDTO computerDTO = new ComputerDTO();
+            computerDTO.idComputer = this.idComputer;
+            computerDTO.name = this.name;
+            computerDTO.introducedDate = this.introducedDate;
+            computerDTO.discontinuedDate = this.discontinuedDate;
+            computerDTO.companyDTO = this.companyDTO;
+            return computerDTO;
+        }
     }
 
 }

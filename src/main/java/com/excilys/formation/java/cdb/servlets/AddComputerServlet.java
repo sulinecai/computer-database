@@ -45,7 +45,8 @@ public class AddComputerServlet extends HttpServlet {
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        ComputerDTO computerDTO = new ComputerDTO(request.getParameter("computerName"));
+        ComputerDTO computerDTO = new ComputerDTO.Builder()
+                .setName(request.getParameter("computerName")).build();
         System.out.println("introduced : " + request.getParameter("introduced"));
         if (!request.getParameter("introduced").isEmpty()) {
             computerDTO.setIntroducedDate(request.getParameter("introduced"));
