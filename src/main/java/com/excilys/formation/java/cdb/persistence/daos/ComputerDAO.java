@@ -12,6 +12,8 @@ import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import com.excilys.formation.java.cdb.mappers.CompanyMapper;
 import com.excilys.formation.java.cdb.mappers.ComputerMapper;
@@ -19,14 +21,11 @@ import com.excilys.formation.java.cdb.models.Computer;
 import com.excilys.formation.java.cdb.models.Page;
 import com.excilys.formation.java.cdb.persistence.Datasource;
 
+@Repository
 public class ComputerDAO {
 
     private static final String SQL_SELECT_ALL = "SELECT computer.id, computer.name, introduced, discontinued, "
             + "company_id, company.name AS company_name FROM computer LEFT JOIN company ON company_id = company.id";
-
-//    private static final String SQL_SELECT_ALL_BY_PAGE = "SELECT computer.id, computer.name, introduced, discontinued, "
-//            + "company_id, company.name AS company_name FROM computer LEFT JOIN company ON company_id = company.id "
-//            + "ORDER BY computer.id LIMIT ? OFFSET ?";
 
     private static final String SQL_SELECT_WITH_ID = "SELECT computer.id, computer.name, introduced, discontinued, "
             + "company_id, company.name AS company_name FROM computer LEFT JOIN company ON "
@@ -39,10 +38,6 @@ public class ComputerDAO {
             + "WHERE id = ?";
 
     private static final String SQL_DELETE = "DELETE FROM computer WHERE id = ?";
-
-//    private static final String SQL_SELECT_WITH_NAME_BY_PAGE = "SELECT computer.id, computer.name, introduced, discontinued, "
-//            + "company_id, company.name AS company_name FROM computer LEFT JOIN company ON company_id = company.id "
-//            + "WHERE computer.name LIKE ? OR company.name LIKE ? LIMIT ? OFFSET ?";
 
     private static final String SQL_SELECT_WITH_NAME = "SELECT computer.id, computer.name, introduced, discontinued, "
             + "company_id, company.name AS company_name FROM computer LEFT JOIN company ON company_id = company.id "
@@ -61,7 +56,9 @@ public class ComputerDAO {
 
     private static ComputerDAO computerDAO;
 
-    private Connection connect = Datasource.getInstance();
+    //private Connection connect = Datasource.getInstance();
+    @Autowired
+    private Connection connect;
 
     private static Logger logger = LoggerFactory.getLogger(CompanyMapper.class);
 
@@ -203,7 +200,6 @@ public class ComputerDAO {
                 } else {
                     statement.setLong(4, computer.getCompany().getIdCompany());
                 }
-                System.out.println();
                 statement.execute();
             } catch (SQLException e) {
                 logger.error("sql error when creating a computer", e);
@@ -232,7 +228,7 @@ public class ComputerDAO {
                 statement.setLong(5, computer.getIdComputer());
                 statement.execute();
             } catch (SQLException e) {
-                e.printStackTrace();
+                logger.error("sql exception", e);
             }
         } else {
             logger.error("the computer is null");
@@ -250,7 +246,7 @@ public class ComputerDAO {
                 statement.setLong(1, id);
                 statement.execute();
             } catch (SQLException e) {
-                e.printStackTrace();
+                logger.error("sql exception", e);
             }
         } else {
             logger.error("the computer id to delete is null");

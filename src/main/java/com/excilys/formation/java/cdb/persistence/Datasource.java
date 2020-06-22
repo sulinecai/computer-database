@@ -5,10 +5,10 @@ import java.sql.SQLException;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.annotation.Bean;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
-
 public final class Datasource {
 
     private static Connection connection;
@@ -23,7 +23,6 @@ public final class Datasource {
 
             connection = dataSource.getConnection();
         } catch (SQLException e) {
-            e.printStackTrace();
             logger.error("error when connecting to datasource", e);
         }
     }

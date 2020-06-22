@@ -21,6 +21,7 @@ import com.excilys.formation.java.cdb.models.Company;
 import com.excilys.formation.java.cdb.models.Computer;
 import com.excilys.formation.java.cdb.services.CompanyService;
 import com.excilys.formation.java.cdb.services.ComputerService;
+import com.excilys.formation.java.cdb.spring.SpringConfiguration;
 
 /**
  * Servlet implementation class EditComputersServlet.
@@ -30,9 +31,10 @@ public class EditComputerServlet extends HttpServlet {
 
     private static Logger logger = LoggerFactory.getLogger(EditComputerServlet.class);
 
+    CompanyService companyService = SpringConfiguration.CONTEXT.getBean("companyService", CompanyService.class);
+    ComputerService computerService = SpringConfiguration.CONTEXT.getBean("computerService", ComputerService.class);
+
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        ComputerService computerService = ComputerService.getInstance();
-        CompanyService companyService = CompanyService.getInstance();
         List<Company> allCompanies = companyService.getAll();
         List<CompanyDTO> allCompanyDTOs = new ArrayList<CompanyDTO>();
         for (Company c : allCompanies) {
@@ -72,7 +74,6 @@ public class EditComputerServlet extends HttpServlet {
                 computerDTO.setCompanyDTO(companyDTO);
             }
         }
-        ComputerService computerService = ComputerService.getInstance();
         Computer computer = ComputerMapper.toComputer(computerDTO);
         if (computerService.allowedToCreateOrEdit(computer)) {
             computerService.update(computer);

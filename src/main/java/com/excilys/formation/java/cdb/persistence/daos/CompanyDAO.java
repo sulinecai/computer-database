@@ -10,12 +10,15 @@ import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import com.excilys.formation.java.cdb.mappers.CompanyMapper;
 import com.excilys.formation.java.cdb.models.Company;
 import com.excilys.formation.java.cdb.models.Page;
 import com.excilys.formation.java.cdb.persistence.Datasource;
 
+@Repository
 public class CompanyDAO {
 
     private static final String SQL_SELECT_ALL = "SELECT id, name FROM company ORDER BY id";
@@ -32,7 +35,10 @@ public class CompanyDAO {
 
     private static Logger logger = LoggerFactory.getLogger(CompanyDAO.class);
 
-    private Connection connect = Datasource.getInstance();
+    //private Connection connect = Datasource.getInstance();
+    @Autowired
+    private Connection connect;
+
 
     /**
      * Private constructor of CompanyDAO.

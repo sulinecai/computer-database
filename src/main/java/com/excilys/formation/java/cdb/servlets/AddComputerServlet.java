@@ -21,6 +21,7 @@ import com.excilys.formation.java.cdb.models.Company;
 import com.excilys.formation.java.cdb.models.Computer;
 import com.excilys.formation.java.cdb.services.CompanyService;
 import com.excilys.formation.java.cdb.services.ComputerService;
+import com.excilys.formation.java.cdb.spring.SpringConfiguration;
 import com.excilys.formation.java.cdb.validators.ComputerValidator;
 
 /**
@@ -30,8 +31,10 @@ import com.excilys.formation.java.cdb.validators.ComputerValidator;
 public class AddComputerServlet extends HttpServlet {
     private static Logger logger = LoggerFactory.getLogger(AddComputerServlet.class);
 
+    CompanyService companyService = SpringConfiguration.CONTEXT.getBean("companyService", CompanyService.class);
+    ComputerService computerService = SpringConfiguration.CONTEXT.getBean("computerService", ComputerService.class);
+
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        CompanyService companyService = CompanyService.getInstance();
         List<Company> allCompanies = companyService.getAll();
         List<CompanyDTO> allCompanyDTOs = new ArrayList<CompanyDTO>();
         for (Company c : allCompanies) {
@@ -58,7 +61,6 @@ public class AddComputerServlet extends HttpServlet {
             CompanyDTO companyDTO = new CompanyDTO.Builder().setIdCompany(request.getParameter("companyId")).build();
             computerDTO.setCompanyDTO(companyDTO);
         }
-        ComputerService computerService = ComputerService.getInstance();
         if (ComputerValidator.dateFormatValidator(computerDTO.getIntroducedDate())
                 && ComputerValidator.dateFormatValidator(computerDTO.getDiscontinuedDate())) {
             Computer computer = ComputerMapper.toComputer(computerDTO);

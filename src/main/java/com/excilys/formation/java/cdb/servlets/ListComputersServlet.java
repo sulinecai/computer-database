@@ -15,18 +15,19 @@ import com.excilys.formation.java.cdb.mappers.ComputerMapper;
 import com.excilys.formation.java.cdb.models.Computer;
 import com.excilys.formation.java.cdb.models.Page;
 import com.excilys.formation.java.cdb.services.ComputerService;
+import com.excilys.formation.java.cdb.spring.SpringConfiguration;
 
 /**
  * Servlet implementation class ListComputersServlet.
  */
 @WebServlet("/ListComputers")
 public class ListComputersServlet extends HttpServlet {
+    ComputerService computerService = SpringConfiguration.CONTEXT.getBean("computerService", ComputerService.class);
 
     private static final long serialVersionUID = 1L;
     static int computerPerPage = 10;
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        ComputerService computerService = ComputerService.getInstance();
         int nbComputers = computerService.getAll().size();
         int currentPage = 1;
         if (request.getParameter("page") != null) {
@@ -83,7 +84,6 @@ public class ListComputersServlet extends HttpServlet {
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         if (request.getParameter("selection") != null && !request.getParameter("selection").isEmpty()) {
             String[] computerIdsToDelete = request.getParameter("selection").split(",");
-            ComputerService computerService = ComputerService.getInstance();
 
             for (String computerId : computerIdsToDelete) {
                 computerService.delete(Long.valueOf(computerId));

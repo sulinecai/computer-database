@@ -4,12 +4,15 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.excilys.formation.java.cdb.models.Computer;
 import com.excilys.formation.java.cdb.models.Page;
 import com.excilys.formation.java.cdb.persistence.daos.CompanyDAO;
 import com.excilys.formation.java.cdb.persistence.daos.ComputerDAO;
 
+@Service
 public class ComputerService {
 
     private static ComputerService computerService;
@@ -32,8 +35,11 @@ public class ComputerService {
         return computerService;
     }
 
-    private ComputerDAO computerDAO = ComputerDAO.getInstance();
-    private CompanyDAO companyDAO = CompanyDAO.getInstance();
+    @Autowired
+    private ComputerDAO computerDAO;
+
+    @Autowired
+    private CompanyDAO companyDAO;
 
     private static Logger logger = LoggerFactory.getLogger(ComputerService.class);
 
