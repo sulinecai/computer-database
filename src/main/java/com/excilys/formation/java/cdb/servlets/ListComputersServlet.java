@@ -10,11 +10,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-
 import com.excilys.formation.java.cdb.dtos.ComputerDTO;
 import com.excilys.formation.java.cdb.mappers.ComputerMapper;
 import com.excilys.formation.java.cdb.models.Computer;
@@ -33,7 +28,7 @@ public class ListComputersServlet extends HttpServlet {
     static int computerPerPage = 10;
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int nbComputers = computerService.getAll().size();
+        int nbComputers = computerService.getNumberComputers();
         int currentPage = 1;
         if (request.getParameter("page") != null) {
             currentPage = Integer.parseInt(request.getParameter("page"));

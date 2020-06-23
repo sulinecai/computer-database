@@ -224,8 +224,7 @@ public class UserInterface {
     public void showAllComputers() {
         Page currentPage = new Page();
         boolean quit = false;
-        List<Computer> allComputers = computerService.getAll();
-        int numberOfComputers = allComputers.size();
+        int numberOfComputers = computerService.getNumberComputers();
 
         do {
             List<Computer> allComputersbyPage = computerService.getAllByPage(currentPage);

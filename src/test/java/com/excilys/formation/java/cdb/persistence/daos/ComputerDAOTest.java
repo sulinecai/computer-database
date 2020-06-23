@@ -2,7 +2,6 @@ package com.excilys.formation.java.cdb.persistence.daos;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import java.lang.reflect.Constructor;
@@ -54,10 +53,9 @@ public class ComputerDAOTest {
      * Test the method getAll.
      */
     @Test
-    public void testGetAll() {
-        List<Computer> computers = computerDAO.getAll();
-        assertFalse(computers.isEmpty());
-        assertEquals(50, computers.size());
+    public void testGetNumberComputers() {
+        int nbComputers = computerDAO.getNumberComputers();
+        assertEquals(50, nbComputers);
     }
 
     /**
@@ -171,12 +169,9 @@ public class ComputerDAOTest {
                 .setDiscontinuedDate(LocalDate.of(2011, 3, 15))
                 .setCompany(new Company.Builder()
                         .setIdCompany(1L).build()).build();
-
-        List<Computer> computers = computerDAO.getAll();
-        assertEquals(50, computers.size());
+        assertEquals(50, computerDAO.getNumberComputers());
         computerDAO.create(computer);
-        computers = computerDAO.getAll();
-        assertEquals(51, computers.size());
+        assertEquals(51, computerDAO.getNumberComputers());
     }
 
 

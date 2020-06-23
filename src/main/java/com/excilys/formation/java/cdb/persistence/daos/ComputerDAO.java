@@ -27,6 +27,8 @@ public class ComputerDAO {
     private static final String SQL_SELECT_ALL = "SELECT computer.id, computer.name, introduced, discontinued, "
             + "company_id, company.name AS company_name FROM computer LEFT JOIN company ON company_id = company.id";
 
+    private static final String SQL_COUNT_ALL = "SELECT COUNT(id) AS total FROM computer";
+
     private static final String SQL_SELECT_WITH_ID = "SELECT computer.id, computer.name, introduced, discontinued, "
             + "company_id, company.name AS company_name FROM computer LEFT JOIN company ON "
             + "company_id = company.id WHERE computer.id = ? ";
@@ -64,19 +66,17 @@ public class ComputerDAO {
     private ComputerDAO() {
     }
 
-    public List<Computer> getAll() {
-        List<Computer> computerList = new ArrayList<Computer>();
-
-        try (PreparedStatement statement = Datasource.getInstance().prepareStatement(SQL_SELECT_ALL)) {
+    public int getNumberComputers() {
+        int count = -1;
+        try (PreparedStatement statement = Datasource.getInstance().prepareStatement(SQL_COUNT_ALL)) {
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
-                Computer computer = ComputerMapper.convert(resultSet);
-                computerList.add(computer);
+                count = resultSet.getInt("total");
             }
         } catch (SQLException e) {
-            logger.error("sql error when listing all computers", e);
+            logger.error("sql error when the total number of computers", e);
         }
-        return computerList;
+        return count;
     }
 
     /**

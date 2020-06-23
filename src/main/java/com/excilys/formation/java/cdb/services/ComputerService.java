@@ -29,8 +29,8 @@ public class ComputerService {
     private ComputerService() {
     }
 
-    public List<Computer> getAll() {
-        return computerDAO.getAll();
+    public int getNumberComputers() {
+        return computerDAO.getNumberComputers();
     }
 
     /**
