@@ -5,7 +5,9 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
+import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.time.LocalDate;
 import java.util.Comparator;
 import java.util.List;
@@ -13,6 +15,7 @@ import java.util.Optional;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.test.util.ReflectionTestUtils;
 
 import com.excilys.formation.java.cdb.models.Company;
 import com.excilys.formation.java.cdb.models.Computer;
@@ -21,6 +24,8 @@ import com.excilys.formation.java.cdb.persistence.Datasource;
 
 public class ComputerDAOTest {
 
+    private ComputerDAO computerDAO;
+
     /**
      * Reset the connection.
      *
@@ -28,26 +33,21 @@ public class ComputerDAOTest {
      * @throws NoSuchFieldException
      * @throws IllegalArgumentException
      * @throws IllegalAccessException
+     * @throws NoSuchMethodException
+     * @throws InvocationTargetException
+     * @throws InstantiationException
      */
     @Before
-    public void setUp()
-            throws NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException {
+    public void setUp() throws InvocationTargetException, NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException, NoSuchMethodException, InstantiationException {
         Field instance = Datasource.class.getDeclaredField("connection");
         instance.setAccessible(true);
         instance.set(null, null);
-        Field daoInstance = ComputerDAO.class.getDeclaredField("computerDAO");
-        daoInstance.setAccessible(true);
-        daoInstance.set(null, null);
-    }
 
-    /**
-     * Test the singleton pattern of the instance ComputerDAO.
-     */
-    @Test
-    public void testGetInstance() {
-        ComputerDAO computerDAO = ComputerDAO.getInstance();
-        assertNotNull(computerDAO);
-        assertEquals("The two instance are different (not singleton).", ComputerDAO.getInstance(), computerDAO);
+        Constructor<ComputerDAO> computerDAOConstructor = ComputerDAO.class.getDeclaredConstructor();
+        assertEquals(computerDAOConstructor.isAccessible(), false);
+        computerDAOConstructor.setAccessible(true);
+        computerDAO = computerDAOConstructor.newInstance();
+        ReflectionTestUtils.setField(computerDAO, "connect", Datasource.getInstance());
     }
 
     /**
@@ -55,7 +55,6 @@ public class ComputerDAOTest {
      */
     @Test
     public void testGetAll() {
-        ComputerDAO computerDAO = ComputerDAO.getInstance();
         List<Computer> computers = computerDAO.getAll();
         assertFalse(computers.isEmpty());
         assertEquals(50, computers.size());
@@ -66,7 +65,6 @@ public class ComputerDAOTest {
      */
     @Test
     public void testGetAllByPageFirstPage() {
-        ComputerDAO computerDAO = ComputerDAO.getInstance();
         List<Computer> computers = computerDAO.getAllByPage(new Page(8, 1));
         assertFalse(computers.isEmpty());
         assertEquals(8, computers.size());
@@ -78,7 +76,6 @@ public class ComputerDAOTest {
      */
     @Test
     public void testGetAllByPageSecondPage() {
-        ComputerDAO computerDAO = ComputerDAO.getInstance();
         List<Computer> computers = computerDAO.getAllByPage(new Page(8, 2));
         assertFalse(computers.isEmpty());
         assertEquals(8, computers.size());
@@ -90,7 +87,6 @@ public class ComputerDAOTest {
      */
     @Test
     public void testGetAllByPageNegative() {
-        ComputerDAO computerDAO = ComputerDAO.getInstance();
         List<Computer> computers = computerDAO.getAllByPage(new Page(8, -3));
         assertTrue(computers.isEmpty());
     }
@@ -100,7 +96,6 @@ public class ComputerDAOTest {
      */
     @Test
     public void testGetAllByPageZero() {
-        ComputerDAO computerDAO = ComputerDAO.getInstance();
         List<Computer> computers = computerDAO.getAllByPage(new Page(8, 0));
         assertTrue(computers.isEmpty());
     }
@@ -111,7 +106,6 @@ public class ComputerDAOTest {
      */
     @Test
     public void testGetAllByPageExceeded() {
-        ComputerDAO computerDAO = ComputerDAO.getInstance();
         List<Computer> computers = computerDAO.getAllByPage(new Page(8, 8));
         assertTrue(computers.isEmpty());
     }
@@ -122,7 +116,6 @@ public class ComputerDAOTest {
      */
     @Test
     public void testFindExistingId() {
-        ComputerDAO computerDAO = ComputerDAO.getInstance();
         Optional<Computer> optComputer = computerDAO.findById(2L);
         assertTrue(optComputer.isPresent());
         assertEquals(2L, optComputer.get().getIdComputer(), 0);
@@ -134,7 +127,6 @@ public class ComputerDAOTest {
      */
     @Test
     public void testFindIdNotExisting() {
-        ComputerDAO computerDAO = ComputerDAO.getInstance();
         Optional<Computer> optComputer = computerDAO.findById(55L);
         assertFalse(optComputer.isPresent());
     }
@@ -144,7 +136,6 @@ public class ComputerDAOTest {
      */
     @Test
     public void testFindIdNull() {
-        ComputerDAO computerDAO = ComputerDAO.getInstance();
         Optional<Computer> optComputer = computerDAO.findById(null);
         assertFalse(optComputer.isPresent());
     }
@@ -154,7 +145,6 @@ public class ComputerDAOTest {
      */
     @Test
     public void testFindNegativeId() {
-        ComputerDAO computerDAO = ComputerDAO.getInstance();
         Optional<Computer> optComputer = computerDAO.findById(-1L);
         assertFalse(optComputer.isPresent());
     }
@@ -165,7 +155,6 @@ public class ComputerDAOTest {
      */
     @Test
     public void testFindIdZero() {
-        ComputerDAO computerDAO = ComputerDAO.getInstance();
         Optional<Computer> optComputer = computerDAO.findById(0L);
         assertFalse(optComputer.isPresent());
     }
@@ -176,7 +165,6 @@ public class ComputerDAOTest {
      */
     @Test
     public void testCreate() {
-        ComputerDAO computerDAO = ComputerDAO.getInstance();
         Computer computer = new Computer.Builder()
                 .setName("computer Test")
                 .setIntroducedDate(LocalDate.of(2010, 10, 5))
@@ -194,7 +182,6 @@ public class ComputerDAOTest {
 
     @Test
     public void testUpdate() {
-        ComputerDAO computerDAO = ComputerDAO.getInstance();
         Computer computer = new Computer.Builder()
                 .setIdComputer(1L)
                 .setName("computer Test 1")
@@ -208,7 +195,6 @@ public class ComputerDAOTest {
 
     @Test
     public void testDelete() {
-        ComputerDAO computerDAO = ComputerDAO.getInstance();
         assertTrue(computerDAO.findById(1L).isPresent());
         computerDAO.delete(1L);
         assertFalse(computerDAO.findById(1L).isPresent());
@@ -216,7 +202,6 @@ public class ComputerDAOTest {
 
     @Test
     public void testOrderByComputerNameAsc() {
-        ComputerDAO computerDAO = ComputerDAO.getInstance();
         Page page = new Page(60, 1);
         List<Computer> allComputers = computerDAO.getAllByPage(page);
         List<Computer> orderedComputers = computerDAO.orderBy(page, "computerAsc");
