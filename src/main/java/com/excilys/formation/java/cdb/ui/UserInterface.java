@@ -13,11 +13,13 @@ import com.excilys.formation.java.cdb.models.Computer;
 import com.excilys.formation.java.cdb.models.Page;
 import com.excilys.formation.java.cdb.services.CompanyService;
 import com.excilys.formation.java.cdb.services.ComputerService;
+import com.excilys.formation.java.cdb.spring.SpringConfiguration;
 
 public class UserInterface {
 
-    private static ComputerService computerService = ComputerService.getInstance();
-    private static CompanyService companyService = CompanyService.getInstance();
+    private static ComputerService computerService = SpringConfiguration.CONTEXT.getBean(ComputerService.class);
+    private static CompanyService companyService = SpringConfiguration.CONTEXT.getBean(CompanyService.class);
+
     private static Scanner scanner = new Scanner(System.in);
 
     private static Logger logger = LoggerFactory.getLogger(UserInterface.class);

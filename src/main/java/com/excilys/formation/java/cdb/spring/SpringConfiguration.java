@@ -9,18 +9,12 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
 import com.excilys.formation.java.cdb.persistence.Datasource;
-import com.excilys.formation.java.cdb.services.ComputerService;
 
 @Configuration
-@ComponentScan("com.excilys.formation.java.cdb")
+@ComponentScan({"com.excilys.formation.java.cdb.services", "com.excilys.formation.java.cdb.persistence.daos"})
 public class SpringConfiguration {
 
     public static final ApplicationContext CONTEXT = new AnnotationConfigApplicationContext(SpringConfiguration.class);
-
-    @Bean
-    public ComputerService computerService() {
-    return ComputerService.getInstance();
-    }
 
     @Bean
     public Connection getConnection() {

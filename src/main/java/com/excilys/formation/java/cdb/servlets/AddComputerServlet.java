@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.excilys.formation.java.cdb.dtos.CompanyDTO;
 import com.excilys.formation.java.cdb.dtos.ComputerDTO;
@@ -31,8 +33,8 @@ import com.excilys.formation.java.cdb.validators.ComputerValidator;
 public class AddComputerServlet extends HttpServlet {
     private static Logger logger = LoggerFactory.getLogger(AddComputerServlet.class);
 
-    CompanyService companyService = SpringConfiguration.CONTEXT.getBean("companyService", CompanyService.class);
-    ComputerService computerService = SpringConfiguration.CONTEXT.getBean("computerService", ComputerService.class);
+    CompanyService companyService = SpringConfiguration.CONTEXT.getBean(CompanyService.class);
+    ComputerService computerService = SpringConfiguration.CONTEXT.getBean(ComputerService.class);
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<Company> allCompanies = companyService.getAll();
@@ -40,17 +42,12 @@ public class AddComputerServlet extends HttpServlet {
         for (Company c : allCompanies) {
             allCompanyDTOs.add(CompanyMapper.toCompanyDTO(c));
         }
-
         request.setAttribute("companies", allCompanyDTOs);
-
         request.getRequestDispatcher("/views/addComputer.jsp").forward(request, response);
-
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        ComputerDTO computerDTO = new ComputerDTO.Builder()
-                .setName(request.getParameter("computerName")).build();
-        System.out.println("introduced : " + request.getParameter("introduced"));
+        ComputerDTO computerDTO = new ComputerDTO.Builder().setName(request.getParameter("computerName")).build();
         if (!request.getParameter("introduced").isEmpty()) {
             computerDTO.setIntroducedDate(request.getParameter("introduced"));
         }
@@ -71,7 +68,6 @@ public class AddComputerServlet extends HttpServlet {
                 logger.error("computer creation not allowed");
             }
         }
-
         doGet(request, response);
     }
 }
