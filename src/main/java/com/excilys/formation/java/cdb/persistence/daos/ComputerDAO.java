@@ -53,10 +53,6 @@ public class ComputerDAO {
 
     private static final String SQL_OFFSET  = " LIMIT ? OFFSET ?";
 
-
-    private static ComputerDAO computerDAO;
-
-    //private Connection connect = Datasource.getInstance();
     @Autowired
     private Connection connect;
 
@@ -66,18 +62,6 @@ public class ComputerDAO {
      * Private constructor of ComputerDAO.
      */
     private ComputerDAO() {
-    }
-
-    /**
-     * Instance of the singleton ComputerDAO.
-     *
-     * @return the instance of ComputerDAO
-     */
-    public static synchronized ComputerDAO getInstance() {
-        if (computerDAO == null) {
-            computerDAO = new ComputerDAO();
-        }
-        return computerDAO;
     }
 
     public List<Computer> getAll() {

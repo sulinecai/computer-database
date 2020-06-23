@@ -15,26 +15,6 @@ import com.excilys.formation.java.cdb.persistence.daos.ComputerDAO;
 @Service
 public class ComputerService {
 
-    private static ComputerService computerService;
-
-    /**
-     * Private constructor.
-     */
-    private ComputerService() {
-    }
-
-    /**
-     * Singleton instance.
-     *
-     * @return ComputerService
-     */
-    public static synchronized ComputerService getInstance() {
-        if (computerService == null) {
-            computerService = new ComputerService();
-        }
-        return computerService;
-    }
-
     @Autowired
     private ComputerDAO computerDAO;
 
@@ -42,6 +22,12 @@ public class ComputerService {
     private CompanyDAO companyDAO;
 
     private static Logger logger = LoggerFactory.getLogger(ComputerService.class);
+
+    /**
+     * Private constructor.
+     */
+    private ComputerService() {
+    }
 
     public List<Computer> getAll() {
         return computerDAO.getAll();

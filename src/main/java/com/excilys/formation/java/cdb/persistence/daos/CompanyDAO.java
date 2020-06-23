@@ -16,7 +16,6 @@ import org.springframework.stereotype.Repository;
 import com.excilys.formation.java.cdb.mappers.CompanyMapper;
 import com.excilys.formation.java.cdb.models.Company;
 import com.excilys.formation.java.cdb.models.Page;
-import com.excilys.formation.java.cdb.persistence.Datasource;
 
 @Repository
 public class CompanyDAO {
@@ -31,30 +30,15 @@ public class CompanyDAO {
 
     private static final String SQL_DELETE_COMPUTER_WITH_COMPANY_ID = "DELETE FROM computer WHERE company_id = ?";
 
-    private static CompanyDAO companyDAO;
-
     private static Logger logger = LoggerFactory.getLogger(CompanyDAO.class);
 
-    //private Connection connect = Datasource.getInstance();
     @Autowired
     private Connection connect;
-
 
     /**
      * Private constructor of CompanyDAO.
      */
     private CompanyDAO() {
-    }
-
-    /**
-     * Instance of the singleton CompanyDAO.
-     * @return the instance of CompanyDAO
-     */
-    public static synchronized CompanyDAO getInstance() {
-        if (companyDAO == null) {
-            companyDAO = new CompanyDAO();
-        }
-        return companyDAO;
     }
 
     public List<Company> getAll() {

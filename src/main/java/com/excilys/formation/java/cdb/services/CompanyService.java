@@ -12,20 +12,14 @@ import com.excilys.formation.java.cdb.persistence.daos.CompanyDAO;
 @Service
 public class CompanyService {
 
-    private static CompanyService companyService;
-
-    private CompanyService() {
-    }
-
-    public static synchronized CompanyService getInstance() {
-        if (companyService == null) {
-            companyService = new CompanyService();
-        }
-        return companyService;
-    }
-
     @Autowired
     private CompanyDAO companyDAO;
+
+    /**
+     * Private constructor.
+     */
+    private CompanyService() {
+    }
 
     public List<Company> getAll() {
         return companyDAO.getAll();
@@ -46,5 +40,4 @@ public class CompanyService {
     public void delete(Long id) {
         companyDAO.delete(id);
     }
-
 }
