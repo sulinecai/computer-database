@@ -10,16 +10,20 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import javax.sql.DataSource;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
+import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.excilys.formation.java.cdb.mappers.CompanyMapper;
 import com.excilys.formation.java.cdb.mappers.ComputerMapper;
 import com.excilys.formation.java.cdb.models.Computer;
 import com.excilys.formation.java.cdb.models.Page;
-import com.excilys.formation.java.cdb.persistence.Datasource;
 
 @Repository
 public class ComputerDAO {
@@ -58,6 +62,9 @@ public class ComputerDAO {
     @Autowired
     private Connection connect;
 
+    @Autowired
+    DataSource datasource;
+
     private static Logger logger = LoggerFactory.getLogger(CompanyMapper.class);
 
     /**
@@ -68,13 +75,11 @@ public class ComputerDAO {
 
     public int getNumberComputers() {
         int count = -1;
-        try (PreparedStatement statement = Datasource.getInstance().prepareStatement(SQL_COUNT_ALL)) {
-            ResultSet resultSet = statement.executeQuery();
-            while (resultSet.next()) {
-                count = resultSet.getInt("total");
-            }
-        } catch (SQLException e) {
-            logger.error("sql error when the total number of computers", e);
+        JdbcTemplate jdbcTemplate = new JdbcTemplate(datasource);
+        try {
+            count = jdbcTemplate.queryForObject(SQL_COUNT_ALL, Integer.class);
+        } catch (DataAccessException e) {
+            logger.error("error when getting total number of computers: ", e);
         }
         return count;
     }
@@ -86,38 +91,33 @@ public class ComputerDAO {
      * @return list of the computers
      */
     public List<Computer> getAllByPage(Page page) {
+        JdbcTemplate jdbcTemplate = new JdbcTemplate(datasource);
+
         List<Computer> computerList = new ArrayList<Computer>();
 
         if (page == null) {
             logger.error("the page is null");
         } else if (page.getCurrentPage() > 0) {
-            try (PreparedStatement statement = connect.prepareStatement(SQL_SELECT_ALL.concat(SQL_OFFSET))) {
-                statement.setInt(1, page.getMaxLine());
-                statement.setInt(2, page.getPageFirstLine());
-
-                ResultSet resultSet = statement.executeQuery();
-                while (resultSet.next()) {
-                    Computer computer = ComputerMapper.convert(resultSet);
-                    computerList.add(computer);
-                }
-            } catch (SQLException e) {
-                logger.error("sql error when listing all companies by page", e);
+            try {
+                computerList = jdbcTemplate.query(SQL_SELECT_ALL.concat(SQL_OFFSET), new ComputerMapper(), page.getMaxLine(), page.getPageFirstLine());
+            } catch (DataAccessException e) {
+                logger.error("error when get all by page:", e);
             }
         }
         return computerList;
     }
 
     public Optional<Computer> findById(Long id) {
+        JdbcTemplate jdbcTemplate = new JdbcTemplate(datasource);
+
         Optional<Computer> result = Optional.empty();
         if (id != null) {
-            try (PreparedStatement statement = connect.prepareStatement(SQL_SELECT_WITH_ID)) {
-                statement.setLong(1, id);
-                ResultSet resultSet = statement.executeQuery();
-                while (resultSet.next()) {
-                    result = Optional.ofNullable(ComputerMapper.convert(resultSet));
-                }
-            } catch (SQLException e) {
-                logger.error("sql error when finding computer with id", e);
+            try {
+                result = Optional.ofNullable(jdbcTemplate.queryForObject(SQL_SELECT_WITH_ID, new ComputerMapper(), id));
+            } catch (EmptyResultDataAccessException e) {
+                logger.info("computer with id %d not found", id);
+            } catch (DataAccessException e) {
+                logger.error("error when get finding computer by id", e);
             }
         } else {
             logger.error("company id to find is null");
@@ -126,43 +126,34 @@ public class ComputerDAO {
     }
 
     public List<Computer> findByNameByPage(String name, Page page) {
+        JdbcTemplate jdbcTemplate = new JdbcTemplate(datasource);
+
         List<Computer> computerList = new ArrayList<Computer>();
         if (page.getCurrentPage() > 0 && name != null && !name.isEmpty() && !name.contains("%") && !name.contains("_")) {
-
-            try (PreparedStatement statement = connect.prepareStatement(SQL_SELECT_WITH_NAME.concat(SQL_OFFSET))) {
-                statement.setString(1, "%".concat(name).concat("%"));
-                statement.setString(2, "%".concat(name).concat("%"));
-                statement.setInt(3, page.getMaxLine());
-                statement.setInt(4, page.getPageFirstLine());
-
-                ResultSet resultSet = statement.executeQuery();
-                while (resultSet.next()) {
-                    Computer computer = ComputerMapper.convert(resultSet);
-                    computerList.add(computer);
-                }
-            } catch (SQLException e) {
-                logger.error("sql error when finding computer with name", e);
+            try {
+                computerList = jdbcTemplate.query(SQL_SELECT_WITH_NAME.concat(SQL_OFFSET), new ComputerMapper(),
+                        "%".concat(name).concat("%"),
+                        "%".concat(name).concat("%"),
+                        page.getMaxLine(),
+                        page.getPageFirstLine());
+            } catch (DataAccessException e) {
+                logger.error("error when finding computer with name", e);
             }
         }
         return computerList;
     }
 
     public List<Computer> findAllByName(String name) {
+        JdbcTemplate jdbcTemplate = new JdbcTemplate(datasource);
+
         List<Computer> computerList = new ArrayList<Computer>();
         if (name != null && !name.isEmpty() && !name.contains("%") && !name.contains("_")) {
-
-            try (PreparedStatement statement = connect.prepareStatement(SQL_SELECT_WITH_NAME)) {
-                statement.setString(1, "%".concat(name).concat("%"));
-                statement.setString(2, "%".concat(name).concat("%"));
-                System.out.println(statement);
-
-                ResultSet resultSet = statement.executeQuery();
-                while (resultSet.next()) {
-                    Computer computer = ComputerMapper.convert(resultSet);
-                    computerList.add(computer);
-                }
-            } catch (SQLException e) {
-                logger.error("sql error when finding all computer with name", e);
+            try {
+                computerList = jdbcTemplate.query(SQL_SELECT_WITH_NAME, new ComputerMapper(),
+                        "%".concat(name).concat("%"),
+                        "%".concat(name).concat("%"));
+            } catch (DataAccessException e) {
+                logger.error("error when finding computer with name", e);
             }
         }
         return computerList;
@@ -174,18 +165,19 @@ public class ComputerDAO {
      * @param computer
      */
     public void create(Computer computer) {
+        JdbcTemplate jdbcTemplate = new JdbcTemplate(datasource);
+        int nbRows = 0;
         if (computer != null) {
-            try (PreparedStatement statement = connect.prepareStatement(SQL_INSERT)) {
-                statement.setString(1, computer.getName());
-                statement.setTimestamp(2, localDateToTimestamp(computer.getIntroducedDate()));
-                statement.setTimestamp(3, localDateToTimestamp(computer.getDiscontinuedDate()));
-                if (computer.getCompany() == null) {
-                    statement.setNull(4, java.sql.Types.INTEGER);
-                } else {
-                    statement.setLong(4, computer.getCompany().getIdCompany());
+            try {
+                nbRows = jdbcTemplate.update(SQL_INSERT,
+                        computer.getName(),
+                        localDateToTimestamp(computer.getIntroducedDate()),
+                        localDateToTimestamp(computer.getDiscontinuedDate()),
+                        computer.getCompany() == null ? null : computer.getCompany().getIdCompany());
+                if (nbRows != 1) {
+                    logger.info("%d rows affected when creating computer", nbRows);
                 }
-                statement.execute();
-            } catch (SQLException e) {
+            } catch (DataAccessException e) {
                 logger.error("sql error when creating a computer", e);
             }
         } else {
@@ -199,25 +191,52 @@ public class ComputerDAO {
      * @param computer
      */
     public void update(Computer computer) {
+        JdbcTemplate jdbcTemplate = new JdbcTemplate(datasource);
+        int nbRows = 0;
         if (computer != null) {
-            try (PreparedStatement statement = connect.prepareStatement(SQL_UPDATE)) {
-                statement.setString(1, computer.getName());
-                statement.setTimestamp(2, localDateToTimestamp(computer.getIntroducedDate()));
-                statement.setTimestamp(3, localDateToTimestamp(computer.getDiscontinuedDate()));
-                if (computer.getCompany() == null) {
-                    statement.setNull(4, java.sql.Types.INTEGER);
-                } else {
-                    statement.setLong(4, computer.getCompany().getIdCompany());
+            try {
+                nbRows = jdbcTemplate.update(SQL_UPDATE,
+                        computer.getName(),
+                        localDateToTimestamp(computer.getIntroducedDate()),
+                        localDateToTimestamp(computer.getDiscontinuedDate()),
+                        computer.getCompany() == null ? null : computer.getCompany().getIdCompany(),
+                        computer.getIdComputer());
+                if (nbRows != 1) {
+                    logger.info("%d rows affected when updating computer", nbRows);
                 }
-                statement.setLong(5, computer.getIdComputer());
-                statement.execute();
-            } catch (SQLException e) {
-                logger.error("sql exception", e);
+            } catch (DataAccessException e) {
+                logger.error("sql error when creating a computer", e);
             }
         } else {
             logger.error("the computer is null");
         }
     }
+
+//    /**
+//     * Update an existing Computer.
+//     *
+//     * @param computer
+//     */
+//    public void update(Computer computer) {
+//        if (computer != null) {
+//            try (PreparedStatement statement = connect.prepareStatement(SQL_UPDATE)) {
+//                statement.setString(1, computer.getName());
+//                statement.setTimestamp(2, localDateToTimestamp(computer.getIntroducedDate()));
+//                statement.setTimestamp(3, localDateToTimestamp(computer.getDiscontinuedDate()));
+//                if (computer.getCompany() == null) {
+//                    statement.setNull(4, java.sql.Types.INTEGER);
+//                } else {
+//                    statement.setLong(4, computer.getCompany().getIdCompany());
+//                }
+//                statement.setLong(5, computer.getIdComputer());
+//                statement.execute();
+//            } catch (SQLException e) {
+//                logger.error("sql exception", e);
+//            }
+//        } else {
+//            logger.error("the computer is null");
+//        }
+//    }
 
     /**
      * Delete an existing Computer.

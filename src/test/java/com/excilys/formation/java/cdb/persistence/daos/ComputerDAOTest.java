@@ -12,6 +12,8 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
+import javax.sql.DataSource;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.test.util.ReflectionTestUtils;
@@ -20,6 +22,7 @@ import com.excilys.formation.java.cdb.models.Company;
 import com.excilys.formation.java.cdb.models.Computer;
 import com.excilys.formation.java.cdb.models.Page;
 import com.excilys.formation.java.cdb.persistence.Datasource;
+import com.excilys.formation.java.cdb.spring.SpringConfiguration;
 
 public class ComputerDAOTest {
 
@@ -46,6 +49,8 @@ public class ComputerDAOTest {
         assertEquals(computerDAOConstructor.isAccessible(), false);
         computerDAOConstructor.setAccessible(true);
         computerDAO = computerDAOConstructor.newInstance();
+        ReflectionTestUtils.setField(computerDAO, "datasource", SpringConfiguration.CONTEXT.getBean(DataSource.class));
+
         ReflectionTestUtils.setField(computerDAO, "connect", Datasource.getInstance());
     }
 
