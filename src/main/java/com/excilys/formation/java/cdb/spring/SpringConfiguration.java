@@ -9,6 +9,7 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.jdbc.core.JdbcTemplate;
 
 import com.excilys.formation.java.cdb.persistence.Datasource;
 import com.zaxxer.hikari.HikariConfig;
@@ -26,9 +27,10 @@ public class SpringConfiguration {
     }
 
     @Bean
-    public DataSource getDataSource() {
+    public JdbcTemplate getJdbcTemlplate() {
         HikariConfig config = new HikariConfig("/datasource.properties");
-        return new HikariDataSource(config);
+        DataSource datasource = new HikariDataSource(config);
+        return new JdbcTemplate (datasource);
     }
 
 }

@@ -12,10 +12,9 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
-import javax.sql.DataSource;
-
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.util.ReflectionTestUtils;
 
 import com.excilys.formation.java.cdb.models.Company;
@@ -49,9 +48,8 @@ public class ComputerDAOTest {
         assertEquals(computerDAOConstructor.isAccessible(), false);
         computerDAOConstructor.setAccessible(true);
         computerDAO = computerDAOConstructor.newInstance();
-        ReflectionTestUtils.setField(computerDAO, "datasource", SpringConfiguration.CONTEXT.getBean(DataSource.class));
+        ReflectionTestUtils.setField(computerDAO, "jdbcTemplate", SpringConfiguration.CONTEXT.getBean(JdbcTemplate.class));
 
-        ReflectionTestUtils.setField(computerDAO, "connect", Datasource.getInstance());
     }
 
     /**
@@ -195,9 +193,9 @@ public class ComputerDAOTest {
 
     @Test
     public void testDelete() {
-        assertTrue(computerDAO.findById(1L).isPresent());
-        computerDAO.delete(1L);
-        assertFalse(computerDAO.findById(1L).isPresent());
+        assertTrue(computerDAO.findById(5L).isPresent());
+        computerDAO.delete(5L);
+        assertFalse(computerDAO.findById(5L).isPresent());
     }
 
     @Test
