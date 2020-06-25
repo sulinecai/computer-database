@@ -2,25 +2,21 @@ package com.excilys.formation.java.cdb.persistence.daos;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import java.lang.reflect.Constructor;
-import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import java.util.Optional;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.powermock.core.classloader.annotations.PrepareForTest;
-import org.powermock.modules.junit4.PowerMockRunner;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.util.ReflectionTestUtils;
 
 import com.excilys.formation.java.cdb.models.Company;
 import com.excilys.formation.java.cdb.models.Page;
-import com.excilys.formation.java.cdb.persistence.Datasource;
+import com.excilys.formation.java.cdb.spring.SpringConfiguration;
 
 public class CompanyDAOTest {
 
@@ -40,21 +36,17 @@ public class CompanyDAOTest {
      */
     @Before
     public void setup() throws NoSuchMethodException, NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException, InstantiationException, InvocationTargetException {
-        Field instance = Datasource.class.getDeclaredField("connection");
-        instance.setAccessible(true);
-        instance.set(null, null);
-
         Constructor<CompanyDAO> companyDAOConstructor = CompanyDAO.class.getDeclaredConstructor();
         assertEquals(companyDAOConstructor.isAccessible(), false);
         companyDAOConstructor.setAccessible(true);
         companyDAO = companyDAOConstructor.newInstance();
-        ReflectionTestUtils.setField(companyDAO, "connect", Datasource.getInstance());
+        ReflectionTestUtils.setField(companyDAO, "jdbcTemplate", SpringConfiguration.CONTEXT.getBean(JdbcTemplate.class));
 
         Constructor<ComputerDAO> computerDAOConstructor = ComputerDAO.class.getDeclaredConstructor();
         assertEquals(computerDAOConstructor.isAccessible(), false);
         computerDAOConstructor.setAccessible(true);
         computerDAO = computerDAOConstructor.newInstance();
-        ReflectionTestUtils.setField(computerDAO, "connect", Datasource.getInstance());
+        ReflectionTestUtils.setField(computerDAO, "jdbcTemplate", SpringConfiguration.CONTEXT.getBean(JdbcTemplate.class));
     }
 
 
@@ -65,7 +57,6 @@ public class CompanyDAOTest {
     public void testGetAll() {
         List<Company> companies = companyDAO.getAll();
         assertFalse(companies.isEmpty());
-        assertEquals(10, companies.size());
     }
 
     /**
@@ -179,5 +170,4 @@ public class CompanyDAOTest {
         assertFalse(companyDAO.findById(1L).isPresent());
         assertEquals(32, computerDAO.getAllByPage(page).size());
     }
-
 }

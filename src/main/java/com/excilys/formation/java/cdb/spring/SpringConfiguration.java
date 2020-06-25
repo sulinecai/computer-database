@@ -1,7 +1,5 @@
 package com.excilys.formation.java.cdb.spring;
 
-import java.sql.Connection;
-
 import javax.sql.DataSource;
 
 import org.springframework.context.ApplicationContext;
@@ -11,7 +9,6 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.core.JdbcTemplate;
 
-import com.excilys.formation.java.cdb.persistence.Datasource;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 
@@ -22,15 +19,10 @@ public class SpringConfiguration {
     public static final ApplicationContext CONTEXT = new AnnotationConfigApplicationContext(SpringConfiguration.class);
 
     @Bean
-    public Connection getConnection() {
-        return Datasource.getInstance();
-    }
-
-    @Bean
     public JdbcTemplate getJdbcTemlplate() {
         HikariConfig config = new HikariConfig("/datasource.properties");
         DataSource datasource = new HikariDataSource(config);
-        return new JdbcTemplate (datasource);
+        return new JdbcTemplate(datasource);
     }
 
 }

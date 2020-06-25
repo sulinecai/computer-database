@@ -5,7 +5,6 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.lang.reflect.Constructor;
-import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.time.LocalDate;
 import java.util.Comparator;
@@ -14,13 +13,11 @@ import java.util.Optional;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.util.ReflectionTestUtils;
 
 import com.excilys.formation.java.cdb.models.Company;
 import com.excilys.formation.java.cdb.models.Computer;
 import com.excilys.formation.java.cdb.models.Page;
-import com.excilys.formation.java.cdb.persistence.Datasource;
 import com.excilys.formation.java.cdb.spring.SpringConfiguration;
 
 public class ComputerDAOTest {
@@ -40,16 +37,11 @@ public class ComputerDAOTest {
      */
     @Before
     public void setUp() throws InvocationTargetException, NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException, NoSuchMethodException, InstantiationException {
-        Field instance = Datasource.class.getDeclaredField("connection");
-        instance.setAccessible(true);
-        instance.set(null, null);
-
         Constructor<ComputerDAO> computerDAOConstructor = ComputerDAO.class.getDeclaredConstructor();
         assertEquals(computerDAOConstructor.isAccessible(), false);
         computerDAOConstructor.setAccessible(true);
         computerDAO = computerDAOConstructor.newInstance();
-        ReflectionTestUtils.setField(computerDAO, "jdbcTemplate", SpringConfiguration.CONTEXT.getBean(JdbcTemplate.class));
-
+        ReflectionTestUtils.setField(computerDAO, "jdbcTemplate", new SpringConfiguration().getJdbcTemlplate());
     }
 
     /**

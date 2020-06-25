@@ -9,7 +9,6 @@ import org.springframework.jdbc.core.RowMapper;
 
 import com.excilys.formation.java.cdb.dtos.CompanyDTO;
 import com.excilys.formation.java.cdb.models.Company;
-import com.excilys.formation.java.cdb.models.Computer;
 
 public class CompanyMapper implements RowMapper<Company> {
 
