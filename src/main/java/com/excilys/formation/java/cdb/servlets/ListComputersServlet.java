@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.excilys.formation.java.cdb.dtos.ComputerDTO;
 import com.excilys.formation.java.cdb.mappers.ComputerMapper;
 import com.excilys.formation.java.cdb.models.Computer;
@@ -22,6 +24,7 @@ import com.excilys.formation.java.cdb.spring.SpringConfiguration;
  */
 @WebServlet("/ListComputers")
 public class ListComputersServlet extends HttpServlet {
+
     ComputerService computerService = SpringConfiguration.CONTEXT.getBean(ComputerService.class);
 
     private static final long serialVersionUID = 1L;
