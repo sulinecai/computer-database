@@ -5,25 +5,21 @@ import java.sql.SQLException;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.jdbc.core.RowMapper;
 
 import com.excilys.formation.java.cdb.dtos.CompanyDTO;
 import com.excilys.formation.java.cdb.models.Company;
+import com.excilys.formation.java.cdb.models.Computer;
 
-public class CompanyMapper {
+public class CompanyMapper implements RowMapper<Company> {
 
     static final String ATTRIBUT_ID_COMPANY = "id";
     private static final String ATTRIBUT_NAME = "name";
 
     private static Logger logger = LoggerFactory.getLogger(CompanyMapper.class);
 
-    /**
-     * Convert a result set to the associated Company object.
-     *
-     * @param resultSet
-     * @return converted Company object
-     */
-
-    public static Company convert(ResultSet resultSet) {
+    @Override
+    public Company mapRow(ResultSet resultSet, int rowNum) {
         Company company = new Company();
         try {
             company = new Company.Builder()

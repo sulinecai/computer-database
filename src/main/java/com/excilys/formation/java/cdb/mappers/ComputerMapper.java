@@ -48,34 +48,6 @@ public class ComputerMapper implements RowMapper<Computer> {
     }
 
     /**
-     * Convert a result set to the associated Computer object.
-     *
-     * @param resultSet
-     * @return converted Computer object
-     */
-    public static Computer convert(ResultSet resultSet) {
-        Computer computer = new Computer();
-        try {
-            computer.setIdComputer(resultSet.getLong(ATTRIBUT_ID_COMPUTER));
-            computer.setName(resultSet.getString(ATTRIBUT_NAME));
-            if (resultSet.getTimestamp(ATTRIBUT_INTRODUCED) != null) {
-                computer.setIntroducedDate(resultSet.getTimestamp(ATTRIBUT_INTRODUCED).toLocalDateTime().toLocalDate());
-            }
-            if (resultSet.getTimestamp(ATTRIBUT_DISCONTINUED) != null) {
-                computer.setDiscontinuedDate(
-                        resultSet.getTimestamp(ATTRIBUT_DISCONTINUED).toLocalDateTime().toLocalDate());
-            }
-            computer.setCompany(new Company.Builder()
-                    .setIdCompany(resultSet.getLong(ATTRIBUT_COMPANY_ID))
-                    .setName(resultSet.getString(ATTRIBUT_COMPANY_NAME))
-                    .build());
-        } catch (SQLException e) {
-            logger.error("sql error when converting resultset to computer");
-        }
-        return computer;
-    }
-
-    /**
      * Convert a Computer to a ComputerDTO.
      *
      * @param computer

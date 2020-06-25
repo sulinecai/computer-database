@@ -34,7 +34,7 @@ public class CompanyMapperTest {
         } catch (SQLException e) {
             fail("sql exception :" + e.getMessage());
         }
-        Company company = CompanyMapper.convert(resultSet);
+        Company company = new CompanyMapper().mapRow(resultSet, 0);
         Company expCompany = new Company.Builder()
                 .setIdCompany(id)
                 .setName(name)
@@ -54,7 +54,7 @@ public class CompanyMapperTest {
         } catch (SQLException e) {
             fail("sql exception :" + e.getMessage());
         }
-        Company company = CompanyMapper.convert(resultSet);
+        Company company = new CompanyMapper().mapRow(resultSet, 0);
         Company expCompany = new Company.Builder()
                 .setIdCompany(0L)
                 .setName(name)
@@ -74,7 +74,7 @@ public class CompanyMapperTest {
         } catch (SQLException e) {
             fail("sql exception :" + e.getMessage());
         }
-        Company company = CompanyMapper.convert(resultSet);
+        Company company = new CompanyMapper().mapRow(resultSet, 0);
         Company expCompany = new Company.Builder()
                 .setIdCompany(id)
                 .build();

@@ -46,7 +46,7 @@ public class ComputerMapperTest {
         } catch (SQLException e) {
             fail("sql exception :" + e.getMessage());
         }
-        Computer computer = ComputerMapper.convert(resultSet);
+        Computer computer = new ComputerMapper().mapRow(resultSet, 0);
         Computer expComputer = new Computer.Builder()
                 .setIdComputer(idComputer)
                 .setName(computerName)
@@ -71,7 +71,7 @@ public class ComputerMapperTest {
         } catch (SQLException e) {
             fail("sql exception :" + e.getMessage());
         }
-        Computer computer = ComputerMapper.convert(resultSet);
+        Computer computer = new ComputerMapper().mapRow(resultSet, 0);
         Computer expComputer = new Computer.Builder()
                 .setIdComputer(idComputer)
                 .setName(computerName)
@@ -95,7 +95,7 @@ public class ComputerMapperTest {
         } catch (SQLException e) {
             fail("sql exception :" + e.getMessage());
         }
-        Computer computer = ComputerMapper.convert(resultSet);
+        Computer computer = new ComputerMapper().mapRow(resultSet, 0);
         Computer expComputer = new Computer.Builder()
                 .setIdComputer(idComputer)
                 .setName(computerName)
@@ -117,8 +117,7 @@ public class ComputerMapperTest {
         } catch (SQLException e) {
             fail("sql exception :" + e.getMessage());
         }
-        Computer computer = ComputerMapper.convert(resultSet);
-
+        Computer computer = new ComputerMapper().mapRow(resultSet, 0);
         Computer expComputer = new Computer.Builder()
                 .setIdComputer(idComputer)
                 .setName(computerName)
