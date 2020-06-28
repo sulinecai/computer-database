@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -12,6 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
 import com.excilys.formation.java.cdb.dtos.CompanyDTO;
 import com.excilys.formation.java.cdb.dtos.ComputerDTO;
@@ -31,8 +34,17 @@ public class EditComputerServlet extends HttpServlet {
 
     private static Logger logger = LoggerFactory.getLogger(EditComputerServlet.class);
 
-    CompanyService companyService = SpringConfiguration.CONTEXT.getBean("companyService", CompanyService.class);
-    ComputerService computerService = SpringConfiguration.CONTEXT.getBean("computerService", ComputerService.class);
+//    CompanyService companyService = SpringConfiguration.CONTEXT.getBean("companyService", CompanyService.class);
+//    ComputerService computerService = SpringConfiguration.CONTEXT.getBean("computerService", ComputerService.class);    
+    @Autowired
+    private CompanyService companyService;
+    @Autowired
+    private ComputerService computerService;
+    
+	public void init(ServletConfig config) throws ServletException {
+		super.init(config);
+	    SpringBeanAutowiringSupport.processInjectionBasedOnCurrentContext(this);
+	}
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<Company> allCompanies = companyService.getAll();

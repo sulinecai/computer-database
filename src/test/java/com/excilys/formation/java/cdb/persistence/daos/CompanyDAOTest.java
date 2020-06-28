@@ -22,6 +22,7 @@ public class CompanyDAOTest {
 
     private CompanyDAO companyDAO;
     private ComputerDAO computerDAO;
+    private JdbcTemplate jdbcTemplate = new SpringConfiguration().getJdbcTemplate();
 
     /**
      * Reset the singleton of companyDAO.
@@ -40,13 +41,13 @@ public class CompanyDAOTest {
         assertEquals(companyDAOConstructor.isAccessible(), false);
         companyDAOConstructor.setAccessible(true);
         companyDAO = companyDAOConstructor.newInstance();
-        ReflectionTestUtils.setField(companyDAO, "jdbcTemplate", SpringConfiguration.CONTEXT.getBean(JdbcTemplate.class));
+        ReflectionTestUtils.setField(companyDAO, "jdbcTemplate", jdbcTemplate);
 
         Constructor<ComputerDAO> computerDAOConstructor = ComputerDAO.class.getDeclaredConstructor();
         assertEquals(computerDAOConstructor.isAccessible(), false);
         computerDAOConstructor.setAccessible(true);
         computerDAO = computerDAOConstructor.newInstance();
-        ReflectionTestUtils.setField(computerDAO, "jdbcTemplate", SpringConfiguration.CONTEXT.getBean(JdbcTemplate.class));
+        ReflectionTestUtils.setField(computerDAO, "jdbcTemplate", jdbcTemplate);
     }
 
 

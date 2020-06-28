@@ -1,5 +1,6 @@
 <%@ page pageEncoding= "UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>  
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,9 +8,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta charset="utf-8">
 <!-- Bootstrap -->
-<link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
-<link href="css/font-awesome.css" rel="stylesheet" media="screen">
-<link href="css/main.css" rel="stylesheet" media="screen">
+<link href="resources/css/bootstrap.min.css" rel="stylesheet" media="screen">
+<link href="resources/css/font-awesome.css" rel="stylesheet" media="screen">
+<link href="resources/css/main.css" rel="stylesheet" media="screen">
 </head>
 <body>
     <header class="navbar navbar-inverse navbar-fixed-top">
@@ -39,8 +40,10 @@
             </div>
         </div>    
 
-        <form id="deleteForm" action="ListComputers?page=${currentPage}" method="POST">
+        <form id="deleteForm" action="deleteComputer" method="POST">
             <input type="hidden" name="selection" value="">
+            <input type="hidden" name="nbComputers" value="${nbComputers}">
+            <input type="hidden" name="currentPage" value="${currentPage}">
         </form>
 
         <div class="container" style="margin-top: 10px;">
@@ -169,9 +172,9 @@
         </div>
 
     </footer>
-<script src="js/jquery.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/dashboard.js"></script>
+<script src="resources/js/jquery.min.js"></script>
+<script src="resources/js/bootstrap.min.js"></script>
+<script src="resources/js/dashboard.js"></script>
 
 </body>
 </html>

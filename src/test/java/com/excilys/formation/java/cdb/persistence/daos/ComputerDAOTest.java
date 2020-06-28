@@ -41,7 +41,7 @@ public class ComputerDAOTest {
         assertEquals(computerDAOConstructor.isAccessible(), false);
         computerDAOConstructor.setAccessible(true);
         computerDAO = computerDAOConstructor.newInstance();
-        ReflectionTestUtils.setField(computerDAO, "jdbcTemplate", new SpringConfiguration().getJdbcTemlplate());
+        ReflectionTestUtils.setField(computerDAO, "jdbcTemplate", new SpringConfiguration().getJdbcTemplate());
     }
 
     /**
