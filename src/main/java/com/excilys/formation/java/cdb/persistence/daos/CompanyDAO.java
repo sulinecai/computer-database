@@ -1,6 +1,5 @@
 package com.excilys.formation.java.cdb.persistence.daos;
 
-import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;

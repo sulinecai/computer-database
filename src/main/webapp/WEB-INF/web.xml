@@ -2,21 +2,17 @@
 xmlns="http://java.sun.com/xml/ns/javaee"
 xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
 id="WebApp_ID" version="3.0">
-	<display-name>computer-database</display-name>  
-<!-- 	<welcome-file-list>
-		<welcome-file>/ListComputers</welcome-file>
-		<welcome-file>index.jsp</welcome-file>
-	</welcome-file-list> -->
-	   <error-page>
-        <error-code>403</error-code>
-        <location>/WEB-INF/views/403.jsp</location>
-    </error-page>
+	<display-name>computer-database</display-name>
+	<error-page>
+		<error-code>403</error-code>
+		<location>/WEB-INF/views/403.jsp</location>
+	</error-page>
 	<error-page>
 		<error-code>404</error-code>
 		<location>/WEB-INF/views/404.jsp</location>
 	</error-page>
-	   <error-page>
-        <error-code>500</error-code>
-        <location>/WEB-INF/views/500.jsp</location>
-    </error-page>
+	<error-page>
+		<error-code>500</error-code>
+		<location>/WEB-INF/views/500.jsp</location>
+	</error-page>
 </web-app>

@@ -36,7 +36,7 @@ public class AddComputerController {
     private ComputerService computerService;
 
     @GetMapping
-    public ModelAndView showInfo(){
+    public ModelAndView showInfo() {
         List<Company> allCompanies = companyService.getAll();
         List<CompanyDTO> allCompanyDTOs = new ArrayList<CompanyDTO>();
         for (Company c : allCompanies) {

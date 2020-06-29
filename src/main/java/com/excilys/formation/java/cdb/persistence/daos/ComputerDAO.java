@@ -1,13 +1,10 @@
 package com.excilys.formation.java.cdb.persistence.daos;
 
-import java.sql.Connection;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
-import javax.sql.DataSource;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
