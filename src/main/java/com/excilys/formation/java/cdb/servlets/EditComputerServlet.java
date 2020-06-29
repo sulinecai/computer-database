@@ -29,18 +29,18 @@ import com.excilys.formation.java.cdb.spring.SpringConfiguration;
 /**
  * Servlet implementation class EditComputersServlet.
  */
-@WebServlet("/EditComputer")
+//@WebServlet("/EditComputer")
 public class EditComputerServlet extends HttpServlet {
 
     private static Logger logger = LoggerFactory.getLogger(EditComputerServlet.class);
 
 //    CompanyService companyService = SpringConfiguration.CONTEXT.getBean("companyService", CompanyService.class);
-//    ComputerService computerService = SpringConfiguration.CONTEXT.getBean("computerService", ComputerService.class);    
+//    ComputerService computerService = SpringConfiguration.CONTEXT.getBean("computerService", ComputerService.class);
     @Autowired
     private CompanyService companyService;
     @Autowired
     private ComputerService computerService;
-    
+
 	public void init(ServletConfig config) throws ServletException {
 		super.init(config);
 	    SpringBeanAutowiringSupport.processInjectionBasedOnCurrentContext(this);

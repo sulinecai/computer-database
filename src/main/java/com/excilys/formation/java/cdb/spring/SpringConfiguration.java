@@ -14,10 +14,12 @@ import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 
 @Configuration
-@ComponentScan({"com.excilys.formation.java.cdb.services", "com.excilys.formation.java.cdb.persistence.daos", "com.excilys.formation.java.cdb.controllers"})
+@ComponentScan({ "com.excilys.formation.java.cdb.services", "com.excilys.formation.java.cdb.persistence.daos",
+        "com.excilys.formation.java.cdb.controllers" })
 public class SpringConfiguration extends AbstractContextLoaderInitializer {
 
-    //public static final ApplicationContext CONTEXT = new AnnotationConfigApplicationContext(SpringConfiguration.class);
+    // public static final ApplicationContext CONTEXT = new
+    // AnnotationConfigApplicationContext(SpringConfiguration.class);
 
     @Bean
     public JdbcTemplate getJdbcTemplate() {
@@ -26,10 +28,10 @@ public class SpringConfiguration extends AbstractContextLoaderInitializer {
         return new JdbcTemplate(datasource);
     }
 
-	@Override
-	protected WebApplicationContext createRootApplicationContext() {
-		AnnotationConfigWebApplicationContext rootContext = new AnnotationConfigWebApplicationContext();
-		rootContext.register(SpringConfiguration.class, WebConfig.class);
-		return rootContext;
-	}
+    @Override
+    protected WebApplicationContext createRootApplicationContext() {
+        AnnotationConfigWebApplicationContext rootContext = new AnnotationConfigWebApplicationContext();
+        rootContext.register(SpringConfiguration.class, WebConfig.class);
+        return rootContext;
+    }
 }

@@ -6,9 +6,9 @@
 <title>Computer Database</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!-- Bootstrap -->
-<link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
-<link href="css/font-awesome.css" rel="stylesheet" media="screen">
-<link href="css/main.css" rel="stylesheet" media="screen">
+<link href="resources/css/bootstrap.min.css" rel="stylesheet" media="screen">
+<link href="resources/css/font-awesome.css" rel="stylesheet" media="screen">
+<link href="resources/css/main.css" rel="stylesheet" media="screen">
 </head>
 <body>
     <header class="navbar navbar-inverse navbar-fixed-top">
@@ -26,6 +26,7 @@
                     <h1>Edit Computer</h1>
 
                     <form action="EditComputer" method="POST" onsubmit="return validateForm()">
+                        <input type="hidden" value="${currentPage}" id="currentPage" name="currentPage"/> <!-- TODO: Change this value with the computer id -->
                         <input type="hidden" value="${computer.idComputer}" id="idComputer" name="idComputer"/> <!-- TODO: Change this value with the computer id -->
                         <fieldset>
                             <div class="form-group">
@@ -69,6 +70,6 @@
             </div>
         </div>
     </section>
-<script src="js/validateDates.js"></script>    
+<script src="resources/js/validateDates.js"></script>    
 </body>
 </html>

@@ -108,7 +108,7 @@
                             <input type="checkbox" name="cb" class="cb" value="${computer.idComputer}">
                         </td>
                         <td>
-                            <a href="EditComputer?idComputer=${computer.idComputer}" onclick=""><c:out value="${computer.name}"/></a>
+                            <a href="EditComputer?page=${currentPage}&idComputer=${computer.idComputer}" onclick=""><c:out value="${computer.name}"/></a>
                         </td>
                         <td><c:out value="${computer.introducedDate}"/></td>
                         <td><c:out value="${computer.discontinuedDate}"/></td>
