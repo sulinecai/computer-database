@@ -25,7 +25,7 @@ public class ListComputersController {
     static int computerPerPage = 10;
     static int nbComputers;
 
-    @GetMapping(value = "ListComputers")
+    @GetMapping(value = {"ListComputers", "/"})
     public ModelAndView listComputers(@RequestParam(required = false, name = "search") String searchValue,
             @RequestParam(required = false, name = "page") Integer currentPage,
             @RequestParam(required = false, name = "pageSize") Integer pageSize,

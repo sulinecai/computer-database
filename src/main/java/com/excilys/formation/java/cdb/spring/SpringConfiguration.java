@@ -18,9 +18,6 @@ import com.zaxxer.hikari.HikariDataSource;
         "com.excilys.formation.java.cdb.controllers" })
 public class SpringConfiguration extends AbstractContextLoaderInitializer {
 
-    // public static final ApplicationContext CONTEXT = new
-    // AnnotationConfigApplicationContext(SpringConfiguration.class);
-
     @Bean
     public JdbcTemplate getJdbcTemplate() {
         HikariConfig config = new HikariConfig("/datasource.properties");
