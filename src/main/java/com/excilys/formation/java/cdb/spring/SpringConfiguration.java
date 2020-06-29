@@ -25,11 +25,11 @@ public class SpringConfiguration extends AbstractContextLoaderInitializer {
         DataSource datasource = new HikariDataSource(config);
         return new JdbcTemplate(datasource);
     }
-    
+
 	@Override
 	protected WebApplicationContext createRootApplicationContext() {
 		AnnotationConfigWebApplicationContext rootContext = new AnnotationConfigWebApplicationContext();
-		rootContext.register(SpringConfiguration.class);
+		rootContext.register(SpringConfiguration.class, WebConfig.class);
 		return rootContext;
 	}
 }

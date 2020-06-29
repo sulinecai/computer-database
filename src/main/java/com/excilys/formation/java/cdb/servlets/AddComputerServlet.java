@@ -30,19 +30,19 @@ import com.excilys.formation.java.cdb.validators.ComputerValidator;
 /**
  * Servlet implementation class AddComputerServlet.
  */
-@WebServlet("/AddComputer")
+//@WebServlet("/AddComputer")
 public class AddComputerServlet extends HttpServlet {
     private static Logger logger = LoggerFactory.getLogger(AddComputerServlet.class);
 
-    
+
 //    CompanyService companyService = SpringConfiguration.CONTEXT.getBean(CompanyService.class);
 //    ComputerService computerService = SpringConfiguration.CONTEXT.getBean(ComputerService.class);
-    
+
     @Autowired
     private CompanyService companyService;
     @Autowired
     private ComputerService computerService;
-    
+
 	public void init(ServletConfig config) throws ServletException {
 		super.init(config);
 	    SpringBeanAutowiringSupport.processInjectionBasedOnCurrentContext(this);

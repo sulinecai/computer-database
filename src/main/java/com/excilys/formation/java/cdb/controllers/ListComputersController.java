@@ -19,35 +19,37 @@ import com.excilys.formation.java.cdb.services.ComputerService;
 @Controller
 public class ListComputersController {
 
-	@Autowired
-	private ComputerService computerService;
-	
-	static int computerPerPage = 10;
-	
+    @Autowired
+    private ComputerService computerService;
+
+    static int computerPerPage = 10;
+    static int nbComputers;
+
     @GetMapping(value = "ListComputers")
-	public ModelAndView listComputers(
-			@RequestParam(required = false, name = "search") String searchValue,
-			@RequestParam(required = false, name = "page") Integer currentPage,
-			@RequestParam(required = false, name = "pageSize") Integer computerPerPage,
-			@RequestParam(required = false, name = "search") String searcdhValue,
-			@RequestParam(required = false, name = "orderBy") String orderBy){
-    	
-		ModelAndView modelAndView = new ModelAndView("dashboard");
-		int nbComputers = computerService.getNumberComputers();
-		if (currentPage == null) {
+    public ModelAndView listComputers(@RequestParam(required = false, name = "search") String searchValue,
+            @RequestParam(required = false, name = "page") Integer currentPage,
+            @RequestParam(required = false, name = "pageSize") Integer pageSize,
+            @RequestParam(required = false, name = "search") String searcdhValue,
+            @RequestParam(required = false, name = "orderBy") String orderBy) {
+
+        ModelAndView modelAndView = new ModelAndView("dashboard");
+        nbComputers = computerService.getNumberComputers();
+        if (currentPage == null) {
             currentPage = 1;
         }
         if (currentPage < 1) {
             currentPage = 1;
         }
-        computerPerPage = 10;
+        if (pageSize != null) {
+            computerPerPage = pageSize;
+        }
         Page page = new Page(computerPerPage, currentPage);
         List<Computer> allComputers = new ArrayList<Computer>();
         if (searchValue == null && orderBy == null) {
             allComputers = computerService.getAllByPage(page);
         } else if (searchValue == null && orderBy != null) {
             allComputers = computerService.orderBy(page, orderBy);
-            modelAndView.addObject(orderBy);
+            modelAndView.addObject("orderBy", orderBy);
         } else {
             allComputers = computerService.findByNameByPage(searchValue, page);
             modelAndView.addObject("search", searchValue);
@@ -72,18 +74,42 @@ public class ListComputersController {
         modelAndView.addObject("currentPage", currentPage);
         modelAndView.addObject("nbPages", nbPages);
         modelAndView.addObject("lastPageIndex", lastPageIndex);
-		return modelAndView;
-	}
-    
-    @PostMapping(value="/deleteComputer")
-	public ModelAndView deleteComputer(@RequestParam List<Long> selection,
-			@RequestParam Integer currentPage,
-			@RequestParam(required = false, name = "pageSize") Integer computerPerPage ) {
-		ModelAndView modelAndView = new ModelAndView("redirect:/ListComputers?page="+currentPage);
+        return modelAndView;
+    }
+
+    @PostMapping(value = "/deleteComputer")
+    public ModelAndView deleteComputer(@RequestParam List<Long> selection,
+            @RequestParam(required = false) Integer currentPage) {
+        ModelAndView modelAndView = new ModelAndView("redirect:/ListComputers");
         for (Long computerId : selection) {
             computerService.delete(computerId);
         }
-		return modelAndView;
-	}
+        currentPage = pageNumberToRedirect(currentPage, selection.size());
+        modelAndView.addObject("page", currentPage);
+        return modelAndView;
+    }
 
+    /**
+     * Get the page name to redirect to after deleting computers.
+     *
+     * @param currentPage
+     * @param nbComputerToDelete
+     * @return page
+     */
+    private int pageNumberToRedirect(Integer currentPage, Integer nbComputerToDelete) {
+        if (currentPage == null) {
+            currentPage = 1;
+        }
+        int pageToGo = currentPage;
+        int nbPage = new Page(computerPerPage, currentPage).getTotalPages(nbComputers);
+        if (currentPage < 1) {
+            pageToGo = 1;
+        } else if (currentPage == nbPage && currentPage != 1) {
+            int nbCpLastPage = nbComputers % computerPerPage;
+            if (nbComputerToDelete == nbCpLastPage) {
+                pageToGo--;
+            }
+        }
+        return pageToGo;
+    }
 }
