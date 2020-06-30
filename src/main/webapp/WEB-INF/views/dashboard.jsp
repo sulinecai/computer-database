@@ -62,7 +62,7 @@
                             </span>
                         </th>
 						<c:set var="orderByValueLink" value=""/>  
-						<c:if test="${orderBy == null}"> 
+						<c:if test="${orderBy == null || orderBy.isEmpty()}"> 
 							<c:set var="orderByValueLink" value="&orderBy=computerAsc"/>                             
 						</c:if>                           
 						<c:if test="${orderBy.equals('computerAsc')}"> 
@@ -82,10 +82,10 @@
                         <th>
                             Discontinued date
                         </th>
-                        <c:set var="orderByValueLink" value=""/>  
-						<c:if test="${orderBy == null}"> 
+                        <c:set var="orderByValueLink" value=""/> 
+						<c:if test="${orderBy == null || orderBy.isEmpty()}"> 
 							<c:set var="orderByValueLink" value="&orderBy=companyAsc"/>                             
-						</c:if>                           
+						</c:if>                         
 						<c:if test="${orderBy.equals('companyAsc')}"> 
 							<c:set var="orderByValueLink" value="&orderBy=companyDesc"/>                             
 						</c:if> 
