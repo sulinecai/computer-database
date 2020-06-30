@@ -6,15 +6,16 @@ import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.excilys.formation.java.cdb.mappers.CompanyMapper;
 import com.excilys.formation.java.cdb.models.Company;
 import com.excilys.formation.java.cdb.models.Page;
+import com.excilys.formation.java.cdb.persistence.mappers.CompanyRowMapper;
 
 @Repository
 public class CompanyDAO {
@@ -31,16 +32,17 @@ public class CompanyDAO {
 
     private static Logger logger = LoggerFactory.getLogger(CompanyDAO.class);
 
+    @Autowired
     JdbcTemplate jdbcTemplate;
 
-    private CompanyDAO(JdbcTemplate jdbcTemplate) {
-        this.jdbcTemplate = jdbcTemplate;
+    private CompanyDAO() {
+
     }
 
     public List<Company> getAll() {
         List<Company> companyList = new ArrayList<Company>();
         try {
-            companyList = jdbcTemplate.query(SQL_SELECT_ALL, new CompanyMapper());
+            companyList = jdbcTemplate.query(SQL_SELECT_ALL, new CompanyRowMapper());
         } catch (DataAccessException e) {
             logger.error("error when getting all companies", e);
         }
@@ -56,7 +58,7 @@ public class CompanyDAO {
         List<Company> companyList = new ArrayList<Company>();
         if (page.getCurrentPage() > 0) {
             try {
-                companyList = jdbcTemplate.query(SQL_SELECT_ALL_BY_PAGE, new CompanyMapper(), page.getMaxLine(), page.getPageFirstLine());
+                companyList = jdbcTemplate.query(SQL_SELECT_ALL_BY_PAGE, new CompanyRowMapper(), page.getMaxLine(), page.getPageFirstLine());
             } catch (DataAccessException e) {
                 logger.error("error when listing all companies by page", e);
             }
@@ -68,7 +70,7 @@ public class CompanyDAO {
         Optional<Company> result = Optional.empty();
         if (id != null) {
             try {
-                result = Optional.ofNullable(jdbcTemplate.queryForObject(SQL_SELECT_WITH_ID, new CompanyMapper(), id));
+                result = Optional.ofNullable(jdbcTemplate.queryForObject(SQL_SELECT_WITH_ID, new CompanyRowMapper(), id));
             } catch (EmptyResultDataAccessException e) {
                 logger.info("company with id %d not found", id);
             } catch (DataAccessException e) {

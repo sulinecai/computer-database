@@ -1,15 +1,10 @@
 package com.excilys.formation.java.cdb.mappers;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Timestamp;
 import java.time.LocalDate;
 
 import org.junit.Test;
-import org.mockito.Mockito;
 
 import com.excilys.formation.java.cdb.dtos.CompanyDTO;
 import com.excilys.formation.java.cdb.dtos.ComputerDTO;
@@ -18,115 +13,7 @@ import com.excilys.formation.java.cdb.models.Computer;
 
 public class ComputerMapperTest {
 
-    private static final String ATTRIBUT_ID_COMPUTER = "id";
-    private static final String ATTRIBUT_NAME = "name";
-    private static final String ATTRIBUT_INTRODUCED = "introduced";
-    private static final String ATTRIBUT_DISCONTINUED = "discontinued";
-    private static final String ATTRIBUT_COMPANY_ID = "company_id";
-    private static final String ATTRIBUT_COMPANY_NAME = "company_name";
 
-    private final Long idComputer = 10L;
-    private final String computerName = "computer name";
-    private final Timestamp introduced = new Timestamp(200L);
-    private final Timestamp discontinued = new Timestamp(300L);
-    private final Long idCompany = 15L;
-    private final String companyName = "company name";
-
-    private ResultSet resultSet = Mockito.mock(ResultSet.class);
-
-    @Test
-    public void testConvert() {
-        try {
-            Mockito.when(resultSet.getLong(ATTRIBUT_ID_COMPUTER)).thenReturn(idComputer);
-            Mockito.when(resultSet.getString(ATTRIBUT_NAME)).thenReturn(computerName);
-            Mockito.when(resultSet.getTimestamp(ATTRIBUT_INTRODUCED)).thenReturn(introduced);
-            Mockito.when(resultSet.getTimestamp(ATTRIBUT_DISCONTINUED)).thenReturn(discontinued);
-            Mockito.when(resultSet.getLong(ATTRIBUT_COMPANY_ID)).thenReturn(idCompany);
-            Mockito.when(resultSet.getString(ATTRIBUT_COMPANY_NAME)).thenReturn(companyName);
-        } catch (SQLException e) {
-            fail("sql exception :" + e.getMessage());
-        }
-        Computer computer = new ComputerMapper().mapRow(resultSet, 0);
-        Computer expComputer = new Computer.Builder()
-                .setIdComputer(idComputer)
-                .setName(computerName)
-                .setIntroducedDate(introduced.toLocalDateTime().toLocalDate())
-                .setDiscontinuedDate(discontinued.toLocalDateTime().toLocalDate())
-                .setCompany(new Company.Builder()
-                        .setIdCompany(idCompany)
-                        .setName(companyName)
-                        .build()).build();
-
-        assertEquals(expComputer, computer);
-    }
-
-    @Test
-    public void testConvertIntroducedNull() {
-        try {
-            Mockito.when(resultSet.getLong(ATTRIBUT_ID_COMPUTER)).thenReturn(idComputer);
-            Mockito.when(resultSet.getString(ATTRIBUT_NAME)).thenReturn(computerName);
-            Mockito.when(resultSet.getTimestamp(ATTRIBUT_DISCONTINUED)).thenReturn(discontinued);
-            Mockito.when(resultSet.getLong(ATTRIBUT_COMPANY_ID)).thenReturn(idCompany);
-            Mockito.when(resultSet.getString(ATTRIBUT_COMPANY_NAME)).thenReturn(companyName);
-        } catch (SQLException e) {
-            fail("sql exception :" + e.getMessage());
-        }
-        Computer computer = new ComputerMapper().mapRow(resultSet, 0);
-        Computer expComputer = new Computer.Builder()
-                .setIdComputer(idComputer)
-                .setName(computerName)
-                .setDiscontinuedDate(discontinued.toLocalDateTime().toLocalDate())
-                .setCompany(new Company.Builder()
-                        .setIdCompany(idCompany)
-                        .setName(companyName)
-                        .build()).build();
-
-        assertEquals(expComputer, computer);
-    }
-
-    @Test
-    public void testConvertdiscontinuedNull() {
-        try {
-            Mockito.when(resultSet.getLong(ATTRIBUT_ID_COMPUTER)).thenReturn(idComputer);
-            Mockito.when(resultSet.getString(ATTRIBUT_NAME)).thenReturn(computerName);
-            Mockito.when(resultSet.getTimestamp(ATTRIBUT_INTRODUCED)).thenReturn(introduced);
-            Mockito.when(resultSet.getLong(ATTRIBUT_COMPANY_ID)).thenReturn(idCompany);
-            Mockito.when(resultSet.getString(ATTRIBUT_COMPANY_NAME)).thenReturn(companyName);
-        } catch (SQLException e) {
-            fail("sql exception :" + e.getMessage());
-        }
-        Computer computer = new ComputerMapper().mapRow(resultSet, 0);
-        Computer expComputer = new Computer.Builder()
-                .setIdComputer(idComputer)
-                .setName(computerName)
-                .setIntroducedDate(introduced.toLocalDateTime().toLocalDate())
-                .setCompany(new Company.Builder()
-                        .setIdCompany(idCompany)
-                        .setName(companyName)
-                        .build()).build();
-        assertEquals(expComputer, computer);
-    }
-
-    @Test
-    public void testConvertCompanyNull() {
-        try {
-            Mockito.when(resultSet.getLong(ATTRIBUT_ID_COMPUTER)).thenReturn(idComputer);
-            Mockito.when(resultSet.getString(ATTRIBUT_NAME)).thenReturn(computerName);
-            Mockito.when(resultSet.getTimestamp(ATTRIBUT_INTRODUCED)).thenReturn(introduced);
-            Mockito.when(resultSet.getTimestamp(ATTRIBUT_DISCONTINUED)).thenReturn(discontinued);
-        } catch (SQLException e) {
-            fail("sql exception :" + e.getMessage());
-        }
-        Computer computer = new ComputerMapper().mapRow(resultSet, 0);
-        Computer expComputer = new Computer.Builder()
-                .setIdComputer(idComputer)
-                .setName(computerName)
-                .setIntroducedDate(introduced.toLocalDateTime().toLocalDate())
-                .setDiscontinuedDate(discontinued.toLocalDateTime().toLocalDate())
-                .build();
-
-        assertEquals(expComputer.toString(), computer.toString());
-    }
 
     /**
      * Test that the Computer is correctly converted to a ComputerDTO.

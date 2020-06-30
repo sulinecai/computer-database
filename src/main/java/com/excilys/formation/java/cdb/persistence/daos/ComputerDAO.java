@@ -1,22 +1,21 @@
 package com.excilys.formation.java.cdb.persistence.daos;
 
-import java.sql.Timestamp;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.excilys.formation.java.cdb.mappers.CompanyMapper;
-import com.excilys.formation.java.cdb.mappers.ComputerMapper;
 import com.excilys.formation.java.cdb.models.Computer;
 import com.excilys.formation.java.cdb.models.Page;
+import com.excilys.formation.java.cdb.persistence.mappers.ComputerRowMapper;
 
 @Repository
 public class ComputerDAO {
@@ -52,13 +51,13 @@ public class ComputerDAO {
 
     private static final String SQL_OFFSET  = " LIMIT ? OFFSET ?";
 
+    @Autowired
     JdbcTemplate jdbcTemplate;
 
     private static Logger logger = LoggerFactory.getLogger(CompanyMapper.class);
 
 
-    private ComputerDAO(JdbcTemplate jdbcTemplate) {
-        this.jdbcTemplate = jdbcTemplate;
+    private ComputerDAO() {
     }
 
     public int getNumberComputers() {
@@ -84,7 +83,7 @@ public class ComputerDAO {
             logger.error("the page is null");
         } else if (page.getCurrentPage() > 0) {
             try {
-                computerList = jdbcTemplate.query(SQL_SELECT_ALL.concat(SQL_OFFSET), new ComputerMapper(),
+                computerList = jdbcTemplate.query(SQL_SELECT_ALL.concat(SQL_OFFSET), new ComputerRowMapper(),
                         page.getMaxLine(), page.getPageFirstLine());
             } catch (DataAccessException e) {
                 logger.error("error when get all by page:", e);
@@ -97,7 +96,7 @@ public class ComputerDAO {
         Optional<Computer> result = Optional.empty();
         if (id != null) {
             try {
-                result = Optional.ofNullable(jdbcTemplate.queryForObject(SQL_SELECT_WITH_ID, new ComputerMapper(), id));
+                result = Optional.ofNullable(jdbcTemplate.queryForObject(SQL_SELECT_WITH_ID, new ComputerRowMapper(), id));
             } catch (EmptyResultDataAccessException e) {
                 logger.info("computer with id %d not found", id);
             } catch (DataAccessException e) {
@@ -113,7 +112,7 @@ public class ComputerDAO {
         List<Computer> computerList = new ArrayList<Computer>();
         if (page.getCurrentPage() > 0 && name != null && !name.isEmpty() && !name.contains("%") && !name.contains("_")) {
             try {
-                computerList = jdbcTemplate.query(SQL_SELECT_WITH_NAME.concat(SQL_OFFSET), new ComputerMapper(),
+                computerList = jdbcTemplate.query(SQL_SELECT_WITH_NAME.concat(SQL_OFFSET), new ComputerRowMapper(),
                         "%".concat(name).concat("%"),
                         "%".concat(name).concat("%"),
                         page.getMaxLine(),
@@ -129,7 +128,7 @@ public class ComputerDAO {
         List<Computer> computerList = new ArrayList<Computer>();
         if (name != null && !name.isEmpty() && !name.contains("%") && !name.contains("_")) {
             try {
-                computerList = jdbcTemplate.query(SQL_SELECT_WITH_NAME, new ComputerMapper(),
+                computerList = jdbcTemplate.query(SQL_SELECT_WITH_NAME, new ComputerRowMapper(),
                         "%".concat(name).concat("%"),
                         "%".concat(name).concat("%"));
             } catch (DataAccessException e) {
@@ -150,8 +149,8 @@ public class ComputerDAO {
             try {
                 nbRows = jdbcTemplate.update(SQL_INSERT,
                         computer.getName(),
-                        localDateToTimestamp(computer.getIntroducedDate()),
-                        localDateToTimestamp(computer.getDiscontinuedDate()),
+                        ComputerRowMapper.localDateToTimestamp(computer.getIntroducedDate()),
+                        ComputerRowMapper.localDateToTimestamp(computer.getDiscontinuedDate()),
                         computer.getCompany() == null ? null : computer.getCompany().getIdCompany());
                 if (nbRows != 1) {
                     logger.info("%d rows affected when creating computer", nbRows);
@@ -175,8 +174,8 @@ public class ComputerDAO {
             try {
                 nbRows = jdbcTemplate.update(SQL_UPDATE,
                         computer.getName(),
-                        localDateToTimestamp(computer.getIntroducedDate()),
-                        localDateToTimestamp(computer.getDiscontinuedDate()),
+                        ComputerRowMapper.localDateToTimestamp(computer.getIntroducedDate()),
+                        ComputerRowMapper.localDateToTimestamp(computer.getDiscontinuedDate()),
                         computer.getCompany() == null ? null : computer.getCompany().getIdCompany(),
                         computer.getIdComputer());
                 if (nbRows != 1) {
@@ -235,23 +234,11 @@ public class ComputerDAO {
         }
 
         try {
-            computerList = jdbcTemplate.query(requete, new ComputerMapper(), page.getMaxLine(), page.getPageFirstLine());
+            computerList = jdbcTemplate.query(requete, new ComputerRowMapper(), page.getMaxLine(), page.getPageFirstLine());
         } catch (DataAccessException e) {
             logger.error("error when sorting computers", e);
         }
         return computerList;
-    }
-
-    private Timestamp localDateToTimestamp(LocalDate localDate) {
-        Timestamp result = null;
-        if (localDate != null) {
-            if (localDate.isEqual(LocalDate.of(1970, 1, 1))) {
-                result = Timestamp.valueOf(localDate.atStartOfDay().plusHours(1).plusSeconds(1));
-            } else {
-                result = Timestamp.valueOf(localDate.atStartOfDay());
-            }
-        }
-        return result;
     }
 
 }
