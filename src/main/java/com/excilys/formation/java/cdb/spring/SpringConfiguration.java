@@ -16,19 +16,12 @@ import com.zaxxer.hikari.HikariDataSource;
 @Configuration
 @ComponentScan({ "com.excilys.formation.java.cdb.services", "com.excilys.formation.java.cdb.persistence.daos",
         "com.excilys.formation.java.cdb.controllers" })
-public class SpringConfiguration extends AbstractContextLoaderInitializer {
+public class SpringConfiguration {
 
     @Bean
     public JdbcTemplate getJdbcTemplate() {
         HikariConfig config = new HikariConfig("/datasource.properties");
         DataSource datasource = new HikariDataSource(config);
         return new JdbcTemplate(datasource);
-    }
-
-    @Override
-    protected WebApplicationContext createRootApplicationContext() {
-        AnnotationConfigWebApplicationContext rootContext = new AnnotationConfigWebApplicationContext();
-        rootContext.register(SpringConfiguration.class, WebConfig.class);
-        return rootContext;
     }
 }
