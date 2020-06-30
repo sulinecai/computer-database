@@ -3,7 +3,7 @@ package com.excilys.formation.java.cdb.dtos;
 public class CompanyDTO {
 
     private String idCompany;
-    private String name;
+    private String companyName;
 
     public String getIdCompany() {
         return idCompany;
@@ -13,17 +13,17 @@ public class CompanyDTO {
         this.idCompany = idCompany;
     }
 
-    public String getName() {
-        return name;
+    public String getCompanyName() {
+        return companyName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
     }
 
     @Override
     public String toString() {
-        return "CompanyDTO " + idCompany + ", name: " + name;
+        return "CompanyDTO " + idCompany + ", name: " + companyName;
     }
 
     @Override
@@ -31,7 +31,7 @@ public class CompanyDTO {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((idCompany == null) ? 0 : idCompany.hashCode());
-        result = prime * result + ((name == null) ? 0 : name.hashCode());
+        result = prime * result + ((companyName == null) ? 0 : companyName.hashCode());
         return result;
     }
 
@@ -54,11 +54,11 @@ public class CompanyDTO {
         } else if (!idCompany.equals(other.idCompany)) {
             return false;
         }
-        if (name == null) {
-            if (other.name != null) {
+        if (companyName == null) {
+            if (other.companyName != null) {
                 return false;
             }
-        } else if (!name.equals(other.name)) {
+        } else if (!companyName.equals(other.companyName)) {
             return false;
         }
         return true;
@@ -67,22 +67,22 @@ public class CompanyDTO {
     public static class Builder {
 
         private String idCompany;
-        private String name;
+        private String companyName;
 
         public Builder setIdCompany(String idCompany) {
             this.idCompany = idCompany;
             return this;
         }
 
-        public Builder setName(String name) {
-            this.name = name;
+        public Builder setCompanyName(String companyName) {
+            this.companyName = companyName;
             return this;
         }
 
         public CompanyDTO build() {
             CompanyDTO companyDTO = new CompanyDTO();
             companyDTO.idCompany = this.idCompany;
-            companyDTO.name = this.name;
+            companyDTO.companyName = this.companyName;
             return companyDTO;
 
         }

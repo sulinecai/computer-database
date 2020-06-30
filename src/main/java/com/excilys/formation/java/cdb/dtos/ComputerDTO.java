@@ -2,7 +2,7 @@ package com.excilys.formation.java.cdb.dtos;
 
 public class ComputerDTO {
     private String idComputer;
-    private String name;
+    private String computerName;
     private String introducedDate;
     private String discontinuedDate;
     private CompanyDTO companyDTO;
@@ -15,12 +15,12 @@ public class ComputerDTO {
         this.idComputer = idComputer;
     }
 
-    public String getName() {
-        return name;
+    public String getComputerName() {
+        return computerName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setComputerName(String computerName) {
+        this.computerName = computerName;
     }
 
     public String getIntroducedDate() {
@@ -52,10 +52,10 @@ public class ComputerDTO {
         String companyString = "";
         if (companyDTO != null) {
             if (companyDTO.getIdCompany() != null && companyDTO.getIdCompany() != "0") {
-                companyString = ", companyId:" + companyDTO.getIdCompany() + ", companyName:" + companyDTO.getName();
+                companyString = ", companyId:" + companyDTO.getIdCompany() + ", companyName:" + companyDTO.getCompanyName();
             }
         }
-        return "Computer " + idComputer + ", name: " + name + ", introducedDate:" + introducedDate
+        return "Computer " + idComputer + ", name: " + computerName + ", introducedDate:" + introducedDate
                 + ", discontinuedDate:" + discontinuedDate + companyString;
     }
 
@@ -67,7 +67,7 @@ public class ComputerDTO {
         result = prime * result + ((discontinuedDate == null) ? 0 : discontinuedDate.hashCode());
         result = prime * result + ((idComputer == null) ? 0 : idComputer.hashCode());
         result = prime * result + ((introducedDate == null) ? 0 : introducedDate.hashCode());
-        result = prime * result + ((name == null) ? 0 : name.hashCode());
+        result = prime * result + ((computerName == null) ? 0 : computerName.hashCode());
         return result;
     }
 
@@ -111,11 +111,11 @@ public class ComputerDTO {
         } else if (!introducedDate.equals(other.introducedDate)) {
             return false;
         }
-        if (name == null) {
-            if (other.name != null) {
+        if (computerName == null) {
+            if (other.computerName != null) {
                 return false;
             }
-        } else if (!name.equals(other.name)) {
+        } else if (!computerName.equals(other.computerName)) {
             return false;
         }
         return true;
@@ -124,7 +124,7 @@ public class ComputerDTO {
     public static class Builder {
 
         private String idComputer;
-        private String name;
+        private String computerName;
         private String introducedDate;
         private String discontinuedDate;
         private CompanyDTO companyDTO;
@@ -134,8 +134,8 @@ public class ComputerDTO {
             return this;
         }
 
-        public Builder setName(String name) {
-            this.name = name;
+        public Builder setName(String computerName) {
+            this.computerName = computerName;
             return this;
         }
 
@@ -157,7 +157,7 @@ public class ComputerDTO {
         public ComputerDTO build() {
             ComputerDTO computerDTO = new ComputerDTO();
             computerDTO.idComputer = this.idComputer;
-            computerDTO.name = this.name;
+            computerDTO.computerName = this.computerName;
             computerDTO.introducedDate = this.introducedDate;
             computerDTO.discontinuedDate = this.discontinuedDate;
             computerDTO.companyDTO = this.companyDTO;

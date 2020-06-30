@@ -150,7 +150,7 @@ public class ComputerMapperTest {
                 .setDiscontinuedDate("2016-04-07")
                 .setCompanyDTO(new CompanyDTO.Builder()
                         .setIdCompany("2")
-                        .setName("company").build()).build();
+                        .setCompanyName("company").build()).build();
         assertEquals(expectedDTO, dto);
     }
 
@@ -166,7 +166,7 @@ public class ComputerMapperTest {
             .setDiscontinuedDate("2016-04-07")
             .setCompanyDTO(new CompanyDTO.Builder()
                     .setIdCompany("2")
-                    .setName("company").build()).build();
+                    .setCompanyName("company").build()).build();
 
         Computer computer = ComputerMapper.toComputer(dto);
         Computer expComputer = new Computer.Builder()

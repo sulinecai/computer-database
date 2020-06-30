@@ -31,19 +31,19 @@
                         <fieldset>
                             <div class="form-group">
                                 <label for="computerName">Computer name *</label>
-                                <input type="text" class="form-control" required id="computerName" name="computerName" value="${computer.name}">
+                                <input type="text" class="form-control" required id="computerName" name="computerName" value="${computer.computerName}">
                             </div>
                             <div class="form-group">
-                                <label for="introduced">Introduced date</label>
-                                <input type="date" class="form-control" id="introduced" name="introduced" value="${computer.introducedDate}">
+                                <label for="introducedDate">Introduced date</label>
+                                <input type="date" class="form-control" id="introducedDate" name="introducedDate" value="${computer.introducedDate}">
                             </div>
                             <div class="form-group">
-                                <label for="discontinued">Discontinued date</label>
-                                <input type="date" class="form-control" id="discontinued" name="discontinued" value="${computer.discontinuedDate}">
+                                <label for="discontinuedDate">Discontinued date</label>
+                                <input type="date" class="form-control" id="discontinuedDate" name="discontinuedDate" value="${computer.discontinuedDate}">
                             </div>
                             <div class="form-group">
-                                <label for="companyId">Company</label>
-                                <select class="form-control" id="companyId" name="companyId">
+                                <label for="idCompany">Company</label>
+                                <select class="form-control" id="idCompany" name="idCompany">
                                     <option value="0">--</option>
                                     <c:forEach items="${companies}" var="company">
 										<c:set var="currentCompany" value="" />
@@ -53,7 +53,7 @@
 										<c:out value="${currentCompany}"></c:out>
 										<option value="${company.idCompany}"
 											<c:out value="${currentCompany}"/>>
-											<c:out value="${company.idCompany} - ${company.name}" />
+											<c:out value="${company.idCompany} - ${company.companyName}" />
 										</option>
 									</c:forEach>
                                 </select>

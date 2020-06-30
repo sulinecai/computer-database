@@ -64,31 +64,9 @@ public class EditComputerController {
     }
 
     @PostMapping
-    public ModelAndView editComputer(
-            @RequestParam String idComputer,
-            @RequestParam String computerName,
-            @RequestParam String introduced,
-            @RequestParam String discontinued,
-            @RequestParam String companyId,
-            @RequestParam Integer currentPage) {
-        ModelAndView modelAndView = new ModelAndView("redirect:/ListComputers");
-        ComputerDTO computerDTO = new ComputerDTO();
-
-        if (!idComputer.isEmpty()) {
-            computerDTO.setIdComputer(idComputer);
-            if (!computerName.isEmpty()) {
-                computerDTO.setName(computerName);
-            }
-            if (!introduced.isEmpty()) {
-                computerDTO.setIntroducedDate(introduced);
-            }
-            if (!discontinued.isEmpty()) {
-                computerDTO.setDiscontinuedDate(discontinued);
-            }
-            if (!companyId.isEmpty() && !companyId.equals("0")) {
-                CompanyDTO companyDTO = new CompanyDTO.Builder().setIdCompany(companyId).build();
-                computerDTO.setCompanyDTO(companyDTO);
-            }
+    public ModelAndView editComputer(ComputerDTO computerDTO, CompanyDTO companyDTO, @RequestParam Integer currentPage) {
+        if (!companyDTO.getIdCompany().equals("0")){
+            computerDTO.setCompanyDTO(companyDTO);
         }
         Computer computer = ComputerMapper.toComputer(computerDTO);
         if (computerService.allowedToCreateOrEdit(computer)) {
@@ -97,6 +75,7 @@ public class EditComputerController {
         } else {
             logger.info("computer update not allowed");
         }
+        ModelAndView modelAndView = new ModelAndView("redirect:/ListComputers");
         modelAndView.addObject("page", currentPage);
         return modelAndView;
     }

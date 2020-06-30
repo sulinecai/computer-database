@@ -16,10 +16,10 @@ public class ComputerDTOValidator implements Validator {
     public void validate(Object target, Errors errors) {
         ComputerDTO computerDTO = (ComputerDTO) target;
         System.out.println("test");
-        if (computerDTO.getName() == null || computerDTO.getName().isEmpty()) {
+        if (computerDTO.getComputerName() == null || computerDTO.getComputerName().isEmpty()) {
             errors.rejectValue("name", "null or empty");
         }
-        if (computerDTO.getName().equals("test")) {
+        if (computerDTO.getComputerName().equals("test")) {
             errors.rejectValue("name", "test");
         }
     }

@@ -40,7 +40,7 @@ public class CompanyMapper implements RowMapper<Company> {
         CompanyDTO dto = new CompanyDTO();
         try {
             dto.setIdCompany(company.getIdCompany().toString());
-            dto.setName(company.getName());
+            dto.setCompanyName(company.getName());
         } catch (NullPointerException e) {
             logger.error("idCompany or name null when converting a company to a companyDTO", e);
         }
@@ -56,7 +56,7 @@ public class CompanyMapper implements RowMapper<Company> {
         Company company = new Company();
         try {
             company.setIdCompany(Long.valueOf(dto.getIdCompany()));
-            company.setName(dto.getName());
+            company.setName(dto.getCompanyName());
         } catch (NullPointerException e) {
             logger.error("id company or name null when converting a companyDTO to a company", e);
         }

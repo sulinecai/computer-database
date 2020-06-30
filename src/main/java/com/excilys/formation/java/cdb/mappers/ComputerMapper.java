@@ -57,7 +57,7 @@ public class ComputerMapper implements RowMapper<Computer> {
         ComputerDTO dto = new ComputerDTO();
         try {
             dto.setIdComputer(computer.getIdComputer().toString());
-            dto.setName(computer.getName());
+            dto.setComputerName(computer.getName());
             if (computer.getIntroducedDate() == null) {
                 dto.setIntroducedDate("");
             } else {
@@ -87,7 +87,7 @@ public class ComputerMapper implements RowMapper<Computer> {
             if (dto.getIdComputer() != null) {
                 computer.setIdComputer(Long.valueOf(dto.getIdComputer()));
             }
-            computer.setName(dto.getName());
+            computer.setName(dto.getComputerName());
             if (dto.getIntroducedDate() != null && !dto.getIntroducedDate().equals("")) {
                 computer.setIntroducedDate(LocalDate.parse(dto.getIntroducedDate()));
             }
