@@ -1,38 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
 
-  <groupId>com.excilys.formation.java.cdb</groupId>
-  <artifactId>computer-database</artifactId>
-  <version>4.0.0</version>
-  <packaging>war</packaging>
+	<groupId>com.excilys.formation.java.cdb</groupId>
+	<artifactId>computer-database</artifactId>
+	<version>4.0.0</version>
+	<packaging>war</packaging>
 
-  <name>computer-database Maven Webapp</name>
+	<name>computer-database Maven Webapp</name>
 
-  <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <maven.compiler.source>1.8</maven.compiler.source>
-    <maven.compiler.target>1.8</maven.compiler.target>
-    
-    <junit.version>4.12</junit.version>
-    <javax.servlet-api.version>4.0.0</javax.servlet-api.version>
-    <mysql-connector-java.version>8.0.20</mysql-connector-java.version>
-    <mockito-all.version>1.10.19</mockito-all.version>
-    <powermock-module-junit4.version>1.6.2</powermock-module-junit4.version>
-    <powermock-api-mockito.version>1.6.2</powermock-api-mockito.version>
-    <slf4j-log4j12.version>1.7.25</slf4j-log4j12.version>
-    <slf4j-api.version>1.6.1</slf4j-api.version>
-    <h2.version>1.4.200</h2.version>
-    <jstl.version>1.2</jstl.version>  
-    <HikariCP.version>3.4.5</HikariCP.version>
-    <HikariCP.version>3.4.5</HikariCP.version>
-	<spring.version>5.2.6.RELEASE</spring.version>
-    
-  </properties>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
 
-<dependencies>
+		<junit.version>4.12</junit.version>
+		<javax.servlet-api.version>4.0.0</javax.servlet-api.version>
+		<mysql-connector-java.version>8.0.20</mysql-connector-java.version>
+		<mockito-all.version>1.10.19</mockito-all.version>
+		<powermock-module-junit4.version>1.6.2</powermock-module-junit4.version>
+		<powermock-api-mockito.version>1.6.2</powermock-api-mockito.version>
+		<slf4j-log4j12.version>1.7.25</slf4j-log4j12.version>
+		<slf4j-api.version>1.6.1</slf4j-api.version>
+		<h2.version>1.4.200</h2.version>
+		<jstl.version>1.2</jstl.version>
+		<HikariCP.version>3.4.5</HikariCP.version>
+		<spring.version>5.2.6.RELEASE</spring.version>
+	</properties>
+	
+	<reporting>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-checkstyle-plugin</artifactId>
+				<version>3.1.1</version>
+				<configuration>
+					<configLocation>config/checkstyle.xml</configLocation>
+					<suppressionsLocation>config/suppressions.xml</suppressionsLocation>
+					<suppressionsFileExpression>checkstyle.suppressions.file</suppressionsFileExpression>
+				</configuration>
+			</plugin>
+		</plugins>
+	</reporting>
+
+	<dependencies>
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
@@ -58,124 +72,57 @@
 			<groupId>org.mockito</groupId>
 			<artifactId>mockito-all</artifactId>
 			<version>${mockito-all.version}</version>
- 			<scope>test</scope>
+			<scope>test</scope>
 		</dependency>
 
 		<dependency>
-		    <groupId>org.powermock</groupId>
-		    <artifactId>powermock-module-junit4</artifactId>
-		    <version>${powermock-module-junit4.version}</version>
-		    <scope>test</scope>
-		</dependency>
-		
-		<dependency>
-		    <groupId>org.powermock</groupId>
-		    <artifactId>powermock-api-mockito</artifactId>
-		    <version>${powermock-api-mockito.version}</version>
-		    <scope>test</scope>
-		</dependency>
-
- 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-log4j12</artifactId>
 			<version>${slf4j-log4j12.version}</version>
 		</dependency>
 		<dependency>
-		    <groupId>org.slf4j</groupId>
-		    <artifactId>slf4j-api</artifactId>
-		    <version>${slf4j-api.version}</version>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>${slf4j-api.version}</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
 			<version>${h2.version}</version>
+			<scope>test</scope>
 		</dependency>
 
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>jstl</artifactId>
 			<version>${jstl.version}</version>
+			<scope>runtime</scope>
 		</dependency>
-		
+
 		<dependency>
-		    <groupId>com.zaxxer</groupId>
-		    <artifactId>HikariCP</artifactId>
-		    <version>${HikariCP.version}</version>
+			<groupId>com.zaxxer</groupId>
+			<artifactId>HikariCP</artifactId>
+			<version>${HikariCP.version}</version>
 		</dependency>
-		
+
 		<dependency>
-		    <groupId>org.springframework</groupId>
-		    <artifactId>spring-core</artifactId>
-		    <version>${spring.version}</version>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+			<version>${spring.version}</version>
 		</dependency>
-		
-		<dependency> 
-	        <groupId>org.springframework</groupId> 
-	        <artifactId>spring-context</artifactId> 
-	        <version>${spring.version}</version> 
-    	</dependency> 
-    	
-    	<dependency>
-		    <groupId>org.springframework</groupId>
-		    <artifactId>spring-test</artifactId>
-		    <version>${spring.version}</version>
-		    <scope>test</scope>
-		</dependency>
-		
+
 		<dependency>
-		    <groupId>org.springframework</groupId>
-		    <artifactId>spring-jdbc</artifactId>
-		    <version>${spring.version}</version>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<version>${spring.version}</version>
+			<scope>test</scope>
 		</dependency>
-		
+
 		<dependency>
-		    <groupId>org.springframework</groupId>
-		    <artifactId>spring-webmvc</artifactId>
-		    <version>${spring.version}</version>
-		</dependency>
-		
-		<dependency>
-		    <groupId>org.springframework</groupId>
-		    <artifactId>spring-web</artifactId>
-		    <version>${spring.version}</version>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jdbc</artifactId>
+			<version>${spring.version}</version>
 		</dependency>
 	</dependencies>
-
-  <build>
-    <finalName>computer-database</finalName>
-    <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
-      <plugins>
-        <plugin>
-          <artifactId>maven-clean-plugin</artifactId>
-          <version>3.1.0</version>
-        </plugin>
-        <!-- see http://maven.apache.org/ref/current/maven-core/default-bindings.html#Plugin_bindings_for_war_packaging -->
-        <plugin>
-          <artifactId>maven-resources-plugin</artifactId>
-          <version>3.0.2</version>
-        </plugin>
-        <plugin>
-          <artifactId>maven-compiler-plugin</artifactId>
-          <version>3.8.0</version>
-        </plugin>
-        <plugin>
-          <artifactId>maven-surefire-plugin</artifactId>
-          <version>2.22.1</version>
-        </plugin>
-        <plugin>
-          <artifactId>maven-war-plugin</artifactId>
-          <version>3.2.2</version>
-        </plugin>
-        <plugin>
-          <artifactId>maven-install-plugin</artifactId>
-          <version>2.5.2</version>
-        </plugin>
-        <plugin>
-          <artifactId>maven-deploy-plugin</artifactId>
-          <version>2.8.2</version>
-        </plugin>
-      </plugins>
-    </pluginManagement>
-  </build>
 </project>
