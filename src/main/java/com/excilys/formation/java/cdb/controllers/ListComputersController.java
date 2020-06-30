@@ -2,6 +2,7 @@ package com.excilys.formation.java.cdb.controllers;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.excilys.formation.java.cdb.dtos.ComputerDTO;
 import com.excilys.formation.java.cdb.dtos.DashboardDTO;
+import com.excilys.formation.java.cdb.mappers.CompanyMapper;
 import com.excilys.formation.java.cdb.mappers.ComputerMapper;
 import com.excilys.formation.java.cdb.models.Computer;
 import com.excilys.formation.java.cdb.models.Page;
@@ -52,9 +54,8 @@ public class ListComputersController {
         }
 
         List<ComputerDTO> allComputerDTOs = new ArrayList<ComputerDTO>();
-        for (Computer c : allComputers) {
-            allComputerDTOs.add(ComputerMapper.toComputerDTO(c));
-        }
+        allComputerDTOs = allComputers.stream().map(c -> ComputerMapper.toComputerDTO(c)).collect(Collectors.toList());
+
         int lastPageIndex = nbPages;
         if ((dashboardDTO.getPage() + 9) < nbPages) {
             lastPageIndex = dashboardDTO.getPage() + 9;

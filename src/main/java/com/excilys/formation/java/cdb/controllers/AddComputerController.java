@@ -2,6 +2,7 @@ package com.excilys.formation.java.cdb.controllers;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -40,9 +41,7 @@ public class AddComputerController {
     public ModelAndView showInfo() {
         List<Company> allCompanies = companyService.getAll();
         List<CompanyDTO> allCompanyDTOs = new ArrayList<CompanyDTO>();
-        for (Company c : allCompanies) {
-            allCompanyDTOs.add(CompanyMapper.toCompanyDTO(c));
-        }
+        allCompanyDTOs = allCompanies.stream().map(c -> CompanyMapper.toCompanyDTO(c)).collect(Collectors.toList());
         ModelAndView modelAndView = new ModelAndView("addComputer");
         modelAndView.addObject("companies", allCompanyDTOs);
         return modelAndView;
