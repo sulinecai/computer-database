@@ -8,7 +8,6 @@ import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -53,15 +52,13 @@ public class ComputerDAO {
 
     private static final String SQL_OFFSET  = " LIMIT ? OFFSET ?";
 
-    @Autowired
     JdbcTemplate jdbcTemplate;
 
     private static Logger logger = LoggerFactory.getLogger(CompanyMapper.class);
 
-    /**
-     * Private constructor of ComputerDAO.
-     */
-    private ComputerDAO() {
+
+    private ComputerDAO(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
     }
 
     public int getNumberComputers() {
