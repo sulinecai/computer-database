@@ -26,8 +26,8 @@
                     <h1>Edit Computer</h1>
 
                     <form action="EditComputer" method="POST" onsubmit="return validateForm()">
-                        <input type="hidden" value="${currentPage}" id="currentPage" name="currentPage"/> <!-- TODO: Change this value with the computer id -->
-                        <input type="hidden" value="${computer.idComputer}" id="idComputer" name="idComputer"/> <!-- TODO: Change this value with the computer id -->
+                        <input type="hidden" value="${currentPage}" id="currentPage" name="currentPage"/>
+                        <input type="hidden" value="${computer.idComputer}" id="idComputer" name="idComputer"/> 
                         <fieldset>
                             <div class="form-group">
                                 <label for="computerName">Computer name *</label>

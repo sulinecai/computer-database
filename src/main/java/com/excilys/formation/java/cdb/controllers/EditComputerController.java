@@ -65,7 +65,7 @@ public class EditComputerController {
 
     @PostMapping
     public ModelAndView editComputer(ComputerDTO computerDTO, CompanyDTO companyDTO, @RequestParam Integer currentPage) {
-        if (!companyDTO.getIdCompany().equals("0")){
+        if (companyDTO.getIdCompany() != null && !companyDTO.getIdCompany().equals("0")){
             computerDTO.setCompanyDTO(companyDTO);
         }
         Computer computer = ComputerMapper.toComputer(computerDTO);

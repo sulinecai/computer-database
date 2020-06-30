@@ -22,23 +22,23 @@
             <div class="row">
                 <div class="col-xs-8 col-xs-offset-2 box">
                     <h1>Add Computer</h1>
-                    <form action="AddComputer" method="POST" onsubmit="return validateForm()">
+                    <form action="AddComputer" method="POST" onsubmit="return validateForm()">                    
                         <fieldset>
                             <div class="form-group">
                                 <label for="computerName">Computer name *</label>
                                 <input type="text" class="form-control" required id="computerName" name="computerName" placeholder="Computer name">
                             </div>
                             <div class="form-group">
-                                <label for="introduced">Introduced date</label>
-                                <input type="date" class="form-control" id="introduced" name="introduced" placeholder="Introduced date">
+                                <label for="introducedDate">Introduced date</label>
+                                <input type="date" class="form-control" id="introducedDate" name="introducedDate" placeholder="Introduced date">
                             </div>
                             <div class="form-group">
-                                <label for="discontinued">Discontinued date</label>
-                                <input type="date" class="form-control" id="discontinued" name="discontinued" placeholder="Discontinued date">
+                                <label for="discontinuedDate">Discontinued date</label>
+                                <input type="date" class="form-control" id="discontinuedDate" name="discontinuedDate" placeholder="Discontinued date">
                             </div>
                             <div class="form-group">
-                                <label for="companyId">Company</label>
-                                <select class="form-control" id="companyId" name="companyId">
+                                <label for="idCompany">Company</label>
+                                <select class="form-control" id="idCompany" name="idCompany">
                                     <option value="0" selected="selected">--</option>
 	                                <c:forEach items="${companies}" var="company">
 	                                   <option value="${company.idCompany}" ><c:out value="${company.idCompany} - ${company.companyName}"/></option>

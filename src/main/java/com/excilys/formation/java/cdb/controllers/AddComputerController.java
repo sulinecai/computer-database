@@ -9,7 +9,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.excilys.formation.java.cdb.dtos.CompanyDTO;
@@ -50,21 +49,8 @@ public class AddComputerController {
     }
 
     @PostMapping
-    public ModelAndView addComputer(
-            @RequestParam String computerName,
-            @RequestParam String introduced,
-            @RequestParam String discontinued,
-            @RequestParam String companyId) {
-        ModelAndView modelAndView = new ModelAndView("redirect:/ListComputers");
-        ComputerDTO computerDTO = new ComputerDTO.Builder().setName(computerName).build();
-        if (!introduced.isEmpty()) {
-            computerDTO.setIntroducedDate(introduced);
-        }
-        if (!discontinued.isEmpty()) {
-            computerDTO.setDiscontinuedDate(discontinued);
-        }
-        if (!companyId.isEmpty() && !companyId.equals("0")) {
-            CompanyDTO companyDTO = new CompanyDTO.Builder().setIdCompany(companyId).build();
+    public ModelAndView addComputer(ComputerDTO computerDTO, CompanyDTO companyDTO) {
+        if (companyDTO.getIdCompany() != null && !companyDTO.getIdCompany().equals("0")){
             computerDTO.setCompanyDTO(companyDTO);
         }
         if (ComputerValidator.dateFormatValidator(computerDTO.getIntroducedDate())
@@ -77,6 +63,6 @@ public class AddComputerController {
                 logger.error("computer creation not allowed");
             }
         }
-        return modelAndView;
+        return new ModelAndView("redirect:/ListComputers");
     }
 }
