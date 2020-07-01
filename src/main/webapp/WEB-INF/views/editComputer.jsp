@@ -1,5 +1,6 @@
 <%@ page pageEncoding= "UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>  
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,26 +24,26 @@
                     <div class="label label-default pull-right">
                         id: <c:out value="${computer.idComputer}" />
                     </div>
-                    <h1>Edit Computer</h1>
+                    <h1><spring:message code="label.editComputer"/></h1>
 
                     <form action="EditComputer" method="POST" onsubmit="return validateForm()">
                         <input type="hidden" value="${currentPage}" id="currentPage" name="currentPage"/>
                         <input type="hidden" value="${computer.idComputer}" id="idComputer" name="idComputer"/> 
                         <fieldset>
                             <div class="form-group">
-                                <label for="computerName">Computer name *</label>
+                                <label for="computerName"><spring:message code="label.computer"/> *</label>
                                 <input type="text" class="form-control" required id="computerName" name="computerName" value="${computer.computerName}">
                             </div>
                             <div class="form-group">
-                                <label for="introducedDate">Introduced date</label>
+                                <label for="introducedDate"><spring:message code="label.introduced"/></label>
                                 <input type="date" class="form-control" id="introducedDate" name="introducedDate" value="${computer.introducedDate}">
                             </div>
                             <div class="form-group">
-                                <label for="discontinuedDate">Discontinued date</label>
+                                <label for="discontinuedDate"><spring:message code="label.discontinued"/></label>
                                 <input type="date" class="form-control" id="discontinuedDate" name="discontinuedDate" value="${computer.discontinuedDate}">
                             </div>
                             <div class="form-group">
-                                <label for="idCompany">Company</label>
+                                <label for="idCompany"><spring:message code="label.company"/></label>
                                 <select class="form-control" id="idCompany" name="idCompany">
                                     <option value="0">--</option>
                                     <c:forEach items="${companies}" var="company">
@@ -58,12 +59,12 @@
 									</c:forEach>
                                 </select>
                             </div>  
-                            <i>* required</i>       
+                            <i>* <spring:message code="form.required"/></i>       
                         </fieldset>
                         <div class="actions pull-right">
-                            <input type="submit" value="Edit" class="btn btn-primary">
+                            <input type="submit" value='<spring:message code="button.edit"/>' class="btn btn-primary">
                             or
-                            <a href="ListComputers" class="btn btn-default">Cancel</a>
+                            <a href="ListComputers" class="btn btn-default"><spring:message code="button.cancel"/></a>
                         </div>
                     </form>
                 </div>
