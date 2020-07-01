@@ -32,7 +32,7 @@
                     </form>
                 </div>
                 <div class="pull-right">
-                    <a class="btn btn-success" id="addComputer" href="AddComputer"><spring:message code="button.addComputer"/></a> 
+                    <a class="btn btn-success" id="addComputer" href="AddComputer"><spring:message code="label.addComputer"/></a> 
                     <a class="btn btn-default" id="editComputer" href="#" onclick="$.fn.toggleEditMode();"><spring:message code="button.edit"/></a>
                 </div>
             </div>
@@ -71,14 +71,14 @@
 						</c:if> 
 						
                         <th>
-                        	<a href="ListComputers?${orderByValueLink}" onclick=""><spring:message code="title.computer"/> &#9650; &#9660;</a>
+                        	<a href="ListComputers?${orderByValueLink}" onclick=""><spring:message code="label.computer"/> &#9650; &#9660;</a>
                         </th>
                         <th>
-                            <spring:message code="title.introduced"/>
+                            <spring:message code="label.introduced"/>
                         </th>
                         <!-- Table header for Discontinued Date -->
                         <th>
-                            <spring:message code="title.discontinued"/>
+                            <spring:message code="label.discontinued"/>
                             
                         </th>
                         <c:set var="orderByValueLink" value=""/> 
@@ -93,7 +93,7 @@
 						</c:if> 
                         <!-- Table header for Company -->
                         <th>
-                            <a href="ListComputers?${orderByValueLink}" onclick=""><spring:message code="title.company"/> &#9650; &#9660;</a>
+                            <a href="ListComputers?${orderByValueLink}" onclick=""><spring:message code="label.company"/> &#9650; &#9660;</a>
                         </th>
 
                     </tr>
