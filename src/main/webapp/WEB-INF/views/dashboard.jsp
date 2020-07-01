@@ -18,24 +18,22 @@
             <a class="navbar-brand" href="ListComputers"> Application - Computer Database </a>
         </div>
     </header>
-
     <section id="main">
         <div class="container">
             <h1 id="homeTitle">
-                <c:out value="${nbComputers}"/> Computers found
+                <c:out value="${nbComputers}"/> <spring:message code="search.number"/>
             </h1>
-            <div id="actions" class="form-horizontal">
+        <div id="actions" class="form-horizontal">
                 <div class="pull-left">
                     <form id="searchForm" action="#" method="GET" class="form-inline">
 
-                        <input type="search" id="searchbox" name="search" class="form-control" placeholder="Search name" />
-                        <input type="submit" id="searchsubmit" value="Filter by name"
-                        class="btn btn-primary" />
+                        <input type="search" id="searchbox" name="search" class="form-control" placeholder='<spring:message code="search.name"/>' />
+                        <input type="submit" id="searchsubmit" value='<spring:message code="button.search"/>' class="btn btn-primary" />
                     </form>
                 </div>
                 <div class="pull-right">
-                    <a class="btn btn-success" id="addComputer" href="AddComputer">Add Computer</a> 
-                    <a class="btn btn-default" id="editComputer" href="#" onclick="$.fn.toggleEditMode();">Edit</a>
+                    <a class="btn btn-success" id="addComputer" href="AddComputer"><spring:message code="button.addComputer"/></a> 
+                    <a class="btn btn-default" id="editComputer" href="#" onclick="$.fn.toggleEditMode();"><spring:message code="button.edit"/></a>
                 </div>
             </div>
         </div>    
@@ -73,14 +71,15 @@
 						</c:if> 
 						
                         <th>
-                        	<a href="ListComputers?${orderByValueLink}" onclick="">Computer name &#9650; &#9660;</a>
+                        	<a href="ListComputers?${orderByValueLink}" onclick=""><spring:message code="title.computer"/> &#9650; &#9660;</a>
                         </th>
                         <th>
-                            Introduced date
+                            <spring:message code="title.introduced"/>
                         </th>
                         <!-- Table header for Discontinued Date -->
                         <th>
-                            Discontinued date
+                            <spring:message code="title.discontinued"/>
+                            
                         </th>
                         <c:set var="orderByValueLink" value=""/> 
 						<c:if test="${orderBy == null || orderBy.isEmpty()}"> 
@@ -94,7 +93,7 @@
 						</c:if> 
                         <!-- Table header for Company -->
                         <th>
-                            <a href="ListComputers?${orderByValueLink}" onclick="">Company &#9650; &#9660;</a>
+                            <a href="ListComputers?${orderByValueLink}" onclick=""><spring:message code="title.company"/> &#9650; &#9660;</a>
                         </th>
 
                     </tr>
