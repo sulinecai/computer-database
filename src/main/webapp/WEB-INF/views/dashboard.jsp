@@ -14,10 +14,15 @@
 </head>
 <body>
     <header class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <a class="navbar-brand" href="ListComputers"> Application - Computer Database </a>
-        </div>
-    </header>
+		<div class="container">
+			<a class="navbar-brand" href="ListComputers"> Application -	Computer Database </a>
+			<div class="container lang">
+				<a href="ListComputers?lang=en"><img src="resources/img/flag_en.png " alt='<spring:message code="lang.en"/>'/></a>
+				|
+				<a href="ListComputers?lang=fr"><img src="resources/img/flag_fr.png " alt='<spring:message code="lang.fr"/>'/></a>
+			</div>
+		</div>
+	</header>
     <section id="main">
         <div class="container">
             <h1 id="homeTitle">
