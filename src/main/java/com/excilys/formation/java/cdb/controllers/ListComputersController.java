@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.validation.Valid;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,7 +14,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.excilys.formation.java.cdb.dtos.ComputerDTO;
 import com.excilys.formation.java.cdb.dtos.DashboardDTO;
-import com.excilys.formation.java.cdb.mappers.CompanyMapper;
 import com.excilys.formation.java.cdb.mappers.ComputerMapper;
 import com.excilys.formation.java.cdb.models.Computer;
 import com.excilys.formation.java.cdb.models.Page;
@@ -31,7 +32,7 @@ public class ListComputersController {
     static int nbComputers;
 
     @GetMapping(value = {"ListComputers", "/"})
-    public ModelAndView listComputers(DashboardDTO dashboardDTO) {
+    public ModelAndView listComputers(@Valid DashboardDTO dashboardDTO) {
         ModelAndView modelAndView = new ModelAndView("dashboard");
         nbComputers = computerService.getNumberComputers();
         if (dashboardDTO.getPageSize() != null) {

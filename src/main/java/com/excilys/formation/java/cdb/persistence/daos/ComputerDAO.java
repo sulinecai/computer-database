@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import org.hibernate.SessionFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,10 +55,14 @@ public class ComputerDAO {
     @Autowired
     JdbcTemplate jdbcTemplate;
 
+    @Autowired
+    private SessionFactory sessionFactory;
+
     private static Logger logger = LoggerFactory.getLogger(CompanyMapper.class);
 
 
     private ComputerDAO() {
+        System.out.println(sessionFactory == null);
     }
 
     public int getNumberComputers() {
