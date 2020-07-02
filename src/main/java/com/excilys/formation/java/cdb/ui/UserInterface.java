@@ -8,6 +8,7 @@ import java.util.Scanner;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import com.excilys.formation.java.cdb.models.Company;
 import com.excilys.formation.java.cdb.models.Computer;
@@ -15,6 +16,7 @@ import com.excilys.formation.java.cdb.models.Page;
 import com.excilys.formation.java.cdb.services.CompanyService;
 import com.excilys.formation.java.cdb.services.ComputerService;
 
+@Component
 public class UserInterface {
 
 
@@ -22,6 +24,7 @@ public class UserInterface {
     CompanyService companyService;
     @Autowired
     ComputerService computerService;
+
 
     private static Scanner scanner = new Scanner(System.in);
 

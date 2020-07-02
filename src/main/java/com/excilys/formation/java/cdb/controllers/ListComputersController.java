@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import javax.validation.Valid;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -32,7 +30,7 @@ public class ListComputersController {
     static int nbComputers;
 
     @GetMapping(value = {"ListComputers", "/"})
-    public ModelAndView listComputers(@Valid DashboardDTO dashboardDTO) {
+    public ModelAndView listComputers(DashboardDTO dashboardDTO) {
         ModelAndView modelAndView = new ModelAndView("dashboard");
         nbComputers = computerService.getNumberComputers();
         if (dashboardDTO.getPageSize() != null) {

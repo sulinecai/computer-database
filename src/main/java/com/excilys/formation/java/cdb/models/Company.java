@@ -1,9 +1,28 @@
 package com.excilys.formation.java.cdb.models;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "company")
 public class Company {
 
+    @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idCompany;
     private String name;
+
+//    @OneToMany(mappedBy = "computer")
+//    private List<Computer> items = new ArrayList<Computer>();
 
     public Long getIdCompany() {
         return idCompany;
@@ -84,7 +103,6 @@ public class Company {
             company.idCompany = this.idCompany;
             company.name = this.name;
             return company;
-
         }
     }
 

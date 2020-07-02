@@ -12,13 +12,12 @@ import com.excilys.formation.java.cdb.persistence.daos.CompanyDAO;
 @Service
 public class CompanyService {
 
-    @Autowired
+
     private CompanyDAO companyDAO;
 
-    /**
-     * Private constructor.
-     */
-    private CompanyService() {
+    @Autowired
+    public CompanyService(CompanyDAO companyDAO) {
+        this.companyDAO = companyDAO;
     }
 
     public List<Company> getAll() {

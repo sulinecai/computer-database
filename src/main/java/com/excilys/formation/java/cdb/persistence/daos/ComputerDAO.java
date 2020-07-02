@@ -4,7 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import org.hibernate.HibernateException;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,10 +24,12 @@ import com.excilys.formation.java.cdb.persistence.mappers.ComputerRowMapper;
 @Repository
 public class ComputerDAO {
 
-    private static final String SQL_SELECT_ALL = "SELECT computer.id, computer.name, introduced, discontinued, "
-            + "company_id, company.name AS company_name FROM computer LEFT JOIN company ON company_id = company.id";
-
-    private static final String SQL_COUNT_ALL = "SELECT COUNT(id) AS total FROM computer";
+//    private static final String SQL_SELECT_ALL = "SELECT computer.id, computer.name, introduced, discontinued, "
+//            + "company_id, company.name AS company_name FROM computer LEFT JOIN company ON company_id = company.id";
+    private static final String SQL_SELECT_ALL = "FROM Computer";
+    //from Computer as computer left join computer.company.id as kittens
+    //private static final String SQL_COUNT_ALL = "SELECT COUNT(id) AS total FROM computer";
+    private static final String SQL_COUNT_ALL = "select count(computer) from Computer computer";
 
     private static final String SQL_SELECT_WITH_ID = "SELECT computer.id, computer.name, introduced, discontinued, "
             + "company_id, company.name AS company_name FROM computer LEFT JOIN company ON "
@@ -55,21 +60,21 @@ public class ComputerDAO {
     @Autowired
     JdbcTemplate jdbcTemplate;
 
-    @Autowired
     private SessionFactory sessionFactory;
 
     private static Logger logger = LoggerFactory.getLogger(CompanyMapper.class);
 
 
-    private ComputerDAO() {
-        System.out.println(sessionFactory == null);
+    @Autowired
+    public ComputerDAO(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
     }
 
     public int getNumberComputers() {
         int count = -1;
-        try {
-            count = jdbcTemplate.queryForObject(SQL_COUNT_ALL, Integer.class);
-        } catch (DataAccessException e) {
+        try (Session session = sessionFactory.openSession()) {
+            count = session.createQuery(SQL_COUNT_ALL, Long.class).uniqueResult().intValue();
+        } catch (HibernateException e) {
             logger.error("error when getting total number of computers: ", e);
         }
         return count;
@@ -87,10 +92,14 @@ public class ComputerDAO {
         if (page == null) {
             logger.error("the page is null");
         } else if (page.getCurrentPage() > 0) {
-            try {
-                computerList = jdbcTemplate.query(SQL_SELECT_ALL.concat(SQL_OFFSET), new ComputerRowMapper(),
-                        page.getMaxLine(), page.getPageFirstLine());
-            } catch (DataAccessException e) {
+            try (Session session = sessionFactory.openSession()) {
+                Query<Computer> query = session.createQuery(SQL_SELECT_ALL, Computer.class);
+                query.setFirstResult(page.getPageFirstLine());
+                query.setMaxResults(page.getMaxLine());
+                computerList = query.list();
+
+                //computerList = jdbcTemplate.query(SQL_SELECT_ALL.concat(SQL_OFFSET), new ComputerRowMapper(), page.getMaxLine(), page.getPageFirstLine());
+            } catch (HibernateException e) {
                 logger.error("error when get all by page:", e);
             }
         }
@@ -234,15 +243,26 @@ public class ComputerDAO {
             requete = requete.concat(SQL_ORDER_BY_COMPANY).concat(SQL_DESC).concat(SQL_OFFSET);
             break;
         default:
-            requete = requete.concat(SQL_OFFSET);
+            //requete = requete.concat(SQL_OFFSET);
             break;
         }
 
-        try {
-            computerList = jdbcTemplate.query(requete, new ComputerRowMapper(), page.getMaxLine(), page.getPageFirstLine());
-        } catch (DataAccessException e) {
-            logger.error("error when sorting computers", e);
+
+        try (Session session = sessionFactory.openSession()) {
+            Query<Computer> query = session.createQuery(SQL_SELECT_ALL, Computer.class);
+            query.setFirstResult(page.getPageFirstLine());
+            query.setMaxResults(page.getMaxLine());
+            computerList = query.list();
+
+            //computerList = jdbcTemplate.query(SQL_SELECT_ALL.concat(SQL_OFFSET), new ComputerRowMapper(), page.getMaxLine(), page.getPageFirstLine());
+        } catch (HibernateException e) {
+            logger.error("error when get all by page:", e);
         }
+//        try {
+//            computerList = jdbcTemplate.query(requete, new ComputerRowMapper(), page.getMaxLine(), page.getPageFirstLine());
+//        } catch (DataAccessException e) {
+//            logger.error("error when sorting computers", e);
+//        }
         return computerList;
     }
 

@@ -4,8 +4,8 @@ import java.util.Properties;
 
 import javax.sql.DataSource;
 
-import org.hibernate.SessionFactory;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
@@ -17,35 +17,36 @@ import com.zaxxer.hikari.HikariDataSource;
 
 @Configuration
 @EnableTransactionManagement
+@ComponentScan(basePackages = {"com.excilys.formation.java.cdb" })
 public class HibernateConfig {
+
     @Bean
-    public DataSource datasource() {
+    public DataSource dataSource() {
         HikariConfig config = new HikariConfig("/datasource.properties");
         return new HikariDataSource(config);
     }
 
     @Bean
-    public SessionFactory sessionFactory() {
+    public LocalSessionFactoryBean sessionFactory() {
         LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
-        sessionFactory.setDataSource(datasource());
+        sessionFactory.setDataSource(dataSource());
         sessionFactory.setPackagesToScan("com.excilys.formation.java.cdb.models");
         sessionFactory.setHibernateProperties(hibernateProperties());
-        return sessionFactory.getObject();
+        return sessionFactory;
     }
 
     @Bean
     public PlatformTransactionManager hibernateTransactionManager() {
-        HibernateTransactionManager transactionManager = new HibernateTransactionManager();
-        transactionManager.setSessionFactory(sessionFactory());
+        HibernateTransactionManager transactionManager
+          = new HibernateTransactionManager();
+        transactionManager.setSessionFactory(sessionFactory().getObject());
         return transactionManager;
     }
 
     private final Properties hibernateProperties() {
         Properties hibernateProperties = new Properties();
-//        hibernateProperties.setProperty("hibernate.hbm2ddl.auto", "create-drop");
         hibernateProperties.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQLDialect");
-        hibernateProperties.setProperty("show_sql", "true");
-
+        hibernateProperties.setProperty("hibernate.show_sql", "true");
         return hibernateProperties;
     }
 }
