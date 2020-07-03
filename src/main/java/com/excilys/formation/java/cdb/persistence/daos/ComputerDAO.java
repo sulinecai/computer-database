@@ -4,25 +4,24 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import javax.persistence.PersistenceException;
+import javax.persistence.RollbackException;
+
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataAccessException;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.excilys.formation.java.cdb.mappers.CompanyMapper;
 import com.excilys.formation.java.cdb.models.Computer;
 import com.excilys.formation.java.cdb.models.Page;
-import com.excilys.formation.java.cdb.persistence.mappers.ComputerRowMapper;
 
 @Repository
-@Transactional
 public class ComputerDAO {
 
     private static final String SQL_SELECT_ALL = "FROM Computer computer";
@@ -31,13 +30,10 @@ public class ComputerDAO {
 
     private static final String SQL_SELECT_WITH_ID = "FROM Computer computer WHERE computer.id = :id";
 
-    private static final String SQL_INSERT = "INSERT INTO computer (name, introduced, discontinued, company_id) "
-            + "VALUES (?, ?, ?, ?)";
+    private static final String SQL_UPDATE = "UPDATE Computer computer SET computer.name = :name, computer.introducedDate = :introduced, "
+            + "computer.discontinuedDate = :discontinued, company.id = :companyId WHERE computer.id = :computerId";
 
-    private static final String SQL_UPDATE = "UPDATE Computer computer SET computer.name = :name, computer.introduced = :introduced, "
-            + "computer.discontinued = :disontinued, company.id = :companyId WHERE computer.id = :computerId";
-
-    private static final String SQL_DELETE = "DELETE FROM computer WHERE id = ?";
+    private static final String SQL_DELETE = "DELETE Computer WHERE id = :id";
 
     private static final String SQL_SELECT_WITH_NAME = "FROM Computer computer WHERE computer.name LIKE :search OR company.name LIKE :search";
 
@@ -48,11 +44,6 @@ public class ComputerDAO {
     private static final String SQL_DESC  = " desc";
 
     private static final String SQL_ASC  = " asc";
-
-    private static final String SQL_OFFSET  = " LIMIT ? OFFSET ?";
-
-    @Autowired
-    JdbcTemplate jdbcTemplate;
 
     private SessionFactory sessionFactory;
 
@@ -171,18 +162,20 @@ public class ComputerDAO {
     public void update(Computer computer) {
         int nbRows = 0;
         if (computer != null) {
-            try {
-                nbRows = jdbcTemplate.update(SQL_UPDATE,
-                        computer.getName(),
-                        ComputerRowMapper.localDateToTimestamp(computer.getIntroducedDate()),
-                        ComputerRowMapper.localDateToTimestamp(computer.getDiscontinuedDate()),
-                        computer.getCompany() == null ? null : computer.getCompany().getIdCompany(),
-                        computer.getIdComputer());
+            try (Session session = sessionFactory.openSession()) {
+                Transaction transaction = session.beginTransaction();
+                nbRows = session.createQuery(SQL_UPDATE)
+                        .setParameter("name", computer.getName())
+                        .setParameter("introduced", computer.getIntroducedDate())
+                        .setParameter("discontinued", computer.getDiscontinuedDate())
+                        .setParameter("companyId", computer.getCompany() == null ? null : computer.getCompany().getIdCompany())
+                        .setParameter("computerId", computer.getIdComputer()).executeUpdate();
+                transaction.commit();
                 if (nbRows != 1) {
-                    logger.info("%d rows affected when updating computer", nbRows);
+                    logger.error("%d rows affected when updating computer", nbRows);
                 }
-            } catch (DataAccessException e) {
-                logger.error("error when creating a computer", e);
+            } catch (IllegalStateException | RollbackException | HibernateException e) {
+                logger.error("sql error when creating a computer", e);
             }
         } else {
             logger.error("the computer is null");
@@ -197,12 +190,16 @@ public class ComputerDAO {
     public void delete(Long id) {
         int nbRows = 0;
         if (id != null) {
-            try {
-                nbRows = jdbcTemplate.update(SQL_DELETE, id);
+            try (Session session = sessionFactory.openSession()) {
+                Transaction transaction = session.beginTransaction();
+                nbRows = session.createQuery(SQL_DELETE)
+                        .setParameter("id", id)
+                        .executeUpdate();
+                transaction.commit();
                 if (nbRows != 1) {
-                    logger.info("%d rows affected when deleting computer", nbRows);
+                    logger.error("%d rows affected when deleting computer", nbRows);
                 }
-            } catch (DataAccessException e) {
+            } catch (IllegalStateException | PersistenceException  e) {
                 logger.error("error when deleting computer", e);
             }
         } else {
