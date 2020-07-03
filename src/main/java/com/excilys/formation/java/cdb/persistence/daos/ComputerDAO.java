@@ -4,67 +4,64 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import javax.persistence.PersistenceException;
+import javax.persistence.RollbackException;
+
+import org.hibernate.HibernateException;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataAccessException;
-import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.excilys.formation.java.cdb.mappers.CompanyMapper;
 import com.excilys.formation.java.cdb.models.Computer;
 import com.excilys.formation.java.cdb.models.Page;
-import com.excilys.formation.java.cdb.persistence.mappers.ComputerRowMapper;
 
 @Repository
 public class ComputerDAO {
 
-    private static final String SQL_SELECT_ALL = "SELECT computer.id, computer.name, introduced, discontinued, "
-            + "company_id, company.name AS company_name FROM computer LEFT JOIN company ON company_id = company.id";
+    private static final String SQL_SELECT_ALL = "FROM Computer computer";
 
-    private static final String SQL_COUNT_ALL = "SELECT COUNT(id) AS total FROM computer";
+    private static final String SQL_COUNT_ALL = "SELECT count(computer) from Computer computer";
 
-    private static final String SQL_SELECT_WITH_ID = "SELECT computer.id, computer.name, introduced, discontinued, "
-            + "company_id, company.name AS company_name FROM computer LEFT JOIN company ON "
-            + "company_id = company.id WHERE computer.id = ? ";
+    private static final String SQL_SELECT_WITH_ID = "FROM Computer computer WHERE computer.id = :id";
 
-    private static final String SQL_INSERT = "INSERT INTO computer (name, introduced, discontinued, company_id) "
-            + "VALUES (?, ?, ?, ?)";
+    private static final String SQL_UPDATE = "UPDATE Computer computer SET computer.name = :name, computer.introducedDate = :introduced, "
+            + "computer.discontinuedDate = :discontinued, company.id = :companyId WHERE computer.id = :computerId";
 
-    private static final String SQL_UPDATE = "UPDATE computer SET name = ?, introduced = ?, discontinued = ?, company_id = ? "
-            + "WHERE id = ?";
+    private static final String SQL_DELETE = "DELETE Computer WHERE id = :id";
 
-    private static final String SQL_DELETE = "DELETE FROM computer WHERE id = ?";
+    private static final String SQL_SELECT_WITH_NAME = "FROM Computer computer WHERE computer.name LIKE :search OR company.name LIKE :search";
 
-    private static final String SQL_SELECT_WITH_NAME = "SELECT computer.id, computer.name, introduced, discontinued, "
-            + "company_id, company.name AS company_name FROM computer LEFT JOIN company ON company_id = company.id "
-            + "WHERE computer.name LIKE ? OR company.name LIKE ?";
+    private static final String SQL_COUNT_WITH_NAME = "SELECT count(computer) from Computer computer WHERE computer.name LIKE :search OR company.name LIKE :search";
 
-    private static final String SQL_ORDER_BY_COMPUTER  = " ORDER BY computer.name";
+    private static final String SQL_ORDER_BY_COMPUTER  = " order by computer.name";
 
-    private static final String SQL_ORDER_BY_COMPANY  = " ORDER BY company_name";
+    private static final String SQL_ORDER_BY_COMPANY  = " order by company.name";
 
-    private static final String SQL_DESC  = " DESC";
+    private static final String SQL_DESC  = " desc";
 
-    private static final String SQL_ASC  = " ASC";
+    private static final String SQL_ASC  = " asc";
 
-    private static final String SQL_OFFSET  = " LIMIT ? OFFSET ?";
-
-    @Autowired
-    JdbcTemplate jdbcTemplate;
+    private SessionFactory sessionFactory;
 
     private static Logger logger = LoggerFactory.getLogger(CompanyMapper.class);
 
 
-    private ComputerDAO() {
+    @Autowired
+    public ComputerDAO(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
     }
 
     public int getNumberComputers() {
         int count = -1;
-        try {
-            count = jdbcTemplate.queryForObject(SQL_COUNT_ALL, Integer.class);
-        } catch (DataAccessException e) {
+        try (Session session = sessionFactory.openSession()) {
+            count = session.createQuery(SQL_COUNT_ALL, Long.class).uniqueResult().intValue();
+        } catch (HibernateException e) {
             logger.error("error when getting total number of computers: ", e);
         }
         return count;
@@ -82,10 +79,12 @@ public class ComputerDAO {
         if (page == null) {
             logger.error("the page is null");
         } else if (page.getCurrentPage() > 0) {
-            try {
-                computerList = jdbcTemplate.query(SQL_SELECT_ALL.concat(SQL_OFFSET), new ComputerRowMapper(),
-                        page.getMaxLine(), page.getPageFirstLine());
-            } catch (DataAccessException e) {
+            try (Session session = sessionFactory.openSession()) {
+                Query<Computer> query = session.createQuery(SQL_SELECT_ALL, Computer.class);
+                query.setFirstResult(page.getPageFirstLine());
+                query.setMaxResults(page.getMaxLine());
+                computerList = query.list();
+            } catch (HibernateException e) {
                 logger.error("error when get all by page:", e);
             }
         }
@@ -95,12 +94,12 @@ public class ComputerDAO {
     public Optional<Computer> findById(Long id) {
         Optional<Computer> result = Optional.empty();
         if (id != null) {
-            try {
-                result = Optional.ofNullable(jdbcTemplate.queryForObject(SQL_SELECT_WITH_ID, new ComputerRowMapper(), id));
-            } catch (EmptyResultDataAccessException e) {
-                logger.info("computer with id %d not found", id);
-            } catch (DataAccessException e) {
-                logger.error("error when get finding computer by id", e);
+            try (Session session = sessionFactory.openSession()) {
+                Query<Computer> query = session.createQuery(SQL_SELECT_WITH_ID, Computer.class);
+                query.setParameter("id", id);
+                result = Optional.ofNullable(query.uniqueResult());
+            } catch (HibernateException e) {
+                logger.error("error when finding computer by id", e);
             }
         } else {
             logger.error("company id to find is null");
@@ -111,31 +110,29 @@ public class ComputerDAO {
     public List<Computer> findByNameByPage(String name, Page page) {
         List<Computer> computerList = new ArrayList<Computer>();
         if (page.getCurrentPage() > 0 && name != null && !name.isEmpty() && !name.contains("%") && !name.contains("_")) {
-            try {
-                computerList = jdbcTemplate.query(SQL_SELECT_WITH_NAME.concat(SQL_OFFSET), new ComputerRowMapper(),
-                        "%".concat(name).concat("%"),
-                        "%".concat(name).concat("%"),
-                        page.getMaxLine(),
-                        page.getPageFirstLine());
-            } catch (DataAccessException e) {
-                logger.error("error when finding computer with name", e);
+            try (Session session = sessionFactory.openSession()) {
+                Query<Computer> query = session.createQuery(SQL_SELECT_WITH_NAME, Computer.class);
+                query.setParameter("search", "%".concat(name).concat("%"));
+                query.setFirstResult(page.getPageFirstLine());
+                query.setMaxResults(page.getMaxLine());
+                computerList = query.list();
+            } catch (HibernateException e) {
+                logger.error("error when get all by page:", e);
             }
         }
         return computerList;
     }
 
-    public List<Computer> findAllByName(String name) {
-        List<Computer> computerList = new ArrayList<Computer>();
-        if (name != null && !name.isEmpty() && !name.contains("%") && !name.contains("_")) {
-            try {
-                computerList = jdbcTemplate.query(SQL_SELECT_WITH_NAME, new ComputerRowMapper(),
-                        "%".concat(name).concat("%"),
-                        "%".concat(name).concat("%"));
-            } catch (DataAccessException e) {
-                logger.error("error when finding computer with name", e);
-            }
+    public int getNumberComputersByName(String name) {
+        int count = -1;
+        try (Session session = sessionFactory.openSession()) {
+            count = session.createQuery(SQL_COUNT_WITH_NAME, Long.class)
+                    .setParameter("search", "%".concat(name).concat("%"))
+                    .uniqueResult().intValue();
+        } catch (HibernateException e) {
+            logger.error("error when getting total number of computers: ", e);
         }
-        return computerList;
+        return count;
     }
 
     /**
@@ -144,23 +141,17 @@ public class ComputerDAO {
      * @param computer
      */
     public void create(Computer computer) {
-        int nbRows = 0;
         if (computer != null) {
-            try {
-                nbRows = jdbcTemplate.update(SQL_INSERT,
-                        computer.getName(),
-                        ComputerRowMapper.localDateToTimestamp(computer.getIntroducedDate()),
-                        ComputerRowMapper.localDateToTimestamp(computer.getDiscontinuedDate()),
-                        computer.getCompany() == null ? null : computer.getCompany().getIdCompany());
-                if (nbRows != 1) {
-                    logger.info("%d rows affected when creating computer", nbRows);
-                }
-            } catch (DataAccessException e) {
+            try (Session session = sessionFactory.openSession()) {
+                session.save(computer);
+            } catch (HibernateException e) {
                 logger.error("sql error when creating a computer", e);
             }
         } else {
             logger.error("the computer is null");
         }
+        logger.info(computer.toString());
+
     }
 
     /**
@@ -171,18 +162,20 @@ public class ComputerDAO {
     public void update(Computer computer) {
         int nbRows = 0;
         if (computer != null) {
-            try {
-                nbRows = jdbcTemplate.update(SQL_UPDATE,
-                        computer.getName(),
-                        ComputerRowMapper.localDateToTimestamp(computer.getIntroducedDate()),
-                        ComputerRowMapper.localDateToTimestamp(computer.getDiscontinuedDate()),
-                        computer.getCompany() == null ? null : computer.getCompany().getIdCompany(),
-                        computer.getIdComputer());
+            try (Session session = sessionFactory.openSession()) {
+                Transaction transaction = session.beginTransaction();
+                nbRows = session.createQuery(SQL_UPDATE)
+                        .setParameter("name", computer.getName())
+                        .setParameter("introduced", computer.getIntroducedDate())
+                        .setParameter("discontinued", computer.getDiscontinuedDate())
+                        .setParameter("companyId", computer.getCompany() == null ? null : computer.getCompany().getIdCompany())
+                        .setParameter("computerId", computer.getIdComputer()).executeUpdate();
+                transaction.commit();
                 if (nbRows != 1) {
-                    logger.info("%d rows affected when updating computer", nbRows);
+                    logger.error("%d rows affected when updating computer", nbRows);
                 }
-            } catch (DataAccessException e) {
-                logger.error("error when creating a computer", e);
+            } catch (IllegalStateException | RollbackException | HibernateException e) {
+                logger.error("sql error when creating a computer", e);
             }
         } else {
             logger.error("the computer is null");
@@ -197,12 +190,16 @@ public class ComputerDAO {
     public void delete(Long id) {
         int nbRows = 0;
         if (id != null) {
-            try {
-                nbRows = jdbcTemplate.update(SQL_DELETE, id);
+            try (Session session = sessionFactory.openSession()) {
+                Transaction transaction = session.beginTransaction();
+                nbRows = session.createQuery(SQL_DELETE)
+                        .setParameter("id", id)
+                        .executeUpdate();
+                transaction.commit();
                 if (nbRows != 1) {
-                    logger.info("%d rows affected when deleting computer", nbRows);
+                    logger.error("%d rows affected when deleting computer", nbRows);
                 }
-            } catch (DataAccessException e) {
+            } catch (IllegalStateException | PersistenceException  e) {
                 logger.error("error when deleting computer", e);
             }
         } else {
@@ -210,33 +207,32 @@ public class ComputerDAO {
         }
     }
 
-    public List<Computer> orderBy(Page page, String parameter) {
+    public List<Computer> orderBy(Page page, String orderBy) {
         List<Computer> computerList = new ArrayList<Computer>();
 
         String requete = SQL_SELECT_ALL;
 
-        switch (parameter) {
+        switch (orderBy) {
         case "computerAsc":
-            requete = requete.concat(SQL_ORDER_BY_COMPUTER).concat(SQL_ASC).concat(SQL_OFFSET);
+            requete = requete.concat(SQL_ORDER_BY_COMPUTER).concat(SQL_ASC);
             break;
         case "computerDesc":
-            requete = requete.concat(SQL_ORDER_BY_COMPUTER).concat(SQL_DESC).concat(SQL_OFFSET);
+            requete = requete.concat(SQL_ORDER_BY_COMPUTER).concat(SQL_DESC);
             break;
         case "companyAsc":
-            requete = requete.concat(SQL_ORDER_BY_COMPANY).concat(SQL_ASC).concat(SQL_OFFSET);
+            requete = requete.concat(SQL_ORDER_BY_COMPANY).concat(SQL_ASC);
             break;
         case "companyDesc":
-            requete = requete.concat(SQL_ORDER_BY_COMPANY).concat(SQL_DESC).concat(SQL_OFFSET);
-            break;
-        default:
-            requete = requete.concat(SQL_OFFSET);
+            requete = requete.concat(SQL_ORDER_BY_COMPANY).concat(SQL_DESC);
             break;
         }
-
-        try {
-            computerList = jdbcTemplate.query(requete, new ComputerRowMapper(), page.getMaxLine(), page.getPageFirstLine());
-        } catch (DataAccessException e) {
-            logger.error("error when sorting computers", e);
+        try (Session session = sessionFactory.openSession()) {
+            Query<Computer> query = session.createQuery(requete, Computer.class);
+            query.setFirstResult(page.getPageFirstLine());
+            query.setMaxResults(page.getMaxLine());
+            computerList = query.list();
+        } catch (HibernateException e) {
+            logger.error("error when get all by page:", e);
         }
         return computerList;
     }

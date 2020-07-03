@@ -7,21 +7,23 @@ import java.util.Scanner;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import com.excilys.formation.java.cdb.models.Company;
 import com.excilys.formation.java.cdb.models.Computer;
 import com.excilys.formation.java.cdb.models.Page;
 import com.excilys.formation.java.cdb.services.CompanyService;
 import com.excilys.formation.java.cdb.services.ComputerService;
+import com.excilys.formation.java.cdb.spring.HibernateConfig;
 
 public class UserInterface {
 
+    ApplicationContext context  = new AnnotationConfigApplicationContext(HibernateConfig.class);
 
-    @Autowired
-    CompanyService companyService;
-    @Autowired
-    ComputerService computerService;
+    CompanyService companyService = context.getBean(CompanyService.class);
+
+    ComputerService computerService = context.getBean(ComputerService.class);
 
     private static Scanner scanner = new Scanner(System.in);
 

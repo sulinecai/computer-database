@@ -4,50 +4,39 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import java.util.Optional;
 
+import org.hibernate.SessionFactory;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.test.util.ReflectionTestUtils;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import com.excilys.formation.java.cdb.models.Company;
 import com.excilys.formation.java.cdb.models.Page;
-import com.excilys.formation.java.cdb.spring.SpringConfiguration;
+import com.excilys.formation.java.cdb.spring.HibernateConfig;
 
 public class CompanyDAOTest {
 
     private CompanyDAO companyDAO;
     private ComputerDAO computerDAO;
-    private JdbcTemplate jdbcTemplate = new SpringConfiguration().getJdbcTemplate();
+
+    private ApplicationContext context;
+    private SessionFactory sessionFactory;
 
     /**
      * Reset the singleton of companyDAO.
-     *
-     * @throws SecurityException
-     * @throws NoSuchFieldException
-     * @throws IllegalArgumentException
-     * @throws IllegalAccessException
-     * @throws InvocationTargetException
-     * @throws InstantiationException
-     * @throws NoSuchMethodException
      */
     @Before
-    public void setup() throws NoSuchMethodException, NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException, InstantiationException, InvocationTargetException {
-        Constructor<CompanyDAO> companyDAOConstructor = CompanyDAO.class.getDeclaredConstructor();
-        assertEquals(companyDAOConstructor.isAccessible(), false);
-        companyDAOConstructor.setAccessible(true);
-        companyDAO = companyDAOConstructor.newInstance();
-        ReflectionTestUtils.setField(companyDAO, "jdbcTemplate", jdbcTemplate);
-
-        Constructor<ComputerDAO> computerDAOConstructor = ComputerDAO.class.getDeclaredConstructor();
-        assertEquals(computerDAOConstructor.isAccessible(), false);
-        computerDAOConstructor.setAccessible(true);
-        computerDAO = computerDAOConstructor.newInstance();
-        ReflectionTestUtils.setField(computerDAO, "jdbcTemplate", jdbcTemplate);
+    public void setup() {
+        context  = new AnnotationConfigApplicationContext(HibernateConfig.class);
+        sessionFactory = context.getBean(SessionFactory.class);
+        companyDAO = new CompanyDAO(sessionFactory);
+        computerDAO = new ComputerDAO(sessionFactory);
     }
 
 
@@ -170,5 +159,10 @@ public class CompanyDAOTest {
         companyDAO.delete(1L);
         assertFalse(companyDAO.findById(1L).isPresent());
         assertEquals(32, computerDAO.getAllByPage(page).size());
+    }
+
+    @After
+    public void closeContext() {
+        ((ConfigurableApplicationContext) context).close();
     }
 }

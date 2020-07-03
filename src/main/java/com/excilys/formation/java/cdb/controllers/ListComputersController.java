@@ -12,7 +12,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.excilys.formation.java.cdb.dtos.ComputerDTO;
 import com.excilys.formation.java.cdb.dtos.DashboardDTO;
-import com.excilys.formation.java.cdb.mappers.CompanyMapper;
 import com.excilys.formation.java.cdb.mappers.ComputerMapper;
 import com.excilys.formation.java.cdb.models.Computer;
 import com.excilys.formation.java.cdb.models.Page;
@@ -45,7 +44,7 @@ public class ListComputersController {
         } else {
             allComputers = computerService.findByNameByPage(dashboardDTO.getSearch(), page);
             modelAndView.addObject("search", dashboardDTO.getSearch());
-            nbComputers = computerService.findAllByName(dashboardDTO.getSearch()).size();
+            nbComputers = computerService.getNumberComputersByName(dashboardDTO.getSearch());
         }
         int nbPages = page.getTotalPages(nbComputers);
         if (dashboardDTO.getPage() > nbPages) {
