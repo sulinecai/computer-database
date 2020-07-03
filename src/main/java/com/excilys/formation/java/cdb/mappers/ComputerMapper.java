@@ -33,7 +33,9 @@ public class ComputerMapper {
             } else {
                 dto.setDiscontinuedDate(computer.getDiscontinuedDate().toString());
             }
-            dto.setCompanyDTO(CompanyMapper.toCompanyDTO(computer.getCompany()));
+            if (computer.getCompany() != null) {
+                dto.setCompanyDTO(CompanyMapper.toCompanyDTO(computer.getCompany()));
+            }
         } catch (RuntimeException e) {
             logger.error("error when converting a computerDTO to a computer");
         }
