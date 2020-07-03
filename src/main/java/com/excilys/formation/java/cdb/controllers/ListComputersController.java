@@ -44,7 +44,7 @@ public class ListComputersController {
         } else {
             allComputers = computerService.findByNameByPage(dashboardDTO.getSearch(), page);
             modelAndView.addObject("search", dashboardDTO.getSearch());
-            nbComputers = computerService.findAllByName(dashboardDTO.getSearch()).size();
+            nbComputers = computerService.getNumberComputersByName(dashboardDTO.getSearch());
         }
         int nbPages = page.getTotalPages(nbComputers);
         if (dashboardDTO.getPage() > nbPages) {

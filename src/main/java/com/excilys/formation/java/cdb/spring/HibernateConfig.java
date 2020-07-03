@@ -17,7 +17,8 @@ import com.zaxxer.hikari.HikariDataSource;
 
 @Configuration
 @EnableTransactionManagement
-@ComponentScan(basePackages = {"com.excilys.formation.java.cdb" })
+@ComponentScan({"com.excilys.formation.java.cdb.services", "com.excilys.formation.java.cdb.persistence.daos",
+    "com.excilys.formation.java.cdb.controllers"})
 public class HibernateConfig {
 
     @Bean

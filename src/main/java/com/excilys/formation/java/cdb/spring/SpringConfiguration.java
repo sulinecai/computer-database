@@ -11,8 +11,8 @@ import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 
 @Configuration
-@ComponentScan({ "com.excilys.formation.java.cdb.services", "com.excilys.formation.java.cdb.persistence.daos",
-        "com.excilys.formation.java.cdb.controllers", "com.excilys.formation.java.cdb.ui" })
+@ComponentScan({"com.excilys.formation.java.cdb.services", "com.excilys.formation.java.cdb.persistence.daos",
+        "com.excilys.formation.java.cdb.controllers"})
 public class SpringConfiguration {
 
     @Bean

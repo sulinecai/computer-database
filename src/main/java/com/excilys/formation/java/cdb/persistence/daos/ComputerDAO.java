@@ -37,6 +37,8 @@ public class ComputerDAO {
 
     private static final String SQL_SELECT_WITH_NAME = "FROM Computer computer WHERE computer.name LIKE :search OR company.name LIKE :search";
 
+    private static final String SQL_COUNT_WITH_NAME = "SELECT count(computer) from Computer computer WHERE computer.name LIKE :search OR company.name LIKE :search";
+
     private static final String SQL_ORDER_BY_COMPUTER  = " order by computer.name";
 
     private static final String SQL_ORDER_BY_COMPANY  = " order by company.name";
@@ -121,18 +123,16 @@ public class ComputerDAO {
         return computerList;
     }
 
-    public List<Computer> findAllByName(String name) {
-        List<Computer> computerList = new ArrayList<Computer>();
-        if (name != null && !name.isEmpty() && !name.contains("%") && !name.contains("_")) {
-            try (Session session = sessionFactory.openSession()) {
-                Query<Computer> query = session.createQuery(SQL_SELECT_WITH_NAME, Computer.class);
-                query.setParameter("search", "%".concat(name).concat("%"));
-                computerList = query.list();
-            } catch (HibernateException e) {
-                logger.error("error when get all by page:", e);
-            }
+    public int getNumberComputersByName(String name) {
+        int count = -1;
+        try (Session session = sessionFactory.openSession()) {
+            count = session.createQuery(SQL_COUNT_WITH_NAME, Long.class)
+                    .setParameter("search", "%".concat(name).concat("%"))
+                    .uniqueResult().intValue();
+        } catch (HibernateException e) {
+            logger.error("error when getting total number of computers: ", e);
         }
-        return computerList;
+        return count;
     }
 
     /**
