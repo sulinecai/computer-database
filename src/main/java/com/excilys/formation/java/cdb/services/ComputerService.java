@@ -64,8 +64,8 @@ public class ComputerService {
         return computerDAO.findByNameByPage(name, page);
     }
 
-    public List<Computer> findAllByName(String name) {
-        return computerDAO.findAllByName(name);
+    public int getNumberComputersByName(String name) {
+        return computerDAO.getNumberComputersByName(name);
     }
 
     public void create(Computer computer) {
