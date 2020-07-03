@@ -4,7 +4,6 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-import java.lang.reflect.InvocationTargetException;
 import java.time.LocalDate;
 import java.util.Comparator;
 import java.util.List;
@@ -30,26 +29,11 @@ public class ComputerDAOTest {
 
     /**
      * Reset the connection.
-     *
-     * @throws SecurityException
-     * @throws NoSuchFieldException
-     * @throws IllegalArgumentException
-     * @throws IllegalAccessException
-     * @throws NoSuchMethodException
-     * @throws InvocationTargetException
-     * @throws InstantiationException
      */
     @Before
-    public void setUp() throws InvocationTargetException, NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException, NoSuchMethodException, InstantiationException {
-//        Constructor<ComputerDAO> computerDAOConstructor = ComputerDAO.class.getDeclaredConstructor();
-//        assertEquals(computerDAOConstructor.isAccessible(), false);
-//        computerDAOConstructor.setAccessible(true);
-//        computerDAO = computerDAOConstructor.newInstance();
-        //ReflectionTestUtils.setField(computerDAO, "jdbcTemplate", new SpringConfiguration().getJdbcTemplate());
-
+    public void setUp() {
         context  = new AnnotationConfigApplicationContext(HibernateConfig.class);
         sessionFactory = context.getBean(SessionFactory.class);
-
         computerDAO = new ComputerDAO(sessionFactory);
     }
 

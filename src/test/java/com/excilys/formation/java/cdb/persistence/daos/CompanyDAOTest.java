@@ -30,20 +30,11 @@ public class CompanyDAOTest {
 
     /**
      * Reset the singleton of companyDAO.
-     *
-     * @throws SecurityException
-     * @throws NoSuchFieldException
-     * @throws IllegalArgumentException
-     * @throws IllegalAccessException
-     * @throws InvocationTargetException
-     * @throws InstantiationException
-     * @throws NoSuchMethodException
      */
     @Before
-    public void setup() throws NoSuchMethodException, NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException, InstantiationException, InvocationTargetException {
+    public void setup() {
         context  = new AnnotationConfigApplicationContext(HibernateConfig.class);
         sessionFactory = context.getBean(SessionFactory.class);
-
         companyDAO = new CompanyDAO(sessionFactory);
         computerDAO = new ComputerDAO(sessionFactory);
     }
