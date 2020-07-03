@@ -16,11 +16,10 @@ import com.excilys.formation.java.cdb.models.Page;
 import com.excilys.formation.java.cdb.services.CompanyService;
 import com.excilys.formation.java.cdb.services.ComputerService;
 import com.excilys.formation.java.cdb.spring.HibernateConfig;
-import com.excilys.formation.java.cdb.spring.SpringConfiguration;
 
 public class UserInterface {
 
-    ApplicationContext context  = new AnnotationConfigApplicationContext(HibernateConfig.class, SpringConfiguration.class);
+    ApplicationContext context  = new AnnotationConfigApplicationContext(HibernateConfig.class);
 
     CompanyService companyService = context.getBean(CompanyService.class);
 

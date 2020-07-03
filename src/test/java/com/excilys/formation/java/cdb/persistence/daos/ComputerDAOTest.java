@@ -4,25 +4,29 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.time.LocalDate;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
+import org.hibernate.SessionFactory;
 import org.junit.Before;
 import org.junit.Test;
-import org.springframework.test.util.ReflectionTestUtils;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import com.excilys.formation.java.cdb.models.Company;
 import com.excilys.formation.java.cdb.models.Computer;
 import com.excilys.formation.java.cdb.models.Page;
-import com.excilys.formation.java.cdb.spring.SpringConfiguration;
+import com.excilys.formation.java.cdb.spring.HibernateConfig;
 
 public class ComputerDAOTest {
 
     private ComputerDAO computerDAO;
+
+    private ApplicationContext context;
+    private SessionFactory sessionFactory;
 
     /**
      * Reset the connection.
@@ -37,11 +41,16 @@ public class ComputerDAOTest {
      */
     @Before
     public void setUp() throws InvocationTargetException, NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException, NoSuchMethodException, InstantiationException {
-        Constructor<ComputerDAO> computerDAOConstructor = ComputerDAO.class.getDeclaredConstructor();
-        assertEquals(computerDAOConstructor.isAccessible(), false);
-        computerDAOConstructor.setAccessible(true);
-        computerDAO = computerDAOConstructor.newInstance();
-        ReflectionTestUtils.setField(computerDAO, "jdbcTemplate", new SpringConfiguration().getJdbcTemplate());
+//        Constructor<ComputerDAO> computerDAOConstructor = ComputerDAO.class.getDeclaredConstructor();
+//        assertEquals(computerDAOConstructor.isAccessible(), false);
+//        computerDAOConstructor.setAccessible(true);
+//        computerDAO = computerDAOConstructor.newInstance();
+        //ReflectionTestUtils.setField(computerDAO, "jdbcTemplate", new SpringConfiguration().getJdbcTemplate());
+
+        context  = new AnnotationConfigApplicationContext(HibernateConfig.class);
+        sessionFactory = context.getBean(SessionFactory.class);
+
+        computerDAO = new ComputerDAO(sessionFactory);
     }
 
     /**
