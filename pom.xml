@@ -5,7 +5,7 @@
               
   <groupId>com.excilys.formation.java.cdb</groupId>
   <artifactId>computer-database</artifactId>
-  <version>6.0.0</version>
+  <version>${project.version}</version>
   <packaging>pom</packaging>
               
   <name>computer-database</name>
@@ -15,7 +15,8 @@
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
     
-	<project.version>6.0.0</project.version>
+	<project.version>6.0-SNAPSHOT</project.version>
+	
 	<junit.version>4.12</junit.version>
 	<javax.servlet-api.version>4.0.0</javax.servlet-api.version>
 	<mysql-connector-java.version>8.0.20</mysql-connector-java.version>

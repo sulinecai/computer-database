@@ -6,7 +6,7 @@
 	<parent>
 		<artifactId>computer-database</artifactId>
 		<groupId>com.excilys.formation.java.cdb</groupId>
-		<version>6.0.0</version>
+		<version>${project.version}</version>
 	</parent>
 
 	<artifactId>service</artifactId>
