@@ -27,7 +27,7 @@
                         <fieldset>
                             <div class="form-group">
                                 <label for="computerName"><spring:message code="label.computer"/> *</label>
-                                <input type="text" class="form-control" required id="computerName" name="computerName" placeholder="Computer name">
+                                <input type="text" class="form-control" required id="computerName" name="computerName" placeholder='<spring:message code="label.computer"/>'>
                             </div>
                             <div class="form-group">
                                 <label for="introducedDate"><spring:message code="label.introduced"/></label>

@@ -3549,3 +3549,391 @@ Caused by: com.mysql.cj.exceptions.WrongArgumentException: No timezone mapping e
 2020-07-06 16:29:26 INFO  Dialect:172 - HHH000400: Using dialect: org.hibernate.dialect.MySQLDialect
 2020-07-06 16:29:27 INFO  JtaPlatformInitiator:52 - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
 2020-07-06 16:29:28 INFO  DispatcherServlet:547 - Completed initialization in 4897 ms
+2020-07-09 17:20:25 INFO  DispatcherServlet:525 - Initializing Servlet 'dispatcher'
+2020-07-09 17:20:27 INFO  HikariDataSource:80 - HikariPool-4 - Starting...
+2020-07-09 17:20:27 INFO  HikariDataSource:82 - HikariPool-4 - Start completed.
+2020-07-09 17:20:27 INFO  Version:44 - HHH000412: Hibernate ORM core version 5.4.18.Final
+2020-07-09 17:20:27 INFO  Version:49 - HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+2020-07-09 17:20:28 INFO  Dialect:172 - HHH000400: Using dialect: org.hibernate.dialect.MySQLDialect
+2020-07-09 17:20:29 INFO  JtaPlatformInitiator:52 - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2020-07-09 17:20:29 INFO  SecurityConfig:73 - TEST
+2020-07-09 17:20:29 INFO  DefaultSecurityFilterChain:43 - Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@645bd3a3, org.springframework.security.web.context.SecurityContextPersistenceFilter@1538450, org.springframework.security.web.header.HeaderWriterFilter@284703a4, org.springframework.security.web.authentication.logout.LogoutFilter@6315e871, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@1d230397, org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter@17f5fb25, org.springframework.security.web.authentication.ui.DefaultLogoutPageGeneratingFilter@10358c3a, org.springframework.security.web.authentication.www.DigestAuthenticationFilter@4e8c3116, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@7eddde94, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@60ad4b25, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@7ab4dc74, org.springframework.security.web.session.SessionManagementFilter@1e486cb5, org.springframework.security.web.access.ExceptionTranslationFilter@3f147f1d, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@4268fdd5]
+2020-07-09 17:20:29 INFO  DispatcherServlet:547 - Completed initialization in 4000 ms
+2020-07-09 17:20:31 INFO  HikariDataSource:350 - HikariPool-4 - Shutdown initiated...
+2020-07-09 17:20:31 INFO  HikariDataSource:352 - HikariPool-4 - Shutdown completed.
+2020-07-09 17:20:41 INFO  DispatcherServlet:525 - Initializing Servlet 'dispatcher'
+2020-07-09 17:20:43 INFO  HikariDataSource:80 - HikariPool-1 - Starting...
+2020-07-09 17:20:44 INFO  HikariDataSource:82 - HikariPool-1 - Start completed.
+2020-07-09 17:20:44 INFO  Version:44 - HHH000412: Hibernate ORM core version 5.4.18.Final
+2020-07-09 17:20:44 INFO  Version:49 - HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+2020-07-09 17:20:45 INFO  Dialect:172 - HHH000400: Using dialect: org.hibernate.dialect.MySQLDialect
+2020-07-09 17:20:46 INFO  JtaPlatformInitiator:52 - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2020-07-09 17:20:47 WARN  AnnotationConfigWebApplicationContext:558 - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'springSecurityFilterChain' defined in org.springframework.security.config.annotation.web.configuration.WebSecurityConfiguration: Bean instantiation via factory method failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [javax.servlet.Filter]: Factory method 'springSecurityFilterChain' threw exception; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'passwordEncoder' defined in com.excilys.formation.java.cdb.spring.SecurityConfig: Bean instantiation via factory method failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [org.springframework.security.crypto.password.PasswordEncoder]: Factory method 'passwordEncoder' threw exception; nested exception is java.lang.Error: Unresolved compilation problem: 
+	Md4PasswordEncoder cannot be resolved to a type
+
+2020-07-09 17:20:47 INFO  HikariDataSource:350 - HikariPool-1 - Shutdown initiated...
+2020-07-09 17:20:47 INFO  HikariDataSource:352 - HikariPool-1 - Shutdown completed.
+2020-07-09 17:20:47 ERROR DispatcherServlet:534 - Context initialization failed
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'springSecurityFilterChain' defined in org.springframework.security.config.annotation.web.configuration.WebSecurityConfiguration: Bean instantiation via factory method failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [javax.servlet.Filter]: Factory method 'springSecurityFilterChain' threw exception; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'passwordEncoder' defined in com.excilys.formation.java.cdb.spring.SecurityConfig: Bean instantiation via factory method failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [org.springframework.security.crypto.password.PasswordEncoder]: Factory method 'passwordEncoder' threw exception; nested exception is java.lang.Error: Unresolved compilation problem: 
+	Md4PasswordEncoder cannot be resolved to a type
+
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:656)
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:484)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1338)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1177)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:557)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:517)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:323)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:226)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:321)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:202)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:310)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:202)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:895)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:878)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:550)
+	at org.springframework.web.servlet.FrameworkServlet.configureAndRefreshWebApplicationContext(FrameworkServlet.java:702)
+	at org.springframework.web.servlet.FrameworkServlet.initWebApplicationContext(FrameworkServlet.java:578)
+	at org.springframework.web.servlet.FrameworkServlet.initServletBean(FrameworkServlet.java:530)
+	at org.springframework.web.servlet.HttpServletBean.init(HttpServletBean.java:170)
+	at javax.servlet.GenericServlet.init(GenericServlet.java:158)
+	at org.apache.catalina.core.StandardWrapper.initServlet(StandardWrapper.java:1134)
+	at org.apache.catalina.core.StandardWrapper.load(StandardWrapper.java:986)
+	at org.apache.catalina.core.StandardContext.loadOnStartup(StandardContext.java:4872)
+	at org.apache.catalina.core.StandardContext.startInternal(StandardContext.java:5181)
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:183)
+	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1384)
+	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1374)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at org.apache.tomcat.util.threads.InlineExecutorService.execute(InlineExecutorService.java:75)
+	at java.util.concurrent.AbstractExecutorService.submit(AbstractExecutorService.java:134)
+	at org.apache.catalina.core.ContainerBase.startInternal(ContainerBase.java:909)
+	at org.apache.catalina.core.StandardHost.startInternal(StandardHost.java:841)
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:183)
+	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1384)
+	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1374)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at org.apache.tomcat.util.threads.InlineExecutorService.execute(InlineExecutorService.java:75)
+	at java.util.concurrent.AbstractExecutorService.submit(AbstractExecutorService.java:134)
+	at org.apache.catalina.core.ContainerBase.startInternal(ContainerBase.java:909)
+	at org.apache.catalina.core.StandardEngine.startInternal(StandardEngine.java:262)
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:183)
+	at org.apache.catalina.core.StandardService.startInternal(StandardService.java:421)
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:183)
+	at org.apache.catalina.core.StandardServer.startInternal(StandardServer.java:930)
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:183)
+	at org.apache.catalina.startup.Catalina.start(Catalina.java:633)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.apache.catalina.startup.Bootstrap.start(Bootstrap.java:343)
+	at org.apache.catalina.startup.Bootstrap.main(Bootstrap.java:474)
+Caused by: org.springframework.beans.BeanInstantiationException: Failed to instantiate [javax.servlet.Filter]: Factory method 'springSecurityFilterChain' threw exception; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'passwordEncoder' defined in com.excilys.formation.java.cdb.spring.SecurityConfig: Bean instantiation via factory method failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [org.springframework.security.crypto.password.PasswordEncoder]: Factory method 'passwordEncoder' threw exception; nested exception is java.lang.Error: Unresolved compilation problem: 
+	Md4PasswordEncoder cannot be resolved to a type
+
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:185)
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:651)
+	... 51 more
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'passwordEncoder' defined in com.excilys.formation.java.cdb.spring.SecurityConfig: Bean instantiation via factory method failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [org.springframework.security.crypto.password.PasswordEncoder]: Factory method 'passwordEncoder' threw exception; nested exception is java.lang.Error: Unresolved compilation problem: 
+	Md4PasswordEncoder cannot be resolved to a type
+
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:656)
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:484)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1338)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1177)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:557)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:517)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:323)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:226)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:321)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:207)
+	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1114)
+	at org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer.getBeanOrNull(InitializeUserDetailsBeanManagerConfigurer.java:95)
+	at org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer.configure(InitializeUserDetailsBeanManagerConfigurer.java:68)
+	at org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer.configure(InitializeUserDetailsBeanManagerConfigurer.java:55)
+	at org.springframework.security.config.annotation.AbstractConfiguredSecurityBuilder.configure(AbstractConfiguredSecurityBuilder.java:383)
+	at org.springframework.security.config.annotation.AbstractConfiguredSecurityBuilder.doBuild(AbstractConfiguredSecurityBuilder.java:329)
+	at org.springframework.security.config.annotation.AbstractSecurityBuilder.build(AbstractSecurityBuilder.java:41)
+	at org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration.getAuthenticationManager(AuthenticationConfiguration.java:118)
+	at org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter.authenticationManager(WebSecurityConfigurerAdapter.java:269)
+	at org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter.getHttp(WebSecurityConfigurerAdapter.java:202)
+	at org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter.init(WebSecurityConfigurerAdapter.java:322)
+	at org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter.init(WebSecurityConfigurerAdapter.java:94)
+	at com.excilys.formation.java.cdb.spring.SecurityConfig$$EnhancerBySpringCGLIB$$aeebb612.init(<generated>)
+	at org.springframework.security.config.annotation.AbstractConfiguredSecurityBuilder.init(AbstractConfiguredSecurityBuilder.java:370)
+	at org.springframework.security.config.annotation.AbstractConfiguredSecurityBuilder.doBuild(AbstractConfiguredSecurityBuilder.java:324)
+	at org.springframework.security.config.annotation.AbstractSecurityBuilder.build(AbstractSecurityBuilder.java:41)
+	at org.springframework.security.config.annotation.web.configuration.WebSecurityConfiguration.springSecurityFilterChain(WebSecurityConfiguration.java:104)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:154)
+	... 52 more
+Caused by: org.springframework.beans.BeanInstantiationException: Failed to instantiate [org.springframework.security.crypto.password.PasswordEncoder]: Factory method 'passwordEncoder' threw exception; nested exception is java.lang.Error: Unresolved compilation problem: 
+	Md4PasswordEncoder cannot be resolved to a type
+
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:185)
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:651)
+	... 83 more
+Caused by: java.lang.Error: Unresolved compilation problem: 
+	Md4PasswordEncoder cannot be resolved to a type
+
+	at com.excilys.formation.java.cdb.spring.SecurityConfig.passwordEncoder(SecurityConfig.java:43)
+	at com.excilys.formation.java.cdb.spring.SecurityConfig$$EnhancerBySpringCGLIB$$aeebb612.CGLIB$passwordEncoder$1(<generated>)
+	at com.excilys.formation.java.cdb.spring.SecurityConfig$$EnhancerBySpringCGLIB$$aeebb612$$FastClassBySpringCGLIB$$7757607a.invoke(<generated>)
+	at org.springframework.cglib.proxy.MethodProxy.invokeSuper(MethodProxy.java:244)
+	at org.springframework.context.annotation.ConfigurationClassEnhancer$BeanMethodInterceptor.intercept(ConfigurationClassEnhancer.java:331)
+	at com.excilys.formation.java.cdb.spring.SecurityConfig$$EnhancerBySpringCGLIB$$aeebb612.passwordEncoder(<generated>)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:154)
+	... 84 more
+2020-07-09 17:20:59 INFO  DispatcherServlet:525 - Initializing Servlet 'dispatcher'
+2020-07-09 17:21:01 INFO  HikariDataSource:80 - HikariPool-2 - Starting...
+2020-07-09 17:21:01 INFO  HikariDataSource:82 - HikariPool-2 - Start completed.
+2020-07-09 17:21:01 INFO  Version:44 - HHH000412: Hibernate ORM core version 5.4.18.Final
+2020-07-09 17:21:02 INFO  Version:49 - HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+2020-07-09 17:21:02 INFO  Dialect:172 - HHH000400: Using dialect: org.hibernate.dialect.MySQLDialect
+2020-07-09 17:21:03 INFO  JtaPlatformInitiator:52 - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2020-07-09 17:21:04 INFO  SecurityConfig:74 - TEST
+2020-07-09 17:21:04 INFO  DefaultSecurityFilterChain:43 - Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@6566cb70, org.springframework.security.web.context.SecurityContextPersistenceFilter@24e41fdb, org.springframework.security.web.header.HeaderWriterFilter@16cad786, org.springframework.security.web.authentication.logout.LogoutFilter@35ad3e72, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@5f9bc149, org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter@599d10f3, org.springframework.security.web.authentication.ui.DefaultLogoutPageGeneratingFilter@6db3a569, org.springframework.security.web.authentication.www.DigestAuthenticationFilter@44c93c87, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@53a22ff8, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@6af5e14d, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@3eb6559d, org.springframework.security.web.session.SessionManagementFilter@6451d432, org.springframework.security.web.access.ExceptionTranslationFilter@1259a0a0, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@2b5ffab9]
+2020-07-09 17:21:04 INFO  DispatcherServlet:547 - Completed initialization in 5476 ms
+2020-07-09 17:23:36 INFO  HikariDataSource:350 - HikariPool-2 - Shutdown initiated...
+2020-07-09 17:23:36 INFO  HikariDataSource:352 - HikariPool-2 - Shutdown completed.
+2020-07-09 17:23:38 INFO  DispatcherServlet:525 - Initializing Servlet 'dispatcher'
+2020-07-09 17:23:39 INFO  HikariDataSource:80 - HikariPool-3 - Starting...
+2020-07-09 17:23:39 INFO  HikariDataSource:82 - HikariPool-3 - Start completed.
+2020-07-09 17:23:39 INFO  Version:44 - HHH000412: Hibernate ORM core version 5.4.18.Final
+2020-07-09 17:23:39 INFO  Version:49 - HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+2020-07-09 17:23:40 INFO  Dialect:172 - HHH000400: Using dialect: org.hibernate.dialect.MySQLDialect
+2020-07-09 17:23:41 INFO  JtaPlatformInitiator:52 - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2020-07-09 17:23:41 INFO  SecurityConfig:75 - TEST
+2020-07-09 17:23:41 INFO  DefaultSecurityFilterChain:43 - Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@6ab16eed, org.springframework.security.web.context.SecurityContextPersistenceFilter@20ce580a, org.springframework.security.web.header.HeaderWriterFilter@1d9cac73, org.springframework.security.web.authentication.logout.LogoutFilter@7ce1f556, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@11ca3e0f, org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter@4ad070a4, org.springframework.security.web.authentication.ui.DefaultLogoutPageGeneratingFilter@452b0bb3, org.springframework.security.web.authentication.www.DigestAuthenticationFilter@75896127, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@687b111, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@3ade728c, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@74507744, org.springframework.security.web.session.SessionManagementFilter@1213d058, org.springframework.security.web.access.ExceptionTranslationFilter@3a1f3e5f, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@3099f3d8]
+2020-07-09 17:23:41 INFO  DispatcherServlet:547 - Completed initialization in 3591 ms
+2020-07-09 17:23:51 INFO  HikariDataSource:350 - HikariPool-3 - Shutdown initiated...
+2020-07-09 17:23:51 INFO  HikariDataSource:352 - HikariPool-3 - Shutdown completed.
+2020-07-09 17:23:53 INFO  DispatcherServlet:525 - Initializing Servlet 'dispatcher'
+2020-07-09 17:23:54 INFO  HikariDataSource:80 - HikariPool-4 - Starting...
+2020-07-09 17:23:54 INFO  HikariDataSource:82 - HikariPool-4 - Start completed.
+2020-07-09 17:23:54 INFO  Version:44 - HHH000412: Hibernate ORM core version 5.4.18.Final
+2020-07-09 17:23:54 INFO  Version:49 - HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+2020-07-09 17:23:55 INFO  Dialect:172 - HHH000400: Using dialect: org.hibernate.dialect.MySQLDialect
+2020-07-09 17:23:56 INFO  JtaPlatformInitiator:52 - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2020-07-09 17:23:56 INFO  SecurityConfig:69 - TEST
+2020-07-09 17:23:56 INFO  DefaultSecurityFilterChain:43 - Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@7371eb3b, org.springframework.security.web.context.SecurityContextPersistenceFilter@1d624054, org.springframework.security.web.header.HeaderWriterFilter@2b15ee0b, org.springframework.security.web.authentication.logout.LogoutFilter@418f8c9, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@7b8f1d9, org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter@4b23b020, org.springframework.security.web.authentication.ui.DefaultLogoutPageGeneratingFilter@75f14805, org.springframework.security.web.authentication.www.DigestAuthenticationFilter@7e13a7d9, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@2377aef2, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@466e6ea4, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@41378ccb, org.springframework.security.web.session.SessionManagementFilter@6fd19065, org.springframework.security.web.access.ExceptionTranslationFilter@2c7321d7, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@5e6f28b4]
+2020-07-09 17:23:56 INFO  DispatcherServlet:547 - Completed initialization in 3314 ms
+2020-07-09 17:23:58 INFO  HikariDataSource:350 - HikariPool-4 - Shutdown initiated...
+2020-07-09 17:23:58 INFO  HikariDataSource:352 - HikariPool-4 - Shutdown completed.
+2020-07-09 17:24:05 INFO  DispatcherServlet:525 - Initializing Servlet 'dispatcher'
+2020-07-09 17:24:06 INFO  HikariDataSource:80 - HikariPool-1 - Starting...
+2020-07-09 17:24:06 INFO  HikariDataSource:82 - HikariPool-1 - Start completed.
+2020-07-09 17:24:07 INFO  Version:44 - HHH000412: Hibernate ORM core version 5.4.18.Final
+2020-07-09 17:24:07 INFO  Version:49 - HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+2020-07-09 17:24:07 INFO  Dialect:172 - HHH000400: Using dialect: org.hibernate.dialect.MySQLDialect
+2020-07-09 17:24:08 INFO  JtaPlatformInitiator:52 - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2020-07-09 17:24:09 INFO  SecurityConfig:69 - TEST
+2020-07-09 17:24:09 INFO  DefaultSecurityFilterChain:43 - Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@5fc4af25, org.springframework.security.web.context.SecurityContextPersistenceFilter@298eca94, org.springframework.security.web.header.HeaderWriterFilter@18cdacd, org.springframework.security.web.authentication.logout.LogoutFilter@7efcdcde, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@7bec83d5, org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter@c360f40, org.springframework.security.web.authentication.ui.DefaultLogoutPageGeneratingFilter@66abb7d4, org.springframework.security.web.authentication.www.DigestAuthenticationFilter@494f74cd, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@2acf3108, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@6e0d7be4, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@359ae83a, org.springframework.security.web.session.SessionManagementFilter@51d2218e, org.springframework.security.web.access.ExceptionTranslationFilter@11501f90, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@2d4df467]
+2020-07-09 17:24:09 INFO  DispatcherServlet:547 - Completed initialization in 4465 ms
+2020-07-09 17:26:34 INFO  HikariDataSource:350 - HikariPool-1 - Shutdown initiated...
+2020-07-09 17:26:34 INFO  HikariDataSource:352 - HikariPool-1 - Shutdown completed.
+2020-07-09 17:26:39 INFO  DispatcherServlet:525 - Initializing Servlet 'dispatcher'
+2020-07-09 17:26:41 INFO  HikariDataSource:80 - HikariPool-1 - Starting...
+2020-07-09 17:26:41 INFO  HikariDataSource:82 - HikariPool-1 - Start completed.
+2020-07-09 17:26:41 INFO  Version:44 - HHH000412: Hibernate ORM core version 5.4.18.Final
+2020-07-09 17:26:42 INFO  Version:49 - HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+2020-07-09 17:26:42 INFO  Dialect:172 - HHH000400: Using dialect: org.hibernate.dialect.MySQLDialect
+2020-07-09 17:26:43 INFO  JtaPlatformInitiator:52 - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2020-07-09 17:26:44 INFO  SecurityConfig:69 - TEST
+2020-07-09 17:26:44 INFO  DefaultSecurityFilterChain:43 - Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@5fc4af25, org.springframework.security.web.context.SecurityContextPersistenceFilter@298eca94, org.springframework.security.web.header.HeaderWriterFilter@18cdacd, org.springframework.security.web.authentication.logout.LogoutFilter@7efcdcde, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@7bec83d5, org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter@c360f40, org.springframework.security.web.authentication.ui.DefaultLogoutPageGeneratingFilter@66abb7d4, org.springframework.security.web.authentication.www.DigestAuthenticationFilter@494f74cd, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@2acf3108, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@6e0d7be4, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@359ae83a, org.springframework.security.web.session.SessionManagementFilter@51d2218e, org.springframework.security.web.access.ExceptionTranslationFilter@11501f90, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@2d4df467]
+2020-07-09 17:26:44 INFO  DispatcherServlet:547 - Completed initialization in 5035 ms
+2020-07-09 17:27:17 INFO  HikariDataSource:350 - HikariPool-1 - Shutdown initiated...
+2020-07-09 17:27:17 INFO  HikariDataSource:352 - HikariPool-1 - Shutdown completed.
+2020-07-09 17:27:20 INFO  DispatcherServlet:525 - Initializing Servlet 'dispatcher'
+2020-07-09 17:27:20 WARN  AnnotationConfigWebApplicationContext:558 - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanDefinitionStoreException: Failed to read candidate component class: file [/home/suline/eclipse-workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp1/wtpwebapps/webapp/WEB-INF/classes/com/excilys/formation/java/cdb/controllers/AddComputerController.class]; nested exception is java.nio.channels.ClosedByInterruptException
+2020-07-09 17:27:20 ERROR DispatcherServlet:534 - Context initialization failed
+org.springframework.beans.factory.BeanDefinitionStoreException: Failed to read candidate component class: file [/home/suline/eclipse-workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp1/wtpwebapps/webapp/WEB-INF/classes/com/excilys/formation/java/cdb/controllers/AddComputerController.class]; nested exception is java.nio.channels.ClosedByInterruptException
+	at org.springframework.context.annotation.ClassPathScanningCandidateComponentProvider.scanCandidateComponents(ClassPathScanningCandidateComponentProvider.java:452)
+	at org.springframework.context.annotation.ClassPathScanningCandidateComponentProvider.findCandidateComponents(ClassPathScanningCandidateComponentProvider.java:315)
+	at org.springframework.context.annotation.ClassPathBeanDefinitionScanner.doScan(ClassPathBeanDefinitionScanner.java:276)
+	at org.springframework.context.annotation.ComponentScanAnnotationParser.parse(ComponentScanAnnotationParser.java:132)
+	at org.springframework.context.annotation.ConfigurationClassParser.doProcessConfigurationClass(ConfigurationClassParser.java:295)
+	at org.springframework.context.annotation.ConfigurationClassParser.processConfigurationClass(ConfigurationClassParser.java:249)
+	at org.springframework.context.annotation.ConfigurationClassParser.parse(ConfigurationClassParser.java:206)
+	at org.springframework.context.annotation.ConfigurationClassParser.parse(ConfigurationClassParser.java:174)
+	at org.springframework.context.annotation.ConfigurationClassPostProcessor.processConfigBeanDefinitions(ConfigurationClassPostProcessor.java:319)
+	at org.springframework.context.annotation.ConfigurationClassPostProcessor.postProcessBeanDefinitionRegistry(ConfigurationClassPostProcessor.java:236)
+	at org.springframework.context.support.PostProcessorRegistrationDelegate.invokeBeanDefinitionRegistryPostProcessors(PostProcessorRegistrationDelegate.java:280)
+	at org.springframework.context.support.PostProcessorRegistrationDelegate.invokeBeanFactoryPostProcessors(PostProcessorRegistrationDelegate.java:96)
+	at org.springframework.context.support.AbstractApplicationContext.invokeBeanFactoryPostProcessors(AbstractApplicationContext.java:706)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:532)
+	at org.springframework.web.servlet.FrameworkServlet.configureAndRefreshWebApplicationContext(FrameworkServlet.java:702)
+	at org.springframework.web.servlet.FrameworkServlet.initWebApplicationContext(FrameworkServlet.java:578)
+	at org.springframework.web.servlet.FrameworkServlet.initServletBean(FrameworkServlet.java:530)
+	at org.springframework.web.servlet.HttpServletBean.init(HttpServletBean.java:170)
+	at javax.servlet.GenericServlet.init(GenericServlet.java:158)
+	at org.apache.catalina.core.StandardWrapper.initServlet(StandardWrapper.java:1134)
+	at org.apache.catalina.core.StandardWrapper.load(StandardWrapper.java:986)
+	at org.apache.catalina.core.StandardContext.loadOnStartup(StandardContext.java:4872)
+	at org.apache.catalina.core.StandardContext.startInternal(StandardContext.java:5181)
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:183)
+	at org.apache.catalina.core.StandardContext.reload(StandardContext.java:3761)
+	at org.apache.catalina.loader.WebappLoader.backgroundProcess(WebappLoader.java:299)
+	at org.apache.catalina.core.StandardContext.backgroundProcess(StandardContext.java:5531)
+	at org.apache.catalina.core.ContainerBase$ContainerBackgroundProcessor.processChildren(ContainerBase.java:1353)
+	at org.apache.catalina.core.ContainerBase$ContainerBackgroundProcessor.processChildren(ContainerBase.java:1357)
+	at org.apache.catalina.core.ContainerBase$ContainerBackgroundProcessor.processChildren(ContainerBase.java:1357)
+	at org.apache.catalina.core.ContainerBase$ContainerBackgroundProcessor.run(ContainerBase.java:1335)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)
+	at java.util.concurrent.FutureTask.runAndReset(FutureTask.java:308)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$301(ScheduledThreadPoolExecutor.java:180)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:294)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Thread.java:748)
+Caused by: java.nio.channels.ClosedByInterruptException
+	at java.nio.channels.spi.AbstractInterruptibleChannel.end(AbstractInterruptibleChannel.java:202)
+	at sun.nio.ch.FileChannelImpl.read(FileChannelImpl.java:164)
+	at sun.nio.ch.ChannelInputStream.read(ChannelInputStream.java:65)
+	at sun.nio.ch.ChannelInputStream.read(ChannelInputStream.java:109)
+	at sun.nio.ch.ChannelInputStream.read(ChannelInputStream.java:103)
+	at org.springframework.asm.ClassReader.readStream(ClassReader.java:316)
+	at org.springframework.asm.ClassReader.<init>(ClassReader.java:284)
+	at org.springframework.core.type.classreading.SimpleMetadataReader.getClassReader(SimpleMetadataReader.java:57)
+	at org.springframework.core.type.classreading.SimpleMetadataReader.<init>(SimpleMetadataReader.java:49)
+	at org.springframework.core.type.classreading.SimpleMetadataReaderFactory.getMetadataReader(SimpleMetadataReaderFactory.java:103)
+	at org.springframework.core.type.classreading.CachingMetadataReaderFactory.getMetadataReader(CachingMetadataReaderFactory.java:123)
+	at org.springframework.context.annotation.ClassPathScanningCandidateComponentProvider.scanCandidateComponents(ClassPathScanningCandidateComponentProvider.java:429)
+	... 38 more
+2020-07-09 17:27:27 INFO  DispatcherServlet:525 - Initializing Servlet 'dispatcher'
+2020-07-09 17:27:29 INFO  HikariDataSource:80 - HikariPool-1 - Starting...
+2020-07-09 17:27:29 INFO  HikariDataSource:82 - HikariPool-1 - Start completed.
+2020-07-09 17:27:29 INFO  Version:44 - HHH000412: Hibernate ORM core version 5.4.18.Final
+2020-07-09 17:27:30 INFO  Version:49 - HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+2020-07-09 17:27:30 INFO  Dialect:172 - HHH000400: Using dialect: org.hibernate.dialect.MySQLDialect
+2020-07-09 17:27:31 INFO  JtaPlatformInitiator:52 - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2020-07-09 17:27:32 INFO  SecurityConfig:68 - TEST
+2020-07-09 17:27:32 INFO  DefaultSecurityFilterChain:43 - Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@5fc4af25, org.springframework.security.web.context.SecurityContextPersistenceFilter@298eca94, org.springframework.security.web.header.HeaderWriterFilter@18cdacd, org.springframework.security.web.authentication.logout.LogoutFilter@7efcdcde, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@7bec83d5, org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter@c360f40, org.springframework.security.web.authentication.ui.DefaultLogoutPageGeneratingFilter@66abb7d4, org.springframework.security.web.authentication.www.DigestAuthenticationFilter@494f74cd, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@2acf3108, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@6e0d7be4, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@359ae83a, org.springframework.security.web.session.SessionManagementFilter@51d2218e, org.springframework.security.web.access.ExceptionTranslationFilter@11501f90, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@2d4df467]
+2020-07-09 17:27:32 INFO  DispatcherServlet:547 - Completed initialization in 4865 ms
+2020-07-09 17:28:59 INFO  HikariDataSource:350 - HikariPool-1 - Shutdown initiated...
+2020-07-09 17:28:59 INFO  HikariDataSource:352 - HikariPool-1 - Shutdown completed.
+2020-07-09 17:29:01 INFO  DispatcherServlet:525 - Initializing Servlet 'dispatcher'
+2020-07-09 17:29:02 INFO  HikariDataSource:80 - HikariPool-2 - Starting...
+2020-07-09 17:29:02 INFO  HikariDataSource:82 - HikariPool-2 - Start completed.
+2020-07-09 17:29:02 INFO  Version:44 - HHH000412: Hibernate ORM core version 5.4.18.Final
+2020-07-09 17:29:03 INFO  Version:49 - HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+2020-07-09 17:29:03 INFO  Dialect:172 - HHH000400: Using dialect: org.hibernate.dialect.MySQLDialect
+2020-07-09 17:29:04 INFO  JtaPlatformInitiator:52 - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2020-07-09 17:29:05 INFO  SecurityConfig:66 - TEST
+2020-07-09 17:29:05 INFO  DefaultSecurityFilterChain:43 - Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@23dca2b0, org.springframework.security.web.context.SecurityContextPersistenceFilter@3e54796f, org.springframework.security.web.header.HeaderWriterFilter@7e4a2bf3, org.springframework.security.web.authentication.logout.LogoutFilter@2051ca3b, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@60cb341, org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter@19b479eb, org.springframework.security.web.authentication.ui.DefaultLogoutPageGeneratingFilter@196df2b4, org.springframework.security.web.authentication.www.DigestAuthenticationFilter@46aa565b, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@1f660e2e, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@2b139211, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@27f7d370, org.springframework.security.web.session.SessionManagementFilter@57a3fa80, org.springframework.security.web.access.ExceptionTranslationFilter@24273c8d, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@634ce99b]
+2020-07-09 17:29:05 INFO  DispatcherServlet:547 - Completed initialization in 4807 ms
+2020-07-09 17:39:14 INFO  DispatcherServlet:525 - Initializing Servlet 'dispatcher'
+2020-07-09 17:39:16 INFO  HikariDataSource:80 - HikariPool-1 - Starting...
+2020-07-09 17:39:16 INFO  HikariDataSource:82 - HikariPool-1 - Start completed.
+2020-07-09 17:39:17 INFO  Version:44 - HHH000412: Hibernate ORM core version 5.4.18.Final
+2020-07-09 17:39:17 INFO  Version:49 - HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+2020-07-09 17:39:17 INFO  Dialect:172 - HHH000400: Using dialect: org.hibernate.dialect.MySQLDialect
+2020-07-09 17:39:18 INFO  JtaPlatformInitiator:52 - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2020-07-09 17:39:19 INFO  SecurityConfig:66 - TEST
+2020-07-09 17:39:19 INFO  DefaultSecurityFilterChain:43 - Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@5fc4af25, org.springframework.security.web.context.SecurityContextPersistenceFilter@298eca94, org.springframework.security.web.header.HeaderWriterFilter@18cdacd, org.springframework.security.web.authentication.logout.LogoutFilter@7efcdcde, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@7bec83d5, org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter@c360f40, org.springframework.security.web.authentication.ui.DefaultLogoutPageGeneratingFilter@66abb7d4, org.springframework.security.web.authentication.www.DigestAuthenticationFilter@494f74cd, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@2acf3108, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@6e0d7be4, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@359ae83a, org.springframework.security.web.session.SessionManagementFilter@51d2218e, org.springframework.security.web.access.ExceptionTranslationFilter@11501f90, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@2d4df467]
+2020-07-09 17:39:19 INFO  DispatcherServlet:547 - Completed initialization in 4972 ms
+2020-07-09 17:42:48 INFO  HikariDataSource:350 - HikariPool-1 - Shutdown initiated...
+2020-07-09 17:42:48 INFO  HikariDataSource:352 - HikariPool-1 - Shutdown completed.
+2020-07-09 17:42:50 INFO  DispatcherServlet:525 - Initializing Servlet 'dispatcher'
+2020-07-09 17:42:51 INFO  HikariDataSource:80 - HikariPool-2 - Starting...
+2020-07-09 17:42:51 INFO  HikariDataSource:82 - HikariPool-2 - Start completed.
+2020-07-09 17:42:51 INFO  Version:44 - HHH000412: Hibernate ORM core version 5.4.18.Final
+2020-07-09 17:42:52 INFO  Version:49 - HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+2020-07-09 17:42:52 INFO  Dialect:172 - HHH000400: Using dialect: org.hibernate.dialect.MySQLDialect
+2020-07-09 17:42:53 INFO  JtaPlatformInitiator:52 - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2020-07-09 17:42:54 INFO  SecurityConfig:66 - TEST
+2020-07-09 17:42:54 INFO  DefaultSecurityFilterChain:43 - Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@2123edc, org.springframework.security.web.context.SecurityContextPersistenceFilter@1e168f80, org.springframework.security.web.header.HeaderWriterFilter@1e3b096c, org.springframework.security.web.authentication.logout.LogoutFilter@4e757405, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@54a3427d, org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter@5c8ebbca, org.springframework.security.web.authentication.ui.DefaultLogoutPageGeneratingFilter@3dddee2e, org.springframework.security.web.authentication.www.DigestAuthenticationFilter@7396fd39, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@52352b97, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@2df5727d, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@2960b1dc, org.springframework.security.web.session.SessionManagementFilter@33afe29e, org.springframework.security.web.access.ExceptionTranslationFilter@7be77f59, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@5ef780b5]
+2020-07-09 17:42:54 INFO  DispatcherServlet:547 - Completed initialization in 4178 ms
+2020-07-09 17:45:57 INFO  HikariDataSource:350 - HikariPool-2 - Shutdown initiated...
+2020-07-09 17:45:57 INFO  HikariDataSource:352 - HikariPool-2 - Shutdown completed.
+2020-07-09 17:45:59 INFO  DispatcherServlet:525 - Initializing Servlet 'dispatcher'
+2020-07-09 17:45:59 INFO  HikariDataSource:80 - HikariPool-3 - Starting...
+2020-07-09 17:46:00 INFO  HikariDataSource:82 - HikariPool-3 - Start completed.
+2020-07-09 17:46:00 INFO  Version:44 - HHH000412: Hibernate ORM core version 5.4.18.Final
+2020-07-09 17:46:00 INFO  Version:49 - HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+2020-07-09 17:46:00 INFO  Dialect:172 - HHH000400: Using dialect: org.hibernate.dialect.MySQLDialect
+2020-07-09 17:46:01 INFO  JtaPlatformInitiator:52 - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2020-07-09 17:46:01 WARN  AnnotationConfigWebApplicationContext:558 - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'requestMappingHandlerMapping' defined in org.springframework.web.servlet.config.annotation.DelegatingWebMvcConfiguration: Invocation of init method failed; nested exception is java.lang.IllegalStateException: Ambiguous mapping. Cannot map 'registerController' method 
+com.excilys.formation.java.cdb.controllers.RegisterController#showInfo()
+to {GET /AddComputer}: There is already 'addComputerController' bean method
+com.excilys.formation.java.cdb.controllers.AddComputerController#showInfo() mapped.
+2020-07-09 17:46:01 INFO  HikariDataSource:350 - HikariPool-3 - Shutdown initiated...
+2020-07-09 17:46:01 INFO  HikariDataSource:352 - HikariPool-3 - Shutdown completed.
+2020-07-09 17:46:01 ERROR DispatcherServlet:534 - Context initialization failed
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'requestMappingHandlerMapping' defined in org.springframework.web.servlet.config.annotation.DelegatingWebMvcConfiguration: Invocation of init method failed; nested exception is java.lang.IllegalStateException: Ambiguous mapping. Cannot map 'registerController' method 
+com.excilys.formation.java.cdb.controllers.RegisterController#showInfo()
+to {GET /AddComputer}: There is already 'addComputerController' bean method
+com.excilys.formation.java.cdb.controllers.AddComputerController#showInfo() mapped.
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1796)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:595)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:517)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:323)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:226)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:321)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:202)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:895)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:878)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:550)
+	at org.springframework.web.servlet.FrameworkServlet.configureAndRefreshWebApplicationContext(FrameworkServlet.java:702)
+	at org.springframework.web.servlet.FrameworkServlet.initWebApplicationContext(FrameworkServlet.java:578)
+	at org.springframework.web.servlet.FrameworkServlet.initServletBean(FrameworkServlet.java:530)
+	at org.springframework.web.servlet.HttpServletBean.init(HttpServletBean.java:170)
+	at javax.servlet.GenericServlet.init(GenericServlet.java:158)
+	at org.apache.catalina.core.StandardWrapper.initServlet(StandardWrapper.java:1134)
+	at org.apache.catalina.core.StandardWrapper.load(StandardWrapper.java:986)
+	at org.apache.catalina.core.StandardContext.loadOnStartup(StandardContext.java:4872)
+	at org.apache.catalina.core.StandardContext.startInternal(StandardContext.java:5181)
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:183)
+	at org.apache.catalina.core.StandardContext.reload(StandardContext.java:3761)
+	at org.apache.catalina.loader.WebappLoader.backgroundProcess(WebappLoader.java:299)
+	at org.apache.catalina.core.StandardContext.backgroundProcess(StandardContext.java:5531)
+	at org.apache.catalina.core.ContainerBase$ContainerBackgroundProcessor.processChildren(ContainerBase.java:1353)
+	at org.apache.catalina.core.ContainerBase$ContainerBackgroundProcessor.processChildren(ContainerBase.java:1357)
+	at org.apache.catalina.core.ContainerBase$ContainerBackgroundProcessor.processChildren(ContainerBase.java:1357)
+	at org.apache.catalina.core.ContainerBase$ContainerBackgroundProcessor.run(ContainerBase.java:1335)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)
+	at java.util.concurrent.FutureTask.runAndReset(FutureTask.java:308)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$301(ScheduledThreadPoolExecutor.java:180)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:294)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Thread.java:748)
+Caused by: java.lang.IllegalStateException: Ambiguous mapping. Cannot map 'registerController' method 
+com.excilys.formation.java.cdb.controllers.RegisterController#showInfo()
+to {GET /AddComputer}: There is already 'addComputerController' bean method
+com.excilys.formation.java.cdb.controllers.AddComputerController#showInfo() mapped.
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodMapping$MappingRegistry.validateMethodMapping(AbstractHandlerMethodMapping.java:636)
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodMapping$MappingRegistry.register(AbstractHandlerMethodMapping.java:603)
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodMapping.registerHandlerMethod(AbstractHandlerMethodMapping.java:318)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping.registerHandlerMethod(RequestMappingHandlerMapping.java:377)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping.registerHandlerMethod(RequestMappingHandlerMapping.java:74)
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodMapping.lambda$detectHandlerMethods$1(AbstractHandlerMethodMapping.java:288)
+	at java.util.LinkedHashMap.forEach(LinkedHashMap.java:684)
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodMapping.detectHandlerMethods(AbstractHandlerMethodMapping.java:286)
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodMapping.processCandidateBean(AbstractHandlerMethodMapping.java:258)
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodMapping.initHandlerMethods(AbstractHandlerMethodMapping.java:217)
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodMapping.afterPropertiesSet(AbstractHandlerMethodMapping.java:205)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping.afterPropertiesSet(RequestMappingHandlerMapping.java:188)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1855)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1792)
+	... 34 more
+2020-07-09 18:05:55 INFO  DispatcherServlet:525 - Initializing Servlet 'dispatcher'
+2020-07-09 18:05:57 INFO  HikariDataSource:80 - HikariPool-1 - Starting...
+2020-07-09 18:05:58 INFO  HikariDataSource:82 - HikariPool-1 - Start completed.
+2020-07-09 18:05:58 INFO  Version:44 - HHH000412: Hibernate ORM core version 5.4.18.Final
+2020-07-09 18:05:58 INFO  Version:49 - HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+2020-07-09 18:05:59 INFO  Dialect:172 - HHH000400: Using dialect: org.hibernate.dialect.MySQLDialect
+2020-07-09 18:06:00 INFO  JtaPlatformInitiator:52 - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2020-07-09 18:06:01 INFO  SecurityConfig:67 - TEST
+2020-07-09 18:06:01 INFO  DefaultSecurityFilterChain:43 - Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@7b4fbedb, org.springframework.security.web.context.SecurityContextPersistenceFilter@674c9079, org.springframework.security.web.header.HeaderWriterFilter@14c5625d, org.springframework.security.web.authentication.logout.LogoutFilter@625439ba, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@2b5a659f, org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter@9af2a00, org.springframework.security.web.authentication.ui.DefaultLogoutPageGeneratingFilter@73534675, org.springframework.security.web.authentication.www.DigestAuthenticationFilter@550482aa, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@4cf5cf47, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@4de5d46c, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@2b7b6f58, org.springframework.security.web.session.SessionManagementFilter@2acacdf, org.springframework.security.web.access.ExceptionTranslationFilter@8dba70a, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@6a4ec62d]
+2020-07-09 18:06:01 INFO  DispatcherServlet:547 - Completed initialization in 5393 ms

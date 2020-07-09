@@ -27,11 +27,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 //    @Override
 //    public void configure(AuthenticationManagerBuilder auth) throws Exception {
-//        List<User> users = userService.getAll();
-//        for (User user : users) {
-//            auth.inMemoryAuthentication()
-//            .withUser(user.getUsername()).password(user.getPassword()).roles(user.getRole());
-//        }
 //        auth.inMemoryAuthentication()
 //        .withUser("user").password(passwordEncoder.encode("123456")).roles("USER")
 //        .and()
@@ -45,17 +40,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
        
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.addFilter(digestAuthenticationFilter())       
-        .authorizeRequests()
+        http.authorizeRequests()
         .antMatchers("/login").permitAll()
-        .antMatchers(HttpMethod.GET, "/").hasAnyRole("USER", "ADMIN")
-        .antMatchers(HttpMethod.POST, "/").hasRole("ADMIN")
-        .antMatchers(HttpMethod.GET, "/ListComputers/**").hasAnyRole("USER", "ADMIN")
-        .antMatchers(HttpMethod.POST, "/ListComputers/**").hasRole("ADMIN")
+        .antMatchers("/RegisterUser").permitAll()
+        .antMatchers(HttpMethod.GET, "/", "/ListComputers/**").hasAnyRole("USER", "ADMIN")
+        .antMatchers(HttpMethod.POST, "/", "/ListComputers/**").hasRole("ADMIN")
         .antMatchers("/AddComputer/**").hasRole("ADMIN")
         .antMatchers("/EditComputer/**").hasRole("ADMIN")
         .and().formLogin()
-        .and().csrf().disable();        
+        .and().csrf().disable()
+        .addFilter(digestAuthenticationFilter());        
     }
 
     DigestAuthenticationFilter digestAuthenticationFilter() throws Exception {
