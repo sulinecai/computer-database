@@ -41,7 +41,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         .antMatchers("/EditComputer/**").hasRole("ADMIN")
         .and().formLogin()
         .and().csrf().disable()
-        .addFilter(digestAuthenticationFilter());        
+        .addFilter(digestAuthenticationFilter());
+//        .invalidateHttpSession(true);
+//        .logout();        
     }
 
     DigestAuthenticationFilter digestAuthenticationFilter() throws Exception {
