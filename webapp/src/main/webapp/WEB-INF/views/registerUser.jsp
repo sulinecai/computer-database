@@ -23,7 +23,7 @@
             <div class="row">
                 <div class="col-xs-8 col-xs-offset-2 box">
                     <h1><spring:message code="label.register"/></h1>
-                    <form action="RegisterUser" method="POST">                    
+                    <form class="registrationForm" action="RegisterUser" method="POST">                    
                         <fieldset>
                             <div class="form-group">
                                 <label for="username"><spring:message code="label.username"/> *</label>
@@ -58,7 +58,8 @@
         </div>
     </section>
 <script src="resources/js/jquery.min.js"></script>
+<script src="resources/js/jquery.validate.min.js"></script>
 <script src="resources/js/bootstrap.min.js"></script>
-<script src="resources/js/validateDates.js"></script>
+<script src="resources/js/registration.js"></script>
 </body>
 </html>
