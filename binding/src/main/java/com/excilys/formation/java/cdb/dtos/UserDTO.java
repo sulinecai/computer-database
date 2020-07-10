@@ -6,18 +6,6 @@ public class UserDTO {
     private String username;
     private String password;
     private String role;
-        
-    /**
-     * @param username
-     * @param password
-     * @param role
-     */
-    public UserDTO(String username, String password, String role) {
-        super();
-        this.username = username;
-        this.password = password;
-        this.role = role;
-    }
     
     public String getId() {
         return id;
@@ -43,9 +31,19 @@ public class UserDTO {
     public void setRole(String role) {
         this.role = role;
     }
-
     @Override
     public String toString() {
         return "UserDTO [id=" + id + ", username=" + username + ", password=" + password + ", role=" + role + "]";
-    }    
+    }   
+//    /**
+//     * @param username
+//     * @param password
+//     * @param role
+//     */
+//    public UserDTO(String username, String password, String role) {
+//        super();
+//        this.username = username;
+//        this.password = password;
+//        this.role = role;
+//    }   
 }

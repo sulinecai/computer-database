@@ -9,6 +9,7 @@
 <!-- Bootstrap -->
 <link href="resources/css/bootstrap.min.css" rel="stylesheet" media="screen">
 <link href="resources/css/font-awesome.css" rel="stylesheet" media="screen">
+<link href="resources/css/main.css" rel="stylesheet" media="screen">
 </head>
 <body>
     <header class="navbar navbar-inverse navbar-fixed-top">
@@ -21,21 +22,33 @@
         <div class="container">
             <div class="row">
                 <div class="col-xs-8 col-xs-offset-2 box">
-                    <h1><spring:message code="label.registration"/></h1>
+                    <h1><spring:message code="label.register"/></h1>
                     <form action="RegisterUser" method="POST">                    
                         <fieldset>
                             <div class="form-group">
                                 <label for="username"><spring:message code="label.username"/> *</label>
-                                <input type="text" class="form-control" required id="username" name="username" placeholder='<spring:message code="username"/>'>
+                                <input type="text" class="form-control" required id="username" name="username" placeholder='<spring:message code="label.username"/>'>
                             </div>
                             <div class="form-group">
                                 <label for="password"><spring:message code="label.password"/> *</label>
-                                <input type="text" class="form-control" required id="password" name="password" placeholder='<spring:message code="password"/>'>
-                            </div>  
+                                <input type="password" class="form-control" required id="password" name="password" placeholder='<spring:message code="label.password"/>'>
+                            </div> 
+                            <div class="form-group">
+                                <label for="confirm"><spring:message code="label.confirm"/> *</label>
+                                <input type="password" class="form-control" required id="confirm" name="confirm" placeholder='<spring:message code="label.confirm"/>'>
+                            </div> 
+                            <div class="form-group">
+							<label for="role"><spring:message code="label.role"/> *</label>
+							<select id="role" name="role">
+							    <option value="USER">USER</option>
+							    <option value="ADMIN">ADMIN</option>
+							</select>
+							</div> 
+							
                             <i>* <spring:message code="form.required"/></i>               
                         </fieldset>                        
                         <div class="actions pull-right">
-                            <input type="submit" value='<spring:message code="button.add"/>' class="btn btn-primary">
+                            <input type="submit" value='<spring:message code="button.validate"/>' class="btn btn-primary">
                             or
                             <a href="ListComputers" class="btn btn-default"><spring:message code="button.cancel"/></a>
                         </div>

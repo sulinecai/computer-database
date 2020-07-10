@@ -20,6 +20,10 @@
 				<a href="ListComputers?lang=en"><img src="resources/img/flag_en.png " alt='<spring:message code="lang.en"/>'/></a>
 				|
 				<a href="ListComputers?lang=fr"><img src="resources/img/flag_fr.png " alt='<spring:message code="lang.fr"/>'/></a>
+				<br>
+				<a href="logout">Logout</a>
+				|
+				<a href="RegisterUser">Register</a>
 			</div>
 		</div>
 	</header>
