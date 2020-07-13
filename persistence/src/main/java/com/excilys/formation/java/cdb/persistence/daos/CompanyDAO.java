@@ -19,6 +19,8 @@ import org.springframework.stereotype.Repository;
 import com.excilys.formation.java.cdb.models.Company;
 import com.excilys.formation.java.cdb.models.Page;
 
+import exceptions.NotFoundInDatabaseException;
+
 @Repository
 public class CompanyDAO {
 
@@ -84,12 +86,16 @@ public class CompanyDAO {
     }
 
     public void delete(Long id) {
+        int nbRows = 0;
         if (id != null) {
             try (Session session = sessionFactory.openSession()) {
                 Transaction transaction = session.beginTransaction();
-                session.createQuery(SQL_DELETE_COMPUTER_WITH_COMPANY_ID).setParameter("id", id).executeUpdate();
-                session.createQuery(SQL_DELETE_COMPANY_WITH_ID).setParameter("id", id).executeUpdate();
+                nbRows += session.createQuery(SQL_DELETE_COMPUTER_WITH_COMPANY_ID).setParameter("id", id).executeUpdate();
+                nbRows += session.createQuery(SQL_DELETE_COMPANY_WITH_ID).setParameter("id", id).executeUpdate();
                 transaction.commit();
+                if (nbRows == 0) {
+                    throw new NotFoundInDatabaseException("Company not found");
+                }
             } catch (IllegalStateException | PersistenceException  e) {
                 logger.error("error when deleting computer", e);
             }

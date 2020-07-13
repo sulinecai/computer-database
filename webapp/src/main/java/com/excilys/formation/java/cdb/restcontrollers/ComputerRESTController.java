@@ -1,6 +1,7 @@
 package com.excilys.formation.java.cdb.restcontrollers;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,11 +14,14 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
 
 import com.excilys.formation.java.cdb.dtos.ComputerDTO;
 import com.excilys.formation.java.cdb.mappers.ComputerMapper;
 import com.excilys.formation.java.cdb.models.Computer;
 import com.excilys.formation.java.cdb.services.ComputerService;
+
+import exceptions.NotFoundInDatabaseException;
 
 @RestController
 @RequestMapping("computers")
@@ -34,32 +38,34 @@ public class ComputerRESTController {
 
     @GetMapping("/{id}")
     public ComputerDTO getComputer(@PathVariable Long id) {
-        ComputerDTO dto = new ComputerDTO();
-        if (computerService.exist(id)) {
-            dto = ComputerMapper.toComputerDTO(computerService.findById(id));
+        Optional<Computer> computerOpt = computerService.findByIdOpt(id);
+        if (!computerOpt.isPresent()) {
+            throw new ResponseStatusException (HttpStatus.NOT_FOUND, "The Computer is not found is the database");
         }
-        return dto;
+        return ComputerMapper.toComputerDTO(computerOpt.get());
     }
-
+    
     @DeleteMapping("/{id}")
-    public HttpStatus deleteComputer(@PathVariable Long id) {
-        if (computerService.exist(id)) {
+    public void deleteComputer(@PathVariable Long id) {
+        try {
             computerService.delete(id);
-            return HttpStatus.OK;
-        }  
-        return HttpStatus.NOT_FOUND;
+        } catch (NotFoundInDatabaseException e) {
+            throw new ResponseStatusException (HttpStatus.NOT_FOUND, "The Computer is not found is the database");
+        }
     }
     
     @PostMapping(value = {"", "/"})
-    public ComputerDTO createComputer(@RequestBody ComputerDTO dto) {
+    public void createComputer(@RequestBody ComputerDTO dto) {
       computerService.create(ComputerMapper.toComputer(dto));
-      return dto;
     }
     
     @PutMapping(value = {"", "/"})
-    public ComputerDTO updateComputer(@RequestBody ComputerDTO dto) {
-      computerService.update(ComputerMapper.toComputer(dto));
-      return dto;
+    public void updateComputer(@RequestBody ComputerDTO dto) {
+      try {
+          computerService.update(ComputerMapper.toComputer(dto));
+      } catch (NotFoundInDatabaseException e) {
+          throw new ResponseStatusException (HttpStatus.NOT_FOUND, "The Computer is not found is the database");
+      }
     }
     
 }

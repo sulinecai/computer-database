@@ -22,6 +22,8 @@ import com.excilys.formation.java.cdb.models.Company;
 import com.excilys.formation.java.cdb.models.Computer;
 import com.excilys.formation.java.cdb.models.Page;
 
+import exceptions.NotFoundInDatabaseException;
+
 @Repository
 public class ComputerDAO {
 
@@ -161,8 +163,6 @@ public class ComputerDAO {
         } else {
             logger.error("the computer is null");
         }
-        logger.info(computer.toString());
-
     }
 
     /**
@@ -184,6 +184,7 @@ public class ComputerDAO {
                 transaction.commit();
                 if (nbRows != 1) {
                     logger.error("%d rows affected when updating computer", nbRows);
+                    throw new NotFoundInDatabaseException("Computer not found.");
                 }
             } catch (IllegalStateException | RollbackException | HibernateException e) {
                 logger.error("sql error when creating a computer", e);
@@ -209,6 +210,7 @@ public class ComputerDAO {
                 transaction.commit();
                 if (nbRows != 1) {
                     logger.error("%d rows affected when deleting computer", nbRows);
+                    throw new NotFoundInDatabaseException("Computer not  found.");
                 }
             } catch (IllegalStateException | PersistenceException  e) {
                 logger.error("error when deleting computer", e);
