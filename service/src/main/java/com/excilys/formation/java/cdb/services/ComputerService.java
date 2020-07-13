@@ -1,6 +1,7 @@
 package com.excilys.formation.java.cdb.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,6 +33,10 @@ public class ComputerService {
     public int getNumberComputers() {
         return computerDAO.getNumberComputers();
     }
+    
+    public List<Computer> getAll() {
+        return computerDAO.getAll();
+    }
 
     /**
      * Return the list of computers on a given page.
@@ -52,6 +57,11 @@ public class ComputerService {
     public Computer findById(Long id) {
         return computerDAO.findById(id).get();
     }
+    
+    public Optional<Computer> findByIdOpt(Long id) {
+        return computerDAO.findById(id);
+    }
+    
 
     /**
      * Return the list of computer containing the given name on the given page.

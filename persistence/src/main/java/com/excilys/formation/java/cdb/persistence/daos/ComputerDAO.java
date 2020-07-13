@@ -18,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.excilys.formation.java.cdb.mappers.CompanyMapper;
+import com.excilys.formation.java.cdb.models.Company;
 import com.excilys.formation.java.cdb.models.Computer;
 import com.excilys.formation.java.cdb.models.Page;
 
@@ -65,6 +66,16 @@ public class ComputerDAO {
             logger.error("error when getting total number of computers: ", e);
         }
         return count;
+    }
+    
+    public List<Computer> getAll() {
+        List<Computer> computerList = new ArrayList<Computer>();
+        try (Session session = sessionFactory.openSession()) {
+            computerList = session.createQuery(SQL_SELECT_ALL, Computer.class).list();
+        } catch (HibernateException e) {
+            logger.error("error when getting all computers", e);
+        }
+        return computerList;
     }
 
     /**

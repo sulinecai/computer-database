@@ -56,7 +56,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         DigestAuthenticationEntryPoint bauth = new DigestAuthenticationEntryPoint();
         bauth.setRealmName("digest auth");
         bauth.setKey("MyKey");
-        logger.info("TEST");
         return bauth;
     }
 }
