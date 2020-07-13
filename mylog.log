@@ -6062,3 +6062,206 @@ Caused by: java.nio.channels.ClosedByInterruptException
 2020-07-13 17:03:59 INFO  JtaPlatformInitiator:52 - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
 2020-07-13 17:04:00 INFO  DefaultSecurityFilterChain:43 - Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@5841716b, org.springframework.security.web.context.SecurityContextPersistenceFilter@4529b266, org.springframework.security.web.header.HeaderWriterFilter@6e2ab1f4, org.springframework.security.web.authentication.logout.LogoutFilter@54e1e8a7, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@42017162, org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter@69cf9acb, org.springframework.security.web.authentication.ui.DefaultLogoutPageGeneratingFilter@550a78ed, org.springframework.security.web.authentication.www.DigestAuthenticationFilter@fbb39ea, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@6aca85da, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@19bd1f98, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@b8f6500, org.springframework.security.web.session.SessionManagementFilter@673ade3d, org.springframework.security.web.access.ExceptionTranslationFilter@495fa126, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@c0d114b]
 2020-07-13 17:04:00 INFO  DispatcherServlet:547 - Completed initialization in 5980 ms
+2020-07-13 17:25:51 INFO  HikariDataSource:350 - HikariPool-1 - Shutdown initiated...
+2020-07-13 17:25:51 INFO  HikariDataSource:352 - HikariPool-1 - Shutdown completed.
+2020-07-13 17:34:17 INFO  DispatcherServlet:525 - Initializing Servlet 'dispatcher'
+2020-07-13 17:34:20 INFO  HikariDataSource:80 - HikariPool-1 - Starting...
+2020-07-13 17:34:20 INFO  HikariDataSource:82 - HikariPool-1 - Start completed.
+2020-07-13 17:34:21 INFO  Version:44 - HHH000412: Hibernate ORM core version 5.4.18.Final
+2020-07-13 17:34:21 INFO  Version:49 - HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+2020-07-13 17:34:21 INFO  Dialect:172 - HHH000400: Using dialect: org.hibernate.dialect.MySQLDialect
+2020-07-13 17:34:23 INFO  JtaPlatformInitiator:52 - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2020-07-13 17:34:24 INFO  DefaultSecurityFilterChain:43 - Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@5841716b, org.springframework.security.web.context.SecurityContextPersistenceFilter@4529b266, org.springframework.security.web.header.HeaderWriterFilter@6e2ab1f4, org.springframework.security.web.authentication.logout.LogoutFilter@54e1e8a7, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@42017162, org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter@69cf9acb, org.springframework.security.web.authentication.ui.DefaultLogoutPageGeneratingFilter@550a78ed, org.springframework.security.web.authentication.www.DigestAuthenticationFilter@fbb39ea, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@6aca85da, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@19bd1f98, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@b8f6500, org.springframework.security.web.session.SessionManagementFilter@673ade3d, org.springframework.security.web.access.ExceptionTranslationFilter@495fa126, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@c0d114b]
+2020-07-13 17:34:24 INFO  DispatcherServlet:547 - Completed initialization in 6965 ms
+2020-07-13 17:38:38 INFO  HikariDataSource:350 - HikariPool-1 - Shutdown initiated...
+2020-07-13 17:38:38 INFO  HikariDataSource:352 - HikariPool-1 - Shutdown completed.
+2020-07-13 17:38:40 INFO  DispatcherServlet:525 - Initializing Servlet 'dispatcher'
+2020-07-13 17:38:42 INFO  HikariDataSource:80 - HikariPool-2 - Starting...
+2020-07-13 17:38:42 INFO  HikariDataSource:82 - HikariPool-2 - Start completed.
+2020-07-13 17:38:43 INFO  Version:44 - HHH000412: Hibernate ORM core version 5.4.18.Final
+2020-07-13 17:38:43 INFO  Version:49 - HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+2020-07-13 17:38:43 INFO  Dialect:172 - HHH000400: Using dialect: org.hibernate.dialect.MySQLDialect
+2020-07-13 17:38:44 INFO  JtaPlatformInitiator:52 - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2020-07-13 17:38:46 INFO  DefaultSecurityFilterChain:43 - Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@50097c6a, org.springframework.security.web.context.SecurityContextPersistenceFilter@7a20c2b, org.springframework.security.web.header.HeaderWriterFilter@33370411, org.springframework.security.web.authentication.logout.LogoutFilter@3332eaff, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@3b8cdfe2, org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter@4fa060d6, org.springframework.security.web.authentication.ui.DefaultLogoutPageGeneratingFilter@513c04b5, org.springframework.security.web.authentication.www.DigestAuthenticationFilter@79e1d621, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@48c89a5f, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@759b5078, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@739d375b, org.springframework.security.web.session.SessionManagementFilter@43526aee, org.springframework.security.web.access.ExceptionTranslationFilter@75394d2e, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@47e55587]
+2020-07-13 17:38:46 INFO  DispatcherServlet:547 - Completed initialization in 5563 ms
+2020-07-13 17:39:41 INFO  HikariDataSource:350 - HikariPool-2 - Shutdown initiated...
+2020-07-13 17:39:41 INFO  HikariDataSource:352 - HikariPool-2 - Shutdown completed.
+2020-07-13 17:39:43 INFO  DispatcherServlet:525 - Initializing Servlet 'dispatcher'
+2020-07-13 17:39:43 INFO  HikariDataSource:80 - HikariPool-3 - Starting...
+2020-07-13 17:39:44 INFO  HikariDataSource:82 - HikariPool-3 - Start completed.
+2020-07-13 17:39:44 INFO  Version:44 - HHH000412: Hibernate ORM core version 5.4.18.Final
+2020-07-13 17:39:44 INFO  Version:49 - HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+2020-07-13 17:39:44 INFO  Dialect:172 - HHH000400: Using dialect: org.hibernate.dialect.MySQLDialect
+2020-07-13 17:39:45 INFO  JtaPlatformInitiator:52 - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2020-07-13 17:39:46 INFO  DefaultSecurityFilterChain:43 - Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@19bf98ab, org.springframework.security.web.context.SecurityContextPersistenceFilter@2f458b2, org.springframework.security.web.header.HeaderWriterFilter@bb8f4c0, org.springframework.security.web.authentication.logout.LogoutFilter@2fb3bf2d, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@481f6302, org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter@47fef71f, org.springframework.security.web.authentication.ui.DefaultLogoutPageGeneratingFilter@d2507d2, org.springframework.security.web.authentication.www.DigestAuthenticationFilter@913d8a6, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@64edbe1, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@af38222, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@5b94d6b1, org.springframework.security.web.session.SessionManagementFilter@114b7dcf, org.springframework.security.web.access.ExceptionTranslationFilter@6145ec0c, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@376a2d67]
+2020-07-13 17:39:46 INFO  DispatcherServlet:547 - Completed initialization in 3673 ms
+2020-07-13 17:43:47 INFO  HikariDataSource:350 - HikariPool-3 - Shutdown initiated...
+2020-07-13 17:43:47 INFO  HikariDataSource:352 - HikariPool-3 - Shutdown completed.
+2020-07-13 17:43:48 INFO  DispatcherServlet:525 - Initializing Servlet 'dispatcher'
+2020-07-13 17:43:49 INFO  HikariDataSource:80 - HikariPool-4 - Starting...
+2020-07-13 17:43:49 INFO  HikariDataSource:82 - HikariPool-4 - Start completed.
+2020-07-13 17:43:50 INFO  Version:44 - HHH000412: Hibernate ORM core version 5.4.18.Final
+2020-07-13 17:43:50 INFO  Version:49 - HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+2020-07-13 17:43:50 INFO  Dialect:172 - HHH000400: Using dialect: org.hibernate.dialect.MySQLDialect
+2020-07-13 17:43:51 INFO  JtaPlatformInitiator:52 - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2020-07-13 17:43:53 INFO  DefaultSecurityFilterChain:43 - Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@1db15cad, org.springframework.security.web.context.SecurityContextPersistenceFilter@1c6b866a, org.springframework.security.web.header.HeaderWriterFilter@4695d8fa, org.springframework.security.web.authentication.logout.LogoutFilter@68ab04b9, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@5a368d33, org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter@7d88b3fb, org.springframework.security.web.authentication.ui.DefaultLogoutPageGeneratingFilter@7a5c1136, org.springframework.security.web.authentication.www.DigestAuthenticationFilter@c9a065e, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@4b4d0cd9, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@15971e21, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@60bd3bd9, org.springframework.security.web.session.SessionManagementFilter@3ce16298, org.springframework.security.web.access.ExceptionTranslationFilter@30f5fba7, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@2a45e0d6]
+2020-07-13 17:43:53 INFO  DispatcherServlet:547 - Completed initialization in 4370 ms
+2020-07-13 17:44:26 INFO  HikariDataSource:350 - HikariPool-4 - Shutdown initiated...
+2020-07-13 17:44:26 INFO  HikariDataSource:352 - HikariPool-4 - Shutdown completed.
+2020-07-13 17:44:28 INFO  DispatcherServlet:525 - Initializing Servlet 'dispatcher'
+2020-07-13 17:44:29 INFO  HikariDataSource:80 - HikariPool-5 - Starting...
+2020-07-13 17:44:29 INFO  HikariDataSource:82 - HikariPool-5 - Start completed.
+2020-07-13 17:44:29 INFO  Version:44 - HHH000412: Hibernate ORM core version 5.4.18.Final
+2020-07-13 17:44:29 INFO  Version:49 - HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+2020-07-13 17:44:30 INFO  Dialect:172 - HHH000400: Using dialect: org.hibernate.dialect.MySQLDialect
+2020-07-13 17:44:31 INFO  JtaPlatformInitiator:52 - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2020-07-13 17:44:32 INFO  DefaultSecurityFilterChain:43 - Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@39dce44b, org.springframework.security.web.context.SecurityContextPersistenceFilter@78ced145, org.springframework.security.web.header.HeaderWriterFilter@4270aa4f, org.springframework.security.web.authentication.logout.LogoutFilter@7391e26d, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@15c4b05d, org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter@51bfa672, org.springframework.security.web.authentication.ui.DefaultLogoutPageGeneratingFilter@20b81f2c, org.springframework.security.web.authentication.www.DigestAuthenticationFilter@36a13ca2, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@75d6ed10, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@22d172d2, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@4494eac3, org.springframework.security.web.session.SessionManagementFilter@54d7aa6e, org.springframework.security.web.access.ExceptionTranslationFilter@44ec417e, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@2cc70bfb]
+2020-07-13 17:44:32 INFO  DispatcherServlet:547 - Completed initialization in 4425 ms
+2020-07-13 17:44:44 INFO  HikariDataSource:350 - HikariPool-5 - Shutdown initiated...
+2020-07-13 17:44:44 INFO  HikariDataSource:352 - HikariPool-5 - Shutdown completed.
+2020-07-13 17:44:46 INFO  DispatcherServlet:525 - Initializing Servlet 'dispatcher'
+2020-07-13 17:44:47 INFO  HikariDataSource:80 - HikariPool-6 - Starting...
+2020-07-13 17:44:47 INFO  HikariDataSource:82 - HikariPool-6 - Start completed.
+2020-07-13 17:44:47 INFO  Version:44 - HHH000412: Hibernate ORM core version 5.4.18.Final
+2020-07-13 17:44:47 INFO  Version:49 - HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+2020-07-13 17:44:48 INFO  Dialect:172 - HHH000400: Using dialect: org.hibernate.dialect.MySQLDialect
+2020-07-13 17:44:49 INFO  JtaPlatformInitiator:52 - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2020-07-13 17:44:50 INFO  DefaultSecurityFilterChain:43 - Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@5c9bb6ad, org.springframework.security.web.context.SecurityContextPersistenceFilter@78a53287, org.springframework.security.web.header.HeaderWriterFilter@231dfa9e, org.springframework.security.web.authentication.logout.LogoutFilter@5cd4e206, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@6f26dd17, org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter@5373fe0c, org.springframework.security.web.authentication.ui.DefaultLogoutPageGeneratingFilter@39854b0d, org.springframework.security.web.authentication.www.DigestAuthenticationFilter@53c876af, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@6c715004, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@760856a1, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@22c4f395, org.springframework.security.web.session.SessionManagementFilter@78152969, org.springframework.security.web.access.ExceptionTranslationFilter@6620add, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@5ae897e0]
+2020-07-13 17:44:50 INFO  DispatcherServlet:547 - Completed initialization in 4484 ms
+2020-07-13 17:45:23 INFO  HikariDataSource:350 - HikariPool-6 - Shutdown initiated...
+2020-07-13 17:45:23 INFO  HikariDataSource:352 - HikariPool-6 - Shutdown completed.
+2020-07-13 17:45:25 INFO  DispatcherServlet:525 - Initializing Servlet 'dispatcher'
+2020-07-13 17:45:26 INFO  HikariDataSource:80 - HikariPool-7 - Starting...
+2020-07-13 17:45:26 INFO  HikariDataSource:82 - HikariPool-7 - Start completed.
+2020-07-13 17:45:26 INFO  Version:44 - HHH000412: Hibernate ORM core version 5.4.18.Final
+2020-07-13 17:45:27 INFO  Version:49 - HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+2020-07-13 17:45:27 INFO  Dialect:172 - HHH000400: Using dialect: org.hibernate.dialect.MySQLDialect
+2020-07-13 17:45:28 INFO  JtaPlatformInitiator:52 - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2020-07-13 17:45:29 INFO  DefaultSecurityFilterChain:43 - Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@37b4122d, org.springframework.security.web.context.SecurityContextPersistenceFilter@6772ceb1, org.springframework.security.web.header.HeaderWriterFilter@45681eb3, org.springframework.security.web.authentication.logout.LogoutFilter@3a445b42, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@613ccdff, org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter@32043619, org.springframework.security.web.authentication.ui.DefaultLogoutPageGeneratingFilter@632fd574, org.springframework.security.web.authentication.www.DigestAuthenticationFilter@162dc8, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@7c81c81b, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@3a0e4bd5, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@58170272, org.springframework.security.web.session.SessionManagementFilter@65835015, org.springframework.security.web.access.ExceptionTranslationFilter@3aeb229d, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@2c22ccbf]
+2020-07-13 17:45:29 INFO  DispatcherServlet:547 - Completed initialization in 4415 ms
+2020-07-13 17:46:23 INFO  HikariDataSource:350 - HikariPool-7 - Shutdown initiated...
+2020-07-13 17:46:23 INFO  HikariDataSource:352 - HikariPool-7 - Shutdown completed.
+2020-07-13 17:46:25 INFO  DispatcherServlet:525 - Initializing Servlet 'dispatcher'
+2020-07-13 17:46:27 INFO  HikariDataSource:80 - HikariPool-8 - Starting...
+2020-07-13 17:46:27 INFO  HikariDataSource:82 - HikariPool-8 - Start completed.
+2020-07-13 17:46:27 INFO  Version:44 - HHH000412: Hibernate ORM core version 5.4.18.Final
+2020-07-13 17:46:27 INFO  Version:49 - HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+2020-07-13 17:46:27 INFO  Dialect:172 - HHH000400: Using dialect: org.hibernate.dialect.MySQLDialect
+2020-07-13 17:46:28 INFO  JtaPlatformInitiator:52 - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2020-07-13 17:46:28 WARN  AnnotationConfigWebApplicationContext:558 - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'computerRESTController': Lookup method resolution failed; nested exception is java.lang.IllegalStateException: Failed to introspect Class [com.excilys.formation.java.cdb.restcontrollers.ComputerRESTController] from ClassLoader [ParallelWebappClassLoader
+  context: webapp
+  delegate: false
+----------> Parent Classloader:
+java.net.URLClassLoader@2c7b84de
+]
+2020-07-13 17:46:29 INFO  HikariDataSource:350 - HikariPool-8 - Shutdown initiated...
+2020-07-13 17:46:29 INFO  HikariDataSource:352 - HikariPool-8 - Shutdown completed.
+2020-07-13 17:46:29 ERROR DispatcherServlet:534 - Context initialization failed
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'computerRESTController': Lookup method resolution failed; nested exception is java.lang.IllegalStateException: Failed to introspect Class [com.excilys.formation.java.cdb.restcontrollers.ComputerRESTController] from ClassLoader [ParallelWebappClassLoader
+  context: webapp
+  delegate: false
+----------> Parent Classloader:
+java.net.URLClassLoader@2c7b84de
+]
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.determineCandidateConstructors(AutowiredAnnotationBeanPostProcessor.java:289)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.determineConstructorsFromBeanPostProcessors(AbstractAutowireCapableBeanFactory.java:1286)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1201)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:557)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:517)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:323)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:226)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:321)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:202)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:895)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:878)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:550)
+	at org.springframework.web.servlet.FrameworkServlet.configureAndRefreshWebApplicationContext(FrameworkServlet.java:702)
+	at org.springframework.web.servlet.FrameworkServlet.initWebApplicationContext(FrameworkServlet.java:578)
+	at org.springframework.web.servlet.FrameworkServlet.initServletBean(FrameworkServlet.java:530)
+	at org.springframework.web.servlet.HttpServletBean.init(HttpServletBean.java:170)
+	at javax.servlet.GenericServlet.init(GenericServlet.java:158)
+	at org.apache.catalina.core.StandardWrapper.initServlet(StandardWrapper.java:1134)
+	at org.apache.catalina.core.StandardWrapper.load(StandardWrapper.java:986)
+	at org.apache.catalina.core.StandardContext.loadOnStartup(StandardContext.java:4872)
+	at org.apache.catalina.core.StandardContext.startInternal(StandardContext.java:5181)
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:183)
+	at org.apache.catalina.core.StandardContext.reload(StandardContext.java:3761)
+	at org.apache.catalina.loader.WebappLoader.backgroundProcess(WebappLoader.java:299)
+	at org.apache.catalina.core.StandardContext.backgroundProcess(StandardContext.java:5531)
+	at org.apache.catalina.core.ContainerBase$ContainerBackgroundProcessor.processChildren(ContainerBase.java:1353)
+	at org.apache.catalina.core.ContainerBase$ContainerBackgroundProcessor.processChildren(ContainerBase.java:1357)
+	at org.apache.catalina.core.ContainerBase$ContainerBackgroundProcessor.processChildren(ContainerBase.java:1357)
+	at org.apache.catalina.core.ContainerBase$ContainerBackgroundProcessor.run(ContainerBase.java:1335)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)
+	at java.util.concurrent.FutureTask.runAndReset(FutureTask.java:308)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$301(ScheduledThreadPoolExecutor.java:180)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:294)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Thread.java:748)
+Caused by: java.lang.IllegalStateException: Failed to introspect Class [com.excilys.formation.java.cdb.restcontrollers.ComputerRESTController] from ClassLoader [ParallelWebappClassLoader
+  context: webapp
+  delegate: false
+----------> Parent Classloader:
+java.net.URLClassLoader@2c7b84de
+]
+	at org.springframework.util.ReflectionUtils.getDeclaredMethods(ReflectionUtils.java:481)
+	at org.springframework.util.ReflectionUtils.doWithLocalMethods(ReflectionUtils.java:321)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.determineCandidateConstructors(AutowiredAnnotationBeanPostProcessor.java:267)
+	... 36 more
+Caused by: java.lang.NoClassDefFoundError: PageDTO
+	at java.lang.Class.getDeclaredMethods0(Native Method)
+	at java.lang.Class.privateGetDeclaredMethods(Class.java:2701)
+	at java.lang.Class.getDeclaredMethods(Class.java:1975)
+	at org.springframework.util.ReflectionUtils.getDeclaredMethods(ReflectionUtils.java:463)
+	... 38 more
+Caused by: java.lang.ClassNotFoundException: PageDTO
+	at org.apache.catalina.loader.WebappClassLoaderBase.loadClass(WebappClassLoaderBase.java:1365)
+	at org.apache.catalina.loader.WebappClassLoaderBase.loadClass(WebappClassLoaderBase.java:1188)
+	... 42 more
+2020-07-13 17:47:10 INFO  DispatcherServlet:525 - Initializing Servlet 'dispatcher'
+2020-07-13 17:47:13 INFO  HikariDataSource:80 - HikariPool-1 - Starting...
+2020-07-13 17:47:14 INFO  HikariDataSource:82 - HikariPool-1 - Start completed.
+2020-07-13 17:47:14 INFO  Version:44 - HHH000412: Hibernate ORM core version 5.4.18.Final
+2020-07-13 17:47:14 INFO  Version:49 - HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+2020-07-13 17:47:15 INFO  Dialect:172 - HHH000400: Using dialect: org.hibernate.dialect.MySQLDialect
+2020-07-13 17:47:16 INFO  JtaPlatformInitiator:52 - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2020-07-13 17:47:17 INFO  DefaultSecurityFilterChain:43 - Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@32c503d3, org.springframework.security.web.context.SecurityContextPersistenceFilter@491b5bd9, org.springframework.security.web.header.HeaderWriterFilter@224bff6, org.springframework.security.web.authentication.logout.LogoutFilter@69cf9acb, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@63f95ac1, org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter@ef21eba, org.springframework.security.web.authentication.ui.DefaultLogoutPageGeneratingFilter@5626cb89, org.springframework.security.web.authentication.www.DigestAuthenticationFilter@38c38c5a, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@36f329e7, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@6e2ab1f4, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@38dacb78, org.springframework.security.web.session.SessionManagementFilter@5dca1c50, org.springframework.security.web.access.ExceptionTranslationFilter@2fd1f0e4, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@62f25e32]
+2020-07-13 17:47:17 INFO  DispatcherServlet:547 - Completed initialization in 7427 ms
+2020-07-13 17:47:27 INFO  HikariDataSource:350 - HikariPool-1 - Shutdown initiated...
+2020-07-13 17:47:27 INFO  HikariDataSource:352 - HikariPool-1 - Shutdown completed.
+2020-07-13 17:47:30 INFO  DispatcherServlet:525 - Initializing Servlet 'dispatcher'
+2020-07-13 17:47:31 INFO  HikariDataSource:80 - HikariPool-2 - Starting...
+2020-07-13 17:47:32 INFO  HikariDataSource:82 - HikariPool-2 - Start completed.
+2020-07-13 17:47:32 INFO  Version:44 - HHH000412: Hibernate ORM core version 5.4.18.Final
+2020-07-13 17:47:32 INFO  Version:49 - HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+2020-07-13 17:47:33 INFO  Dialect:172 - HHH000400: Using dialect: org.hibernate.dialect.MySQLDialect
+2020-07-13 17:47:33 INFO  JtaPlatformInitiator:52 - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2020-07-13 17:47:34 INFO  DefaultSecurityFilterChain:43 - Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@7efaec96, org.springframework.security.web.context.SecurityContextPersistenceFilter@7c71309b, org.springframework.security.web.header.HeaderWriterFilter@5232f33d, org.springframework.security.web.authentication.logout.LogoutFilter@27121f5e, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@288629b9, org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter@5cc09444, org.springframework.security.web.authentication.ui.DefaultLogoutPageGeneratingFilter@282619b9, org.springframework.security.web.authentication.www.DigestAuthenticationFilter@5f45da88, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@36b1e23, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@472f89a7, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@3f40e339, org.springframework.security.web.session.SessionManagementFilter@f5cfe2e, org.springframework.security.web.access.ExceptionTranslationFilter@11a653ed, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@8ba97e5]
+2020-07-13 17:47:34 INFO  DispatcherServlet:547 - Completed initialization in 4435 ms
+2020-07-13 17:51:33 WARN  PageNotFound:1251 - No mapping for GET /webapp/computers/search/apple
+2020-07-13 17:51:59 INFO  HikariDataSource:350 - HikariPool-2 - Shutdown initiated...
+2020-07-13 17:51:59 INFO  HikariDataSource:352 - HikariPool-2 - Shutdown completed.
+2020-07-13 17:52:06 INFO  DispatcherServlet:525 - Initializing Servlet 'dispatcher'
+2020-07-13 17:52:08 INFO  HikariDataSource:80 - HikariPool-1 - Starting...
+2020-07-13 17:52:08 INFO  HikariDataSource:82 - HikariPool-1 - Start completed.
+2020-07-13 17:52:09 INFO  Version:44 - HHH000412: Hibernate ORM core version 5.4.18.Final
+2020-07-13 17:52:09 INFO  Version:49 - HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+2020-07-13 17:52:09 INFO  Dialect:172 - HHH000400: Using dialect: org.hibernate.dialect.MySQLDialect
+2020-07-13 17:52:10 INFO  JtaPlatformInitiator:52 - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2020-07-13 17:52:11 INFO  DefaultSecurityFilterChain:43 - Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@87f4794, org.springframework.security.web.context.SecurityContextPersistenceFilter@7b3d759f, org.springframework.security.web.header.HeaderWriterFilter@5b3063b7, org.springframework.security.web.authentication.logout.LogoutFilter@206d4413, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@2de4045a, org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter@56d3e4a9, org.springframework.security.web.authentication.ui.DefaultLogoutPageGeneratingFilter@78a894fe, org.springframework.security.web.authentication.www.DigestAuthenticationFilter@146b3bc7, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@62c4ad40, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@234a08ea, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@200cdb37, org.springframework.security.web.session.SessionManagementFilter@1d123972, org.springframework.security.web.access.ExceptionTranslationFilter@673ade3d, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@38dacb78]
+2020-07-13 17:52:11 INFO  DispatcherServlet:547 - Completed initialization in 5283 ms
+2020-07-13 17:55:40 INFO  HikariDataSource:350 - HikariPool-1 - Shutdown initiated...
+2020-07-13 17:55:40 INFO  HikariDataSource:352 - HikariPool-1 - Shutdown completed.
+2020-07-13 17:55:42 INFO  DispatcherServlet:525 - Initializing Servlet 'dispatcher'
+2020-07-13 17:55:44 INFO  HikariDataSource:80 - HikariPool-2 - Starting...
+2020-07-13 17:55:44 INFO  HikariDataSource:82 - HikariPool-2 - Start completed.
+2020-07-13 17:55:44 INFO  Version:44 - HHH000412: Hibernate ORM core version 5.4.18.Final
+2020-07-13 17:55:45 INFO  Version:49 - HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+2020-07-13 17:55:45 INFO  Dialect:172 - HHH000400: Using dialect: org.hibernate.dialect.MySQLDialect
+2020-07-13 17:55:46 INFO  JtaPlatformInitiator:52 - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2020-07-13 17:55:47 INFO  DefaultSecurityFilterChain:43 - Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@b376616, org.springframework.security.web.context.SecurityContextPersistenceFilter@c4052d2, org.springframework.security.web.header.HeaderWriterFilter@792bf900, org.springframework.security.web.authentication.logout.LogoutFilter@2768b286, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@22bc678a, org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter@12ec1559, org.springframework.security.web.authentication.ui.DefaultLogoutPageGeneratingFilter@c2f538a, org.springframework.security.web.authentication.www.DigestAuthenticationFilter@25f11077, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@78648b68, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@2e36fc03, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@49e16fe4, org.springframework.security.web.session.SessionManagementFilter@6e1dc674, org.springframework.security.web.access.ExceptionTranslationFilter@14fff2b6, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@59c3ddb8]
+2020-07-13 17:55:47 INFO  DispatcherServlet:547 - Completed initialization in 5016 ms
+2020-07-13 17:57:17 INFO  HikariDataSource:350 - HikariPool-2 - Shutdown initiated...
+2020-07-13 17:57:17 INFO  HikariDataSource:352 - HikariPool-2 - Shutdown completed.

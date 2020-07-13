@@ -17,7 +17,9 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.excilys.formation.java.cdb.dtos.ComputerDTO;
+import com.excilys.formation.java.cdb.dtos.PageDTO;
 import com.excilys.formation.java.cdb.mappers.ComputerMapper;
+import com.excilys.formation.java.cdb.mappers.PageMapper;
 import com.excilys.formation.java.cdb.models.Computer;
 import com.excilys.formation.java.cdb.services.ComputerService;
 
@@ -35,6 +37,18 @@ public class ComputerRESTController {
         List<Computer> allComputers = computerService.getAll();
         return allComputers.stream().map(c -> ComputerMapper.toComputerDTO(c)).collect(Collectors.toList());
     }
+    
+    @GetMapping("/search/{search}")
+    public List<ComputerDTO> searchComputer(@PathVariable String search, @RequestBody PageDTO pageDTO) {
+        List<Computer> allComputers = computerService.findByNameByPage(search, PageMapper.toPage(pageDTO));
+        return allComputers.stream().map(c -> ComputerMapper.toComputerDTO(c)).collect(Collectors.toList());
+    }
+    
+    @GetMapping("/orderBy/{orderBy}")
+    public List<ComputerDTO> orderComputer(@PathVariable String orderBy, @RequestBody PageDTO pageDTO) {
+        List<Computer> allComputers = computerService.orderBy(PageMapper.toPage(pageDTO), orderBy);
+        return allComputers.stream().map(c -> ComputerMapper.toComputerDTO(c)).collect(Collectors.toList());
+    }
 
     @GetMapping("/{id}")
     public ComputerDTO getComputer(@PathVariable Long id) {
@@ -44,7 +58,7 @@ public class ComputerRESTController {
         }
         return ComputerMapper.toComputerDTO(computerOpt.get());
     }
-    
+        
     @DeleteMapping("/{id}")
     public void deleteComputer(@PathVariable Long id) {
         try {
