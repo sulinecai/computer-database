@@ -6,6 +6,9 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.RequestEntity;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,64 +25,79 @@ import com.excilys.formation.java.cdb.mappers.ComputerMapper;
 import com.excilys.formation.java.cdb.mappers.PageMapper;
 import com.excilys.formation.java.cdb.models.Computer;
 import com.excilys.formation.java.cdb.services.ComputerService;
+import com.excilys.formation.java.cdb.services.InvalidComputerException;
 
 import exceptions.NotFoundInDatabaseException;
 
 @RestController
+@CrossOrigin("*")
 @RequestMapping("computers")
 public class ComputerRESTController {
-    
-    @Autowired
-    private ComputerService computerService;
 
-    @GetMapping(value = {"", "/"})
-    public List<ComputerDTO> listComputers() {
-        List<Computer> allComputers = computerService.getAll();
-        return allComputers.stream().map(c -> ComputerMapper.toComputerDTO(c)).collect(Collectors.toList());
-    }
-    
-    @GetMapping("/search/{search}")
-    public List<ComputerDTO> searchComputer(@PathVariable String search, @RequestBody PageDTO pageDTO) {
-        List<Computer> allComputers = computerService.findByNameByPage(search, PageMapper.toPage(pageDTO));
-        return allComputers.stream().map(c -> ComputerMapper.toComputerDTO(c)).collect(Collectors.toList());
-    }
-    
-    @GetMapping("/orderBy/{orderBy}")
-    public List<ComputerDTO> orderComputer(@PathVariable String orderBy, @RequestBody PageDTO pageDTO) {
-        List<Computer> allComputers = computerService.orderBy(PageMapper.toPage(pageDTO), orderBy);
-        return allComputers.stream().map(c -> ComputerMapper.toComputerDTO(c)).collect(Collectors.toList());
-    }
+	@Autowired
+	private ComputerService computerService;
 
-    @GetMapping("/{id}")
-    public ComputerDTO getComputer(@PathVariable Long id) {
-        Optional<Computer> computerOpt = computerService.findByIdOpt(id);
-        if (!computerOpt.isPresent()) {
-            throw new ResponseStatusException (HttpStatus.NOT_FOUND, "The Computer is not found is the database");
-        }
-        return ComputerMapper.toComputerDTO(computerOpt.get());
-    }
-        
-    @DeleteMapping("/{id}")
-    public void deleteComputer(@PathVariable Long id) {
-        try {
-            computerService.delete(id);
-        } catch (NotFoundInDatabaseException e) {
-            throw new ResponseStatusException (HttpStatus.NOT_FOUND, "The Computer is not found is the database");
-        }
-    }
-    
-    @PostMapping(value = {"", "/"})
-    public void createComputer(@RequestBody ComputerDTO dto) {
-      computerService.create(ComputerMapper.toComputer(dto));
-    }
-    
-    @PutMapping(value = {"", "/"})
-    public void updateComputer(@RequestBody ComputerDTO dto) {
-      try {
-          computerService.update(ComputerMapper.toComputer(dto));
-      } catch (NotFoundInDatabaseException e) {
-          throw new ResponseStatusException (HttpStatus.NOT_FOUND, "The Computer is not found is the database");
-      }
-    }
-    
+	@GetMapping(value = { "", "/" }, produces = "application/json")
+	public List<ComputerDTO> listComputers() {
+		List<Computer> allComputers = computerService.getAll();
+		return allComputers.stream().map(c -> ComputerMapper.toComputerDTO(c)).collect(Collectors.toList());
+	}
+
+	@GetMapping(value= "/search/{search}", produces = "application/json")
+	public List<ComputerDTO> searchComputer(@PathVariable String search, @RequestBody PageDTO pageDTO) {
+		List<Computer> allComputers = computerService.findByNameByPage(search, PageMapper.toPage(pageDTO));
+		return allComputers.stream().map(c -> ComputerMapper.toComputerDTO(c)).collect(Collectors.toList());
+	}
+
+	@GetMapping("/orderBy/{orderBy}")
+	public List<ComputerDTO> orderComputer(@PathVariable String orderBy, @RequestBody PageDTO pageDTO) {
+		List<Computer> allComputers = computerService.orderBy(PageMapper.toPage(pageDTO), orderBy);
+		return allComputers.stream().map(c -> ComputerMapper.toComputerDTO(c)).collect(Collectors.toList());
+	}
+
+	@GetMapping("/{id}")
+	public ComputerDTO getComputer(@PathVariable Long id) {
+		Optional<Computer> computerOpt = computerService.findByIdOpt(id);
+		if (!computerOpt.isPresent()) {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "The Computer is not found is the database");
+		}
+		return ComputerMapper.toComputerDTO(computerOpt.get());
+	}
+
+	@DeleteMapping(value = "/{id}", produces = "application/json")
+	public ResponseEntity<String> deleteComputer(@PathVariable Long id) {
+		try {
+			computerService.delete(id);
+			return ResponseEntity.ok("{ok : true}");
+		} catch (NotFoundInDatabaseException e) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("The Computer is not found is the database");
+		}
+	}
+
+	@PostMapping(value = { "", "/" }, produces = "application/json")
+	public ResponseEntity<String> createComputer(@RequestBody ComputerDTO dto) {
+		try {
+			computerService.create(ComputerMapper.toComputer(dto));
+			return ResponseEntity.ok("{ok : true}");
+		} catch (InvalidComputerException e) {
+			StringBuilder sb = new StringBuilder();
+			e.getProblems().stream().forEach(p -> sb.append(p.getExplanation() + "\n"));
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body( "{error : \"" + sb.toString() + "\"}");
+		}
+	}
+
+	@PutMapping(value = { "", "/" }, produces = "application/json")
+	public ResponseEntity<String> updateComputer(@RequestBody ComputerDTO dto) {
+		try {
+			computerService.update(ComputerMapper.toComputer(dto));
+			return ResponseEntity.ok("{ok : true}");
+		} catch (InvalidComputerException e) { 
+			StringBuilder sb = new StringBuilder();
+			e.getProblems().stream().forEach(p -> sb.append(p.getExplanation() + "\n"));
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body( "{error : \"" + sb.toString() + "\"}");
+		} catch (NotFoundInDatabaseException e) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("The Computer is not found is the database");
+		}
+	}
+
 }

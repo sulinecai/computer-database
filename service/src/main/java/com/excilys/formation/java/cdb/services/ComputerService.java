@@ -24,6 +24,8 @@ public class ComputerService {
 
     private static Logger logger = LoggerFactory.getLogger(ComputerService.class);
 
+    @Autowired
+    ComputerValidator validator;
     /**
      * Private constructor.
      */
@@ -78,7 +80,8 @@ public class ComputerService {
         return computerDAO.getNumberComputersByName(name);
     }
 
-    public void create(Computer computer) {
+    public void create(Computer computer) throws InvalidComputerException {
+    	validator.validate(computer);
         computerDAO.create(computer);
     }
 
@@ -111,7 +114,8 @@ public class ComputerService {
         return allowed;
     }
 
-    public void update(Computer computer) {
+    public void update(Computer computer) throws InvalidComputerException {
+    	validator.validate(computer);
         computerDAO.update(computer);
     }
 
