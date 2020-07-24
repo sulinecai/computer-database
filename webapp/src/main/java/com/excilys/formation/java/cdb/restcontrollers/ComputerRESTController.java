@@ -30,7 +30,7 @@ import com.excilys.formation.java.cdb.services.InvalidComputerException;
 import exceptions.NotFoundInDatabaseException;
 
 @RestController
-@CrossOrigin("*")
+@CrossOrigin(origins = "*")
 @RequestMapping("computers")
 public class ComputerRESTController {
 
