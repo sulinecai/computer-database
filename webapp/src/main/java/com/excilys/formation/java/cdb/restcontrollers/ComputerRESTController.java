@@ -51,9 +51,8 @@ public class ComputerRESTController {
 
 	@GetMapping(value = "/searchOrder/{search}/{order}", produces = "application/json")
 	public List<ComputerDTO> orderAndSearch(@PathVariable String search, @PathVariable String order,
-			@RequestBody(required = false) PageDTO page) {
+			 PageDTO page) {
 		System.out.println(search);
-		System.out.println(order);
 		PageDTO p = page == null ? new PageDTO() : page;
 		try {
 			List<ComputerDTO> l = computerService.getBySearchAndOrder(search, order, PageMapper.toPage(p)).stream()
@@ -66,7 +65,7 @@ public class ComputerRESTController {
 	}
 
 	@GetMapping("/orderBy/{orderBy}")
-	public List<ComputerDTO> orderComputer(@PathVariable String orderBy, @RequestBody PageDTO pageDTO) {
+	public List<ComputerDTO> orderComputer(@PathVariable String orderBy, PageDTO pageDTO) {
 		List<Computer> allComputers = computerService.orderBy(PageMapper.toPage(pageDTO), orderBy);
 		return allComputers.stream().map(c -> ComputerMapper.toComputerDTO(c)).collect(Collectors.toList());
 	}
