@@ -42,12 +42,21 @@ public class ComputerRESTController {
 		List<Computer> allComputers = computerService.getAll();
 		return allComputers.stream().map(c -> ComputerMapper.toComputerDTO(c)).collect(Collectors.toList());
 	}
-
-	@GetMapping(value = "/search/{search}", produces = "application/json")
-	public List<ComputerDTO> searchComputer(@PathVariable String search, @RequestBody PageDTO pageDTO) {
-		List<Computer> allComputers = computerService.findByNameByPage(search, PageMapper.toPage(pageDTO));
+	
+    @GetMapping(value = {"/number"}, produces = "application/json")
+    public Integer numberComputers() {
+        return computerService.getNumberComputers();
+    }
+	@GetMapping(value= "/search/{search}", produces = "application/json")
+	public List<ComputerDTO> searchComputer(@PathVariable String search, PageDTO pageDTO) {
+ 		List<Computer> allComputers = computerService.findByNameByPage(search, PageMapper.toPage(pageDTO));
 		return allComputers.stream().map(c -> ComputerMapper.toComputerDTO(c)).collect(Collectors.toList());
 	}
+	
+    @GetMapping(value = {"/search/{search}/number"}, produces = "application/json")
+    public Integer numberSearchedComputers(@PathVariable String search) {
+        return computerService.getNumberComputersByName(search);
+    }
 
 	@GetMapping(value = "/searchOrder/{search}/{order}", produces = "application/json")
 	public List<ComputerDTO> orderAndSearch(@PathVariable String search, @PathVariable String order,
@@ -114,5 +123,4 @@ public class ComputerRESTController {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("The Computer is not found is the database");
 		}
 	}
-
 }
