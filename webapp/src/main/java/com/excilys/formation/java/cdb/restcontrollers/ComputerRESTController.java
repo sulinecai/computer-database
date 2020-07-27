@@ -30,7 +30,7 @@ import com.excilys.formation.java.cdb.services.InvalidComputerException;
 import exceptions.NotFoundInDatabaseException;
 
 @RestController
-@CrossOrigin(origins = "*")
+@CrossOrigin("*")
 @RequestMapping("computers")
 public class ComputerRESTController {
 
@@ -43,10 +43,26 @@ public class ComputerRESTController {
 		return allComputers.stream().map(c -> ComputerMapper.toComputerDTO(c)).collect(Collectors.toList());
 	}
 
-	@GetMapping(value= "/search/{search}", produces = "application/json")
+	@GetMapping(value = "/search/{search}", produces = "application/json")
 	public List<ComputerDTO> searchComputer(@PathVariable String search, @RequestBody PageDTO pageDTO) {
 		List<Computer> allComputers = computerService.findByNameByPage(search, PageMapper.toPage(pageDTO));
 		return allComputers.stream().map(c -> ComputerMapper.toComputerDTO(c)).collect(Collectors.toList());
+	}
+
+	@GetMapping(value = "/searchOrder/{search}/{order}", produces = "application/json")
+	public List<ComputerDTO> orderAndSearch(@PathVariable String search, @PathVariable String order,
+			@RequestBody(required = false) PageDTO page) {
+		System.out.println(search);
+		System.out.println(order);
+		PageDTO p = page == null ? new PageDTO() : page;
+		try {
+			List<ComputerDTO> l = computerService.getBySearchAndOrder(search, order, PageMapper.toPage(p)).stream()
+					.map(ComputerMapper::toComputerDTO).collect(Collectors.toList());
+			System.out.println(l);
+			return l;
+		} catch (IllegalArgumentException e) {
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Bad sort parameter");
+		}
 	}
 
 	@GetMapping("/orderBy/{orderBy}")
@@ -82,7 +98,7 @@ public class ComputerRESTController {
 		} catch (InvalidComputerException e) {
 			StringBuilder sb = new StringBuilder();
 			e.getProblems().stream().forEach(p -> sb.append(p.getExplanation() + "\n"));
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body( "{error : \"" + sb.toString() + "\"}");
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{error : \"" + sb.toString() + "\"}");
 		}
 	}
 
@@ -91,10 +107,10 @@ public class ComputerRESTController {
 		try {
 			computerService.update(ComputerMapper.toComputer(dto));
 			return ResponseEntity.ok("{ok : true}");
-		} catch (InvalidComputerException e) { 
+		} catch (InvalidComputerException e) {
 			StringBuilder sb = new StringBuilder();
 			e.getProblems().stream().forEach(p -> sb.append(p.getExplanation() + "\n"));
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body( "{error : \"" + sb.toString() + "\"}");
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{error : \"" + sb.toString() + "\"}");
 		} catch (NotFoundInDatabaseException e) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("The Computer is not found is the database");
 		}
