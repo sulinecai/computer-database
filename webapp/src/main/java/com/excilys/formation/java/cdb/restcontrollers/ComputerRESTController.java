@@ -6,11 +6,11 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -24,13 +24,14 @@ import com.excilys.formation.java.cdb.dtos.PageDTO;
 import com.excilys.formation.java.cdb.mappers.ComputerMapper;
 import com.excilys.formation.java.cdb.mappers.PageMapper;
 import com.excilys.formation.java.cdb.models.Computer;
+import com.excilys.formation.java.cdb.models.Page;
 import com.excilys.formation.java.cdb.services.ComputerService;
 import com.excilys.formation.java.cdb.services.InvalidComputerException;
 
 import exceptions.NotFoundInDatabaseException;
-
+ 
 @RestController
-@CrossOrigin("*")
+@CrossOrigin
 @RequestMapping("computers")
 public class ComputerRESTController {
 
@@ -42,25 +43,32 @@ public class ComputerRESTController {
 		List<Computer> allComputers = computerService.getAll();
 		return allComputers.stream().map(c -> ComputerMapper.toComputerDTO(c)).collect(Collectors.toList());
 	}
-	
-    @GetMapping(value = {"/number"}, produces = "application/json")
-    public Integer numberComputers() {
-        return computerService.getNumberComputers();
-    }
-	@GetMapping(value= "/search/{search}", produces = "application/json")
-	public List<ComputerDTO> searchComputer(@PathVariable String search, PageDTO pageDTO) {
- 		List<Computer> allComputers = computerService.findByNameByPage(search, PageMapper.toPage(pageDTO));
+
+	@GetMapping(value = { "/page" }, produces = "application/json")
+	public List<ComputerDTO> listComputersPage(@ModelAttribute PageDTO page) {
+		Page p = page == null ? new Page() : PageMapper.toPage(page);
+		List<Computer> allComputers = computerService.getAllByPage(p);
 		return allComputers.stream().map(c -> ComputerMapper.toComputerDTO(c)).collect(Collectors.toList());
 	}
-	
-    @GetMapping(value = {"/search/{search}/number"}, produces = "application/json")
-    public Integer numberSearchedComputers(@PathVariable String search) {
-        return computerService.getNumberComputersByName(search);
-    }
+
+	@GetMapping(value = { "/number" }, produces = "application/json")
+	public Integer numberComputers() {
+		return computerService.getNumberComputers();
+	}
+
+	@GetMapping(value = "/search/{search}", produces = "application/json")
+	public List<ComputerDTO> searchComputer(@PathVariable String search, PageDTO pageDTO) {
+		List<Computer> allComputers = computerService.findByNameByPage(search, PageMapper.toPage(pageDTO));
+		return allComputers.stream().map(c -> ComputerMapper.toComputerDTO(c)).collect(Collectors.toList());
+	}
+
+	@GetMapping(value = { "/search/{search}/number" }, produces = "application/json")
+	public Integer numberSearchedComputers(@PathVariable String search) {
+		return computerService.getNumberComputersByName(search);
+	}
 
 	@GetMapping(value = "/searchOrder/{search}/{order}", produces = "application/json")
-	public List<ComputerDTO> orderAndSearch(@PathVariable String search, @PathVariable String order,
-			 PageDTO page) {
+	public List<ComputerDTO> orderAndSearch(@PathVariable String search, @PathVariable String order, PageDTO page) {
 		System.out.println(search);
 		PageDTO p = page == null ? new PageDTO() : page;
 		try {
@@ -122,5 +130,5 @@ public class ComputerRESTController {
 		} catch (NotFoundInDatabaseException e) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("The Computer is not found is the database");
 		}
-	}
+	} 
 }
