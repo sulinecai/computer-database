@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -24,6 +25,7 @@ import com.excilys.formation.java.cdb.dtos.PageDTO;
 import com.excilys.formation.java.cdb.mappers.ComputerMapper;
 import com.excilys.formation.java.cdb.mappers.PageMapper;
 import com.excilys.formation.java.cdb.models.Computer;
+import com.excilys.formation.java.cdb.models.Page;
 import com.excilys.formation.java.cdb.services.ComputerService;
 import com.excilys.formation.java.cdb.services.InvalidComputerException;
 
@@ -42,22 +44,29 @@ public class ComputerRESTController {
 		List<Computer> allComputers = computerService.getAll();
 		return allComputers.stream().map(c -> ComputerMapper.toComputerDTO(c)).collect(Collectors.toList());
 	}
-	
-    @GetMapping(value = {"/number"}, produces = "application/json")
-    public Integer numberComputers() {
-        return computerService.getNumberComputers();
-    }
 
-	@GetMapping(value= "/search/{search}", produces = "application/json")
+	@GetMapping(value = { "/page" }, produces = "application/json")
+	public List<ComputerDTO> listComputersPage(@RequestParam(required = false) PageDTO page) {
+		Page p = page == null ? new Page() : PageMapper.toPage(page);
+		List<Computer> allComputers = computerService.getAllByPage(p);
+		return allComputers.stream().map(c -> ComputerMapper.toComputerDTO(c)).collect(Collectors.toList());
+	}
+
+	@GetMapping(value = { "/number" }, produces = "application/json")
+	public Integer numberComputers() {
+		return computerService.getNumberComputers();
+	}
+
+	@GetMapping(value = "/search/{search}", produces = "application/json")
 	public List<ComputerDTO> searchComputer(@PathVariable String search, PageDTO pageDTO) {
 		List<Computer> allComputers = computerService.findByNameByPage(search, PageMapper.toPage(pageDTO));
 		return allComputers.stream().map(c -> ComputerMapper.toComputerDTO(c)).collect(Collectors.toList());
 	}
-	
-    @GetMapping(value = {"/search/{search}/number"}, produces = "application/json")
-    public Integer numberSearchedComputers(@PathVariable String search) {
-        return computerService.getNumberComputersByName(search);
-    }
+
+	@GetMapping(value = { "/search/{search}/number" }, produces = "application/json")
+	public Integer numberSearchedComputers(@PathVariable String search) {
+		return computerService.getNumberComputersByName(search);
+	}
 
 	@GetMapping("/orderBy/{orderBy}")
 	public List<ComputerDTO> orderComputer(@PathVariable String orderBy, PageDTO pageDTO) {
@@ -92,7 +101,7 @@ public class ComputerRESTController {
 		} catch (InvalidComputerException e) {
 			StringBuilder sb = new StringBuilder();
 			e.getProblems().stream().forEach(p -> sb.append(p.getExplanation() + "\n"));
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body( "{error : \"" + sb.toString() + "\"}");
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{error : \"" + sb.toString() + "\"}");
 		}
 	}
 
@@ -101,10 +110,10 @@ public class ComputerRESTController {
 		try {
 			computerService.update(ComputerMapper.toComputer(dto));
 			return ResponseEntity.ok("{ok : true}");
-		} catch (InvalidComputerException e) { 
+		} catch (InvalidComputerException e) {
 			StringBuilder sb = new StringBuilder();
 			e.getProblems().stream().forEach(p -> sb.append(p.getExplanation() + "\n"));
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body( "{error : \"" + sb.toString() + "\"}");
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{error : \"" + sb.toString() + "\"}");
 		} catch (NotFoundInDatabaseException e) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("The Computer is not found is the database");
 		}
