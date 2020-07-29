@@ -11,9 +11,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -32,7 +34,7 @@ import com.excilys.formation.java.cdb.services.InvalidComputerException;
 import exceptions.NotFoundInDatabaseException;
 
 @RestController
-@CrossOrigin(origins = "*")
+@CrossOrigin
 @RequestMapping("computers")
 public class ComputerRESTController {
 
@@ -46,10 +48,11 @@ public class ComputerRESTController {
 	}
 
 	@GetMapping(value = { "/page" }, produces = "application/json")
-	public List<ComputerDTO> listComputersPage(@RequestParam(required = false) PageDTO page) {
+	public List<ComputerDTO> listComputersPage(@ModelAttribute PageDTO page) { 
 		Page p = page == null ? new Page() : PageMapper.toPage(page);
 		List<Computer> allComputers = computerService.getAllByPage(p);
-		return allComputers.stream().map(c -> ComputerMapper.toComputerDTO(c)).collect(Collectors.toList());
+		return allComputers.stream()
+				.map(c -> ComputerMapper.toComputerDTO(c)).collect(Collectors.toList());
 	}
 
 	@GetMapping(value = { "/number" }, produces = "application/json")
