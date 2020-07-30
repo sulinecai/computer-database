@@ -43,38 +43,47 @@ public class JwtRequestFilter extends OncePerRequestFilter {
         String jwtToken = null;
         // JWT Token is in the form "Bearer token". Remove Bearer word and get
         // only the Token
-        if (requestTokenHeader != null
-                && requestTokenHeader.startsWith("Bearer ")) {
-            jwtToken = requestTokenHeader.substring(7);
-            try {
-                username = jwtTokenUtil.getUsernameFromToken(jwtToken);
-            } catch (IllegalArgumentException e) {
-                response.sendError(HttpServletResponse.SC_BAD_REQUEST,
-                        e.getMessage());
-                return;
-            } catch (ExpiredJwtException e) {
+        if (requestTokenHeader != null) {
+            if (requestTokenHeader.startsWith("Bearer ")) {
+                jwtToken = requestTokenHeader.substring(7);
+                try {
+                    username = jwtTokenUtil.getUsernameFromToken(jwtToken);
+                } catch (IllegalArgumentException e) {
+                    setCorsHeader(response);
+                    response.sendError(HttpServletResponse.SC_BAD_REQUEST,
+                            e.getMessage());
+                    return;
+                } catch (ExpiredJwtException e) {
+                    setCorsHeader(response);
+                    response.sendError(HttpServletResponse.SC_UNAUTHORIZED,
+                            "Expired token");
+                    return;
+                } catch (MalformedJwtException e) {
+                    setCorsHeader(response);
+                    response.sendError(HttpServletResponse.SC_BAD_REQUEST,
+                            "Malformed token");
+                    return;
+                } catch (SignatureException e) {
+                    setCorsHeader(response);
+                    response.sendError(HttpServletResponse.SC_UNAUTHORIZED,
+                            "Signature issue");
+                    return;
+                } catch (PrematureJwtException e) {
+                    setCorsHeader(response);
+                    response.sendError(HttpServletResponse.SC_UNAUTHORIZED,
+                            "Premature token");
+                    return;
+                } catch (UnsupportedJwtException e) {
+                    setCorsHeader(response);
+                    response.sendError(HttpServletResponse.SC_BAD_REQUEST,
+                            "Unsupported token");
+                    return;
+                }
+            } else {
+                setCorsHeader(response);
                 response.sendError(HttpServletResponse.SC_UNAUTHORIZED,
-                        "Expired token");
-                return;
-            } catch (MalformedJwtException e) {
-                response.sendError(HttpServletResponse.SC_BAD_REQUEST,
-                        "Malformed token");
-                return;
-            } catch (SignatureException e) {
-                response.sendError(HttpServletResponse.SC_UNAUTHORIZED,
-                        "Signature issue");
-                return;
-            } catch (PrematureJwtException e) {
-                response.sendError(HttpServletResponse.SC_UNAUTHORIZED,
-                        "Premature token");
-                return;
-            } catch (UnsupportedJwtException e) {
-                response.sendError(HttpServletResponse.SC_BAD_REQUEST,
-                        "Unsupported token");
-                return;
+                        "wrong authentication method (Bearer token expected)");
             }
-        } else {
-            logger.warn("JWT Token does not begin with Bearer String");
         }
 
         // Once we get the token validate it.
@@ -103,5 +112,9 @@ public class JwtRequestFilter extends OncePerRequestFilter {
             }
         }
         chain.doFilter(request, response);
+    }
+
+    private void setCorsHeader(HttpServletResponse response) {
+        response.setHeader("Access-Control-Allow-Origin", "*");
     }
 }
