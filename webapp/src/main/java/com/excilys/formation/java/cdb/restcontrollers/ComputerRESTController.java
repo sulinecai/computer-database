@@ -27,6 +27,8 @@ import com.excilys.formation.java.cdb.models.Computer;
 import com.excilys.formation.java.cdb.models.Page;
 import com.excilys.formation.java.cdb.services.ComputerService;
 import com.excilys.formation.java.cdb.services.InvalidComputerException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import exceptions.NotFoundInDatabaseException;
  
@@ -96,13 +98,15 @@ public class ComputerRESTController {
 		return ComputerMapper.toComputerDTO(computerOpt.get());
 	}
 
-	@DeleteMapping(value = "/{id}", produces = "application/json")
-	public ResponseEntity<String> deleteComputer(@PathVariable Long id) {
+	@DeleteMapping(value = "/{id}")
+	public ResponseEntity<JsonNode> deleteComputer(@PathVariable Long id) {
+        ObjectMapper mapper = new ObjectMapper();
+
 		try {
 			computerService.delete(id);
-			return ResponseEntity.ok("{ok : true}");
+            return ResponseEntity.ok(mapper.createObjectNode().put("ok", true));
 		} catch (NotFoundInDatabaseException e) {
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("The Computer is not found is the database");
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(mapper.createObjectNode().put("error", "The Computer is not found is the database"));
 		}
 	}
 
