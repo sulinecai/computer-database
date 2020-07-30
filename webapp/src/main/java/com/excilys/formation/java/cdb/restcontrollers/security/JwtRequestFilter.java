@@ -43,44 +43,39 @@ public class JwtRequestFilter extends OncePerRequestFilter {
         String jwtToken = null;
         // JWT Token is in the form "Bearer token". Remove Bearer word and get
         // only the Token
+        setCorsHeader(response);
+
         if (requestTokenHeader != null) {
             if (requestTokenHeader.startsWith("Bearer ")) {
                 jwtToken = requestTokenHeader.substring(7);
                 try {
                     username = jwtTokenUtil.getUsernameFromToken(jwtToken);
                 } catch (IllegalArgumentException e) {
-                    setCorsHeader(response);
                     response.sendError(HttpServletResponse.SC_BAD_REQUEST,
                             e.getMessage());
                     return;
                 } catch (ExpiredJwtException e) {
-                    setCorsHeader(response);
                     response.sendError(HttpServletResponse.SC_UNAUTHORIZED,
                             "Expired token");
                     return;
                 } catch (MalformedJwtException e) {
-                    setCorsHeader(response);
                     response.sendError(HttpServletResponse.SC_BAD_REQUEST,
                             "Malformed token");
                     return;
                 } catch (SignatureException e) {
-                    setCorsHeader(response);
                     response.sendError(HttpServletResponse.SC_UNAUTHORIZED,
                             "Signature issue");
                     return;
                 } catch (PrematureJwtException e) {
-                    setCorsHeader(response);
                     response.sendError(HttpServletResponse.SC_UNAUTHORIZED,
                             "Premature token");
                     return;
                 } catch (UnsupportedJwtException e) {
-                    setCorsHeader(response);
                     response.sendError(HttpServletResponse.SC_BAD_REQUEST,
                             "Unsupported token");
                     return;
                 }
             } else {
-                setCorsHeader(response);
                 response.sendError(HttpServletResponse.SC_UNAUTHORIZED,
                         "wrong authentication method (Bearer token expected)");
             }
