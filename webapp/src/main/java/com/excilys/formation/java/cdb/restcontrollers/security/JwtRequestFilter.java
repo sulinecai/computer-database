@@ -16,6 +16,7 @@ import org.springframework.security.web.authentication.WebAuthenticationDetailsS
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
+import exceptions.NotFoundInDatabaseException;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.MalformedJwtException;
 import io.jsonwebtoken.PrematureJwtException;
@@ -74,6 +75,10 @@ public class JwtRequestFilter extends OncePerRequestFilter {
                     response.sendError(HttpServletResponse.SC_BAD_REQUEST,
                             "Unsupported token");
                     return;
+                } catch (NotFoundInDatabaseException e) {
+                    response.sendError(HttpServletResponse.SC_UNAUTHORIZED,
+                            "User deleted");
+                    return;
                 }
             } else {
                 response.sendError(HttpServletResponse.SC_UNAUTHORIZED,
@@ -111,7 +116,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 
     private void setCorsHeader(HttpServletResponse response) {
         response.setHeader("Access-Control-Allow-Origin", "*");
-        response.setHeader("Access-Control-Allow-Headers", "*");        
-        response.setHeader("Access-Control-Allow-Methods", "*");        
+        response.setHeader("Access-Control-Allow-Headers", "*");
+        response.setHeader("Access-Control-Allow-Methods", "*");
     }
 }
