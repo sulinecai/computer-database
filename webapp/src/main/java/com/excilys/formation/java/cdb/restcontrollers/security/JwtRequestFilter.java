@@ -16,6 +16,7 @@ import org.springframework.security.web.authentication.WebAuthenticationDetailsS
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
+import exceptions.NotFoundInDatabaseException;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.MalformedJwtException;
 import io.jsonwebtoken.PrematureJwtException;
@@ -73,6 +74,10 @@ public class JwtRequestFilter extends OncePerRequestFilter {
                 } catch (UnsupportedJwtException e) {
                     response.sendError(HttpServletResponse.SC_BAD_REQUEST,
                             "Unsupported token");
+                    return;
+                } catch (NotFoundInDatabaseException e) {
+                    response.sendError(HttpServletResponse.SC_UNAUTHORIZED,
+                            "User deleted");
                     return;
                 }
             } else {
