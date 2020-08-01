@@ -41,7 +41,7 @@ public class ComputerDAO {
 
 	private static final String SQL_COUNT_WITH_NAME = "SELECT count(computer) from Computer computer WHERE computer.name LIKE :search OR company.name LIKE :search";
 
-	private static final String SQL_PAGE_ORDER_NAME = "FROM Computer computer WHERE computer.name LIKE :search ORDER BY %s ,computer.id";
+	private static final String SQL_PAGE_ORDER_NAME = "FROM Computer computer WHERE computer.name LIKE :search OR company.name LIKE :search ORDER BY %s ,computer.id";
 	private SessionFactory sessionFactory;
 
 	private static Logger logger = LoggerFactory.getLogger(CompanyMapper.class);
@@ -113,7 +113,6 @@ public class ComputerDAO {
 			}
 
 		}
-		System.out.println(".....");
 		return computerList;
 	}
 
