@@ -57,13 +57,13 @@ public class ComputerDAO {
 		case "companyDesc":
 			return "company.name DESC";
 		case "introducedAsc":
-			return "computer.introduced ASC";
+			return "computer.introducedDate ASC";
 		case "introducedDesc":
-			return "computer.introduced DESC";
+			return "computer.introducedDate DESC";
 		case "discontinuedAsc":
-			return "computer.discontinued ASC";
+			return "computer.discontinuedDate ASC";
 		case "discontinuedDesc":
-			return "computer.discontinued DESC";
+			return "computer.discontinuedDate DESC";
 		default:
 			throw new IllegalArgumentException();
 		}
