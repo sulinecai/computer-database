@@ -69,6 +69,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.DELETE, "/computers/**")
                 .hasRole("ADMIN")
                 .antMatchers(HttpMethod.PUT, "/computers/**").hasRole("ADMIN")
+                .antMatchers(HttpMethod.POST, "/register/admin")
+                .hasRole("ADMIN")
                 .and().csrf().disable()
                 .exceptionHandling()
                 .authenticationEntryPoint(jwtAuthenticationEntryPoint).and()

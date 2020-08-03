@@ -83,6 +83,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
             } else {
                 response.sendError(HttpServletResponse.SC_UNAUTHORIZED,
                         "wrong authentication method (Bearer token expected)");
+                return;
             }
         }
 
