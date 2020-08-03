@@ -40,7 +40,7 @@ public class ComputerDAO {
 	private static final String SQL_SELECT_WITH_NAME = "FROM Computer computer WHERE computer.name LIKE :search";
 	private static final String SQL_COUNT_WITH_NAME = "SELECT count(computer) from Computer computer WHERE computer.name LIKE :search";
 
-	private static final String SQL_PAGE_ORDER_NAME = "FROM Computer computer WHERE computer.name LIKE :search ORDER BY %s ,computer.id";
+	private static final String SQL_PAGE_ORDER_NAME = "FROM Computer computer WHERE computer.name LIKE :search OR company.name LIKE :search ORDER BY %s ,computer.id";
 	private SessionFactory sessionFactory;
 
 	private static Logger logger = LoggerFactory.getLogger(CompanyMapper.class);
@@ -56,13 +56,13 @@ public class ComputerDAO {
 		case "companyDesc":
 			return "company.name DESC";
 		case "introducedAsc":
-			return "computer.introduced ASC";
+			return "computer.introducedDate ASC";
 		case "introducedDesc":
-			return "computer.introduced DESC";
+			return "computer.introducedDate DESC";
 		case "discontinuedAsc":
-			return "computer.discontinued ASC";
+			return "computer.discontinuedDate ASC";
 		case "discontinuedDesc":
-			return "computer.discontinued DESC";
+			return "computer.discontinuedDate DESC";
 		default:
 			throw new IllegalArgumentException();
 		}
@@ -112,7 +112,6 @@ public class ComputerDAO {
 			}
 
 		}
-		System.out.println(".....");
 		return computerList;
 	}
 
