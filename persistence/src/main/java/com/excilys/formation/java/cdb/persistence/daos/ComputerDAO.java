@@ -37,16 +37,18 @@ public class ComputerDAO {
 
 	private static final String SQL_DELETE = "DELETE Computer WHERE id = :id";
 
-	private static final String SQL_SELECT_WITH_NAME = "FROM Computer computer WHERE computer.name LIKE :search";
+	private static final String SQL_SELECT_WITH_NAME = "SELECT computer FROM Computer computer LEFT JOIN computer.company  WHERE computer.name LIKE :search OR computer.company.name LIKE :search ";
 	private static final String SQL_COUNT_WITH_NAME = "SELECT count(computer) from Computer computer WHERE computer.name LIKE :search";
 
-	private static final String SQL_PAGE_ORDER_NAME = "FROM Computer computer WHERE computer.name LIKE :search OR company.name LIKE :search ORDER BY %s ,computer.id";
+	private static final String SQL_PAGE_ORDER_NAME = "SELECT computer FROM Computer computer LEFT JOIN computer.company as company WHERE computer.name LIKE :search OR computer.company.name LIKE :search ORDER BY %s ,computer.id";
+	private static final String SQL_PAGE_ORDER = "SELECT computer FROM Computer computer LEFT JOIN computer.company as company ORDER BY %s ,computer.id";
+	
 	private SessionFactory sessionFactory;
 
 	private static Logger logger = LoggerFactory.getLogger(CompanyMapper.class);
 
 	private String getSqlOrderByClauseFromString(String order) {
-		switch (order) {
+		switch (order) { 
 		case "computerAsc":
 			return "computer.name ASC";
 		case "computerDesc":
@@ -73,9 +75,8 @@ public class ComputerDAO {
 
 		try (Session session = sessionFactory.openSession()) {
 			// TODO : mettre dans une chaine + format ?
-			String requete = SQL_SELECT_ALL + " ORDER BY " + this.getSqlOrderByClauseFromString(orderBy)
-					+ ", computer.id";
-
+			String requete = String.format(SQL_PAGE_ORDER, getSqlOrderByClauseFromString(orderBy));
+			
 			Query<Computer> query = session.createQuery(requete, Computer.class);
 			query.setFirstResult(page.getPageFirstLine());
 			query.setMaxResults(page.getMaxLine());
