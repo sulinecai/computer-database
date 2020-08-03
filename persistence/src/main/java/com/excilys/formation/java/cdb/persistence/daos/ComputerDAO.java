@@ -37,9 +37,8 @@ public class ComputerDAO {
 
 	private static final String SQL_DELETE = "DELETE Computer WHERE id = :id";
 
-	private static final String SQL_SELECT_WITH_NAME = "FROM Computer computer WHERE computer.name LIKE :search OR company.name LIKE :search";
-
-	private static final String SQL_COUNT_WITH_NAME = "SELECT count(computer) from Computer computer WHERE computer.name LIKE :search OR company.name LIKE :search";
+	private static final String SQL_SELECT_WITH_NAME = "FROM Computer computer WHERE computer.name LIKE :search";
+	private static final String SQL_COUNT_WITH_NAME = "SELECT count(computer) from Computer computer WHERE computer.name LIKE :search";
 
 	private static final String SQL_PAGE_ORDER_NAME = "FROM Computer computer WHERE computer.name LIKE :search ORDER BY %s ,computer.id";
 	private SessionFactory sessionFactory;
@@ -91,7 +90,7 @@ public class ComputerDAO {
 
 	public List<Computer> getListWithSearchAndOrder(String name, String order, Page page) {
 		List<Computer> computerList = new ArrayList<Computer>();
-		if (name.isEmpty())
+		if ( name == null || name.isEmpty())
 			return this.orderBy(page, order);
 
 		if (page.getCurrentPage() > 0) {
@@ -183,12 +182,13 @@ public class ComputerDAO {
 	}
 
 	public List<Computer> findByNameByPage(String name, Page page) {
+		if(name==null)
+			return this.getAllByPage(page);
 		List<Computer> computerList = new ArrayList<Computer>();
-		if (page.getCurrentPage() > 0 && name != null && !name.isEmpty() && !name.contains("%")
-				&& !name.contains("_")) {
+		if (page.getCurrentPage() > 0) {
 			try (Session session = sessionFactory.openSession()) {
 				Query<Computer> query = session.createQuery(SQL_SELECT_WITH_NAME, Computer.class);
-				query.setParameter("search", "%".concat(name).concat("%"));
+				query.setParameter("search", "%".concat(name.replace("%", "\\%")).concat("%"));
 				query.setFirstResult(page.getPageFirstLine());
 				query.setMaxResults(page.getMaxLine());
 				computerList = query.list();
